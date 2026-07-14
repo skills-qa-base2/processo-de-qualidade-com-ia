@@ -221,10 +221,7 @@ def build_skill_page(s, idx):
                 """
             elif ex.get("prompt_note"):
                 prompt_html = f"""
-                <div class="guardrail-box">
-                  <div class="g-label">⚑ SEM PROMPT COPIÁVEL</div>
-                  <p>{render_inline_md(ex['prompt_note'])}</p>
-                </div>
+                <p class="example-note">{render_inline_md(ex['prompt_note'])}</p>
                 """
             else:
                 prompt_html = ""

@@ -391,6 +391,18 @@ html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .examples-content p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
 .examples-content p:last-child { margin-bottom: 0; }
 
+/* Nota sobre o próprio exemplo (ex: "sem prompt copiável") — deliberadamente mais
+   leve que .guardrail-box, que já significa "guardrail real da skill" ou "ainda não
+   validada". Isto aqui é uma observação sobre a documentação, não sobre a skill. */
+.example-note {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  border-left: 2px dotted var(--border);
+  padding: 2px 0 2px 12px;
+  margin: 8px 0;
+}
+
 /* Tarja border-left decorativa: cores vibrantes originais, sem exigência de contraste. */
 .examples-accordion--1 { border-left-color: var(--blue); }
 .examples-accordion--2 { border-left-color: var(--purple); }

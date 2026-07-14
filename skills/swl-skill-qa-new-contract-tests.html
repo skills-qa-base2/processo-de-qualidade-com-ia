@@ -399,6 +399,18 @@ html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .examples-content p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
 .examples-content p:last-child { margin-bottom: 0; }
 
+/* Nota sobre o próprio exemplo (ex: "sem prompt copiável") — deliberadamente mais
+   leve que .guardrail-box, que já significa "guardrail real da skill" ou "ainda não
+   validada". Isto aqui é uma observação sobre a documentação, não sobre a skill. */
+.example-note {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  border-left: 2px dotted var(--border);
+  padding: 2px 0 2px 12px;
+  margin: 8px 0;
+}
+
 /* Tarja border-left decorativa: cores vibrantes originais, sem exigência de contraste. */
 .examples-accordion--1 { border-left-color: var(--blue); }
 .examples-accordion--2 { border-left-color: var(--purple); }
@@ -755,10 +767,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
                 <p><strong>Cenário:</strong> Na "PagaFácil" (fintech de pagamentos fictícia, API), o time quer só "documentar o contrato atual" a partir de uma resposta de exemplo colada no Slack por um dev, sem OpenAPI nem Pact publicado, pra ganhar tempo antes de uma integração com parceiro externo.</p>
                 <p><strong>Input:</strong> cola uma resposta JSON de exemplo do endpoint de conciliação e pede pra gerar o teste "baseado nesse exemplo mesmo".</p>
                 
-                <div class="guardrail-box">
-                  <div class="g-label">⚑ SEM PROMPT COPIÁVEL</div>
-                  <p>Este cenário envolve dado real colado pela pessoa — não é possível (nem desejável) mostrar um prompt de exemplo copiável aqui sem reproduzir o mesmo tipo de dado sensível que o guardrail existe para proteger.</p>
-                </div>
+                <p class="example-note">Este cenário envolve dado real colado pela pessoa — não é possível (nem desejável) mostrar um prompt de exemplo copiável aqui sem reproduzir o mesmo tipo de dado sensível que o guardrail existe para proteger.</p>
                 
                 <p><strong>Saída esperada:</strong> A skill não gera o teste a partir da resposta isolada — um campo que aparece como <code>null</code> nesse exemplo específico pode ser opcional ou pode ser obrigatório-mas-vazio-nesse-caso, e a diferença importa pra quem for construir a integração em cima. Pede a especificação real (via schema OpenAPI ou contrato Pact já publicado) antes de codificar qualquer validação, já que o parceiro externo vai confiar nesse teste como se fosse o contrato oficial.</p>
               </div>
