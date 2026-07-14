@@ -729,6 +729,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "Lojinha Verde" (e-commerce de plantas, web) recebe um critério de aceite simples de busca de produto.</p>
                 <p><strong>Input:</strong> "Critério: usuário busca por nome de produto e vê os resultados correspondentes."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-bdd-scenarios Critério: usuário busca por nome de produto e vê os resultados correspondentes.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill gera <code>Funcionalidade: Busca de produtos</code> com cenário happy path, um negativo (busca sem resultado) e um edge case (busca com caractere especial).</p>
               </div>
             </details>
@@ -738,6 +742,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA no app mobile da "TarefaCerta" (gestão de tarefas fictícia) recebe um critério de assinatura de plano com regra de desconto pouco clara.</p>
                 <p><strong>Input:</strong> "Critério: usuário assina o plano premium e, se for a segunda assinatura do mesmo usuário, recebe desconto." (sem informar o percentual)</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-bdd-scenarios Critério: usuário assina o plano premium e, se for a segunda assinatura do mesmo usuário, recebe desconto.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill gera o cenário happy path da assinatura simples e um Esquema do Cenário pro desconto, mas deixa o percentual como <code>&lt;percentual_a_confirmar&gt;</code> nos Exemplos, em vez de inventar um número plausível.</p>
               </div>
             </details>
@@ -747,6 +755,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Na "PagaFácil" (fintech de pagamentos, API), o critério de aceite de estorno descreve três regras diferentes numa frase só (prazo de estorno, taxa de reversão e notificação ao usuário), e o PO pede "um cenário só, pra não ficar grande".</p>
                 <p><strong>Input:</strong> critério de aceite denso com 3 regras numa frase, e pedido explícito de resumir em um cenário único.</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-bdd-scenarios Critério: se o cliente pedir estorno dentro do prazo, o sistema calcula a taxa de reversão aplicável e notifica o usuário do resultado. Quero só um cenário pra isso, não precisa separar em vários.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> Mesmo com o pedido de simplificar, a skill gera 3 cenários separados — um <code>Quando</code> que testa prazo, taxa e notificação ao mesmo tempo não isola qual das três falhou se o teste quebrar. Resumir do jeito pedido deixaria a falha sem indicar qual regra de negócio especificamente parou de funcionar.</p>
               </div>
             </details>

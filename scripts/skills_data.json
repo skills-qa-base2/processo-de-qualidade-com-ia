@@ -16,6 +16,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) gera as regras de QA pela primeira vez, a partir de uma página de wiki já existente.",
         "input": "\"Gera as regras de QA pra Lojinha Verde. Temos uma página de wiki com nossas convenções de teste.\"",
+        "prompt_example": "/swl-skill-qa-generate-rules Gera as regras de QA pra Lojinha Verde. Temos uma página de wiki com nossas convenções de teste.",
+        "prompt_note": null,
         "expected_output": "A skill lê o wiki e gera `padroes-teste.md`, `restricoes-teste.md` e `convencoes-teste.md` com as convenções reais documentadas (Playwright, Page Object Model, nomenclatura em português)."
       },
       {
@@ -23,6 +25,8 @@
         "project_type": "API",
         "scenario": "Um QA na \"PagaFácil\" (fintech de pagamentos fictícia, API) tem só parte do processo documentado.",
         "input": "\"Não temos wiki, mas o time sabe de cabeça algumas convenções. Vou te contar o que sei.\"",
+        "prompt_example": "/swl-skill-qa-generate-rules Não temos wiki, mas o time sabe de cabeça algumas convenções. Vou te contar o que sei.",
+        "prompt_note": null,
         "expected_output": "A skill conduz a entrevista curta, documenta o que foi confirmado (ferramentas de automação de API, estrutura de pastas), e para os pontos sem certeza no time (política de dados de teste) deixa marcado como \"a definir\" em vez de assumir um padrão genérico de mercado."
       },
       {
@@ -30,6 +34,8 @@
         "project_type": "Integração",
         "scenario": "Um QA herda o sistema legado da \"RotaCerta\" (logística/entregas fictícia, integração com sistemas de rastreamento de terceiros) sem nenhuma documentação de QA, e o tech lead pede pra \"gerar regras baseadas no que costuma ser padrão em projetos de logística\", já que ninguém mais lembra as convenções antigas.",
         "input": "\"Ninguém aqui sabe as convenções antigas desse projeto. Pode gerar baseado no que costuma ser padrão pra sistemas de logística?\"",
+        "prompt_example": "/swl-skill-qa-generate-rules Ninguém aqui sabe as convenções antigas desse projeto. Pode gerar baseado no que costuma ser padrão pra sistemas de logística?",
+        "prompt_note": null,
         "expected_output": "Em vez de recorrer a um \"padrão de mercado\" genérico, a skill examina a estrutura real de testes já existente no código (pastas, nomenclatura usada nos arquivos) como fonte concreta. Para o que não consegue confirmar nem pela estrutura nem pela entrevista, marca \"a definir\" explicitamente — uma regra errada aqui não fica só registrada, ela vira instrução que a IA vai seguir automaticamente em toda tarefa futura nesse projeto."
       }
     ]
@@ -51,6 +57,8 @@
         "project_type": "API",
         "scenario": "Um QA recém-chegado na \"AgroConecta\" (marketplace agro B2B fictício, API + integrações com ERPs de fornecedores) percebe que nunca houve uma estratégia de teste formal documentada.",
         "input": "\"Nunca tivemos uma estratégia de teste formal aqui na AgroConecta. Pode me ajudar a definir uma?\"",
+        "prompt_example": "/swl-skill-qa-plan-strategy Nunca tivemos uma estratégia de teste formal aqui na AgroConecta. Pode me ajudar a definir uma?",
+        "prompt_note": null,
         "expected_output": "A skill lê o CLAUDE.md (ainda incompleto) e faz as 5 perguntas estruturadas. O QA responde todas com clareza (monolito com integrações externas, sem QA dedicado ainda, envolvido só na entrega, sistema não é crítico financeiramente, existe ambiente de staging). A skill propõe uma pirâmide balanceada (não 100% E2E) e gera `docs/qa/estrategia-teste.md`."
       },
       {
@@ -58,6 +66,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos online fictícia, web) responde às perguntas, mas não tem certeza se existe massa de dados própria de teste.",
         "input": "responde as 4 primeiras perguntas com segurança, mas diz \"não sei se temos massa de dados própria — às vezes usamos uma cópia de produção mascarada\".",
+        "prompt_example": "/swl-skill-qa-plan-strategy Não sei se temos massa de dados própria — às vezes usamos uma cópia de produção mascarada.",
+        "prompt_note": null,
         "expected_output": "A skill registra as 4 respostas normalmente, e para a pergunta 5 marca como \"a confirmar\" em vez de assumir que existe massa fictícia de verdade — uma cópia de produção mascarada não é necessariamente massa de teste fictícia, e a skill sinaliza isso como risco em aberto em vez de tratar como resposta dada."
       },
       {
@@ -65,6 +75,8 @@
         "project_type": "Mobile",
         "scenario": "Na \"BancoDigitalX\" (banco digital fictício, app mobile + API), a diretoria pede uma estratégia de teste pronta pra apresentar amanhã, e o QA, sem tempo de entrevistar o time todo, pede pra skill \"preencher com o que é padrão de mercado pra banco digital\".",
         "input": "\"Preciso da estratégia pronta pra reunião de amanhã, pode assumir as respostas típicas de um banco digital?\"",
+        "prompt_example": "/swl-skill-qa-plan-strategy Preciso da estratégia pronta pra reunião de amanhã, pode assumir as respostas típicas de um banco digital?",
+        "prompt_note": null,
         "expected_output": "Mesmo com o pedido explícito de assumir respostas, a skill não inventa nenhuma das 5 perguntas — registra cada uma como \"a confirmar\" e lista como risco em aberto no documento gerado. A reunião de amanhã sai com um documento que mostra exatamente o que ainda não foi levantado, em vez de uma estratégia com aparência de pronta que ninguém no time realmente validou."
       }
     ]
@@ -86,6 +98,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app do entregador da \"RotaCerta\" (logística fictícia) precisa automatizar o cenário de login válido, com Playwright já configurado pro app híbrido.",
         "input": "\"Gera a automação do cenário de login válido, já temos o cenário BDD pronto em features/login.feature.\"",
+        "prompt_example": "/swl-skill-qa-new-automation Gera a automação do cenário de login válido, já temos o cenário BDD pronto em features/login.feature.",
+        "prompt_note": null,
         "expected_output": "A skill detecta Playwright via CLAUDE.md, gera o teste reutilizando o `LoginPage` já existente, com seletores estáveis, e marca `generated-by-ai: pending-review`."
       },
       {
@@ -93,6 +107,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"ContaCerta\" (contabilidade SaaS B2B fictícia, web) precisa automatizar o cenário de emissão de nota fiscal, mas não está claro se deve reutilizar um Page Object existente ou criar um novo componente de API.",
         "input": "\"Automatiza o cenário de emissão de nota fiscal. Temos um NotaFiscalPage mas não sei se ele cobre a parte de API que valida o status.\"",
+        "prompt_example": "/swl-skill-qa-new-automation Automatiza o cenário de emissão de nota fiscal. Temos um NotaFiscalPage mas não sei se ele cobre a parte de API que valida o status.",
+        "prompt_note": null,
         "expected_output": "A skill reutiliza o `NotaFiscalPage` existente para a parte de UI, mas para a validação de status via API, como não encontra um componente equivalente já existente, pergunta se deve criar um novo ou se já existe em outro lugar do projeto — em vez de duplicar sem confirmar."
       },
       {
@@ -100,6 +116,8 @@
         "project_type": "API",
         "scenario": "Na \"ClickIngressos\" (venda de ingressos online fictícia, API de alta concorrência), o time sob pressão de sprint pede pra já marcar os testes gerados na camada de API como `generated-by-ai: reviewed` direto, \"porque vamos revisar depois\".",
         "input": "\"Gera a automação da compra de ingresso e já marca como reviewed, revisamos amanhã, precisamos fechar a sprint hoje.\"",
+        "prompt_example": "/swl-skill-qa-new-automation Gera a automação da compra de ingresso e já marca como reviewed, revisamos amanhã, precisamos fechar a sprint hoje.",
+        "prompt_note": null,
         "expected_output": "A skill gera o teste normalmente, mas marca `generated-by-ai: pending-review`, não `reviewed`. Marcar como revisado sem revisão real é diferente de só chegar atrasado numa sprint — é a etiqueta que faz o time de revisão de PR parar de olhar esse teste com atenção, então ela só muda quando alguém de fato ler o código gerado."
       }
     ]
@@ -121,6 +139,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia) precisa automatizar a tela de favoritar um pet, com Detox já configurado.",
         "input": "\"Gera a automação mobile do cenário de favoritar um pet, já temos Detox configurado e o ScreenObject de Listagem pronto.\"",
+        "prompt_example": "/swl-skill-qa-new-mobile-automation Gera a automação mobile do cenário de favoritar um pet, já temos Detox configurado e o ScreenObject de Listagem pronto.",
+        "prompt_note": null,
         "expected_output": "A skill detecta Detox via `.detoxrc`, reutiliza o Screen Object existente, usa seletores por `testID`, declara \"testado no emulador Android 14 (Pixel 7)\" e marca `generated-by-ai: pending-review`."
       },
       {
@@ -128,6 +148,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA na \"BancoDigitalX\" (banco digital fictício) precisa automatizar a aprovação de transferência via biometria, mas não está claro se o projeto já trata o diálogo nativo de biometria em algum outro teste.",
         "input": "\"Automatiza a aprovação de transferência via biometria no Appium. Não sei se já lidamos com o diálogo do sistema de biometria em algum outro teste.\"",
+        "prompt_example": "/swl-skill-qa-new-mobile-automation Automatiza a aprovação de transferência via biometria no Appium. Não sei se já lidamos com o diálogo do sistema de biometria em algum outro teste.",
+        "prompt_note": null,
         "expected_output": "A skill gera o teste cobrindo o fluxo, mas ao chegar no diálogo nativo de biometria do SO, marca que não encontrou tratamento existente pra esse tipo de diálogo no projeto e pergunta se deve ser mockado (comum em CI, já que biometria real não funciona em emulador) antes de assumir uma abordagem."
       },
       {
@@ -135,6 +157,8 @@
         "project_type": "Mobile",
         "scenario": "Na \"RotaCerta\" (app do entregador fictício), o QA testou só no emulador Android mais recente, mas o gerente de operações pede pra \"confirmar que funciona em todos os celulares dos entregadores\" pra aprovar o rollout geral.",
         "input": "\"Preciso saber se a atualização do app funciona nos celulares dos entregadores em geral, pra liberar pra todo mundo essa semana.\"",
+        "prompt_example": "/swl-skill-qa-new-mobile-automation Preciso saber se a atualização do app funciona nos celulares dos entregadores em geral, pra liberar pra todo mundo essa semana.",
+        "prompt_note": null,
         "expected_output": "A skill documenta exatamente o que rodou (emulador Android 14, Pixel 7) e não estende essa cobertura pra \"os celulares dos entregadores em geral\" — a frota real inclui Android 9 a 14 em fabricantes variados, nenhum deles exercitado nesta execução. O rollout geral, aprovado só com base nesse teste, estaria liberando pra um universo de dispositivos nunca tocado."
       }
     ]
@@ -156,6 +180,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app mobile \"PetAmigo\" (adoção de pets fictícia) recebe uma user story simples de favoritar um pet.",
         "input": "\"User story: como usuário, quero favoritar um pet pra ver depois na minha lista.\"",
+        "prompt_example": "/swl-skill-qa-new-test-cases User story: como usuário, quero favoritar um pet pra ver depois na minha lista.",
+        "prompt_note": null,
         "expected_output": "A skill gera casos de happy path (favoritar e ver na lista), edge case (favoritar o mesmo pet duas vezes) e negativo (favoritar sem estar logado)."
       },
       {
@@ -163,6 +189,8 @@
         "project_type": "Integração",
         "scenario": "Um QA na \"SaúdeJá\" (telemedicina fictícia, integração com serviço externo de videochamada) recebe uma user story de agendamento com regra de cancelamento incompleta.",
         "input": "\"User story: paciente agenda consulta e pode cancelar até X horas antes.\" (sem definir o valor de X)",
+        "prompt_example": "/swl-skill-qa-new-test-cases User story: paciente agenda consulta e pode cancelar até X horas antes.",
+        "prompt_note": null,
         "expected_output": "A skill gera os casos de agendamento normalmente, e no caso de cancelamento marca o prazo como `[REGRA A CONFIRMAR COM PO]`, em vez de assumir \"24 horas\" como muitos sistemas fazem por padrão."
       },
       {
@@ -170,6 +198,8 @@
         "project_type": "API",
         "scenario": "Na \"BancoDigitalX\" (banco digital fictício, API), a user story de bloqueio de cartão após tentativas de senha erradas chega sem o número oficial de tentativas, e o time de produto, sem tempo, sugere \"usar 3, é o mais comum no mercado\".",
         "input": "pede pra usar \"o padrão de mercado\" (3 tentativas) já que ninguém confirmou o número oficial do produto.",
+        "prompt_example": "/swl-skill-qa-new-test-cases A user story de bloqueio de cartão não diz o número oficial de tentativas. Pode usar 3? É o mais comum no mercado e ninguém confirmou o número oficial ainda.",
+        "prompt_note": null,
         "expected_output": "A skill não trata a sugestão de mercado como regra de negócio confirmada — gera o caso de teste com o número de tentativas marcado como pendência de confirmação. Uma regra de segurança bancária decidida por acordo informal, em vez da especificação real do produto, pode acabar aprovando um comportamento diferente do que o banco de fato pretendia implementar."
       }
     ]
@@ -191,6 +221,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"Lojinha Verde\" (e-commerce de plantas, web) recebe um critério de aceite simples de busca de produto.",
         "input": "\"Critério: usuário busca por nome de produto e vê os resultados correspondentes.\"",
+        "prompt_example": "/swl-skill-qa-new-bdd-scenarios Critério: usuário busca por nome de produto e vê os resultados correspondentes.",
+        "prompt_note": null,
         "expected_output": "A skill gera `Funcionalidade: Busca de produtos` com cenário happy path, um negativo (busca sem resultado) e um edge case (busca com caractere especial)."
       },
       {
@@ -198,6 +230,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app mobile da \"TarefaCerta\" (gestão de tarefas fictícia) recebe um critério de assinatura de plano com regra de desconto pouco clara.",
         "input": "\"Critério: usuário assina o plano premium e, se for a segunda assinatura do mesmo usuário, recebe desconto.\" (sem informar o percentual)",
+        "prompt_example": "/swl-skill-qa-new-bdd-scenarios Critério: usuário assina o plano premium e, se for a segunda assinatura do mesmo usuário, recebe desconto.",
+        "prompt_note": null,
         "expected_output": "A skill gera o cenário happy path da assinatura simples e um Esquema do Cenário pro desconto, mas deixa o percentual como `<percentual_a_confirmar>` nos Exemplos, em vez de inventar um número plausível."
       },
       {
@@ -205,6 +239,8 @@
         "project_type": "API",
         "scenario": "Na \"PagaFácil\" (fintech de pagamentos, API), o critério de aceite de estorno descreve três regras diferentes numa frase só (prazo de estorno, taxa de reversão e notificação ao usuário), e o PO pede \"um cenário só, pra não ficar grande\".",
         "input": "critério de aceite denso com 3 regras numa frase, e pedido explícito de resumir em um cenário único.",
+        "prompt_example": "/swl-skill-qa-new-bdd-scenarios Critério: se o cliente pedir estorno dentro do prazo, o sistema calcula a taxa de reversão aplicável e notifica o usuário do resultado. Quero só um cenário pra isso, não precisa separar em vários.",
+        "prompt_note": null,
         "expected_output": "Mesmo com o pedido de simplificar, a skill gera 3 cenários separados — um `Quando` que testa prazo, taxa e notificação ao mesmo tempo não isola qual das três falhou se o teste quebrar. Resumir do jeito pedido deixaria a falha sem indicar qual regra de negócio especificamente parou de funcionar."
       }
     ]
@@ -226,6 +262,8 @@
         "project_type": "Web",
         "scenario": "Um QA no time da \"Lojinha Verde\" (e-commerce fictício de plantas, web) precisa de massa de dados para testar o cadastro de clientes.",
         "input": "\"Preciso de dados de teste para a entidade Cliente do nosso cadastro (nome, e-mail, telefone, CEP).\"",
+        "prompt_example": "/swl-skill-qa-new-test-data Preciso de dados de teste para a entidade Cliente do nosso cadastro (nome, e-mail, telefone, CEP).",
+        "prompt_note": null,
         "expected_output": "A skill lê o CLAUDE.md e o modelo da entidade, gera um conjunto válido (nome/e-mail/telefone/CEP fictícios plausíveis), conjuntos de borda (nome vazio, CEP em formato errado) e inválidos (e-mail sem arroba), e salva tudo como factory reutilizável em `test/factories/cliente.factory.ts`."
       },
       {
@@ -233,6 +271,8 @@
         "project_type": "API",
         "scenario": "Um QA na \"PagaFácil\" (fintech fictícia de pagamentos, API) precisa de massa para testar limite de valor de transferência, mas o critério de aceite não deixa claro qual é o valor máximo permitido.",
         "input": "\"Preciso de dados de teste para Transferência (valor, conta origem, conta destino). O critério de aceite não diz qual o valor máximo por transferência.\"",
+        "prompt_example": "/swl-skill-qa-new-test-data Preciso de dados de teste para Transferência (valor, conta origem, conta destino). O critério de aceite não diz qual o valor máximo por transferência.",
+        "prompt_note": null,
         "expected_output": "A skill gera os conjuntos válido/borda/inválido normalmente para os campos conhecidos, mas para o valor-limite marca explicitamente \"valor máximo não confirmado — a definir com o PO antes de fixar o dado de borda 'no limite'\", em vez de chutar um número redondo."
       },
       {
@@ -240,6 +280,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app mobile da \"PagaFácil\", com o prazo apertado pro onboarding de novos usuários, cola um print de um cadastro real de cliente de produção (nome, CPF e e-mail reais) e pede pra gerar \"mais 10 parecidos\" como referência de formato.",
         "input": "cola nome, CPF e e-mail reais de um cliente de produção, pedindo 10 registros no mesmo formato.",
+        "prompt_example": null,
+        "prompt_note": "Este cenário envolve dado real colado pela pessoa — não é possível (nem desejável) mostrar um prompt de exemplo copiável aqui sem reproduzir o mesmo tipo de dado sensível que o guardrail existe para proteger.",
         "expected_output": "A skill recusa usar o dado colado como base, gera 10 registros 100% fictícios (CPF com dígito verificador válido mas sem correspondência real, domínio de e-mail inventado) e avisa que os dados reais colados não foram aproveitados. É justamente sob pressão de prazo, como neste caso, que um dado real tende a entrar sem querer numa massa de teste — e de lá pra um ambiente de homologação, um dump de log, ou uma tela compartilhada em print."
       }
     ]
@@ -261,6 +303,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"ClickIngressos\" (venda de ingressos online fictícia, web) quer um smoke test simples do endpoint de listagem de eventos, com k6 já configurado.",
         "input": "\"Preciso de um teste de performance smoke pro endpoint GET /eventos, já usamos k6.\"",
+        "prompt_example": "/swl-skill-qa-new-performance-test Preciso de um teste de performance smoke pro endpoint GET /eventos, já usamos k6.",
+        "prompt_note": null,
         "expected_output": "A skill detecta k6, confirma que é smoke test (poucos usuários virtuais, só validar que o script roda), gera o script parametrizado e salva em `tests/performance/`."
       },
       {
@@ -268,6 +312,8 @@
         "project_type": "Integração",
         "scenario": "Um QA na \"StreamPlay\" (streaming de vídeo fictício, com integração a um CDN de terceiro) quer testar a API de início de reprodução, mas só definiu o tipo de teste (load), sem os thresholds.",
         "input": "\"Quero um teste de carga (load) pro endpoint de iniciar reprodução, mas ainda não sei os números de threshold.\"",
+        "prompt_example": "/swl-skill-qa-new-performance-test Quero um teste de carga (load) pro endpoint de iniciar reprodução, mas ainda não sei os números de threshold.",
+        "prompt_note": null,
         "expected_output": "A skill gera o script como load test conforme pedido, mas para os thresholds (p95, taxa de erro, RPS) marca \"a confirmar com o responsável pelo SLA\" em vez de preencher com números de exemplo."
       },
       {
@@ -275,6 +321,8 @@
         "project_type": "Mobile",
         "scenario": "Na \"BancoDigitalX\" (banco digital fictício, mobile), o time de infra pede um teste de stress pro endpoint de autenticação do app antes de um evento de marketing com pico esperado de acessos, mas ninguém do time de negócio respondeu quais números de SLA valem, e o prazo é hoje.",
         "input": "\"Precisamos rodar um teste de stress hoje mesmo pro pico do evento, mas ninguém me respondeu ainda o SLA. Pode estimar um número razoável pra gente não atrasar?\"",
+        "prompt_example": "/swl-skill-qa-new-performance-test Precisamos rodar um teste de stress hoje mesmo pro pico do evento, mas ninguém me respondeu ainda o SLA. Pode estimar um número razoável pra gente não atrasar?",
+        "prompt_note": null,
         "expected_output": "Mesmo com o prazo apertado e o pedido direto de estimar, a skill gera o script de stress funcional, mas deixa os thresholds marcados como pendentes — um teste \"aprovado\" contra um número inventado pela própria skill não prova nada sobre o sistema aguentar o pico real do evento, só prova que ele aguenta o número que foi chutado."
       }
     ]
@@ -296,6 +344,8 @@
         "project_type": "API",
         "scenario": "Um QA na \"AgroConecta\" (marketplace agro B2B fictício, API) precisa do teste de contrato do endpoint `GET /produtos/{id}`, com spec OpenAPI já publicada.",
         "input": "\"Gera o teste de contrato pro endpoint GET /produtos/{id}, o schema tá no nosso arquivo openapi.yaml.\"",
+        "prompt_example": "/swl-skill-qa-new-contract-tests Gera o teste de contrato pro endpoint GET /produtos/{id}, o schema tá no nosso arquivo openapi.yaml.",
+        "prompt_note": null,
         "expected_output": "A skill lê o schema real, valida status 200 com os campos definidos (tipos, obrigatoriedade), e gera o teste com a biblioteca de validação de schema do stack detectado."
       },
       {
@@ -303,6 +353,8 @@
         "project_type": "API",
         "scenario": "Um QA na \"LogiFrete\" (transportadora fictícia, API) precisa de testes de contrato entre o serviço de rastreamento e seus múltiplos consumidores (app do motorista, painel do cliente), mas o projeto não tem nenhuma ferramenta de contrato consumer-driven configurada ainda.",
         "input": "\"Preciso de testes de contrato entre o serviço de rastreamento e seus consumidores. Temos vários consumidores desse serviço mas não sei se já usamos Pact.\"",
+        "prompt_example": "/swl-skill-qa-new-contract-tests Preciso de testes de contrato entre o serviço de rastreamento e seus consumidores. Temos vários consumidores desse serviço mas não sei se já usamos Pact.",
+        "prompt_note": null,
         "expected_output": "A skill identifica múltiplos consumidores — sinal claro de que o cenário pede contrato consumer-driven (Pact) em vez de só validação de schema — mas como não encontra Pact nem Spring Cloud Contract configurado no projeto, pergunta se deve introduzir a ferramenta ou se o time prefere só validação de schema por ora, em vez de decidir sozinha."
       },
       {
@@ -310,6 +362,8 @@
         "project_type": "API",
         "scenario": "Na \"PagaFácil\" (fintech de pagamentos fictícia, API), o time quer só \"documentar o contrato atual\" a partir de uma resposta de exemplo colada no Slack por um dev, sem OpenAPI nem Pact publicado, pra ganhar tempo antes de uma integração com parceiro externo.",
         "input": "cola uma resposta JSON de exemplo do endpoint de conciliação e pede pra gerar o teste \"baseado nesse exemplo mesmo\".",
+        "prompt_example": null,
+        "prompt_note": "Este cenário envolve dado real colado pela pessoa — não é possível (nem desejável) mostrar um prompt de exemplo copiável aqui sem reproduzir o mesmo tipo de dado sensível que o guardrail existe para proteger.",
         "expected_output": "A skill não gera o teste a partir da resposta isolada — um campo que aparece como `null` nesse exemplo específico pode ser opcional ou pode ser obrigatório-mas-vazio-nesse-caso, e a diferença importa pra quem for construir a integração em cima. Pede a especificação real (via schema OpenAPI ou contrato Pact já publicado) antes de codificar qualquer validação, já que o parceiro externo vai confiar nesse teste como se fosse o contrato oficial."
       }
     ]
@@ -331,6 +385,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos online fictícia, web) audita a página de listagem de cursos, com axe-core já configurado.",
         "input": "\"Audita a acessibilidade da página de listagem de cursos, nível AA, já usamos axe-core no projeto.\"",
+        "prompt_example": "/swl-skill-qa-check-accessibility Audita a acessibilidade da página de listagem de cursos, nível AA, já usamos axe-core no projeto.",
+        "prompt_note": null,
         "expected_output": "A skill detecta axe-core, roda contra a página, e reporta violações reais encontradas (ex: contraste insuficiente em um botão) com critério WCAG e severidade."
       },
       {
@@ -338,6 +394,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia, mobile) precisa auditar a tela de cadastro de pet, mas o nível WCAG alvo não foi confirmado.",
         "input": "\"Audita a acessibilidade da tela de cadastro de pet.\" (sem dizer o nível)",
+        "prompt_example": "/swl-skill-qa-check-accessibility Audita a acessibilidade da tela de cadastro de pet.",
+        "prompt_note": null,
         "expected_output": "A skill pergunta qual nível é o alvo (A, AA ou AAA) em vez de assumir AA por padrão, e só roda a auditoria depois de confirmado."
       },
       {
@@ -345,6 +403,8 @@
         "project_type": "Mobile",
         "scenario": "No app \"SaúdeJá\" (telemedicina fictícia, mobile), o time de produto pede pra \"declarar conforme AA\" no app inteiro com base só na auditoria feita na tela de login, pra atender um requisito de licitação pública.",
         "input": "\"Auditamos só a tela de login e passou. Pode declarar o app inteiro conforme AA pra gente anexar na licitação?\"",
+        "prompt_example": "/swl-skill-qa-check-accessibility Auditamos só a tela de login e passou. Pode declarar o app inteiro conforme AA pra gente anexar na licitação?",
+        "prompt_note": null,
         "expected_output": "A skill relata a conformidade só para a tela de login efetivamente testada, sem estender a conclusão pro \"app inteiro\" — telas de agendamento, prontuário e pagamento nunca passaram pela ferramenta. Uma declaração assim, anexada numa licitação pública, vira uma promessa que alguém vai cobrar depois: no dia em que um usuário de leitor de tela não conseguir passar da tela de prontuário."
       }
     ]
@@ -366,6 +426,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos fictícia, web) audita um relatório simples de execução de testes do módulo de matrícula antes de enviar pro time.",
         "input": "\"Audita esse relatório de testes do módulo de matrícula antes de eu enviar pro time.\"",
+        "prompt_example": "/swl-skill-qa-check-data-quality Audita esse relatório de testes do módulo de matrícula antes de eu enviar pro time.",
+        "prompt_note": null,
         "expected_output": "A skill confere as afirmações do relatório — todas rastreáveis ao arquivo de resultado real anexado — e não sinaliza nada, já que não há número ou citação sem fonte."
       },
       {
@@ -373,6 +435,8 @@
         "project_type": "API",
         "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, API) audita um relatório de diagnóstico de bug com uma citação de cliente sem transcrição anexada.",
         "input": "\"Audita esse relatório de bug antes de eu abrir o chamado.\" (o relatório cita \"o cliente disse que trava toda vez\" sem anexo)",
+        "prompt_example": "/swl-skill-qa-check-data-quality Audita esse relatório de bug antes de eu abrir o chamado.",
+        "prompt_note": null,
         "expected_output": "A skill sinaliza a citação atribuída ao cliente como sem fonte rastreável (nenhuma transcrição, e-mail ou print anexado) e pergunta qual é a origem, sem remover nem confirmar a afirmação por conta própria."
       },
       {
@@ -380,6 +444,8 @@
         "project_type": "Mobile",
         "scenario": "Na \"RotaCerta\" (app do entregador fictício, mobile), um analista entrega ao QA um relatório de sessão exploratória com \"98% de satisfação dos entregadores testados\" pra incluir no relatório trimestral de qualidade da diretoria.",
         "input": "\"Pode revisar esse relatório antes de eu mandar pra diretoria? Tem um número de satisfação ali.\"",
+        "prompt_example": "/swl-skill-qa-check-data-quality Pode revisar esse relatório antes de eu mandar pra diretoria? Tem um número de satisfação ali.",
+        "prompt_note": null,
         "expected_output": "A skill sinaliza o \"98% de satisfação\" como número redondo demais sem fonte associada — não há survey, entrevista registrada nem pesquisa anexada — e pergunta de onde veio, em vez de deixar passar por já estar num relatório formatado. Um número assim, uma vez impresso num relatório de diretoria, costuma virar fato citado depois, mesmo que ninguém mais lembre de onde saiu."
       }
     ]
@@ -401,6 +467,8 @@
         "project_type": "Integração",
         "scenario": "Um QA na \"LogiFrete\" (transportadora fictícia) analisa a suíte de integração com o sistema de rastreamento de um parceiro externo, que às vezes falha sem motivo aparente.",
         "input": "\"Analisa essa suíte de integração com o rastreamento, ela às vezes falha sem motivo aparente.\"",
+        "prompt_example": "/swl-skill-qa-check-flakiness Analisa essa suíte de integração com o rastreamento, ela às vezes falha sem motivo aparente.",
+        "prompt_note": null,
         "expected_output": "A skill identifica um `waitForTimeout(3000)` na linha X, sugere trocar por espera condicional ao estado da resposta da API do parceiro."
       },
       {
@@ -408,6 +476,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA na \"SaúdeJá\" (telemedicina fictícia) tem testes de agendamento no app mobile que parecem depender de ordem de execução, mas não há histórico de execução disponível pra confirmar.",
         "input": "\"Os testes de agendamento do app falham quando rodam em paralelo, mas só às vezes. Não tenho o histórico de execução do CI à mão.\"",
+        "prompt_example": "/swl-skill-qa-check-flakiness Os testes de agendamento do app falham quando rodam em paralelo, mas só às vezes. Não tenho o histórico de execução do CI à mão.",
+        "prompt_note": null,
         "expected_output": "A skill identifica na análise estática uma variável compartilhada entre dois testes (indício claro de dependência de ordem), mas para outro trecho suspeito, sem histórico disponível, classifica como \"padrão de risco, não confirmado como causa da falha real\" em vez de afirmar que é a causa."
       },
       {
@@ -415,6 +485,8 @@
         "project_type": "Web",
         "scenario": "Na \"ClickIngressos\" (venda de ingressos, alta demanda, web), dias antes de um lançamento, o tech lead pede pra só marcar a suíte inteira como \"flaky, ignorar por enquanto\" pra não travar o deploy, já que \"sempre foi meio instável mesmo\".",
         "input": "\"A suíte de compra de ingresso está instável há semanas, só marca tudo como flaky e segue com o deploy, não temos tempo agora.\"",
+        "prompt_example": "/swl-skill-qa-check-flakiness A suíte de compra de ingresso está instável há semanas, só marca tudo como flaky e segue com o deploy, não temos tempo agora.",
+        "prompt_note": null,
         "expected_output": "A skill analisa arquivo por arquivo em vez de aceitar o rótulo de largada, e encontra que boa parte dos testes usa seletor por classe CSS de estilo, que muda a cada deploy de design. Não é instabilidade aleatória — é um padrão previsível quebrando toda vez que o time de design mexe no CSS, e rotular isso como \"flaky\" deixaria o mesmo problema voltando no próximo deploy."
       }
     ]
@@ -436,6 +508,8 @@
         "project_type": "Integração",
         "scenario": "Um QA na \"LogiFrete\" (transportadora fictícia) prioriza 4 cenários do módulo de rastreamento de encomenda por risco.",
         "input": "\"Prioriza esses 4 cenários de rastreamento por risco.\"",
+        "prompt_example": "/swl-skill-qa-risk-priority Prioriza esses 4 cenários de rastreamento por risco.",
+        "prompt_note": null,
         "expected_output": "A skill classifica cada um com impacto/frequência/complexidade visíveis, matriz rastreável, e recomendações de automatizar ou testar manualmente."
       },
       {
@@ -443,6 +517,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos fictícia, web) prioriza cenários de emissão de certificado, mas sem dado de histórico de bugs disponível.",
         "input": "\"Prioriza os cenários de certificado. Não tenho números de bugs anteriores dessa área.\"",
+        "prompt_example": "/swl-skill-qa-risk-priority Prioriza os cenários de certificado. Não tenho números de bugs anteriores dessa área.",
+        "prompt_note": null,
         "expected_output": "A skill classifica pelos critérios disponíveis (impacto, frequência, complexidade) e omite o critério de histórico de bugs da matriz, em vez de estimar um número pra preencher a coluna."
       },
       {
@@ -450,6 +526,8 @@
         "project_type": "Mobile",
         "scenario": "Na \"BancoDigitalX\" (banco digital fictício, mobile), o gerente de risco pede pra classificar o cenário de troca de senha como \"Baixo\" porque \"na prática quase nunca dá problema\", mesmo lidando com autenticação.",
         "input": "\"Classifica troca de senha como Baixo, na prática quase nunca falha.\"",
+        "prompt_example": "/swl-skill-qa-risk-priority Classifica troca de senha como Baixo, na prática quase nunca falha.",
+        "prompt_note": null,
         "expected_output": "A skill classifica com base nos critérios — impacto alto por lidar com autenticação, frequência de uso real, complexidade técnica — e chega em \"Alto\", não em \"Baixo\". Frequência baixa de falha passada não é o mesmo critério que impacto se a falha acontecer, e a matriz mantém os dois separados justamente pra essa distinção não se perder."
       }
     ]
@@ -471,6 +549,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app mobile \"PetAmigo\" (adoção de pets fictícia) revisa um teste gerado por IA de cadastro de pet pra adoção.",
         "input": "\"Revisa esse teste de cadastro de pet que a IA gerou.\"",
+        "prompt_example": "/swl-skill-qa-review-tests Revisa esse teste de cadastro de pet que a IA gerou.",
+        "prompt_note": null,
         "expected_output": "O nome do teste descreve o comportamento, os asserts validam o campo relevante, sem redundância — recomendação: manter."
       },
       {
@@ -478,6 +558,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, web) revisa um teste de listagem de fornecedores com nome genérico.",
         "input": "\"Revisa esse teste chamado 'test_listagem_2'.\"",
+        "prompt_example": "/swl-skill-qa-review-tests Revisa esse teste chamado 'test_listagem_2'.",
+        "prompt_note": null,
         "expected_output": "A skill sinaliza que o nome não descreve comportamento (deveria dizer o que está sendo validado), recomendação: ajustar o nome, mantendo o restante."
       },
       {
@@ -485,6 +567,8 @@
         "project_type": "API",
         "scenario": "Na \"PagaFácil\" (fintech de pagamentos fictícia, API), o QA recebe 8 testes gerados por IA pro fluxo de estorno, já marcados como `generated-by-ai: reviewed`, com o tech lead pedindo \"só confirma que tá tudo certo, é rotina\".",
         "input": "\"Revisa esses 8 testes de estorno, já estão marcados como reviewed, é só formalidade.\"",
+        "prompt_example": "/swl-skill-qa-review-tests Revisa esses 8 testes de estorno, já estão marcados como reviewed, é só formalidade.",
+        "prompt_note": null,
         "expected_output": "A skill revisa os 8 normalmente e aponta 2 com asserts fracos (só verificam que não lançou exceção, não que o valor do estorno está correto) — sem validar o marcador `reviewed` já presente. Nesses dois casos o marcador foi colocado antes de alguém checar se os asserts realmente provam o que o nome do teste promete, que é a mesma verificação que essa chamada acabou de fazer."
       }
     ]
@@ -506,6 +590,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) confirma que o ambiente de staging está pronto antes de rodar a suíte de checkout.",
         "input": "\"Confirma que o staging está pronto antes de eu rodar a suíte de regressão do checkout.\"",
+        "prompt_example": "/swl-skill-qa-check-environment Confirma que o staging está pronto antes de eu rodar a suíte de regressão do checkout.",
+        "prompt_note": null,
         "expected_output": "A skill faz health check da API e do banco (ambos UP), confirma seed de dados de produtos presente, nenhuma feature flag relevante configurada, e dá veredito AMBIENTE PRONTO."
       },
       {
@@ -513,6 +599,8 @@
         "project_type": "API",
         "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, API) verifica o ambiente antes da suíte de negociação de preço rodar, mas não há documentação de quais feature flags deveriam estar ativas.",
         "input": "\"Verifica o ambiente de staging antes da suíte de negociação de preço rodar.\"",
+        "prompt_example": "/swl-skill-qa-check-environment Verifica o ambiente de staging antes da suíte de negociação de preço rodar.",
+        "prompt_note": null,
         "expected_output": "A skill confirma serviços UP e seed de dados presente, mas para feature flags, como não há definição registrada de qual estado é esperado, marca \"não verificado — estado esperado não documentado\" em vez de assumir que está correto."
       },
       {
@@ -520,6 +608,8 @@
         "project_type": "Mobile",
         "scenario": "Na \"BancoDigitalX\" (banco digital fictício, mobile), véspera de um teste de carga importante, o time de infra informa que \"o ambiente deve estar ok, sempre está\" pra não atrasar o início do teste.",
         "input": "\"Pode rodar a suíte já, o ambiente de performance sempre tá ok, não precisa checar.\"",
+        "prompt_example": "/swl-skill-qa-check-environment Pode rodar a suíte já, o ambiente de performance sempre tá ok, não precisa checar.",
+        "prompt_note": null,
         "expected_output": "Mesmo com a garantia informal, a skill roda o health check real antes de liberar — e encontra que o serviço de autenticação mockado (WireMock) não estava no ar, o que faria toda a suíte de carga falhar por um motivo que não tem nada a ver com a performance sendo medida. Sem essa checagem, o teste teria produzido um relatório de \"sistema não aguenta carga\" quando o problema real era um mock fora do ar."
       }
     ]
@@ -541,6 +631,8 @@
         "project_type": "API",
         "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, API) verifica a cobertura do módulo de negociação de preço entre comprador e vendedor.",
         "input": "\"Verifica a cobertura do módulo de negociação: propor preço, aceitar proposta, recusar proposta.\"",
+        "prompt_example": "/swl-skill-qa-check-coverage Verifica a cobertura do módulo de negociação: propor preço, aceitar proposta, recusar proposta.",
+        "prompt_note": null,
         "expected_output": "A skill cruza os 3 critérios com os cenários existentes e reporta que \"recusar proposta\" só tem happy path — falta um negativo (recusar uma proposta que já foi aceita por outra parte)."
       },
       {
@@ -548,6 +640,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos fictícia, web) verifica cobertura do módulo de emissão de certificado, com critérios parcialmente documentados.",
         "input": "\"Verifica cobertura do módulo de certificado. Alguns critérios estão só no board do Jira, não sei se peguei todos.\"",
+        "prompt_example": "/swl-skill-qa-check-coverage Verifica cobertura do módulo de certificado. Alguns critérios estão só no board do Jira, não sei se peguei todos.",
+        "prompt_note": null,
         "expected_output": "A skill cruza os critérios encontrados no board com os cenários existentes normalmente, mas avisa que a fonte de critérios pode estar incompleta — a cobertura reportada vale só para o que foi levantado, não é garantia de que não existam critérios adicionais não capturados no board."
       },
       {
@@ -555,6 +649,8 @@
         "project_type": "Integração",
         "scenario": "Na \"ContaCerta\" (contabilidade SaaS fictícia), o gerente de produto pede um relatório de cobertura \"de 100%\" pra apresentar ao board de investidores antes de uma rodada de captação, com o módulo de integração bancária tendo só 2 de 6 cenários automatizados.",
         "input": "\"Preciso de um relatório que mostre 100% de cobertura na integração bancária, é pra reunião com investidores amanhã.\"",
+        "prompt_example": "/swl-skill-qa-check-coverage Preciso de um relatório que mostre 100% de cobertura na integração bancária, é pra reunião com investidores amanhã.",
+        "prompt_note": null,
         "expected_output": "A skill relata os números reais — 2 de 6 cenários cobertos, os outros 4 sem nenhum teste — em vez de arredondar a análise pra chegar em 100%. O relatório que sai dessa chamada é o que existe de verdade hoje, não o que seria conveniente mostrar amanhã."
       }
     ]
@@ -576,6 +672,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"ClickIngressos\" (venda de ingressos fictícia, web) analisa o resultado real de um smoke test em k6, sem threshold definido ainda.",
         "input": "\"Analisa esse resultado do smoke test que rodei.\" (arquivo JSON real do k6)",
+        "prompt_example": "/swl-skill-qa-check-performance-results Analisa esse resultado do smoke test que rodei.",
+        "prompt_note": null,
         "expected_output": "A skill extrai as métricas reais (p95, taxa de erro, RPS) e reporta como \"sem threshold definido para comparar\", já que é só o smoke inicial."
       },
       {
@@ -583,6 +681,8 @@
         "project_type": "Integração",
         "scenario": "Um QA na \"StreamPlay\" (streaming de vídeo fictício, integração com CDN de terceiro) analisa um resultado de load test com threshold definido só para latência, não para taxa de erro.",
         "input": "\"Analisa esse resultado de carga. Só combinamos o threshold de latência (p95 < 400ms) até agora.\"",
+        "prompt_example": "/swl-skill-qa-check-performance-results Analisa esse resultado de carga. Só combinamos o threshold de latência (p95 < 400ms) até agora.",
+        "prompt_note": null,
         "expected_output": "A skill compara a latência real contra os 400ms combinados normalmente, mas para taxa de erro, sem threshold combinado, apresenta o número bruto e avisa que não há base de comparação pra esse critério específico."
       },
       {
@@ -590,6 +690,8 @@
         "project_type": "Mobile",
         "scenario": "Na \"BancoDigitalX\" (banco digital fictício, mobile), depois de um teste de stress no endpoint de autenticação do app, o resultado mostra taxa de erro 15 pontos acima do threshold combinado, e o gerente pede pra \"considerar dentro do esperado, foi só um pico passageiro no gráfico\".",
         "input": "\"Vi que passou um pouco do threshold só num pico rápido, pode considerar como dentro do esperado no relatório final?\"",
+        "prompt_example": "/swl-skill-qa-check-performance-results Vi que passou um pouco do threshold só num pico rápido, pode considerar como dentro do esperado no relatório final?",
+        "prompt_note": null,
         "expected_output": "A skill mantém o veredito de \"violou threshold\" com a taxa de erro real extraída do arquivo. O pico existiu no resultado real da execução, e um relatório ajustado pra parecer aprovado é o tipo de documento que, se o mesmo cenário falhar depois em produção, ninguém vai conseguir usar pra entender o que já tinha aparecido no teste."
       }
     ]
@@ -611,6 +713,8 @@
         "project_type": "Web",
         "scenario": "Um QA no \"TarefaCerta\" (app web fictício de gestão de tarefas, stack Node/Express) precisa checar a segurança básica da tela de login.",
         "input": "\"Verifica a segurança do endpoint de login em https://tarefacerta-staging.exemplo.com/login.\"",
+        "prompt_example": "/swl-skill-qa-check-security Verifica a segurança do endpoint de login em https://tarefacerta-staging.exemplo.com/login.",
+        "prompt_note": null,
         "expected_output": "A skill confirma que o stack não é .NET, testa acesso sem token/com token expirado, injeção básica nos campos, headers de segurança na resposta real, e reporta achados com severidade — sem inventar nenhum problema que não foi de fato observado."
       },
       {
@@ -618,6 +722,8 @@
         "project_type": "API",
         "scenario": "Um QA no \"TarefaCerta\" quer verificar o endpoint de exportação de relatórios, mas não sabe se o time já tem alguma ferramenta de segurança configurada.",
         "input": "\"Verifica a segurança do endpoint GET /api/relatorios/exportar. Não sei se já temos ferramenta de segurança configurada no projeto.\"",
+        "prompt_example": "/swl-skill-qa-check-security Verifica a segurança do endpoint GET /api/relatorios/exportar. Não sei se já temos ferramenta de segurança configurada no projeto.",
+        "prompt_note": null,
         "expected_output": "A skill não encontra ferramenta de scan configurada e, em vez de introduzir uma por conta própria, marca isso como pendência (\"nenhuma ferramenta de scan detectada — confirmar com o time antes de adicionar uma\"), seguindo apenas com a verificação funcional manual que não depende de ferramenta externa."
       },
       {
@@ -625,6 +731,8 @@
         "project_type": "Mobile",
         "scenario": "No \"TarefaCerta Mobile\" (app fictício), o PO pede pra \"confirmar que o app está aprovado em segurança\" pra lançar amanhã, mas o time só testou autenticação — não testou certificate pinning nem armazenamento local por falta de tempo.",
         "input": "\"Preciso que confirme que o app está aprovado em segurança pra lançarmos amanhã. Testamos login com token inválido, o resto não deu tempo.\"",
+        "prompt_example": "/swl-skill-qa-check-security Preciso que confirme que o app está aprovado em segurança pra lançarmos amanhã. Testamos login com token inválido, o resto não deu tempo.",
+        "prompt_note": null,
         "expected_output": "A skill reporta o que foi de fato testado (autenticação — sem problemas encontrados), mas recusa declarar \"aprovado em segurança\" no geral — sinaliza explicitamente que certificate pinning e armazenamento local ficaram fora do escopo desta execução. Reportar \"aprovado\" com dois dos três itens de fora seria o tipo de aprovação que o time de produto lê como \"pronto pra loja de aplicativos\" — mesmo sem ser."
       }
     ]
@@ -646,6 +754,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia) faz sua primeira sessão exploratória na tela de busca de pets.",
         "input": "\"Quero fazer uma sessão exploratória na busca de pets, tenho 1 hora.\"",
+        "prompt_example": "/swl-skill-qa-exploratory-session Quero fazer uma sessão exploratória na busca de pets, tenho 1 hora.",
+        "prompt_note": null,
         "expected_output": "A skill define o charter (missão: busca por filtros combinados; escopo: só a tela de busca; tempo-caixa: 60 min), conduz e documenta os achados reais da sessão."
       },
       {
@@ -653,6 +763,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, web) conduz sessão exploratória no checkout, mas é interrompido antes de testar uma parte do fluxo planejado.",
         "input": "relata que testou boa parte do fluxo de negociação de preço, mas foi interrompido antes de testar o fluxo de aprovação em duas etapas.",
+        "prompt_example": "/swl-skill-qa-exploratory-session Testei boa parte do fluxo de negociação de preço, mas fui interrompido antes de testar o fluxo de aprovação em duas etapas.",
+        "prompt_note": null,
         "expected_output": "A skill documenta as áreas realmente cobertas (negociação de preço) e registra explicitamente, em \"cobertura percebida\", que o fluxo de aprovação em duas etapas não foi exercitado por falta de tempo — sem incluir esse fluxo em \"áreas cobertas\" mesmo fazendo parte do charter original."
       },
       {
@@ -660,6 +772,8 @@
         "project_type": "Integração",
         "scenario": "Na \"RH Fácil\" (sistema de RH fictício, com integração ao processador de folha de pagamento externo), o QA conduz uma sessão de 45 minutos na tela de folha de pagamento, e o gerente pede pro relatório dizer que \"o módulo de folha inteiro foi testado\" pra justificar a liberação do release.",
         "input": "\"Coloca no relatório que testamos o módulo de folha inteiro, deu pra ver bastante coisa nessa sessão.\"",
+        "prompt_example": "/swl-skill-qa-exploratory-session Coloca no relatório que testamos o módulo de folha inteiro, deu pra ver bastante coisa nessa sessão.",
+        "prompt_note": null,
         "expected_output": "O relatório lista como \"áreas cobertas\" exatamente as três telas exercitadas (cálculo de horas extras, desconto de INSS, geração de holerite) — não o módulo inteiro, que também inclui rescisão e o envio ao processador externo de folha, nenhum dos dois tocados nesses 45 minutos. Um release liberado com base num relatório que diz \"módulo inteiro testado\" deixa ninguém sabendo que a integração de rescisão ficou sem nenhum teste, até um problema aparecer lá."
       }
     ]
@@ -681,6 +795,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) vê um teste de checkout falhar no CI com uma mensagem de assert clara.",
         "input": "cola o log — o teste esperava \"Pedido confirmado!\" e recebeu \"Pedido confirmado com sucesso!\", porque a aplicação mudou o texto da mensagem.",
+        "prompt_example": "/swl-skill-qa-diagnose-failure O teste de checkout falhou no CI. Esperava \"Pedido confirmado!\" e recebeu \"Pedido confirmado com sucesso!\".",
+        "prompt_note": null,
         "expected_output": "A skill classifica como \"teste mal escrito\" (expectativa desatualizada), aponta a linha exata do assert, e sugere corrigir o texto esperado no teste."
       },
       {
@@ -688,6 +804,8 @@
         "project_type": "Integração",
         "scenario": "Um QA na \"PagaFácil\" (fintech de pagamentos fictícia) tem um teste de integração com o serviço de notificação que falha 1 a cada 5 execuções no CI, sem mudança de código recente.",
         "input": "cola o log de timeout na chamada ao serviço de notificação, mencionando que \"já viu isso antes\" mas sem dados de histórico completo.",
+        "prompt_example": "/swl-skill-qa-diagnose-failure O teste de integração com o serviço de notificação deu timeout de novo no CI. Já vi isso antes, mas não tenho um histórico completo das vezes anteriores.",
+        "prompt_note": null,
         "expected_output": "A skill nota o padrão intermitente, mas como o histórico de execução não foi fornecido de forma completa, marca como \"possível flakiness, rastreamento incompleto\" e recomenda coletar o histórico real via `swl-skill-qa-check-flakiness` antes de classificar definitivamente."
       },
       {
@@ -695,6 +813,8 @@
         "project_type": "API",
         "scenario": "Na \"PagaFácil\" (fintech de pagamentos fictícia, API), a equipe de infraestrutura explica que uma falha recorrente no fechamento de fatura em produção é \"só instabilidade de rede\", pedindo apenas retry no teste pra ele passar.",
         "input": "descreve a pressão para classificar como \"ambiente\" e colar retry, mas mostra um log onde o valor da fatura calculado já vem errado (arredondamento) antes do timeout aparecer.",
+        "prompt_example": "/swl-skill-qa-diagnose-failure A infra disse que essa falha recorrente no fechamento de fatura é só instabilidade de rede e pediu pra só colocar retry no teste. Mas o log mostra o valor da fatura já calculado errado (parece arredondamento) antes do timeout aparecer — pode confirmar se é isso mesmo ou se é rede?",
+        "prompt_note": null,
         "expected_output": "A skill recusa classificar como ambiente/flaky só para o teste passar — aponta que o log mostra um valor de fatura incorreto antes do timeout, indicando bug real de arredondamento, não instabilidade de rede. Recomenda investigar a lógica de cálculo em vez de mascarar com retry: o timeout foi só o sintoma que apareceu primeiro no log, o valor da fatura já tinha saído errado duas linhas antes dele."
       }
     ]
@@ -716,6 +836,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) encontra um bug claro no botão de checkout.",
         "input": "\"Encontrei um bug: o botão de finalizar compra não faz nada quando clico duas vezes rápido.\"",
+        "prompt_example": "/swl-skill-qa-report-bug Encontrei um bug: o botão de finalizar compra não faz nada quando clico duas vezes rápido.",
+        "prompt_note": null,
         "expected_output": "A skill gera relatório estruturado com passos exatos, severidade Alta (bloqueia fluxo principal), resultado esperado vs. obtido claros."
       },
       {
@@ -723,6 +845,8 @@
         "project_type": "API",
         "scenario": "Um QA na \"PagaFácil\" (fintech de pagamentos fictícia, API) reporta um bug sem informar o navegador ou dispositivo usado.",
         "input": "\"A tela de extrato trava às vezes.\" (sem dizer em qual navegador ou dispositivo)",
+        "prompt_example": "/swl-skill-qa-report-bug A tela de extrato trava às vezes.",
+        "prompt_note": null,
         "expected_output": "A skill gera o relatório com os passos que foram informados, mas marca o campo Ambiente como \"não informado — confirmar navegador/dispositivo com quem reportou\", em vez de deixar em branco ou assumir o mais comum."
       },
       {
@@ -730,6 +854,8 @@
         "project_type": "Mobile",
         "scenario": "Na \"ClickIngressos\" (venda de ingressos fictícia, app mobile), dias antes de um lançamento, o suporte pede pra abrir um bug urgente de \"ingresso duplicado\" mandando só um print da tela de confirmação do app, sem descrever os passos nem confirmar se conseguiu reproduzir de novo.",
         "input": "manda um print de uma tela mostrando dois ingressos iguais na conta do usuário, pedindo prioridade máxima, sem mais detalhes.",
+        "prompt_example": "/swl-skill-qa-report-bug [print anexado] Emergência: cliente com dois ingressos iguais na conta. Prioridade máxima nisso.",
+        "prompt_note": null,
         "expected_output": "A skill monta o relatório com o que o print realmente mostra, mas deixa \"Passos para reproduzir\" e \"Resultado esperado\" como pendentes de confirmação com quem reportou, em vez de reconstruir uma sequência plausível de toques. Um bug de duplicação tratado como urgente com passos inventados pode levar o time a corrigir a causa errada enquanto o ingresso real continua duplicando."
       }
     ]
@@ -751,6 +877,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) atualiza a documentação depois que a branch adicionou um cenário de cupom de desconto.",
         "input": "\"Atualiza a documentação de testes com base nessa branch que adicionou o cenário de cupom.\"",
+        "prompt_example": "/swl-skill-qa-update-test-docs Atualiza a documentação de testes com base nessa branch que adicionou o cenário de cupom.",
+        "prompt_note": null,
         "expected_output": "A skill atualiza o mapa de cobertura incluindo o novo cenário, mantendo a estrutura e o tom já usados no README de automação."
       },
       {
@@ -758,6 +886,8 @@
         "project_type": "Integração",
         "scenario": "Um QA na \"LogiFrete\" (transportadora fictícia) atualiza a documentação depois que a branch removeu um cenário de cálculo de frete considerado obsoleto.",
         "input": "\"Atualiza a documentação, removemos um cenário de frete que não existe mais.\"",
+        "prompt_example": "/swl-skill-qa-update-test-docs Atualiza a documentação, removemos um cenário de frete que não existe mais.",
+        "prompt_note": null,
         "expected_output": "A skill atualiza o que a branch de fato mudou, mas antes de remover a entrada do glossário de cenários, verifica se ele ainda aparece em alguma suíte ativa não tocada nesta branch — encontra que ainda é referenciado num teste de regressão separado, mantém a entrada e sinaliza a inconsistência em vez de apagar."
       },
       {
@@ -765,6 +895,8 @@
         "project_type": "Mobile",
         "scenario": "Na \"BancoDigitalX\" (banco digital fictício, mobile), numa reorganização de pastas do app, o tech lead pede pra \"limpar a documentação toda e recomeçar do zero\", já que \"ninguém mais usa a estrutura antiga mesmo\".",
         "input": "\"Pode limpar toda a documentação de testes antiga e escrever do zero, ninguém usa mais aquilo.\"",
+        "prompt_example": "/swl-skill-qa-update-test-docs Pode limpar toda a documentação de testes antiga e escrever do zero, ninguém usa mais aquilo.",
+        "prompt_note": null,
         "expected_output": "A skill atualiza o que mudou nesta branch, mas não apaga as seções de cenários ainda ativos na suíte atual só porque a reorganização de pastas mudou onde os arquivos vivem. Um cenário de aprovação de transferência documentado há dois anos continua rodando no CI todo dia, mesmo com a pasta em que foi originalmente descrito tendo sido reorganizada."
       }
     ]
@@ -786,6 +918,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia) descreve o PR de uma branch com 3 arquivos de teste novos, gerados por IA nesta sessão.",
         "input": "\"Descreve o PR dessa branch de testes de favoritar pet.\"",
+        "prompt_example": "/swl-skill-qa-describe-test-pr Descreve o PR dessa branch de testes de favoritar pet.",
+        "prompt_note": null,
         "expected_output": "A skill analisa o diff, categoriza os 3 arquivos como gerados por IA, e monta a descrição com o checklist."
       },
       {
@@ -793,6 +927,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"SaúdeJá\" (telemedicina fictícia, web) descreve um PR com testes gerados por IA e um teste ajustado manualmente por um dev, mas o commit não usa a tag de rastreabilidade.",
         "input": "\"Descreve o PR da branch de agendamento.\" (commit sem tag `[ai-assisted-test]`)",
+        "prompt_example": "/swl-skill-qa-describe-test-pr Descreve o PR da branch de agendamento.",
+        "prompt_note": null,
         "expected_output": "A skill categoriza os arquivos com base no contexto disponível, mas sinaliza que a ausência da tag no commit impede confirmar a categorização só pelo histórico — recomenda registrar a tag em commits futuros pra essa distinção ficar rastreável sem depender de contexto externo."
       },
       {
@@ -800,6 +936,8 @@
         "project_type": "API",
         "scenario": "Na \"BancoDigitalX\" (banco digital fictício, API), o QA monta a descrição do PR de testes do endpoint de transferência — nenhum teste tem o marcador `reviewed` ainda, o check-flakiness não rodou nesta branch — mas o tech lead pede pra \"marcar tudo, já revisamos informalmente numa call\".",
         "input": "\"Pode marcar os itens do checklist como concluídos, revisamos tudo numa call rápida ontem.\"",
+        "prompt_example": "/swl-skill-qa-describe-test-pr Pode marcar os itens do checklist como concluídos, revisamos tudo numa call rápida ontem.",
+        "prompt_note": null,
         "expected_output": "A skill deixa os dois primeiros itens do checklist desmarcados (marcador `reviewed` ausente, `check-flakiness` não executado nesta branch), e só marca o terceiro (dados fictícios), único confirmável pelo próprio conteúdo dos arquivos. Uma call informal não deixa rastro no repositório — o checklist reflete o que está registrado no código, não o que foi dito numa reunião."
       }
     ]
@@ -821,6 +959,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) gera o relatório de execução da suíte de checkout a partir do JSON real do Playwright.",
         "input": "\"Gera o relatório de execução a partir desse JSON do Playwright.\" (2 testes, ambos passaram)",
+        "prompt_example": "/swl-skill-qa-generate-test-report Gera o relatório de execução a partir desse JSON do Playwright.",
+        "prompt_note": null,
         "expected_output": "A skill gera o relatório com números reais extraídos do arquivo — 2 executados, 2 sucesso, 0 falha, tempo real de execução."
       },
       {
@@ -828,6 +968,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia, mobile) gera o relatório de uma execução com uma falha, sem execução anterior disponível pra comparar.",
         "input": "\"Gera o relatório dessa execução do app.\" (1 falha em 20 testes) + \"não tenho o resultado da execução anterior aqui.\"",
+        "prompt_example": "/swl-skill-qa-generate-test-report Gera o relatório dessa execução do app. Não tenho o resultado da execução anterior aqui.",
+        "prompt_note": null,
         "expected_output": "A skill reporta os números reais (19 sucesso, 1 falha com a mensagem de erro), sem incluir comparação de tendência (\"melhorou\" ou \"piorou\"), já que só há um ponto de dado disponível."
       },
       {
@@ -835,6 +977,8 @@
         "project_type": "Integração",
         "scenario": "Na \"StreamPlay\" (streaming de vídeo fictício, integração com CDN de terceiro), antes de uma reunião de status, o gerente de projeto pede pra \"consolidar\" duas execuções diferentes (segunda e sexta) somando os testes que passaram em qualquer uma das duas, \"pra mostrar cobertura maior\".",
         "input": "manda os dois arquivos de execução e pede pra somar os que passaram em qualquer um dos dois como \"aprovados\".",
+        "prompt_example": "/swl-skill-qa-generate-test-report [dois arquivos de execução anexados — segunda e sexta] Consolida os dois: quero que conte como aprovado qualquer teste que passou em pelo menos uma das duas execuções.",
+        "prompt_note": null,
         "expected_output": "A skill gera o relatório de cada execução separadamente, com os números reais de cada arquivo, sem somar \"passou em pelo menos uma das duas\" como métrica de aprovação. Um teste que passou na segunda e falhou na sexta não vira confiável só por ter passado uma vez — ele continua com um resultado real de falha que o relatório consolidado teria escondido."
       }
     ]
@@ -856,6 +1000,8 @@
         "project_type": "Mobile",
         "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia) roda o pipeline de commit seguro numa branch pequena de testes de favoritar pet, todos os checks passam limpos.",
         "input": "\"Roda o pipeline de commit seguro pra essa branch de favoritar pet.\"",
+        "prompt_example": "/swl-skill-qa-safe-test-commit Roda o pipeline de commit seguro pra essa branch de favoritar pet.",
+        "prompt_note": null,
         "expected_output": "Os 4 checks passam sem achado crítico, e a skill gera o commit no padrão Conventional Commits com a tag `[ai-assisted-test]`."
       },
       {
@@ -863,6 +1009,8 @@
         "project_type": "Web",
         "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos fictícia, web) roda o pipeline numa branch com um achado de severidade Média.",
         "input": "\"Roda o pipeline pra branch de emissão de certificado.\"",
+        "prompt_example": "/swl-skill-qa-safe-test-commit Roda o pipeline pra branch de emissão de certificado.",
+        "prompt_note": null,
         "expected_output": "Os 4 checks rodam, o `qa-review-tests` encontra um assert fraco (severidade Média) — registrado como observação no corpo do commit, e o pipeline segue sem bloquear."
       },
       {
@@ -870,6 +1018,8 @@
         "project_type": "API",
         "scenario": "Na \"ClickIngressos\" (venda de ingressos fictícia, API), poucas horas antes do lançamento de um show concorrido, o tech lead pede pra pular o `qa-check-coverage` \"só dessa vez\" porque a etapa está demorando e o deploy já devia ter saído.",
         "input": "\"Pula a etapa de coverage só dessa vez, precisamos subir agora, já testamos manualmente.\"",
+        "prompt_example": "/swl-skill-qa-safe-test-commit Pula a etapa de coverage só dessa vez, precisamos subir agora, já testamos manualmente.",
+        "prompt_note": null,
         "expected_output": "A skill não pula silenciosamente — registra explicitamente no corpo do commit que a etapa foi pulada e por quê (\"pulado a pedido do tech lead, sob prazo de lançamento, testado manualmente conforme relatado\"), tornando a decisão rastreável pra quem olhar o histórico do commit depois, em vez de deixar parecer que o pipeline completo rodou normalmente."
       }
     ]

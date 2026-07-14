@@ -719,6 +719,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA no time da "Lojinha Verde" (e-commerce fictício de plantas, web) precisa de massa de dados para testar o cadastro de clientes.</p>
                 <p><strong>Input:</strong> "Preciso de dados de teste para a entidade Cliente do nosso cadastro (nome, e-mail, telefone, CEP)."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-test-data Preciso de dados de teste para a entidade Cliente do nosso cadastro (nome, e-mail, telefone, CEP).</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill lê o CLAUDE.md e o modelo da entidade, gera um conjunto válido (nome/e-mail/telefone/CEP fictícios plausíveis), conjuntos de borda (nome vazio, CEP em formato errado) e inválidos (e-mail sem arroba), e salva tudo como factory reutilizável em <code>test/factories/cliente.factory.ts</code>.</p>
               </div>
             </details>
@@ -728,6 +732,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "PagaFácil" (fintech fictícia de pagamentos, API) precisa de massa para testar limite de valor de transferência, mas o critério de aceite não deixa claro qual é o valor máximo permitido.</p>
                 <p><strong>Input:</strong> "Preciso de dados de teste para Transferência (valor, conta origem, conta destino). O critério de aceite não diz qual o valor máximo por transferência."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-test-data Preciso de dados de teste para Transferência (valor, conta origem, conta destino). O critério de aceite não diz qual o valor máximo por transferência.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill gera os conjuntos válido/borda/inválido normalmente para os campos conhecidos, mas para o valor-limite marca explicitamente "valor máximo não confirmado — a definir com o PO antes de fixar o dado de borda 'no limite'", em vez de chutar um número redondo.</p>
               </div>
             </details>
@@ -737,6 +745,12 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA no app mobile da "PagaFácil", com o prazo apertado pro onboarding de novos usuários, cola um print de um cadastro real de cliente de produção (nome, CPF e e-mail reais) e pede pra gerar "mais 10 parecidos" como referência de formato.</p>
                 <p><strong>Input:</strong> cola nome, CPF e e-mail reais de um cliente de produção, pedindo 10 registros no mesmo formato.</p>
+                
+                <div class="guardrail-box">
+                  <div class="g-label">⚑ SEM PROMPT COPIÁVEL</div>
+                  <p>Este cenário envolve dado real colado pela pessoa — não é possível (nem desejável) mostrar um prompt de exemplo copiável aqui sem reproduzir o mesmo tipo de dado sensível que o guardrail existe para proteger.</p>
+                </div>
+                
                 <p><strong>Saída esperada:</strong> A skill recusa usar o dado colado como base, gera 10 registros 100% fictícios (CPF com dígito verificador válido mas sem correspondência real, domínio de e-mail inventado) e avisa que os dados reais colados não foram aproveitados. É justamente sob pressão de prazo, como neste caso, que um dado real tende a entrar sem querer numa massa de teste — e de lá pra um ambiente de homologação, um dump de log, ou uma tela compartilhada em print.</p>
               </div>
             </details>

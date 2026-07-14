@@ -725,6 +725,10 @@ Veredito: DENTRO DO THRESHOLD / VIOLOU THRESHOLD / SEM THRESHOLD DEFINIDO PARA C
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "ClickIngressos" (venda de ingressos fictícia, web) analisa o resultado real de um smoke test em k6, sem threshold definido ainda.</p>
                 <p><strong>Input:</strong> "Analisa esse resultado do smoke test que rodei." (arquivo JSON real do k6)</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-check-performance-results Analisa esse resultado do smoke test que rodei.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill extrai as métricas reais (p95, taxa de erro, RPS) e reporta como "sem threshold definido para comparar", já que é só o smoke inicial.</p>
               </div>
             </details>
@@ -734,6 +738,10 @@ Veredito: DENTRO DO THRESHOLD / VIOLOU THRESHOLD / SEM THRESHOLD DEFINIDO PARA C
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "StreamPlay" (streaming de vídeo fictício, integração com CDN de terceiro) analisa um resultado de load test com threshold definido só para latência, não para taxa de erro.</p>
                 <p><strong>Input:</strong> "Analisa esse resultado de carga. Só combinamos o threshold de latência (p95 &lt; 400ms) até agora."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-check-performance-results Analisa esse resultado de carga. Só combinamos o threshold de latência (p95 &lt; 400ms) até agora.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill compara a latência real contra os 400ms combinados normalmente, mas para taxa de erro, sem threshold combinado, apresenta o número bruto e avisa que não há base de comparação pra esse critério específico.</p>
               </div>
             </details>
@@ -743,6 +751,10 @@ Veredito: DENTRO DO THRESHOLD / VIOLOU THRESHOLD / SEM THRESHOLD DEFINIDO PARA C
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Na "BancoDigitalX" (banco digital fictício, mobile), depois de um teste de stress no endpoint de autenticação do app, o resultado mostra taxa de erro 15 pontos acima do threshold combinado, e o gerente pede pra "considerar dentro do esperado, foi só um pico passageiro no gráfico".</p>
                 <p><strong>Input:</strong> "Vi que passou um pouco do threshold só num pico rápido, pode considerar como dentro do esperado no relatório final?"</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-check-performance-results Vi que passou um pouco do threshold só num pico rápido, pode considerar como dentro do esperado no relatório final?</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill mantém o veredito de "violou threshold" com a taxa de erro real extraída do arquivo. O pico existiu no resultado real da execução, e um relatório ajustado pra parecer aprovado é o tipo de documento que, se o mesmo cenário falhar depois em produção, ninguém vai conseguir usar pra entender o que já tinha aparecido no teste.</p>
               </div>
             </details>

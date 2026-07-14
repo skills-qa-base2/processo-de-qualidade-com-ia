@@ -716,6 +716,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA no app mobile "PetAmigo" (adoção de pets fictícia) revisa um teste gerado por IA de cadastro de pet pra adoção.</p>
                 <p><strong>Input:</strong> "Revisa esse teste de cadastro de pet que a IA gerou."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-review-tests Revisa esse teste de cadastro de pet que a IA gerou.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> O nome do teste descreve o comportamento, os asserts validam o campo relevante, sem redundância — recomendação: manter.</p>
               </div>
             </details>
@@ -725,6 +729,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "AgroConecta" (marketplace B2B fictício, web) revisa um teste de listagem de fornecedores com nome genérico.</p>
                 <p><strong>Input:</strong> "Revisa esse teste chamado 'test_listagem_2'."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-review-tests Revisa esse teste chamado &#x27;test_listagem_2&#x27;.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill sinaliza que o nome não descreve comportamento (deveria dizer o que está sendo validado), recomendação: ajustar o nome, mantendo o restante.</p>
               </div>
             </details>
@@ -734,6 +742,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Na "PagaFácil" (fintech de pagamentos fictícia, API), o QA recebe 8 testes gerados por IA pro fluxo de estorno, já marcados como <code>generated-by-ai: reviewed</code>, com o tech lead pedindo "só confirma que tá tudo certo, é rotina".</p>
                 <p><strong>Input:</strong> "Revisa esses 8 testes de estorno, já estão marcados como reviewed, é só formalidade."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-review-tests Revisa esses 8 testes de estorno, já estão marcados como reviewed, é só formalidade.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill revisa os 8 normalmente e aponta 2 com asserts fracos (só verificam que não lançou exceção, não que o valor do estorno está correto) — sem validar o marcador <code>reviewed</code> já presente. Nesses dois casos o marcador foi colocado antes de alguém checar se os asserts realmente provam o que o nome do teste promete, que é a mesma verificação que essa chamada acabou de fazer.</p>
               </div>
             </details>

@@ -723,6 +723,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA no app do entregador da "RotaCerta" (logística fictícia) precisa automatizar o cenário de login válido, com Playwright já configurado pro app híbrido.</p>
                 <p><strong>Input:</strong> "Gera a automação do cenário de login válido, já temos o cenário BDD pronto em features/login.feature."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-automation Gera a automação do cenário de login válido, já temos o cenário BDD pronto em features/login.feature.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill detecta Playwright via CLAUDE.md, gera o teste reutilizando o <code>LoginPage</code> já existente, com seletores estáveis, e marca <code>generated-by-ai: pending-review</code>.</p>
               </div>
             </details>
@@ -732,6 +736,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "ContaCerta" (contabilidade SaaS B2B fictícia, web) precisa automatizar o cenário de emissão de nota fiscal, mas não está claro se deve reutilizar um Page Object existente ou criar um novo componente de API.</p>
                 <p><strong>Input:</strong> "Automatiza o cenário de emissão de nota fiscal. Temos um NotaFiscalPage mas não sei se ele cobre a parte de API que valida o status."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-automation Automatiza o cenário de emissão de nota fiscal. Temos um NotaFiscalPage mas não sei se ele cobre a parte de API que valida o status.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill reutiliza o <code>NotaFiscalPage</code> existente para a parte de UI, mas para a validação de status via API, como não encontra um componente equivalente já existente, pergunta se deve criar um novo ou se já existe em outro lugar do projeto — em vez de duplicar sem confirmar.</p>
               </div>
             </details>
@@ -741,6 +749,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Na "ClickIngressos" (venda de ingressos online fictícia, API de alta concorrência), o time sob pressão de sprint pede pra já marcar os testes gerados na camada de API como <code>generated-by-ai: reviewed</code> direto, "porque vamos revisar depois".</p>
                 <p><strong>Input:</strong> "Gera a automação da compra de ingresso e já marca como reviewed, revisamos amanhã, precisamos fechar a sprint hoje."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-automation Gera a automação da compra de ingresso e já marca como reviewed, revisamos amanhã, precisamos fechar a sprint hoje.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill gera o teste normalmente, mas marca <code>generated-by-ai: pending-review</code>, não <code>reviewed</code>. Marcar como revisado sem revisão real é diferente de só chegar atrasado numa sprint — é a etiqueta que faz o time de revisão de PR parar de olhar esse teste com atenção, então ela só muda quando alguém de fato ler o código gerado.</p>
               </div>
             </details>

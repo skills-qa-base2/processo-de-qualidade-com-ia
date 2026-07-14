@@ -1,4 +1,5 @@
 import json, re, os, math, base64
+from html import escape as html_escape
 import markdown as md
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -213,12 +214,28 @@ def build_skill_page(s, idx):
     if s.get("examples"):
         accordions = []
         for idx, ex in enumerate(s["examples"], start=1):
+            if ex.get("prompt_example"):
+                prompt_html = f"""
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>{html_escape(ex['prompt_example'])}</code></pre>
+                """
+            elif ex.get("prompt_note"):
+                prompt_html = f"""
+                <div class="guardrail-box">
+                  <div class="g-label">⚑ SEM PROMPT COPIÁVEL</div>
+                  <p>{render_inline_md(ex['prompt_note'])}</p>
+                </div>
+                """
+            else:
+                prompt_html = ""
+
             accordions.append(f"""
             <details class="examples-accordion examples-accordion--{idx}">
               <summary>{ex['situation']} <span class="examples-sep">·</span> {ex['project_type']}</summary>
               <div class="examples-content">
                 <p><strong>Cenário:</strong> {render_inline_md(ex['scenario'])}</p>
                 <p><strong>Input:</strong> {render_inline_md(ex['input'])}</p>
+                {prompt_html}
                 <p><strong>Saída esperada:</strong> {render_inline_md(ex['expected_output'])}</p>
               </div>
             </details>

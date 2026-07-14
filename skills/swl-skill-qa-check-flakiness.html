@@ -721,6 +721,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "LogiFrete" (transportadora fictícia) analisa a suíte de integração com o sistema de rastreamento de um parceiro externo, que às vezes falha sem motivo aparente.</p>
                 <p><strong>Input:</strong> "Analisa essa suíte de integração com o rastreamento, ela às vezes falha sem motivo aparente."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-check-flakiness Analisa essa suíte de integração com o rastreamento, ela às vezes falha sem motivo aparente.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill identifica um <code>waitForTimeout(3000)</code> na linha X, sugere trocar por espera condicional ao estado da resposta da API do parceiro.</p>
               </div>
             </details>
@@ -730,6 +734,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "SaúdeJá" (telemedicina fictícia) tem testes de agendamento no app mobile que parecem depender de ordem de execução, mas não há histórico de execução disponível pra confirmar.</p>
                 <p><strong>Input:</strong> "Os testes de agendamento do app falham quando rodam em paralelo, mas só às vezes. Não tenho o histórico de execução do CI à mão."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-check-flakiness Os testes de agendamento do app falham quando rodam em paralelo, mas só às vezes. Não tenho o histórico de execução do CI à mão.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill identifica na análise estática uma variável compartilhada entre dois testes (indício claro de dependência de ordem), mas para outro trecho suspeito, sem histórico disponível, classifica como "padrão de risco, não confirmado como causa da falha real" em vez de afirmar que é a causa.</p>
               </div>
             </details>
@@ -739,6 +747,10 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Na "ClickIngressos" (venda de ingressos, alta demanda, web), dias antes de um lançamento, o tech lead pede pra só marcar a suíte inteira como "flaky, ignorar por enquanto" pra não travar o deploy, já que "sempre foi meio instável mesmo".</p>
                 <p><strong>Input:</strong> "A suíte de compra de ingresso está instável há semanas, só marca tudo como flaky e segue com o deploy, não temos tempo agora."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-check-flakiness A suíte de compra de ingresso está instável há semanas, só marca tudo como flaky e segue com o deploy, não temos tempo agora.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill analisa arquivo por arquivo em vez de aceitar o rótulo de largada, e encontra que boa parte dos testes usa seletor por classe CSS de estilo, que muda a cada deploy de design. Não é instabilidade aleatória — é um padrão previsível quebrando toda vez que o time de design mexe no CSS, e rotular isso como "flaky" deixaria o mesmo problema voltando no próximo deploy.</p>
               </div>
             </details>

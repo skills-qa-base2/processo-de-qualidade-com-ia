@@ -750,6 +750,10 @@ Reviewed-by: &lt;nome do QA&gt;
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA no app "PetAmigo" (adoção de pets fictícia) roda o pipeline de commit seguro numa branch pequena de testes de favoritar pet, todos os checks passam limpos.</p>
                 <p><strong>Input:</strong> "Roda o pipeline de commit seguro pra essa branch de favoritar pet."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-safe-test-commit Roda o pipeline de commit seguro pra essa branch de favoritar pet.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> Os 4 checks passam sem achado crítico, e a skill gera o commit no padrão Conventional Commits com a tag <code>[ai-assisted-test]</code>.</p>
               </div>
             </details>
@@ -759,6 +763,10 @@ Reviewed-by: &lt;nome do QA&gt;
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "EstudaMais" (plataforma de cursos fictícia, web) roda o pipeline numa branch com um achado de severidade Média.</p>
                 <p><strong>Input:</strong> "Roda o pipeline pra branch de emissão de certificado."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-safe-test-commit Roda o pipeline pra branch de emissão de certificado.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> Os 4 checks rodam, o <code>qa-review-tests</code> encontra um assert fraco (severidade Média) — registrado como observação no corpo do commit, e o pipeline segue sem bloquear.</p>
               </div>
             </details>
@@ -768,6 +776,10 @@ Reviewed-by: &lt;nome do QA&gt;
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Na "ClickIngressos" (venda de ingressos fictícia, API), poucas horas antes do lançamento de um show concorrido, o tech lead pede pra pular o <code>qa-check-coverage</code> "só dessa vez" porque a etapa está demorando e o deploy já devia ter saído.</p>
                 <p><strong>Input:</strong> "Pula a etapa de coverage só dessa vez, precisamos subir agora, já testamos manualmente."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-safe-test-commit Pula a etapa de coverage só dessa vez, precisamos subir agora, já testamos manualmente.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill não pula silenciosamente — registra explicitamente no corpo do commit que a etapa foi pulada e por quê ("pulado a pedido do tech lead, sob prazo de lançamento, testado manualmente conforme relatado"), tornando a decisão rastreável pra quem olhar o histórico do commit depois, em vez de deixar parecer que o pipeline completo rodou normalmente.</p>
               </div>
             </details>

@@ -78,12 +78,16 @@ def parse_examples(folder):
         content = blocks[i + 2]
         cenario = re.search(r"\*\*Cenário:\*\*\s*(.+?)(?=\n\*\*|\Z)", content, re.S)
         input_ = re.search(r"\*\*Input:\*\*\s*(.+?)(?=\n\*\*|\Z)", content, re.S)
+        prompt = re.search(r"\*\*Prompt de exemplo:\*\*\s*```\s*(.+?)\s*```", content, re.S)
+        prompt_note = re.search(r"\*\*Prompt de exemplo \(nota\):\*\*\s*(.+?)(?=\n\*\*|\Z)", content, re.S)
         saida = re.search(r"\*\*Saída esperada:\*\*\s*(.+?)(?=\n\n|\Z)", content, re.S)
         examples.append({
             "situation": situation,
             "project_type": project_type,
             "scenario": cenario.group(1).strip() if cenario else "",
             "input": input_.group(1).strip() if input_ else "",
+            "prompt_example": prompt.group(1).strip() if prompt else None,
+            "prompt_note": prompt_note.group(1).strip() if prompt_note else None,
             "expected_output": saida.group(1).strip() if saida else "",
         })
     return examples

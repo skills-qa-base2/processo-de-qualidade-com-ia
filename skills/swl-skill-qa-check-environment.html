@@ -730,6 +730,10 @@ Veredito: AMBIENTE PRONTO / AMBIENTE NÃO PRONTO (motivo) / VERIFICAÇÃO PARCIA
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "Lojinha Verde" (e-commerce fictício de plantas, web) confirma que o ambiente de staging está pronto antes de rodar a suíte de checkout.</p>
                 <p><strong>Input:</strong> "Confirma que o staging está pronto antes de eu rodar a suíte de regressão do checkout."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-check-environment Confirma que o staging está pronto antes de eu rodar a suíte de regressão do checkout.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill faz health check da API e do banco (ambos UP), confirma seed de dados de produtos presente, nenhuma feature flag relevante configurada, e dá veredito AMBIENTE PRONTO.</p>
               </div>
             </details>
@@ -739,6 +743,10 @@ Veredito: AMBIENTE PRONTO / AMBIENTE NÃO PRONTO (motivo) / VERIFICAÇÃO PARCIA
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "AgroConecta" (marketplace B2B fictício, API) verifica o ambiente antes da suíte de negociação de preço rodar, mas não há documentação de quais feature flags deveriam estar ativas.</p>
                 <p><strong>Input:</strong> "Verifica o ambiente de staging antes da suíte de negociação de preço rodar."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-check-environment Verifica o ambiente de staging antes da suíte de negociação de preço rodar.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill confirma serviços UP e seed de dados presente, mas para feature flags, como não há definição registrada de qual estado é esperado, marca "não verificado — estado esperado não documentado" em vez de assumir que está correto.</p>
               </div>
             </details>
@@ -748,6 +756,10 @@ Veredito: AMBIENTE PRONTO / AMBIENTE NÃO PRONTO (motivo) / VERIFICAÇÃO PARCIA
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Na "BancoDigitalX" (banco digital fictício, mobile), véspera de um teste de carga importante, o time de infra informa que "o ambiente deve estar ok, sempre está" pra não atrasar o início do teste.</p>
                 <p><strong>Input:</strong> "Pode rodar a suíte já, o ambiente de performance sempre tá ok, não precisa checar."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-check-environment Pode rodar a suíte já, o ambiente de performance sempre tá ok, não precisa checar.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> Mesmo com a garantia informal, a skill roda o health check real antes de liberar — e encontra que o serviço de autenticação mockado (WireMock) não estava no ar, o que faria toda a suíte de carga falhar por um motivo que não tem nada a ver com a performance sendo medida. Sem essa checagem, o teste teria produzido um relatório de "sistema não aguenta carga" quando o problema real era um mock fora do ar.</p>
               </div>
             </details>

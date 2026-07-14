@@ -728,6 +728,10 @@ Prioridade: &lt;Crítico/Alto/Médio/Baixo — usar swl-skill-qa-risk-priority s
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA no app mobile "PetAmigo" (adoção de pets fictícia) recebe uma user story simples de favoritar um pet.</p>
                 <p><strong>Input:</strong> "User story: como usuário, quero favoritar um pet pra ver depois na minha lista."</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-test-cases User story: como usuário, quero favoritar um pet pra ver depois na minha lista.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill gera casos de happy path (favoritar e ver na lista), edge case (favoritar o mesmo pet duas vezes) e negativo (favoritar sem estar logado).</p>
               </div>
             </details>
@@ -737,6 +741,10 @@ Prioridade: &lt;Crítico/Alto/Médio/Baixo — usar swl-skill-qa-risk-priority s
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Um QA na "SaúdeJá" (telemedicina fictícia, integração com serviço externo de videochamada) recebe uma user story de agendamento com regra de cancelamento incompleta.</p>
                 <p><strong>Input:</strong> "User story: paciente agenda consulta e pode cancelar até X horas antes." (sem definir o valor de X)</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-test-cases User story: paciente agenda consulta e pode cancelar até X horas antes.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill gera os casos de agendamento normalmente, e no caso de cancelamento marca o prazo como <code>[REGRA A CONFIRMAR COM PO]</code>, em vez de assumir "24 horas" como muitos sistemas fazem por padrão.</p>
               </div>
             </details>
@@ -746,6 +754,10 @@ Prioridade: &lt;Crítico/Alto/Médio/Baixo — usar swl-skill-qa-risk-priority s
               <div class="examples-content">
                 <p><strong>Cenário:</strong> Na "BancoDigitalX" (banco digital fictício, API), a user story de bloqueio de cartão após tentativas de senha erradas chega sem o número oficial de tentativas, e o time de produto, sem tempo, sugere "usar 3, é o mais comum no mercado".</p>
                 <p><strong>Input:</strong> pede pra usar "o padrão de mercado" (3 tentativas) já que ninguém confirmou o número oficial do produto.</p>
+                
+                <p><strong>Prompt de exemplo:</strong></p>
+                <pre><code>/swl-skill-qa-new-test-cases A user story de bloqueio de cartão não diz o número oficial de tentativas. Pode usar 3? É o mais comum no mercado e ninguém confirmou o número oficial ainda.</code></pre>
+                
                 <p><strong>Saída esperada:</strong> A skill não trata a sugestão de mercado como regra de negócio confirmada — gera o caso de teste com o número de tentativas marcado como pendência de confirmação. Uma regra de segurança bancária decidida por acordo informal, em vez da especificação real do produto, pode acabar aprovando um comportamento diferente do que o banco de fato pretendia implementar.</p>
               </div>
             </details>
