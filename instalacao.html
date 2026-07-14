@@ -675,7 +675,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">247 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
+    <div class="content-meta">500 palavras&nbsp;&nbsp;|&nbsp;&nbsp;3 min</div>
     
 <div class="eyebrow"><span class="cat-pill">Fundamentos</span></div>
 <h1>Como instalar e usar</h1>
@@ -740,6 +740,49 @@ Documente no <code>CLAUDE.md</code> do seu projeto:</p>
 <li>Política de dados de teste</li>
 </ul>
 <p>Quanto mais completo o <code>CLAUDE.md</code>, mais preciso o resultado das skills.</p>
+<h2>Preciso de uma URL para testar?</h2>
+<p>As skills geram ou verificam código de teste — elas não sobem a aplicação. Alguém
+(você, o Docker Compose do projeto, o pipeline de CI) precisa ter a aplicação
+rodando em algum endereço acessível antes do teste gerado conseguir bater nela.</p>
+<p>O que esse "endereço" significa varia por tipo de skill:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de skill</th>
+<th>O que precisa estar de pé</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web/E2E (<code>swl-skill-qa-new-automation</code> com Playwright/Cypress/Selenium)</td>
+<td>Uma URL — localhost, staging, ou o <code>baseURL</code> já configurado no framework</td>
+</tr>
+<tr>
+<td>API (<code>swl-skill-qa-new-automation</code> com RestAssured/Postman, <code>swl-skill-qa-new-contract-tests</code>)</td>
+<td>Um endpoint base — mesma lógica de URL</td>
+</tr>
+<tr>
+<td>Mobile (<code>swl-skill-qa-new-mobile-automation</code>)</td>
+<td>Não é URL — é emulador/simulador ou dispositivo físico rodando, com o app já instalado</td>
+</tr>
+<tr>
+<td>Performance (<code>swl-skill-qa-new-performance-test</code>)</td>
+<td>URL/endpoint, com o cuidado de nunca apontar pra produção sem aprovação explícita</td>
+</tr>
+<tr>
+<td>Contrato (<code>swl-skill-qa-new-contract-tests</code>)</td>
+<td>Pode não precisar de nada rodando, se o teste for só validação de schema contra um arquivo OpenAPI já existente</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recomendação prática:</strong> documente a URL/porta padrão do ambiente local (ou onde
+fica o staging) no <code>CLAUDE.md</code> do projeto. Assim, as skills que precisam desse
+endereço param de ter que perguntar toda vez.</p>
+<p>Antes de rodar a suíte, vale confirmar que esse endereço está de pé de verdade —
+é exatamente pra isso que existe a
+<a href="skills/swl-skill-qa-check-environment.html">swl-skill-qa-check-environment</a>:
+ela confirma health check dos serviços, seed de dados e feature flags antes da
+execução, em vez de você descobrir no meio da suíte que o ambiente não respondia.</p>
 
 <h2>Todos os comandos</h2>
 <table>

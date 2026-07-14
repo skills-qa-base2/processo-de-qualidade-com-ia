@@ -87,6 +87,32 @@ Documente no `CLAUDE.md` do seu projeto:
 - Política de dados de teste
 
 Quanto mais completo o `CLAUDE.md`, mais preciso o resultado das skills.
+
+## Preciso de uma URL para testar?
+
+As skills geram ou verificam código de teste — elas não sobem a aplicação. Alguém
+(você, o Docker Compose do projeto, o pipeline de CI) precisa ter a aplicação
+rodando em algum endereço acessível antes do teste gerado conseguir bater nela.
+
+O que esse "endereço" significa varia por tipo de skill:
+
+| Tipo de skill | O que precisa estar de pé |
+|---|---|
+| Web/E2E (`swl-skill-qa-new-automation` com Playwright/Cypress/Selenium) | Uma URL — localhost, staging, ou o `baseURL` já configurado no framework |
+| API (`swl-skill-qa-new-automation` com RestAssured/Postman, `swl-skill-qa-new-contract-tests`) | Um endpoint base — mesma lógica de URL |
+| Mobile (`swl-skill-qa-new-mobile-automation`) | Não é URL — é emulador/simulador ou dispositivo físico rodando, com o app já instalado |
+| Performance (`swl-skill-qa-new-performance-test`) | URL/endpoint, com o cuidado de nunca apontar pra produção sem aprovação explícita |
+| Contrato (`swl-skill-qa-new-contract-tests`) | Pode não precisar de nada rodando, se o teste for só validação de schema contra um arquivo OpenAPI já existente |
+
+**Recomendação prática:** documente a URL/porta padrão do ambiente local (ou onde
+fica o staging) no `CLAUDE.md` do projeto. Assim, as skills que precisam desse
+endereço param de ter que perguntar toda vez.
+
+Antes de rodar a suíte, vale confirmar que esse endereço está de pé de verdade —
+é exatamente pra isso que existe a
+[swl-skill-qa-check-environment](skills/swl-skill-qa-check-environment.html):
+ela confirma health check dos serviços, seed de dados e feature flags antes da
+execução, em vez de você descobrir no meio da suíte que o ambiente não respondia.
 """
 
 install_html = render_md(install_md)
