@@ -728,7 +728,7 @@ Veredito: AMBIENTE PRONTO / AMBIENTE NÃO PRONTO (motivo) / VERIFICAÇÃO PARCIA
             <details class="examples-accordion examples-accordion--1">
               <summary>Cenário direto <span class="examples-sep">·</span> Web</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA júnior na "Lojinha Verde" (e-commerce fictício de plantas, web) confirma que o ambiente de staging está pronto antes de rodar a suíte de checkout.</p>
+                <p><strong>Cenário:</strong> Um QA na "Lojinha Verde" (e-commerce fictício de plantas, web) confirma que o ambiente de staging está pronto antes de rodar a suíte de checkout.</p>
                 <p><strong>Input:</strong> "Confirma que o staging está pronto antes de eu rodar a suíte de regressão do checkout."</p>
                 <p><strong>Saída esperada:</strong> A skill faz health check da API e do banco (ambos UP), confirma seed de dados de produtos presente, nenhuma feature flag relevante configurada, e dá veredito AMBIENTE PRONTO.</p>
               </div>
@@ -737,7 +737,7 @@ Veredito: AMBIENTE PRONTO / AMBIENTE NÃO PRONTO (motivo) / VERIFICAÇÃO PARCIA
             <details class="examples-accordion examples-accordion--2">
               <summary>Cenário com ambiguidade <span class="examples-sep">·</span> API</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA pleno na "AgroConecta" (marketplace B2B fictício, API) verifica o ambiente antes da suíte de negociação de preço rodar, mas não há documentação de quais feature flags deveriam estar ativas.</p>
+                <p><strong>Cenário:</strong> Um QA na "AgroConecta" (marketplace B2B fictício, API) verifica o ambiente antes da suíte de negociação de preço rodar, mas não há documentação de quais feature flags deveriam estar ativas.</p>
                 <p><strong>Input:</strong> "Verifica o ambiente de staging antes da suíte de negociação de preço rodar."</p>
                 <p><strong>Saída esperada:</strong> A skill confirma serviços UP e seed de dados presente, mas para feature flags, como não há definição registrada de qual estado é esperado, marca "não verificado — estado esperado não documentado" em vez de assumir que está correto.</p>
               </div>

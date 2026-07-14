@@ -723,7 +723,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
             <details class="examples-accordion examples-accordion--1">
               <summary>Cenário direto <span class="examples-sep">·</span> Mobile</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA júnior no app "PetAmigo" (adoção de pets fictícia) precisa automatizar a tela de favoritar um pet, com Detox já configurado.</p>
+                <p><strong>Cenário:</strong> Um QA no app "PetAmigo" (adoção de pets fictícia) precisa automatizar a tela de favoritar um pet, com Detox já configurado.</p>
                 <p><strong>Input:</strong> "Gera a automação mobile do cenário de favoritar um pet, já temos Detox configurado e o ScreenObject de Listagem pronto."</p>
                 <p><strong>Saída esperada:</strong> A skill detecta Detox via <code>.detoxrc</code>, reutiliza o Screen Object existente, usa seletores por <code>testID</code>, declara "testado no emulador Android 14 (Pixel 7)" e marca <code>generated-by-ai: pending-review</code>.</p>
               </div>
@@ -732,7 +732,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
             <details class="examples-accordion examples-accordion--2">
               <summary>Cenário com ambiguidade <span class="examples-sep">·</span> Mobile</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA pleno na "BancoDigitalX" (banco digital fictício) precisa automatizar a aprovação de transferência via biometria, mas não está claro se o projeto já trata o diálogo nativo de biometria em algum outro teste.</p>
+                <p><strong>Cenário:</strong> Um QA na "BancoDigitalX" (banco digital fictício) precisa automatizar a aprovação de transferência via biometria, mas não está claro se o projeto já trata o diálogo nativo de biometria em algum outro teste.</p>
                 <p><strong>Input:</strong> "Automatiza a aprovação de transferência via biometria no Appium. Não sei se já lidamos com o diálogo do sistema de biometria em algum outro teste."</p>
                 <p><strong>Saída esperada:</strong> A skill gera o teste cobrindo o fluxo, mas ao chegar no diálogo nativo de biometria do SO, marca que não encontrou tratamento existente pra esse tipo de diálogo no projeto e pergunta se deve ser mockado (comum em CI, já que biometria real não funciona em emulador) antes de assumir uma abordagem.</p>
               </div>
@@ -741,7 +741,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
             <details class="examples-accordion examples-accordion--3">
               <summary>Cenário de risco real <span class="examples-sep">·</span> Mobile</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> Na "RotaCerta" (app do entregador fictício), o QA sênior testou só no emulador Android mais recente, mas o gerente de operações pede pra "confirmar que funciona em todos os celulares dos entregadores" pra aprovar o rollout geral.</p>
+                <p><strong>Cenário:</strong> Na "RotaCerta" (app do entregador fictício), o QA testou só no emulador Android mais recente, mas o gerente de operações pede pra "confirmar que funciona em todos os celulares dos entregadores" pra aprovar o rollout geral.</p>
                 <p><strong>Input:</strong> "Preciso saber se a atualização do app funciona nos celulares dos entregadores em geral, pra liberar pra todo mundo essa semana."</p>
                 <p><strong>Saída esperada:</strong> A skill documenta exatamente o que rodou (emulador Android 14, Pixel 7) e não estende essa cobertura pra "os celulares dos entregadores em geral" — a frota real inclui Android 9 a 14 em fabricantes variados, nenhum deles exercitado nesta execução. O rollout geral, aprovado só com base nesse teste, estaria liberando pra um universo de dispositivos nunca tocado.</p>
               </div>

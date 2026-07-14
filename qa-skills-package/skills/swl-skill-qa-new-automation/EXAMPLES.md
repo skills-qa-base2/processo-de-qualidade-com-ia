@@ -1,10 +1,10 @@
 ## Cenário direto — Mobile
-**Cenário:** QA júnior no app do entregador da "RotaCerta" (logística fictícia) precisa automatizar o cenário de login válido, com Playwright já configurado pro app híbrido.
+**Cenário:** Um QA no app do entregador da "RotaCerta" (logística fictícia) precisa automatizar o cenário de login válido, com Playwright já configurado pro app híbrido.
 **Input:** "Gera a automação do cenário de login válido, já temos o cenário BDD pronto em features/login.feature."
 **Saída esperada:** A skill detecta Playwright via CLAUDE.md, gera o teste reutilizando o `LoginPage` já existente, com seletores estáveis, e marca `generated-by-ai: pending-review`.
 
 ## Cenário com ambiguidade — Web
-**Cenário:** QA pleno na "ContaCerta" (contabilidade SaaS B2B fictícia, web) precisa automatizar o cenário de emissão de nota fiscal, mas não está claro se deve reutilizar um Page Object existente ou criar um novo componente de API.
+**Cenário:** Um QA na "ContaCerta" (contabilidade SaaS B2B fictícia, web) precisa automatizar o cenário de emissão de nota fiscal, mas não está claro se deve reutilizar um Page Object existente ou criar um novo componente de API.
 **Input:** "Automatiza o cenário de emissão de nota fiscal. Temos um NotaFiscalPage mas não sei se ele cobre a parte de API que valida o status."
 **Saída esperada:** A skill reutiliza o `NotaFiscalPage` existente para a parte de UI, mas para a validação de status via API, como não encontra um componente equivalente já existente, pergunta se deve criar um novo ou se já existe em outro lugar do projeto — em vez de duplicar sem confirmar.
 

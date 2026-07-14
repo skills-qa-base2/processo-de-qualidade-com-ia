@@ -726,7 +726,7 @@ Prioridade: &lt;Crítico/Alto/Médio/Baixo — usar swl-skill-qa-risk-priority s
             <details class="examples-accordion examples-accordion--1">
               <summary>Cenário direto <span class="examples-sep">·</span> Mobile</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA júnior no app mobile "PetAmigo" (adoção de pets fictícia) recebe uma user story simples de favoritar um pet.</p>
+                <p><strong>Cenário:</strong> Um QA no app mobile "PetAmigo" (adoção de pets fictícia) recebe uma user story simples de favoritar um pet.</p>
                 <p><strong>Input:</strong> "User story: como usuário, quero favoritar um pet pra ver depois na minha lista."</p>
                 <p><strong>Saída esperada:</strong> A skill gera casos de happy path (favoritar e ver na lista), edge case (favoritar o mesmo pet duas vezes) e negativo (favoritar sem estar logado).</p>
               </div>
@@ -735,7 +735,7 @@ Prioridade: &lt;Crítico/Alto/Médio/Baixo — usar swl-skill-qa-risk-priority s
             <details class="examples-accordion examples-accordion--2">
               <summary>Cenário com ambiguidade <span class="examples-sep">·</span> Integração</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA pleno na "SaúdeJá" (telemedicina fictícia, integração com serviço externo de videochamada) recebe uma user story de agendamento com regra de cancelamento incompleta.</p>
+                <p><strong>Cenário:</strong> Um QA na "SaúdeJá" (telemedicina fictícia, integração com serviço externo de videochamada) recebe uma user story de agendamento com regra de cancelamento incompleta.</p>
                 <p><strong>Input:</strong> "User story: paciente agenda consulta e pode cancelar até X horas antes." (sem definir o valor de X)</p>
                 <p><strong>Saída esperada:</strong> A skill gera os casos de agendamento normalmente, e no caso de cancelamento marca o prazo como <code>[REGRA A CONFIRMAR COM PO]</code>, em vez de assumir "24 horas" como muitos sistemas fazem por padrão.</p>
               </div>

@@ -1,10 +1,10 @@
 ## Cenário direto — API
-**Cenário:** QA júnior na "AgroConecta" (marketplace agro B2B fictício, API) precisa do teste de contrato do endpoint `GET /produtos/{id}`, com spec OpenAPI já publicada.
+**Cenário:** Um QA na "AgroConecta" (marketplace agro B2B fictício, API) precisa do teste de contrato do endpoint `GET /produtos/{id}`, com spec OpenAPI já publicada.
 **Input:** "Gera o teste de contrato pro endpoint GET /produtos/{id}, o schema tá no nosso arquivo openapi.yaml."
 **Saída esperada:** A skill lê o schema real, valida status 200 com os campos definidos (tipos, obrigatoriedade), e gera o teste com a biblioteca de validação de schema do stack detectado.
 
 ## Cenário com ambiguidade — API
-**Cenário:** QA pleno na "LogiFrete" (transportadora fictícia, API) precisa de testes de contrato entre o serviço de rastreamento e seus múltiplos consumidores (app do motorista, painel do cliente), mas o projeto não tem nenhuma ferramenta de contrato consumer-driven configurada ainda.
+**Cenário:** Um QA na "LogiFrete" (transportadora fictícia, API) precisa de testes de contrato entre o serviço de rastreamento e seus múltiplos consumidores (app do motorista, painel do cliente), mas o projeto não tem nenhuma ferramenta de contrato consumer-driven configurada ainda.
 **Input:** "Preciso de testes de contrato entre o serviço de rastreamento e seus consumidores. Temos vários consumidores desse serviço mas não sei se já usamos Pact."
 **Saída esperada:** A skill identifica múltiplos consumidores — sinal claro de que o cenário pede contrato consumer-driven (Pact) em vez de só validação de schema — mas como não encontra Pact nem Spring Cloud Contract configurado no projeto, pergunta se deve introduzir a ferramenta ou se o time prefere só validação de schema por ora, em vez de decidir sozinha.
 

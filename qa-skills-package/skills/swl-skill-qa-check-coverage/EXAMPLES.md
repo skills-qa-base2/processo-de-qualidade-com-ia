@@ -1,10 +1,10 @@
 ## Cenário direto — API
-**Cenário:** QA júnior na "AgroConecta" (marketplace B2B fictício, API) verifica a cobertura do módulo de negociação de preço entre comprador e vendedor.
+**Cenário:** Um QA na "AgroConecta" (marketplace B2B fictício, API) verifica a cobertura do módulo de negociação de preço entre comprador e vendedor.
 **Input:** "Verifica a cobertura do módulo de negociação: propor preço, aceitar proposta, recusar proposta."
 **Saída esperada:** A skill cruza os 3 critérios com os cenários existentes e reporta que "recusar proposta" só tem happy path — falta um negativo (recusar uma proposta que já foi aceita por outra parte).
 
 ## Cenário com ambiguidade — Web
-**Cenário:** QA pleno na "EstudaMais" (plataforma de cursos fictícia, web) verifica cobertura do módulo de emissão de certificado, com critérios parcialmente documentados.
+**Cenário:** Um QA na "EstudaMais" (plataforma de cursos fictícia, web) verifica cobertura do módulo de emissão de certificado, com critérios parcialmente documentados.
 **Input:** "Verifica cobertura do módulo de certificado. Alguns critérios estão só no board do Jira, não sei se peguei todos."
 **Saída esperada:** A skill cruza os critérios encontrados no board com os cenários existentes normalmente, mas avisa que a fonte de critérios pode estar incompleta — a cobertura reportada vale só para o que foi levantado, não é garantia de que não existam critérios adicionais não capturados no board.
 

@@ -1,10 +1,10 @@
 ## Cenário direto — Integração
-**Cenário:** QA júnior na "LogiFrete" (transportadora fictícia) prioriza 4 cenários do módulo de rastreamento de encomenda por risco.
+**Cenário:** Um QA na "LogiFrete" (transportadora fictícia) prioriza 4 cenários do módulo de rastreamento de encomenda por risco.
 **Input:** "Prioriza esses 4 cenários de rastreamento por risco."
 **Saída esperada:** A skill classifica cada um com impacto/frequência/complexidade visíveis, matriz rastreável, e recomendações de automatizar ou testar manualmente.
 
 ## Cenário com ambiguidade — Web
-**Cenário:** QA pleno na "EstudaMais" (plataforma de cursos fictícia, web) prioriza cenários de emissão de certificado, mas sem dado de histórico de bugs disponível.
+**Cenário:** Um QA na "EstudaMais" (plataforma de cursos fictícia, web) prioriza cenários de emissão de certificado, mas sem dado de histórico de bugs disponível.
 **Input:** "Prioriza os cenários de certificado. Não tenho números de bugs anteriores dessa área."
 **Saída esperada:** A skill classifica pelos critérios disponíveis (impacto, frequência, complexidade) e omite o critério de histórico de bugs da matriz, em vez de estimar um número pra preencher a coluna.
 

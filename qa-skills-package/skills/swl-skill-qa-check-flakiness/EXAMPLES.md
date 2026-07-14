@@ -1,10 +1,10 @@
 ## Cenário direto — Integração
-**Cenário:** QA júnior na "LogiFrete" (transportadora fictícia) analisa a suíte de integração com o sistema de rastreamento de um parceiro externo, que às vezes falha sem motivo aparente.
+**Cenário:** Um QA na "LogiFrete" (transportadora fictícia) analisa a suíte de integração com o sistema de rastreamento de um parceiro externo, que às vezes falha sem motivo aparente.
 **Input:** "Analisa essa suíte de integração com o rastreamento, ela às vezes falha sem motivo aparente."
 **Saída esperada:** A skill identifica um `waitForTimeout(3000)` na linha X, sugere trocar por espera condicional ao estado da resposta da API do parceiro.
 
 ## Cenário com ambiguidade — Mobile
-**Cenário:** QA pleno na "SaúdeJá" (telemedicina fictícia) tem testes de agendamento no app mobile que parecem depender de ordem de execução, mas não há histórico de execução disponível pra confirmar.
+**Cenário:** Um QA na "SaúdeJá" (telemedicina fictícia) tem testes de agendamento no app mobile que parecem depender de ordem de execução, mas não há histórico de execução disponível pra confirmar.
 **Input:** "Os testes de agendamento do app falham quando rodam em paralelo, mas só às vezes. Não tenho o histórico de execução do CI à mão."
 **Saída esperada:** A skill identifica na análise estática uma variável compartilhada entre dois testes (indício claro de dependência de ordem), mas para outro trecho suspeito, sem histórico disponível, classifica como "padrão de risco, não confirmado como causa da falha real" em vez de afirmar que é a causa.
 

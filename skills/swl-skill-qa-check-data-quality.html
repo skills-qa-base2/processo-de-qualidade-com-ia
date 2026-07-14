@@ -719,7 +719,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
             <details class="examples-accordion examples-accordion--1">
               <summary>Cenário direto <span class="examples-sep">·</span> Web</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA júnior na "EstudaMais" (plataforma de cursos fictícia, web) audita um relatório simples de execução de testes do módulo de matrícula antes de enviar pro time.</p>
+                <p><strong>Cenário:</strong> Um QA na "EstudaMais" (plataforma de cursos fictícia, web) audita um relatório simples de execução de testes do módulo de matrícula antes de enviar pro time.</p>
                 <p><strong>Input:</strong> "Audita esse relatório de testes do módulo de matrícula antes de eu enviar pro time."</p>
                 <p><strong>Saída esperada:</strong> A skill confere as afirmações do relatório — todas rastreáveis ao arquivo de resultado real anexado — e não sinaliza nada, já que não há número ou citação sem fonte.</p>
               </div>
@@ -728,7 +728,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
             <details class="examples-accordion examples-accordion--2">
               <summary>Cenário com ambiguidade <span class="examples-sep">·</span> API</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA pleno na "AgroConecta" (marketplace B2B fictício, API) audita um relatório de diagnóstico de bug com uma citação de cliente sem transcrição anexada.</p>
+                <p><strong>Cenário:</strong> Um QA na "AgroConecta" (marketplace B2B fictício, API) audita um relatório de diagnóstico de bug com uma citação de cliente sem transcrição anexada.</p>
                 <p><strong>Input:</strong> "Audita esse relatório de bug antes de eu abrir o chamado." (o relatório cita "o cliente disse que trava toda vez" sem anexo)</p>
                 <p><strong>Saída esperada:</strong> A skill sinaliza a citação atribuída ao cliente como sem fonte rastreável (nenhuma transcrição, e-mail ou print anexado) e pergunta qual é a origem, sem remover nem confirmar a afirmação por conta própria.</p>
               </div>
@@ -737,7 +737,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
             <details class="examples-accordion examples-accordion--3">
               <summary>Cenário de risco real <span class="examples-sep">·</span> Mobile</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> Na "RotaCerta" (app do entregador fictício, mobile), um analista júnior entrega ao QA sênior um relatório de sessão exploratória com "98% de satisfação dos entregadores testados" pra incluir no relatório trimestral de qualidade da diretoria.</p>
+                <p><strong>Cenário:</strong> Na "RotaCerta" (app do entregador fictício, mobile), um analista entrega ao QA um relatório de sessão exploratória com "98% de satisfação dos entregadores testados" pra incluir no relatório trimestral de qualidade da diretoria.</p>
                 <p><strong>Input:</strong> "Pode revisar esse relatório antes de eu mandar pra diretoria? Tem um número de satisfação ali."</p>
                 <p><strong>Saída esperada:</strong> A skill sinaliza o "98% de satisfação" como número redondo demais sem fonte associada — não há survey, entrevista registrada nem pesquisa anexada — e pergunta de onde veio, em vez de deixar passar por já estar num relatório formatado. Um número assim, uma vez impresso num relatório de diretoria, costuma virar fato citado depois, mesmo que ninguém mais lembre de onde saiu.</p>
               </div>

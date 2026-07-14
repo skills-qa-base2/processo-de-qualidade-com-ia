@@ -14,21 +14,21 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"Lojinha Verde\" (e-commerce fictício de plantas, web) gera as regras de QA pela primeira vez, a partir de uma página de wiki já existente.",
+        "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) gera as regras de QA pela primeira vez, a partir de uma página de wiki já existente.",
         "input": "\"Gera as regras de QA pra Lojinha Verde. Temos uma página de wiki com nossas convenções de teste.\"",
         "expected_output": "A skill lê o wiki e gera `padroes-teste.md`, `restricoes-teste.md` e `convencoes-teste.md` com as convenções reais documentadas (Playwright, Page Object Model, nomenclatura em português)."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "API",
-        "scenario": "QA pleno na \"PagaFácil\" (fintech de pagamentos fictícia, API) tem só parte do processo documentado.",
+        "scenario": "Um QA na \"PagaFácil\" (fintech de pagamentos fictícia, API) tem só parte do processo documentado.",
         "input": "\"Não temos wiki, mas o time sabe de cabeça algumas convenções. Vou te contar o que sei.\"",
         "expected_output": "A skill conduz a entrevista curta, documenta o que foi confirmado (ferramentas de automação de API, estrutura de pastas), e para os pontos sem certeza no time (política de dados de teste) deixa marcado como \"a definir\" em vez de assumir um padrão genérico de mercado."
       },
       {
         "situation": "Cenário de risco real",
         "project_type": "Integração",
-        "scenario": "QA sênior herda o sistema legado da \"RotaCerta\" (logística/entregas fictícia, integração com sistemas de rastreamento de terceiros) sem nenhuma documentação de QA, e o tech lead pede pra \"gerar regras baseadas no que costuma ser padrão em projetos de logística\", já que ninguém mais lembra as convenções antigas.",
+        "scenario": "Um QA herda o sistema legado da \"RotaCerta\" (logística/entregas fictícia, integração com sistemas de rastreamento de terceiros) sem nenhuma documentação de QA, e o tech lead pede pra \"gerar regras baseadas no que costuma ser padrão em projetos de logística\", já que ninguém mais lembra as convenções antigas.",
         "input": "\"Ninguém aqui sabe as convenções antigas desse projeto. Pode gerar baseado no que costuma ser padrão pra sistemas de logística?\"",
         "expected_output": "Em vez de recorrer a um \"padrão de mercado\" genérico, a skill examina a estrutura real de testes já existente no código (pastas, nomenclatura usada nos arquivos) como fonte concreta. Para o que não consegue confirmar nem pela estrutura nem pela entrevista, marca \"a definir\" explicitamente — uma regra errada aqui não fica só registrada, ela vira instrução que a IA vai seguir automaticamente em toda tarefa futura nesse projeto."
       }
@@ -49,21 +49,21 @@
       {
         "situation": "Cenário direto",
         "project_type": "API",
-        "scenario": "QA júnior recém-chegado na \"AgroConecta\" (marketplace agro B2B fictício, API + integrações com ERPs de fornecedores) percebe que nunca houve uma estratégia de teste formal documentada.",
+        "scenario": "Um QA recém-chegado na \"AgroConecta\" (marketplace agro B2B fictício, API + integrações com ERPs de fornecedores) percebe que nunca houve uma estratégia de teste formal documentada.",
         "input": "\"Nunca tivemos uma estratégia de teste formal aqui na AgroConecta. Pode me ajudar a definir uma?\"",
         "expected_output": "A skill lê o CLAUDE.md (ainda incompleto) e faz as 5 perguntas estruturadas. O QA responde todas com clareza (monolito com integrações externas, sem QA dedicado ainda, envolvido só na entrega, sistema não é crítico financeiramente, existe ambiente de staging). A skill propõe uma pirâmide balanceada (não 100% E2E) e gera `docs/qa/estrategia-teste.md`."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Web",
-        "scenario": "QA pleno na \"EstudaMais\" (plataforma de cursos online fictícia, web) responde às perguntas, mas não tem certeza se existe massa de dados própria de teste.",
+        "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos online fictícia, web) responde às perguntas, mas não tem certeza se existe massa de dados própria de teste.",
         "input": "responde as 4 primeiras perguntas com segurança, mas diz \"não sei se temos massa de dados própria — às vezes usamos uma cópia de produção mascarada\".",
         "expected_output": "A skill registra as 4 respostas normalmente, e para a pergunta 5 marca como \"a confirmar\" em vez de assumir que existe massa fictícia de verdade — uma cópia de produção mascarada não é necessariamente massa de teste fictícia, e a skill sinaliza isso como risco em aberto em vez de tratar como resposta dada."
       },
       {
         "situation": "Cenário de risco real",
         "project_type": "Mobile",
-        "scenario": "Na \"BancoDigitalX\" (banco digital fictício, app mobile + API), a diretoria pede uma estratégia de teste pronta pra apresentar amanhã, e o QA sênior, sem tempo de entrevistar o time todo, pede pra skill \"preencher com o que é padrão de mercado pra banco digital\".",
+        "scenario": "Na \"BancoDigitalX\" (banco digital fictício, app mobile + API), a diretoria pede uma estratégia de teste pronta pra apresentar amanhã, e o QA, sem tempo de entrevistar o time todo, pede pra skill \"preencher com o que é padrão de mercado pra banco digital\".",
         "input": "\"Preciso da estratégia pronta pra reunião de amanhã, pode assumir as respostas típicas de um banco digital?\"",
         "expected_output": "Mesmo com o pedido explícito de assumir respostas, a skill não inventa nenhuma das 5 perguntas — registra cada uma como \"a confirmar\" e lista como risco em aberto no documento gerado. A reunião de amanhã sai com um documento que mostra exatamente o que ainda não foi levantado, em vez de uma estratégia com aparência de pronta que ninguém no time realmente validou."
       }
@@ -84,14 +84,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Mobile",
-        "scenario": "QA júnior no app do entregador da \"RotaCerta\" (logística fictícia) precisa automatizar o cenário de login válido, com Playwright já configurado pro app híbrido.",
+        "scenario": "Um QA no app do entregador da \"RotaCerta\" (logística fictícia) precisa automatizar o cenário de login válido, com Playwright já configurado pro app híbrido.",
         "input": "\"Gera a automação do cenário de login válido, já temos o cenário BDD pronto em features/login.feature.\"",
         "expected_output": "A skill detecta Playwright via CLAUDE.md, gera o teste reutilizando o `LoginPage` já existente, com seletores estáveis, e marca `generated-by-ai: pending-review`."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Web",
-        "scenario": "QA pleno na \"ContaCerta\" (contabilidade SaaS B2B fictícia, web) precisa automatizar o cenário de emissão de nota fiscal, mas não está claro se deve reutilizar um Page Object existente ou criar um novo componente de API.",
+        "scenario": "Um QA na \"ContaCerta\" (contabilidade SaaS B2B fictícia, web) precisa automatizar o cenário de emissão de nota fiscal, mas não está claro se deve reutilizar um Page Object existente ou criar um novo componente de API.",
         "input": "\"Automatiza o cenário de emissão de nota fiscal. Temos um NotaFiscalPage mas não sei se ele cobre a parte de API que valida o status.\"",
         "expected_output": "A skill reutiliza o `NotaFiscalPage` existente para a parte de UI, mas para a validação de status via API, como não encontra um componente equivalente já existente, pergunta se deve criar um novo ou se já existe em outro lugar do projeto — em vez de duplicar sem confirmar."
       },
@@ -119,21 +119,21 @@
       {
         "situation": "Cenário direto",
         "project_type": "Mobile",
-        "scenario": "QA júnior no app \"PetAmigo\" (adoção de pets fictícia) precisa automatizar a tela de favoritar um pet, com Detox já configurado.",
+        "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia) precisa automatizar a tela de favoritar um pet, com Detox já configurado.",
         "input": "\"Gera a automação mobile do cenário de favoritar um pet, já temos Detox configurado e o ScreenObject de Listagem pronto.\"",
         "expected_output": "A skill detecta Detox via `.detoxrc`, reutiliza o Screen Object existente, usa seletores por `testID`, declara \"testado no emulador Android 14 (Pixel 7)\" e marca `generated-by-ai: pending-review`."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Mobile",
-        "scenario": "QA pleno na \"BancoDigitalX\" (banco digital fictício) precisa automatizar a aprovação de transferência via biometria, mas não está claro se o projeto já trata o diálogo nativo de biometria em algum outro teste.",
+        "scenario": "Um QA na \"BancoDigitalX\" (banco digital fictício) precisa automatizar a aprovação de transferência via biometria, mas não está claro se o projeto já trata o diálogo nativo de biometria em algum outro teste.",
         "input": "\"Automatiza a aprovação de transferência via biometria no Appium. Não sei se já lidamos com o diálogo do sistema de biometria em algum outro teste.\"",
         "expected_output": "A skill gera o teste cobrindo o fluxo, mas ao chegar no diálogo nativo de biometria do SO, marca que não encontrou tratamento existente pra esse tipo de diálogo no projeto e pergunta se deve ser mockado (comum em CI, já que biometria real não funciona em emulador) antes de assumir uma abordagem."
       },
       {
         "situation": "Cenário de risco real",
         "project_type": "Mobile",
-        "scenario": "Na \"RotaCerta\" (app do entregador fictício), o QA sênior testou só no emulador Android mais recente, mas o gerente de operações pede pra \"confirmar que funciona em todos os celulares dos entregadores\" pra aprovar o rollout geral.",
+        "scenario": "Na \"RotaCerta\" (app do entregador fictício), o QA testou só no emulador Android mais recente, mas o gerente de operações pede pra \"confirmar que funciona em todos os celulares dos entregadores\" pra aprovar o rollout geral.",
         "input": "\"Preciso saber se a atualização do app funciona nos celulares dos entregadores em geral, pra liberar pra todo mundo essa semana.\"",
         "expected_output": "A skill documenta exatamente o que rodou (emulador Android 14, Pixel 7) e não estende essa cobertura pra \"os celulares dos entregadores em geral\" — a frota real inclui Android 9 a 14 em fabricantes variados, nenhum deles exercitado nesta execução. O rollout geral, aprovado só com base nesse teste, estaria liberando pra um universo de dispositivos nunca tocado."
       }
@@ -154,14 +154,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Mobile",
-        "scenario": "QA júnior no app mobile \"PetAmigo\" (adoção de pets fictícia) recebe uma user story simples de favoritar um pet.",
+        "scenario": "Um QA no app mobile \"PetAmigo\" (adoção de pets fictícia) recebe uma user story simples de favoritar um pet.",
         "input": "\"User story: como usuário, quero favoritar um pet pra ver depois na minha lista.\"",
         "expected_output": "A skill gera casos de happy path (favoritar e ver na lista), edge case (favoritar o mesmo pet duas vezes) e negativo (favoritar sem estar logado)."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Integração",
-        "scenario": "QA pleno na \"SaúdeJá\" (telemedicina fictícia, integração com serviço externo de videochamada) recebe uma user story de agendamento com regra de cancelamento incompleta.",
+        "scenario": "Um QA na \"SaúdeJá\" (telemedicina fictícia, integração com serviço externo de videochamada) recebe uma user story de agendamento com regra de cancelamento incompleta.",
         "input": "\"User story: paciente agenda consulta e pode cancelar até X horas antes.\" (sem definir o valor de X)",
         "expected_output": "A skill gera os casos de agendamento normalmente, e no caso de cancelamento marca o prazo como `[REGRA A CONFIRMAR COM PO]`, em vez de assumir \"24 horas\" como muitos sistemas fazem por padrão."
       },
@@ -189,14 +189,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"Lojinha Verde\" (e-commerce de plantas, web) recebe um critério de aceite simples de busca de produto.",
+        "scenario": "Um QA na \"Lojinha Verde\" (e-commerce de plantas, web) recebe um critério de aceite simples de busca de produto.",
         "input": "\"Critério: usuário busca por nome de produto e vê os resultados correspondentes.\"",
         "expected_output": "A skill gera `Funcionalidade: Busca de produtos` com cenário happy path, um negativo (busca sem resultado) e um edge case (busca com caractere especial)."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Mobile",
-        "scenario": "QA pleno no app mobile da \"TarefaCerta\" (gestão de tarefas fictícia) recebe um critério de assinatura de plano com regra de desconto pouco clara.",
+        "scenario": "Um QA no app mobile da \"TarefaCerta\" (gestão de tarefas fictícia) recebe um critério de assinatura de plano com regra de desconto pouco clara.",
         "input": "\"Critério: usuário assina o plano premium e, se for a segunda assinatura do mesmo usuário, recebe desconto.\" (sem informar o percentual)",
         "expected_output": "A skill gera o cenário happy path da assinatura simples e um Esquema do Cenário pro desconto, mas deixa o percentual como `<percentual_a_confirmar>` nos Exemplos, em vez de inventar um número plausível."
       },
@@ -224,21 +224,21 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior no time da \"Lojinha Verde\" (e-commerce fictício de plantas, web) precisa de massa de dados para testar o cadastro de clientes.",
+        "scenario": "Um QA no time da \"Lojinha Verde\" (e-commerce fictício de plantas, web) precisa de massa de dados para testar o cadastro de clientes.",
         "input": "\"Preciso de dados de teste para a entidade Cliente do nosso cadastro (nome, e-mail, telefone, CEP).\"",
         "expected_output": "A skill lê o CLAUDE.md e o modelo da entidade, gera um conjunto válido (nome/e-mail/telefone/CEP fictícios plausíveis), conjuntos de borda (nome vazio, CEP em formato errado) e inválidos (e-mail sem arroba), e salva tudo como factory reutilizável em `test/factories/cliente.factory.ts`."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "API",
-        "scenario": "QA pleno na \"PagaFácil\" (fintech fictícia de pagamentos, API) precisa de massa para testar limite de valor de transferência, mas o critério de aceite não deixa claro qual é o valor máximo permitido.",
+        "scenario": "Um QA na \"PagaFácil\" (fintech fictícia de pagamentos, API) precisa de massa para testar limite de valor de transferência, mas o critério de aceite não deixa claro qual é o valor máximo permitido.",
         "input": "\"Preciso de dados de teste para Transferência (valor, conta origem, conta destino). O critério de aceite não diz qual o valor máximo por transferência.\"",
         "expected_output": "A skill gera os conjuntos válido/borda/inválido normalmente para os campos conhecidos, mas para o valor-limite marca explicitamente \"valor máximo não confirmado — a definir com o PO antes de fixar o dado de borda 'no limite'\", em vez de chutar um número redondo."
       },
       {
         "situation": "Cenário de risco real",
         "project_type": "Mobile",
-        "scenario": "QA sênior no app mobile da \"PagaFácil\", com o prazo apertado pro onboarding de novos usuários, cola um print de um cadastro real de cliente de produção (nome, CPF e e-mail reais) e pede pra gerar \"mais 10 parecidos\" como referência de formato.",
+        "scenario": "Um QA no app mobile da \"PagaFácil\", com o prazo apertado pro onboarding de novos usuários, cola um print de um cadastro real de cliente de produção (nome, CPF e e-mail reais) e pede pra gerar \"mais 10 parecidos\" como referência de formato.",
         "input": "cola nome, CPF e e-mail reais de um cliente de produção, pedindo 10 registros no mesmo formato.",
         "expected_output": "A skill recusa usar o dado colado como base, gera 10 registros 100% fictícios (CPF com dígito verificador válido mas sem correspondência real, domínio de e-mail inventado) e avisa que os dados reais colados não foram aproveitados. É justamente sob pressão de prazo, como neste caso, que um dado real tende a entrar sem querer numa massa de teste — e de lá pra um ambiente de homologação, um dump de log, ou uma tela compartilhada em print."
       }
@@ -259,14 +259,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"ClickIngressos\" (venda de ingressos online fictícia, web) quer um smoke test simples do endpoint de listagem de eventos, com k6 já configurado.",
+        "scenario": "Um QA na \"ClickIngressos\" (venda de ingressos online fictícia, web) quer um smoke test simples do endpoint de listagem de eventos, com k6 já configurado.",
         "input": "\"Preciso de um teste de performance smoke pro endpoint GET /eventos, já usamos k6.\"",
         "expected_output": "A skill detecta k6, confirma que é smoke test (poucos usuários virtuais, só validar que o script roda), gera o script parametrizado e salva em `tests/performance/`."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Integração",
-        "scenario": "QA pleno na \"StreamPlay\" (streaming de vídeo fictício, com integração a um CDN de terceiro) quer testar a API de início de reprodução, mas só definiu o tipo de teste (load), sem os thresholds.",
+        "scenario": "Um QA na \"StreamPlay\" (streaming de vídeo fictício, com integração a um CDN de terceiro) quer testar a API de início de reprodução, mas só definiu o tipo de teste (load), sem os thresholds.",
         "input": "\"Quero um teste de carga (load) pro endpoint de iniciar reprodução, mas ainda não sei os números de threshold.\"",
         "expected_output": "A skill gera o script como load test conforme pedido, mas para os thresholds (p95, taxa de erro, RPS) marca \"a confirmar com o responsável pelo SLA\" em vez de preencher com números de exemplo."
       },
@@ -294,14 +294,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "API",
-        "scenario": "QA júnior na \"AgroConecta\" (marketplace agro B2B fictício, API) precisa do teste de contrato do endpoint `GET /produtos/{id}`, com spec OpenAPI já publicada.",
+        "scenario": "Um QA na \"AgroConecta\" (marketplace agro B2B fictício, API) precisa do teste de contrato do endpoint `GET /produtos/{id}`, com spec OpenAPI já publicada.",
         "input": "\"Gera o teste de contrato pro endpoint GET /produtos/{id}, o schema tá no nosso arquivo openapi.yaml.\"",
         "expected_output": "A skill lê o schema real, valida status 200 com os campos definidos (tipos, obrigatoriedade), e gera o teste com a biblioteca de validação de schema do stack detectado."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "API",
-        "scenario": "QA pleno na \"LogiFrete\" (transportadora fictícia, API) precisa de testes de contrato entre o serviço de rastreamento e seus múltiplos consumidores (app do motorista, painel do cliente), mas o projeto não tem nenhuma ferramenta de contrato consumer-driven configurada ainda.",
+        "scenario": "Um QA na \"LogiFrete\" (transportadora fictícia, API) precisa de testes de contrato entre o serviço de rastreamento e seus múltiplos consumidores (app do motorista, painel do cliente), mas o projeto não tem nenhuma ferramenta de contrato consumer-driven configurada ainda.",
         "input": "\"Preciso de testes de contrato entre o serviço de rastreamento e seus consumidores. Temos vários consumidores desse serviço mas não sei se já usamos Pact.\"",
         "expected_output": "A skill identifica múltiplos consumidores — sinal claro de que o cenário pede contrato consumer-driven (Pact) em vez de só validação de schema — mas como não encontra Pact nem Spring Cloud Contract configurado no projeto, pergunta se deve introduzir a ferramenta ou se o time prefere só validação de schema por ora, em vez de decidir sozinha."
       },
@@ -329,14 +329,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"EstudaMais\" (plataforma de cursos online fictícia, web) audita a página de listagem de cursos, com axe-core já configurado.",
+        "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos online fictícia, web) audita a página de listagem de cursos, com axe-core já configurado.",
         "input": "\"Audita a acessibilidade da página de listagem de cursos, nível AA, já usamos axe-core no projeto.\"",
         "expected_output": "A skill detecta axe-core, roda contra a página, e reporta violações reais encontradas (ex: contraste insuficiente em um botão) com critério WCAG e severidade."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Mobile",
-        "scenario": "QA pleno no app \"PetAmigo\" (adoção de pets fictícia, mobile) precisa auditar a tela de cadastro de pet, mas o nível WCAG alvo não foi confirmado.",
+        "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia, mobile) precisa auditar a tela de cadastro de pet, mas o nível WCAG alvo não foi confirmado.",
         "input": "\"Audita a acessibilidade da tela de cadastro de pet.\" (sem dizer o nível)",
         "expected_output": "A skill pergunta qual nível é o alvo (A, AA ou AAA) em vez de assumir AA por padrão, e só roda a auditoria depois de confirmado."
       },
@@ -364,21 +364,21 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"EstudaMais\" (plataforma de cursos fictícia, web) audita um relatório simples de execução de testes do módulo de matrícula antes de enviar pro time.",
+        "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos fictícia, web) audita um relatório simples de execução de testes do módulo de matrícula antes de enviar pro time.",
         "input": "\"Audita esse relatório de testes do módulo de matrícula antes de eu enviar pro time.\"",
         "expected_output": "A skill confere as afirmações do relatório — todas rastreáveis ao arquivo de resultado real anexado — e não sinaliza nada, já que não há número ou citação sem fonte."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "API",
-        "scenario": "QA pleno na \"AgroConecta\" (marketplace B2B fictício, API) audita um relatório de diagnóstico de bug com uma citação de cliente sem transcrição anexada.",
+        "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, API) audita um relatório de diagnóstico de bug com uma citação de cliente sem transcrição anexada.",
         "input": "\"Audita esse relatório de bug antes de eu abrir o chamado.\" (o relatório cita \"o cliente disse que trava toda vez\" sem anexo)",
         "expected_output": "A skill sinaliza a citação atribuída ao cliente como sem fonte rastreável (nenhuma transcrição, e-mail ou print anexado) e pergunta qual é a origem, sem remover nem confirmar a afirmação por conta própria."
       },
       {
         "situation": "Cenário de risco real",
         "project_type": "Mobile",
-        "scenario": "Na \"RotaCerta\" (app do entregador fictício, mobile), um analista júnior entrega ao QA sênior um relatório de sessão exploratória com \"98% de satisfação dos entregadores testados\" pra incluir no relatório trimestral de qualidade da diretoria.",
+        "scenario": "Na \"RotaCerta\" (app do entregador fictício, mobile), um analista entrega ao QA um relatório de sessão exploratória com \"98% de satisfação dos entregadores testados\" pra incluir no relatório trimestral de qualidade da diretoria.",
         "input": "\"Pode revisar esse relatório antes de eu mandar pra diretoria? Tem um número de satisfação ali.\"",
         "expected_output": "A skill sinaliza o \"98% de satisfação\" como número redondo demais sem fonte associada — não há survey, entrevista registrada nem pesquisa anexada — e pergunta de onde veio, em vez de deixar passar por já estar num relatório formatado. Um número assim, uma vez impresso num relatório de diretoria, costuma virar fato citado depois, mesmo que ninguém mais lembre de onde saiu."
       }
@@ -399,14 +399,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Integração",
-        "scenario": "QA júnior na \"LogiFrete\" (transportadora fictícia) analisa a suíte de integração com o sistema de rastreamento de um parceiro externo, que às vezes falha sem motivo aparente.",
+        "scenario": "Um QA na \"LogiFrete\" (transportadora fictícia) analisa a suíte de integração com o sistema de rastreamento de um parceiro externo, que às vezes falha sem motivo aparente.",
         "input": "\"Analisa essa suíte de integração com o rastreamento, ela às vezes falha sem motivo aparente.\"",
         "expected_output": "A skill identifica um `waitForTimeout(3000)` na linha X, sugere trocar por espera condicional ao estado da resposta da API do parceiro."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Mobile",
-        "scenario": "QA pleno na \"SaúdeJá\" (telemedicina fictícia) tem testes de agendamento no app mobile que parecem depender de ordem de execução, mas não há histórico de execução disponível pra confirmar.",
+        "scenario": "Um QA na \"SaúdeJá\" (telemedicina fictícia) tem testes de agendamento no app mobile que parecem depender de ordem de execução, mas não há histórico de execução disponível pra confirmar.",
         "input": "\"Os testes de agendamento do app falham quando rodam em paralelo, mas só às vezes. Não tenho o histórico de execução do CI à mão.\"",
         "expected_output": "A skill identifica na análise estática uma variável compartilhada entre dois testes (indício claro de dependência de ordem), mas para outro trecho suspeito, sem histórico disponível, classifica como \"padrão de risco, não confirmado como causa da falha real\" em vez de afirmar que é a causa."
       },
@@ -434,14 +434,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Integração",
-        "scenario": "QA júnior na \"LogiFrete\" (transportadora fictícia) prioriza 4 cenários do módulo de rastreamento de encomenda por risco.",
+        "scenario": "Um QA na \"LogiFrete\" (transportadora fictícia) prioriza 4 cenários do módulo de rastreamento de encomenda por risco.",
         "input": "\"Prioriza esses 4 cenários de rastreamento por risco.\"",
         "expected_output": "A skill classifica cada um com impacto/frequência/complexidade visíveis, matriz rastreável, e recomendações de automatizar ou testar manualmente."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Web",
-        "scenario": "QA pleno na \"EstudaMais\" (plataforma de cursos fictícia, web) prioriza cenários de emissão de certificado, mas sem dado de histórico de bugs disponível.",
+        "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos fictícia, web) prioriza cenários de emissão de certificado, mas sem dado de histórico de bugs disponível.",
         "input": "\"Prioriza os cenários de certificado. Não tenho números de bugs anteriores dessa área.\"",
         "expected_output": "A skill classifica pelos critérios disponíveis (impacto, frequência, complexidade) e omite o critério de histórico de bugs da matriz, em vez de estimar um número pra preencher a coluna."
       },
@@ -469,21 +469,21 @@
       {
         "situation": "Cenário direto",
         "project_type": "Mobile",
-        "scenario": "QA júnior no app mobile \"PetAmigo\" (adoção de pets fictícia) revisa um teste gerado por IA de cadastro de pet pra adoção.",
+        "scenario": "Um QA no app mobile \"PetAmigo\" (adoção de pets fictícia) revisa um teste gerado por IA de cadastro de pet pra adoção.",
         "input": "\"Revisa esse teste de cadastro de pet que a IA gerou.\"",
         "expected_output": "O nome do teste descreve o comportamento, os asserts validam o campo relevante, sem redundância — recomendação: manter."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Web",
-        "scenario": "QA pleno na \"AgroConecta\" (marketplace B2B fictício, web) revisa um teste de listagem de fornecedores com nome genérico.",
+        "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, web) revisa um teste de listagem de fornecedores com nome genérico.",
         "input": "\"Revisa esse teste chamado 'test_listagem_2'.\"",
         "expected_output": "A skill sinaliza que o nome não descreve comportamento (deveria dizer o que está sendo validado), recomendação: ajustar o nome, mantendo o restante."
       },
       {
         "situation": "Cenário de risco real",
         "project_type": "API",
-        "scenario": "Na \"PagaFácil\" (fintech de pagamentos fictícia, API), o QA sênior recebe 8 testes gerados por IA pro fluxo de estorno, já marcados como `generated-by-ai: reviewed`, com o tech lead pedindo \"só confirma que tá tudo certo, é rotina\".",
+        "scenario": "Na \"PagaFácil\" (fintech de pagamentos fictícia, API), o QA recebe 8 testes gerados por IA pro fluxo de estorno, já marcados como `generated-by-ai: reviewed`, com o tech lead pedindo \"só confirma que tá tudo certo, é rotina\".",
         "input": "\"Revisa esses 8 testes de estorno, já estão marcados como reviewed, é só formalidade.\"",
         "expected_output": "A skill revisa os 8 normalmente e aponta 2 com asserts fracos (só verificam que não lançou exceção, não que o valor do estorno está correto) — sem validar o marcador `reviewed` já presente. Nesses dois casos o marcador foi colocado antes de alguém checar se os asserts realmente provam o que o nome do teste promete, que é a mesma verificação que essa chamada acabou de fazer."
       }
@@ -504,14 +504,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"Lojinha Verde\" (e-commerce fictício de plantas, web) confirma que o ambiente de staging está pronto antes de rodar a suíte de checkout.",
+        "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) confirma que o ambiente de staging está pronto antes de rodar a suíte de checkout.",
         "input": "\"Confirma que o staging está pronto antes de eu rodar a suíte de regressão do checkout.\"",
         "expected_output": "A skill faz health check da API e do banco (ambos UP), confirma seed de dados de produtos presente, nenhuma feature flag relevante configurada, e dá veredito AMBIENTE PRONTO."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "API",
-        "scenario": "QA pleno na \"AgroConecta\" (marketplace B2B fictício, API) verifica o ambiente antes da suíte de negociação de preço rodar, mas não há documentação de quais feature flags deveriam estar ativas.",
+        "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, API) verifica o ambiente antes da suíte de negociação de preço rodar, mas não há documentação de quais feature flags deveriam estar ativas.",
         "input": "\"Verifica o ambiente de staging antes da suíte de negociação de preço rodar.\"",
         "expected_output": "A skill confirma serviços UP e seed de dados presente, mas para feature flags, como não há definição registrada de qual estado é esperado, marca \"não verificado — estado esperado não documentado\" em vez de assumir que está correto."
       },
@@ -539,14 +539,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "API",
-        "scenario": "QA júnior na \"AgroConecta\" (marketplace B2B fictício, API) verifica a cobertura do módulo de negociação de preço entre comprador e vendedor.",
+        "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, API) verifica a cobertura do módulo de negociação de preço entre comprador e vendedor.",
         "input": "\"Verifica a cobertura do módulo de negociação: propor preço, aceitar proposta, recusar proposta.\"",
         "expected_output": "A skill cruza os 3 critérios com os cenários existentes e reporta que \"recusar proposta\" só tem happy path — falta um negativo (recusar uma proposta que já foi aceita por outra parte)."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Web",
-        "scenario": "QA pleno na \"EstudaMais\" (plataforma de cursos fictícia, web) verifica cobertura do módulo de emissão de certificado, com critérios parcialmente documentados.",
+        "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos fictícia, web) verifica cobertura do módulo de emissão de certificado, com critérios parcialmente documentados.",
         "input": "\"Verifica cobertura do módulo de certificado. Alguns critérios estão só no board do Jira, não sei se peguei todos.\"",
         "expected_output": "A skill cruza os critérios encontrados no board com os cenários existentes normalmente, mas avisa que a fonte de critérios pode estar incompleta — a cobertura reportada vale só para o que foi levantado, não é garantia de que não existam critérios adicionais não capturados no board."
       },
@@ -574,14 +574,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"ClickIngressos\" (venda de ingressos fictícia, web) analisa o resultado real de um smoke test em k6, sem threshold definido ainda.",
+        "scenario": "Um QA na \"ClickIngressos\" (venda de ingressos fictícia, web) analisa o resultado real de um smoke test em k6, sem threshold definido ainda.",
         "input": "\"Analisa esse resultado do smoke test que rodei.\" (arquivo JSON real do k6)",
         "expected_output": "A skill extrai as métricas reais (p95, taxa de erro, RPS) e reporta como \"sem threshold definido para comparar\", já que é só o smoke inicial."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Integração",
-        "scenario": "QA pleno na \"StreamPlay\" (streaming de vídeo fictício, integração com CDN de terceiro) analisa um resultado de load test com threshold definido só para latência, não para taxa de erro.",
+        "scenario": "Um QA na \"StreamPlay\" (streaming de vídeo fictício, integração com CDN de terceiro) analisa um resultado de load test com threshold definido só para latência, não para taxa de erro.",
         "input": "\"Analisa esse resultado de carga. Só combinamos o threshold de latência (p95 < 400ms) até agora.\"",
         "expected_output": "A skill compara a latência real contra os 400ms combinados normalmente, mas para taxa de erro, sem threshold combinado, apresenta o número bruto e avisa que não há base de comparação pra esse critério específico."
       },
@@ -609,14 +609,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior no \"TarefaCerta\" (app web fictício de gestão de tarefas, stack Node/Express) precisa checar a segurança básica da tela de login.",
+        "scenario": "Um QA no \"TarefaCerta\" (app web fictício de gestão de tarefas, stack Node/Express) precisa checar a segurança básica da tela de login.",
         "input": "\"Verifica a segurança do endpoint de login em https://tarefacerta-staging.exemplo.com/login.\"",
         "expected_output": "A skill confirma que o stack não é .NET, testa acesso sem token/com token expirado, injeção básica nos campos, headers de segurança na resposta real, e reporta achados com severidade — sem inventar nenhum problema que não foi de fato observado."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "API",
-        "scenario": "QA pleno no \"TarefaCerta\" quer verificar o endpoint de exportação de relatórios, mas não sabe se o time já tem alguma ferramenta de segurança configurada.",
+        "scenario": "Um QA no \"TarefaCerta\" quer verificar o endpoint de exportação de relatórios, mas não sabe se o time já tem alguma ferramenta de segurança configurada.",
         "input": "\"Verifica a segurança do endpoint GET /api/relatorios/exportar. Não sei se já temos ferramenta de segurança configurada no projeto.\"",
         "expected_output": "A skill não encontra ferramenta de scan configurada e, em vez de introduzir uma por conta própria, marca isso como pendência (\"nenhuma ferramenta de scan detectada — confirmar com o time antes de adicionar uma\"), seguindo apenas com a verificação funcional manual que não depende de ferramenta externa."
       },
@@ -644,21 +644,21 @@
       {
         "situation": "Cenário direto",
         "project_type": "Mobile",
-        "scenario": "QA júnior no app \"PetAmigo\" (adoção de pets fictícia) faz sua primeira sessão exploratória na tela de busca de pets.",
+        "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia) faz sua primeira sessão exploratória na tela de busca de pets.",
         "input": "\"Quero fazer uma sessão exploratória na busca de pets, tenho 1 hora.\"",
         "expected_output": "A skill define o charter (missão: busca por filtros combinados; escopo: só a tela de busca; tempo-caixa: 60 min), conduz e documenta os achados reais da sessão."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Web",
-        "scenario": "QA pleno na \"AgroConecta\" (marketplace B2B fictício, web) conduz sessão exploratória no checkout, mas é interrompido antes de testar uma parte do fluxo planejado.",
+        "scenario": "Um QA na \"AgroConecta\" (marketplace B2B fictício, web) conduz sessão exploratória no checkout, mas é interrompido antes de testar uma parte do fluxo planejado.",
         "input": "relata que testou boa parte do fluxo de negociação de preço, mas foi interrompido antes de testar o fluxo de aprovação em duas etapas.",
         "expected_output": "A skill documenta as áreas realmente cobertas (negociação de preço) e registra explicitamente, em \"cobertura percebida\", que o fluxo de aprovação em duas etapas não foi exercitado por falta de tempo — sem incluir esse fluxo em \"áreas cobertas\" mesmo fazendo parte do charter original."
       },
       {
         "situation": "Cenário de risco real",
         "project_type": "Integração",
-        "scenario": "Na \"RH Fácil\" (sistema de RH fictício, com integração ao processador de folha de pagamento externo), o QA sênior conduz uma sessão de 45 minutos na tela de folha de pagamento, e o gerente pede pro relatório dizer que \"o módulo de folha inteiro foi testado\" pra justificar a liberação do release.",
+        "scenario": "Na \"RH Fácil\" (sistema de RH fictício, com integração ao processador de folha de pagamento externo), o QA conduz uma sessão de 45 minutos na tela de folha de pagamento, e o gerente pede pro relatório dizer que \"o módulo de folha inteiro foi testado\" pra justificar a liberação do release.",
         "input": "\"Coloca no relatório que testamos o módulo de folha inteiro, deu pra ver bastante coisa nessa sessão.\"",
         "expected_output": "O relatório lista como \"áreas cobertas\" exatamente as três telas exercitadas (cálculo de horas extras, desconto de INSS, geração de holerite) — não o módulo inteiro, que também inclui rescisão e o envio ao processador externo de folha, nenhum dos dois tocados nesses 45 minutos. Um release liberado com base num relatório que diz \"módulo inteiro testado\" deixa ninguém sabendo que a integração de rescisão ficou sem nenhum teste, até um problema aparecer lá."
       }
@@ -679,14 +679,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"Lojinha Verde\" (e-commerce fictício de plantas, web) vê um teste de checkout falhar no CI com uma mensagem de assert clara.",
+        "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) vê um teste de checkout falhar no CI com uma mensagem de assert clara.",
         "input": "cola o log — o teste esperava \"Pedido confirmado!\" e recebeu \"Pedido confirmado com sucesso!\", porque a aplicação mudou o texto da mensagem.",
         "expected_output": "A skill classifica como \"teste mal escrito\" (expectativa desatualizada), aponta a linha exata do assert, e sugere corrigir o texto esperado no teste."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Integração",
-        "scenario": "QA pleno na \"PagaFácil\" (fintech de pagamentos fictícia) tem um teste de integração com o serviço de notificação que falha 1 a cada 5 execuções no CI, sem mudança de código recente.",
+        "scenario": "Um QA na \"PagaFácil\" (fintech de pagamentos fictícia) tem um teste de integração com o serviço de notificação que falha 1 a cada 5 execuções no CI, sem mudança de código recente.",
         "input": "cola o log de timeout na chamada ao serviço de notificação, mencionando que \"já viu isso antes\" mas sem dados de histórico completo.",
         "expected_output": "A skill nota o padrão intermitente, mas como o histórico de execução não foi fornecido de forma completa, marca como \"possível flakiness, rastreamento incompleto\" e recomenda coletar o histórico real via `swl-skill-qa-check-flakiness` antes de classificar definitivamente."
       },
@@ -714,14 +714,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"Lojinha Verde\" (e-commerce fictício de plantas, web) encontra um bug claro no botão de checkout.",
+        "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) encontra um bug claro no botão de checkout.",
         "input": "\"Encontrei um bug: o botão de finalizar compra não faz nada quando clico duas vezes rápido.\"",
         "expected_output": "A skill gera relatório estruturado com passos exatos, severidade Alta (bloqueia fluxo principal), resultado esperado vs. obtido claros."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "API",
-        "scenario": "QA pleno na \"PagaFácil\" (fintech de pagamentos fictícia, API) reporta um bug sem informar o navegador ou dispositivo usado.",
+        "scenario": "Um QA na \"PagaFácil\" (fintech de pagamentos fictícia, API) reporta um bug sem informar o navegador ou dispositivo usado.",
         "input": "\"A tela de extrato trava às vezes.\" (sem dizer em qual navegador ou dispositivo)",
         "expected_output": "A skill gera o relatório com os passos que foram informados, mas marca o campo Ambiente como \"não informado — confirmar navegador/dispositivo com quem reportou\", em vez de deixar em branco ou assumir o mais comum."
       },
@@ -749,14 +749,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"Lojinha Verde\" (e-commerce fictício de plantas, web) atualiza a documentação depois que a branch adicionou um cenário de cupom de desconto.",
+        "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) atualiza a documentação depois que a branch adicionou um cenário de cupom de desconto.",
         "input": "\"Atualiza a documentação de testes com base nessa branch que adicionou o cenário de cupom.\"",
         "expected_output": "A skill atualiza o mapa de cobertura incluindo o novo cenário, mantendo a estrutura e o tom já usados no README de automação."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Integração",
-        "scenario": "QA pleno na \"LogiFrete\" (transportadora fictícia) atualiza a documentação depois que a branch removeu um cenário de cálculo de frete considerado obsoleto.",
+        "scenario": "Um QA na \"LogiFrete\" (transportadora fictícia) atualiza a documentação depois que a branch removeu um cenário de cálculo de frete considerado obsoleto.",
         "input": "\"Atualiza a documentação, removemos um cenário de frete que não existe mais.\"",
         "expected_output": "A skill atualiza o que a branch de fato mudou, mas antes de remover a entrada do glossário de cenários, verifica se ele ainda aparece em alguma suíte ativa não tocada nesta branch — encontra que ainda é referenciado num teste de regressão separado, mantém a entrada e sinaliza a inconsistência em vez de apagar."
       },
@@ -784,21 +784,21 @@
       {
         "situation": "Cenário direto",
         "project_type": "Mobile",
-        "scenario": "QA júnior no app \"PetAmigo\" (adoção de pets fictícia) descreve o PR de uma branch com 3 arquivos de teste novos, gerados por IA nesta sessão.",
+        "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia) descreve o PR de uma branch com 3 arquivos de teste novos, gerados por IA nesta sessão.",
         "input": "\"Descreve o PR dessa branch de testes de favoritar pet.\"",
         "expected_output": "A skill analisa o diff, categoriza os 3 arquivos como gerados por IA, e monta a descrição com o checklist."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Web",
-        "scenario": "QA pleno na \"SaúdeJá\" (telemedicina fictícia, web) descreve um PR com testes gerados por IA e um teste ajustado manualmente por um dev, mas o commit não usa a tag de rastreabilidade.",
+        "scenario": "Um QA na \"SaúdeJá\" (telemedicina fictícia, web) descreve um PR com testes gerados por IA e um teste ajustado manualmente por um dev, mas o commit não usa a tag de rastreabilidade.",
         "input": "\"Descreve o PR da branch de agendamento.\" (commit sem tag `[ai-assisted-test]`)",
         "expected_output": "A skill categoriza os arquivos com base no contexto disponível, mas sinaliza que a ausência da tag no commit impede confirmar a categorização só pelo histórico — recomenda registrar a tag em commits futuros pra essa distinção ficar rastreável sem depender de contexto externo."
       },
       {
         "situation": "Cenário de risco real",
         "project_type": "API",
-        "scenario": "Na \"BancoDigitalX\" (banco digital fictício, API), o QA sênior monta a descrição do PR de testes do endpoint de transferência — nenhum teste tem o marcador `reviewed` ainda, o check-flakiness não rodou nesta branch — mas o tech lead pede pra \"marcar tudo, já revisamos informalmente numa call\".",
+        "scenario": "Na \"BancoDigitalX\" (banco digital fictício, API), o QA monta a descrição do PR de testes do endpoint de transferência — nenhum teste tem o marcador `reviewed` ainda, o check-flakiness não rodou nesta branch — mas o tech lead pede pra \"marcar tudo, já revisamos informalmente numa call\".",
         "input": "\"Pode marcar os itens do checklist como concluídos, revisamos tudo numa call rápida ontem.\"",
         "expected_output": "A skill deixa os dois primeiros itens do checklist desmarcados (marcador `reviewed` ausente, `check-flakiness` não executado nesta branch), e só marca o terceiro (dados fictícios), único confirmável pelo próprio conteúdo dos arquivos. Uma call informal não deixa rastro no repositório — o checklist reflete o que está registrado no código, não o que foi dito numa reunião."
       }
@@ -819,14 +819,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Web",
-        "scenario": "QA júnior na \"Lojinha Verde\" (e-commerce fictício de plantas, web) gera o relatório de execução da suíte de checkout a partir do JSON real do Playwright.",
+        "scenario": "Um QA na \"Lojinha Verde\" (e-commerce fictício de plantas, web) gera o relatório de execução da suíte de checkout a partir do JSON real do Playwright.",
         "input": "\"Gera o relatório de execução a partir desse JSON do Playwright.\" (2 testes, ambos passaram)",
         "expected_output": "A skill gera o relatório com números reais extraídos do arquivo — 2 executados, 2 sucesso, 0 falha, tempo real de execução."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Mobile",
-        "scenario": "QA pleno no app \"PetAmigo\" (adoção de pets fictícia, mobile) gera o relatório de uma execução com uma falha, sem execução anterior disponível pra comparar.",
+        "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia, mobile) gera o relatório de uma execução com uma falha, sem execução anterior disponível pra comparar.",
         "input": "\"Gera o relatório dessa execução do app.\" (1 falha em 20 testes) + \"não tenho o resultado da execução anterior aqui.\"",
         "expected_output": "A skill reporta os números reais (19 sucesso, 1 falha com a mensagem de erro), sem incluir comparação de tendência (\"melhorou\" ou \"piorou\"), já que só há um ponto de dado disponível."
       },
@@ -854,14 +854,14 @@
       {
         "situation": "Cenário direto",
         "project_type": "Mobile",
-        "scenario": "QA júnior no app \"PetAmigo\" (adoção de pets fictícia) roda o pipeline de commit seguro numa branch pequena de testes de favoritar pet, todos os checks passam limpos.",
+        "scenario": "Um QA no app \"PetAmigo\" (adoção de pets fictícia) roda o pipeline de commit seguro numa branch pequena de testes de favoritar pet, todos os checks passam limpos.",
         "input": "\"Roda o pipeline de commit seguro pra essa branch de favoritar pet.\"",
         "expected_output": "Os 4 checks passam sem achado crítico, e a skill gera o commit no padrão Conventional Commits com a tag `[ai-assisted-test]`."
       },
       {
         "situation": "Cenário com ambiguidade",
         "project_type": "Web",
-        "scenario": "QA pleno na \"EstudaMais\" (plataforma de cursos fictícia, web) roda o pipeline numa branch com um achado de severidade Média.",
+        "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos fictícia, web) roda o pipeline numa branch com um achado de severidade Média.",
         "input": "\"Roda o pipeline pra branch de emissão de certificado.\"",
         "expected_output": "Os 4 checks rodam, o `qa-review-tests` encontra um assert fraco (severidade Média) — registrado como observação no corpo do commit, e o pipeline segue sem bloquear."
       },

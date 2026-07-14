@@ -1,10 +1,10 @@
 ## Cenário direto — Mobile
-**Cenário:** QA júnior no app mobile "PetAmigo" (adoção de pets fictícia) recebe uma user story simples de favoritar um pet.
+**Cenário:** Um QA no app mobile "PetAmigo" (adoção de pets fictícia) recebe uma user story simples de favoritar um pet.
 **Input:** "User story: como usuário, quero favoritar um pet pra ver depois na minha lista."
 **Saída esperada:** A skill gera casos de happy path (favoritar e ver na lista), edge case (favoritar o mesmo pet duas vezes) e negativo (favoritar sem estar logado).
 
 ## Cenário com ambiguidade — Integração
-**Cenário:** QA pleno na "SaúdeJá" (telemedicina fictícia, integração com serviço externo de videochamada) recebe uma user story de agendamento com regra de cancelamento incompleta.
+**Cenário:** Um QA na "SaúdeJá" (telemedicina fictícia, integração com serviço externo de videochamada) recebe uma user story de agendamento com regra de cancelamento incompleta.
 **Input:** "User story: paciente agenda consulta e pode cancelar até X horas antes." (sem definir o valor de X)
 **Saída esperada:** A skill gera os casos de agendamento normalmente, e no caso de cancelamento marca o prazo como `[REGRA A CONFIRMAR COM PO]`, em vez de assumir "24 horas" como muitos sistemas fazem por padrão.
 

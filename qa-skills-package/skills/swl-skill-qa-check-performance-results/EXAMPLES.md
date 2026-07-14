@@ -1,10 +1,10 @@
 ## Cenário direto — Web
-**Cenário:** QA júnior na "ClickIngressos" (venda de ingressos fictícia, web) analisa o resultado real de um smoke test em k6, sem threshold definido ainda.
+**Cenário:** Um QA na "ClickIngressos" (venda de ingressos fictícia, web) analisa o resultado real de um smoke test em k6, sem threshold definido ainda.
 **Input:** "Analisa esse resultado do smoke test que rodei." (arquivo JSON real do k6)
 **Saída esperada:** A skill extrai as métricas reais (p95, taxa de erro, RPS) e reporta como "sem threshold definido para comparar", já que é só o smoke inicial.
 
 ## Cenário com ambiguidade — Integração
-**Cenário:** QA pleno na "StreamPlay" (streaming de vídeo fictício, integração com CDN de terceiro) analisa um resultado de load test com threshold definido só para latência, não para taxa de erro.
+**Cenário:** Um QA na "StreamPlay" (streaming de vídeo fictício, integração com CDN de terceiro) analisa um resultado de load test com threshold definido só para latência, não para taxa de erro.
 **Input:** "Analisa esse resultado de carga. Só combinamos o threshold de latência (p95 < 400ms) até agora."
 **Saída esperada:** A skill compara a latência real contra os 400ms combinados normalmente, mas para taxa de erro, sem threshold combinado, apresenta o número bruto e avisa que não há base de comparação pra esse critério específico.
 

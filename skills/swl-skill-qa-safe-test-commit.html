@@ -748,7 +748,7 @@ Reviewed-by: &lt;nome do QA&gt;
             <details class="examples-accordion examples-accordion--1">
               <summary>Cenário direto <span class="examples-sep">·</span> Mobile</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA júnior no app "PetAmigo" (adoção de pets fictícia) roda o pipeline de commit seguro numa branch pequena de testes de favoritar pet, todos os checks passam limpos.</p>
+                <p><strong>Cenário:</strong> Um QA no app "PetAmigo" (adoção de pets fictícia) roda o pipeline de commit seguro numa branch pequena de testes de favoritar pet, todos os checks passam limpos.</p>
                 <p><strong>Input:</strong> "Roda o pipeline de commit seguro pra essa branch de favoritar pet."</p>
                 <p><strong>Saída esperada:</strong> Os 4 checks passam sem achado crítico, e a skill gera o commit no padrão Conventional Commits com a tag <code>[ai-assisted-test]</code>.</p>
               </div>
@@ -757,7 +757,7 @@ Reviewed-by: &lt;nome do QA&gt;
             <details class="examples-accordion examples-accordion--2">
               <summary>Cenário com ambiguidade <span class="examples-sep">·</span> Web</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> QA pleno na "EstudaMais" (plataforma de cursos fictícia, web) roda o pipeline numa branch com um achado de severidade Média.</p>
+                <p><strong>Cenário:</strong> Um QA na "EstudaMais" (plataforma de cursos fictícia, web) roda o pipeline numa branch com um achado de severidade Média.</p>
                 <p><strong>Input:</strong> "Roda o pipeline pra branch de emissão de certificado."</p>
                 <p><strong>Saída esperada:</strong> Os 4 checks rodam, o <code>qa-review-tests</code> encontra um assert fraco (severidade Média) — registrado como observação no corpo do commit, e o pipeline segue sem bloquear.</p>
               </div>

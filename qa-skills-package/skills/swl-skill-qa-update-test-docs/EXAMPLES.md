@@ -1,10 +1,10 @@
 ## Cenário direto — Web
-**Cenário:** QA júnior na "Lojinha Verde" (e-commerce fictício de plantas, web) atualiza a documentação depois que a branch adicionou um cenário de cupom de desconto.
+**Cenário:** Um QA na "Lojinha Verde" (e-commerce fictício de plantas, web) atualiza a documentação depois que a branch adicionou um cenário de cupom de desconto.
 **Input:** "Atualiza a documentação de testes com base nessa branch que adicionou o cenário de cupom."
 **Saída esperada:** A skill atualiza o mapa de cobertura incluindo o novo cenário, mantendo a estrutura e o tom já usados no README de automação.
 
 ## Cenário com ambiguidade — Integração
-**Cenário:** QA pleno na "LogiFrete" (transportadora fictícia) atualiza a documentação depois que a branch removeu um cenário de cálculo de frete considerado obsoleto.
+**Cenário:** Um QA na "LogiFrete" (transportadora fictícia) atualiza a documentação depois que a branch removeu um cenário de cálculo de frete considerado obsoleto.
 **Input:** "Atualiza a documentação, removemos um cenário de frete que não existe mais."
 **Saída esperada:** A skill atualiza o que a branch de fato mudou, mas antes de remover a entrada do glossário de cenários, verifica se ele ainda aparece em alguma suíte ativa não tocada nesta branch — encontra que ainda é referenciado num teste de regressão separado, mantém a entrada e sinaliza a inconsistência em vez de apagar.
 
