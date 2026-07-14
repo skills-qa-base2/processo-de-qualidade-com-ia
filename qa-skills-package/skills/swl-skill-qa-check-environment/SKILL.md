@@ -3,14 +3,14 @@ name: swl-skill-qa-check-environment
 description: Valida que um ambiente está de fato pronto para rodar a suíte antes da execução — health check dos serviços, seed de dados presente, feature flags no estado esperado — nunca assume que um ambiente está pronto sem checar.
 argument-hint: <NomeDoAmbiente>
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   validated: false
 ---
 
 ## Passos
 
 ## 1. Levantamento do que "pronto" significa neste projeto
-Leia o CLAUDE.md e `.claude/rules/qa/` (se existirem, especialmente `convencoes-teste.md` gerado por `swl-skill-qa-generate-rules`) para identificar quais serviços, dados de seed e feature flags o ambiente precisa ter. Se não houver essa definição registrada, pergunte ao usuário — nunca assuma um critério de "ambiente pronto" genérico sem confirmação.
+Leia o CLAUDE.md e `.claude/rules/qa/` (se existirem, especialmente `convencoes-teste.md` gerado por `swl-skill-qa-generate-rules`) para identificar quais serviços, dados de seed e feature flags o ambiente precisa ter. Se não houver essa definição registrada, pergunte ao usuário.
 
 ## 2. Health check dos serviços
 Verifique, com uma chamada real (não suposição), que cada serviço/dependência necessário está de fato respondendo: API principal, banco de dados, filas, serviços externos mockados/stubados (ex: WireMock/MockServer, se o projeto usar).

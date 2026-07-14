@@ -3,7 +3,7 @@ name: swl-skill-qa-new-mobile-automation
 description: Gera código de automação de teste mobile detectando o framework do projeto (Appium, Espresso, XCUITest, Detox, Maestro) a partir do CLAUDE.md e rules — cobre concerns específicas de mobile (matriz de dispositivo/OS, permissões, conectividade).
 argument-hint: <NomeDoCenárioOuTelaAAutomatizar>
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   validated: true
 ---
 
@@ -24,7 +24,7 @@ Gere o teste seguindo os padrões já existentes no projeto:
 - Dados de teste via massa gerada por `swl-skill-qa-new-test-data`, nunca hardcoded inline repetido
 
 ## 4. Matriz de dispositivo/OS
-Declare explicitamente em qual dispositivo/emulador e versão de OS o teste foi gerado/executado. Nunca declare cobertura de uma matriz mais ampla (ex: "testado em iOS e Android") do que a efetivamente exercitada.
+Declare explicitamente em qual dispositivo/emulador e versão de OS o teste foi gerado/executado.
 
 ## 5. Registro no pipeline
 Adicione o teste à suíte/CI conforme convenção do projeto (tag, grupo, pasta).

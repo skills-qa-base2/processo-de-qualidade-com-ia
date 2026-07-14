@@ -602,11 +602,11 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">280 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
+    <div class="content-meta">264 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
       <span class="cat-pill">Geração</span>
-      <span class="ver">versão 1.0.0</span>
+      <span class="ver">versão 1.0.1</span>
     </div>
     <h1>Gerar teste de performance</h1>
     
@@ -623,7 +623,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <h3>1. Detecção da ferramenta</h3>
 <p>Leia o CLAUDE.md e os arquivos de configuração do projeto para identificar a ferramenta de performance já em uso (k6, JMeter, Gatling, Artillery). Nunca introduza uma ferramenta nova sem confirmação explícita do usuário.</p>
 <h3>2. Definição do tipo de teste</h3>
-<p>Esclareça com o usuário qual tipo de teste é necessário — nunca assuma "load" por padrão sem essa definição:</p>
+<p>Esclareça com o usuário qual tipo de teste é necessário:</p>
 <ul>
 <li><strong>Smoke</strong>: poucos usuários virtuais, valida que o script funciona</li>
 <li><strong>Load</strong>: carga esperada em produção</li>
@@ -632,7 +632,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <li><strong>Soak</strong>: carga sustentada por tempo longo, detecta degradação/memory leak</li>
 </ul>
 <h3>3. Definição de thresholds</h3>
-<p>Pergunte e registre os limites aceitáveis: latência p95/p99, taxa de erro máxima, RPS mínimo esperado. Nunca invente um SLA/threshold não informado — marque como "a confirmar com o responsável pelo SLA" se não fornecido.</p>
+<p>Pergunte e registre os limites aceitáveis: latência p95/p99, taxa de erro máxima, RPS mínimo esperado. Marque como "a confirmar com o responsável pelo SLA" se não fornecido.</p>
 <h3>4. Geração do script</h3>
 <p>Gere o script seguindo a ferramenta detectada, parametrizando usuários virtuais/duração conforme o tipo de teste definido no passo 2. Use massa de dados fictícia (via <code>swl-skill-qa-new-test-data</code>) para variar o payload entre requisições, nunca dado hardcoded repetido.</p>
 <h3>5. Saída</h3>

@@ -602,11 +602,11 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">370 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
+    <div class="content-meta">340 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
       <span class="cat-pill">Verificação</span>
-      <span class="ver">versão 1.0.0</span>
+      <span class="ver">versão 1.0.1</span>
     </div>
     <h1>Verificar segurança (multi-stack)</h1>
     
@@ -627,7 +627,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 
     <h2>Passos</h2>
 <h3>1. Levantamento do alvo e do que já existe</h3>
-<p>Identifique o stack do projeto (Node, Python, Java, mobile, etc.) via CLAUDE.md/config. Se o projeto for .NET Web API, esta skill não deve ser usada — use <code>swl-skill-check-security</code> do pacote <code>org-skills</code>, que já cobre esse caso em profundidade. Verifique também se o projeto já tem ferramenta de teste de segurança configurada (ex: OWASP ZAP, Burp Suite, sqlmap, ferramenta de scan de dependências) — nunca introduza uma ferramenta nova sem confirmação explícita do usuário.</p>
+<p>Identifique o stack do projeto via CLAUDE.md/config. Se for .NET Web API, use <code>swl-skill-check-security</code> do pacote <code>org-skills</code> em vez desta. Verifique se o projeto já tem ferramenta de teste de segurança configurada (ex: OWASP ZAP, Burp Suite, sqlmap, scanner de dependências) — nunca introduza uma nova sem confirmação explícita do usuário.</p>
 <h3>2. Verificação funcional/dinâmica</h3>
 <p>A partir de um fluxo, tela ou endpoint real informado, verifique como QA funcional (exercitando o sistema em execução, não lendo o código-fonte):</p>
 <ul>
@@ -638,7 +638,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <li><strong>Mobile (quando aplicável)</strong>: certificado pinning, armazenamento local de dados sensíveis (keychain/keystore vs. armazenamento não criptografado), permissões excessivas</li>
 </ul>
 <h3>3. Classificação</h3>
-<p>Classifique cada achado como Crítico (dado sensível exposto, autenticação contornável) / Alto / Médio / Baixo, com a evidência real observada (request/response, não suposição).</p>
+<p>Classifique cada achado como Crítico (dado sensível exposto, autenticação contornável) / Alto / Médio / Baixo.</p>
 <h3>4. Saída</h3>
 <p>Relatório com um achado por linha: endpoint/fluxo testado, payload/ação usada, resposta real observada, severidade. Se nada for encontrado, diga isso claramente — não invente achado para parecer útil.</p>
     

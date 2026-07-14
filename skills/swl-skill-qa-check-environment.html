@@ -602,11 +602,11 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">341 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
+    <div class="content-meta">330 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
       <span class="cat-pill">Verificação</span>
-      <span class="ver">versão 1.0.0</span>
+      <span class="ver">versão 1.0.1</span>
     </div>
     <h1>Validar ambiente de teste</h1>
     
@@ -627,7 +627,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 
     <h2>Passos</h2>
 <h3>1. Levantamento do que "pronto" significa neste projeto</h3>
-<p>Leia o CLAUDE.md e <code>.claude/rules/qa/</code> (se existirem, especialmente <code>convencoes-teste.md</code> gerado por <code>swl-skill-qa-generate-rules</code>) para identificar quais serviços, dados de seed e feature flags o ambiente precisa ter. Se não houver essa definição registrada, pergunte ao usuário — nunca assuma um critério de "ambiente pronto" genérico sem confirmação.</p>
+<p>Leia o CLAUDE.md e <code>.claude/rules/qa/</code> (se existirem, especialmente <code>convencoes-teste.md</code> gerado por <code>swl-skill-qa-generate-rules</code>) para identificar quais serviços, dados de seed e feature flags o ambiente precisa ter. Se não houver essa definição registrada, pergunte ao usuário.</p>
 <h3>2. Health check dos serviços</h3>
 <p>Verifique, com uma chamada real (não suposição), que cada serviço/dependência necessário está de fato respondendo: API principal, banco de dados, filas, serviços externos mockados/stubados (ex: WireMock/MockServer, se o projeto usar).</p>
 <h3>3. Verificação de seed de dados</h3>

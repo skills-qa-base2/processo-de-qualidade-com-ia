@@ -3,7 +3,7 @@ name: swl-skill-qa-check-accessibility
 description: Audita acessibilidade (WCAG) de telas/fluxos usando a ferramenta já presente no projeto (axe-core, pa11y, Lighthouse ou equivalente) — nunca declara conformidade com um nível WCAG sem execução real da ferramenta.
 argument-hint: <URL, tela ou componente a auditar>
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   validated: false
 ---
 
@@ -16,7 +16,7 @@ Leia o CLAUDE.md e os arquivos de configuração do projeto (`package.json` com 
 Esclareça com o usuário: qual nível WCAG é o alvo (A, AA ou AAA — não assuma AA por padrão sem confirmar) e quais telas/fluxos serão auditados.
 
 ## 3. Execução da auditoria
-Rode a ferramenta detectada contra a(s) tela(s)/fluxo(s) definidos no passo 2. Registre exatamente quais URLs/componentes foram exercitados — a auditoria só vale para o que foi de fato executado.
+Rode a ferramenta detectada contra a(s) tela(s)/fluxo(s) definidos no passo 2. Registre exatamente quais URLs/componentes foram exercitados.
 
 ## 4. Classificação dos achados
 Reporte cada violação com: critério WCAG violado (ex: 1.1.1 Conteúdo Não-textual), elemento/seletor afetado, severidade (Crítico: bloqueia uso por leitor de tela ou navegação por teclado / Alto / Médio / Baixo) e sugestão de correção.

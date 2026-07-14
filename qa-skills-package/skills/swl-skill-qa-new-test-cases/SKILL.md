@@ -3,14 +3,14 @@ name: swl-skill-qa-new-test-cases
 description: Gera casos de teste estruturados a partir de uma user story, card ou requisito, cobrindo happy path, edge cases e cenários negativos.
 argument-hint: <UserStoryOuDescriçãoDoRequisito>
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   validated: true
 ---
 
 ## Passos
 
 ## 1. Leitura do requisito
-Leia a descrição fornecida e os critérios de aceite. Se estiverem incompletos ou ambíguos, pergunte ao usuário antes de gerar os casos — nunca preencha lacunas de regra de negócio por conta própria.
+Leia a descrição fornecida e os critérios de aceite. Se estiverem incompletos ou ambíguos, pergunte ao usuário antes de gerar os casos.
 
 ## 2. Identificação de pré-condições
 Liste o estado inicial necessário (dados cadastrados, permissões, ambiente) para cada fluxo.
