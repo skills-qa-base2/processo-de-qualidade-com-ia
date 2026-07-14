@@ -213,7 +213,7 @@ def build_skill_page(s, idx):
     examples_html = ""
     if s.get("examples"):
         accordions = []
-        for idx, ex in enumerate(s["examples"], start=1):
+        for example_idx, ex in enumerate(s["examples"], start=1):
             if ex.get("prompt_example"):
                 prompt_html = f"""
                 <p><strong>Prompt de exemplo:</strong></p>
@@ -227,7 +227,7 @@ def build_skill_page(s, idx):
                 prompt_html = ""
 
             accordions.append(f"""
-            <details class="examples-accordion examples-accordion--{idx}">
+            <details class="examples-accordion examples-accordion--{example_idx}">
               <summary>{ex['situation']} <span class="examples-sep">·</span> {ex['project_type']}</summary>
               <div class="examples-content">
                 <p><strong>Cenário:</strong> {render_inline_md(ex['scenario'])}</p>

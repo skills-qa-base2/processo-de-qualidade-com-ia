@@ -687,7 +687,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">500 palavras&nbsp;&nbsp;|&nbsp;&nbsp;3 min</div>
+    <div class="content-meta">551 palavras&nbsp;&nbsp;|&nbsp;&nbsp;3 min</div>
     
 <div class="eyebrow"><span class="cat-pill">Fundamentos</span></div>
 <h1>Como instalar e usar</h1>
@@ -706,7 +706,7 @@ contexto do seu projeto.</p>
   <div class="download-option">
     <div class="download-option-label">CLONAR O REPOSITÓRIO</div>
     <p>Inclui histórico de versões, o código-fonte do site e o pacote de skills, tudo junto.</p>
-    <a class="download-btn download-btn-outline" href="https://github.com/SEU-USUARIO/processo-qualidade-ia" target="_blank" rel="noopener">↗ Ver no GitHub</a>
+    <a class="download-btn download-btn-outline" href="https://github.com/skills-qa-base2/processo-de-qualidade-com-ia" target="_blank" rel="noopener">↗ Ver no GitHub</a>
   </div>
 </div>
 <p style="font-size:13.5px; color:var(--text-muted);">As duas opções vêm da mesma fonte
@@ -736,6 +736,16 @@ Copy-Item -Recurse &quot;.\skills\swl-skill-qa-new-test-cases&quot; &quot;$env:U
 <pre><code class="language-bash">cp -r ./skills/swl-skill-qa-plan-strategy ~/.claude/skills/
 cp -r ./skills/swl-skill-qa-new-test-cases ~/.claude/skills/
 # ... repita para cada skill desejada
+</code></pre>
+<p><strong>Instalar todas de uma vez:</strong></p>
+<p>Se preferir disponibilizar as 25 skills globalmente de uma só vez, em vez de copiar pasta por pasta:</p>
+<p><strong>Windows (PowerShell):</strong></p>
+<pre><code class="language-powershell">New-Item -ItemType Directory -Force -Path &quot;$env:USERPROFILE\.claude\skills&quot; | Out-Null
+Copy-Item -Recurse &quot;.\skills\*&quot; &quot;$env:USERPROFILE\.claude\skills\&quot;
+</code></pre>
+<p><strong>macOS / Linux:</strong></p>
+<pre><code class="language-bash">mkdir -p ~/.claude/skills
+cp -r ./skills/*/ ~/.claude/skills/
 </code></pre>
 <p>As skills ficam disponíveis em todos os projetos do usuário.</p>
 <h2>Como usar</h2>

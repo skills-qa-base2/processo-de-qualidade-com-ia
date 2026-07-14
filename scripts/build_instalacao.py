@@ -4,8 +4,7 @@ from build_skill_pages import SKILLS, page_shell, render_md, word_count_and_time
 
 base = ""
 
-# TODO: depois de criar o repositório no GitHub, troque esta URL pela real.
-GITHUB_REPO_URL = "https://github.com/SEU-USUARIO/processo-qualidade-ia"
+GITHUB_REPO_URL = "https://github.com/skills-qa-base2/processo-de-qualidade-com-ia"
 
 command_rows = "\n".join(
     f"<tr><td><code>/{s['name']}</code></td><td>{s['description']}</td></tr>"
@@ -66,6 +65,24 @@ Copy-Item -Recurse ".\\skills\\swl-skill-qa-new-test-cases" "$env:USERPROFILE\\.
 cp -r ./skills/swl-skill-qa-plan-strategy ~/.claude/skills/
 cp -r ./skills/swl-skill-qa-new-test-cases ~/.claude/skills/
 # ... repita para cada skill desejada
+```
+
+**Instalar todas de uma vez:**
+
+Se preferir disponibilizar as 25 skills globalmente de uma só vez, em vez de copiar pasta por pasta:
+
+**Windows (PowerShell):**
+
+```powershell
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\\.claude\\skills" | Out-Null
+Copy-Item -Recurse ".\\skills\\*" "$env:USERPROFILE\\.claude\\skills\\"
+```
+
+**macOS / Linux:**
+
+```bash
+mkdir -p ~/.claude/skills
+cp -r ./skills/*/ ~/.claude/skills/
 ```
 
 As skills ficam disponíveis em todos os projetos do usuário.
