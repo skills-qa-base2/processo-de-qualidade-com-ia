@@ -4,6 +4,7 @@ description: Conduz e documenta uma sessão de teste exploratório estruturada (
 argument-hint: <ÁreaOuFuncionalidadeAExplorar>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

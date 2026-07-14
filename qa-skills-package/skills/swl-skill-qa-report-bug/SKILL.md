@@ -4,6 +4,7 @@ description: Gera relatório de bug estruturado (passos para reproduzir, evidên
 argument-hint: "<descrição do problema encontrado>"
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

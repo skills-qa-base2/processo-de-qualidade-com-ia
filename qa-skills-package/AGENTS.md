@@ -27,6 +27,11 @@ Este repositório mantém uma coleção de skills de QA da Base2 para o Claude C
 - Se a mudança afetar o uso da skill, atualize também a documentação pública e o manifest.
 - Se a mudança for apenas de formato ou clareza da instrução, mantenha o restante do repositório consistente com o estilo atual.
 
+## Duplicação intencional entre skills (não extrair)
+- `swl-skill-qa-new-automation` e `swl-skill-qa-new-mobile-automation` compartilham, de propósito, texto quase idêntico em 4 pontos: a seção `Origem do cenário`, a seção `Registro no pipeline`, o bullet de dados de teste via `swl-skill-qa-new-test-data`, e o núcleo do guardrail sobre o marcador `generated-by-ai: reviewed`/`pending-review`.
+- Essa duplicação foi analisada e a decisão foi **não extrair** para um arquivo compartilhado — o custo de token por chamada seria igual ou pior (a skill precisaria referenciar e ler um arquivo externo, sem redução real de conteúdo carregado), então a duplicação foi mantida por ser pequena (~85 palavras) e o custo de extração superar o ganho.
+- **Se editar um desses 4 trechos em uma das duas skills, confira e replique a mudança na outra** — é o único ponto de manutenção manual que essa decisão deixou em aberto.
+
 ## Comandos e validação
 - Este repositório é principalmente documentação/instruções; não há uma aplicação de runtime principal a ser executada para validar a maioria das mudanças.
 - Sempre revise o diff para garantir que a mudança esteja coerente com a intenção da skill e com os arquivos de referência.

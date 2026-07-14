@@ -204,12 +204,23 @@ def build_skill_page(s, idx):
         </div>
         """
 
+    not_validated_html = ""
+    if not s["validated"]:
+        not_validated_html = """
+        <div class="guardrail-box">
+          <div class="g-label">⚑ AINDA NÃO VALIDADA</div>
+          <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
+          Confira o comportamento documentado abaixo com mais atenção até a validação ser concluída.</p>
+        </div>
+        """
+
     body_html = f"""
     <div class="eyebrow">
       <span class="cat-pill">{s['category']}</span>
       <span class="ver">versão {s['version']}</span>
     </div>
     <h1>{s['title']}</h1>
+    {not_validated_html}
     <p>{s['description']}</p>
 
     <div class="usage-block">

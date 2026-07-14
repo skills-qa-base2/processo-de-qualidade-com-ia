@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnosticar falha de teste · Processo de Qualidade com IA</title>
+<title>Auditar acessibilidade · Processo de Qualidade com IA</title>
 <meta name="description" content="Processo de Qualidade com IA · Skills de QA da Base2 Tecnologia para Claude Code.">
 <style>
 /* ============================================================
@@ -566,7 +566,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <div class="nav-group">
 <div class="nav-group-label">// VERIFICAÇÃO</div>
 <ul>
-<li><a href="../skills/swl-skill-qa-check-accessibility.html" class="">Auditar acessibilidade</a></li>
+<li><a href="../skills/swl-skill-qa-check-accessibility.html" class="active">Auditar acessibilidade</a></li>
 <li><a href="../skills/swl-skill-qa-check-data-quality.html" class="">Auditar qualidade de dados</a></li>
 <li><a href="../skills/swl-skill-qa-check-flakiness.html" class="">Detectar flakiness</a></li>
 <li><a href="../skills/swl-skill-qa-risk-priority.html" class="">Priorizar por risco</a></li>
@@ -580,7 +580,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <div class="nav-group-label">// DIAGNÓSTICO</div>
 <ul>
 <li><a href="../skills/swl-skill-qa-exploratory-session.html" class="">Conduzir sessão exploratória</a></li>
-<li><a href="../skills/swl-skill-qa-diagnose-failure.html" class="active">Diagnosticar falha de teste</a></li>
+<li><a href="../skills/swl-skill-qa-diagnose-failure.html" class="">Diagnosticar falha de teste</a></li>
 <li><a href="../skills/swl-skill-qa-report-bug.html" class="">Reportar bug</a></li>
 </ul></div>
 <div class="nav-group">
@@ -594,48 +594,57 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">185 palavras&nbsp;&nbsp;|&nbsp;&nbsp;1 min</div>
+    <div class="content-meta">281 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
-      <span class="cat-pill">Diagnóstico</span>
+      <span class="cat-pill">Verificação</span>
       <span class="ver">versão 1.0.0</span>
     </div>
-    <h1>Diagnosticar falha de teste</h1>
+    <h1>Auditar acessibilidade</h1>
     
-    <p>Recebe log, stack trace ou descrição de falha de teste e rastreia até a causa raiz, distinguindo bug de produto, teste mal escrito ou instabilidade de ambiente.</p>
+        <div class="guardrail-box">
+          <div class="g-label">⚑ AINDA NÃO VALIDADA</div>
+          <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
+          Confira o comportamento documentado abaixo com mais atenção até a validação ser concluída.</p>
+        </div>
+        
+    <p>Audita acessibilidade (WCAG) de telas/fluxos usando a ferramenta já presente no projeto (axe-core, pa11y, Lighthouse ou equivalente) — nunca declara conformidade com um nível WCAG sem execução real da ferramenta.</p>
 
     <div class="usage-block">
       <div>
         <div class="usage-label">COMANDO</div>
-        <div class="usage-cmd">/swl-skill-qa-diagnose-failure <descrição ou log da falha></div>
+        <div class="usage-cmd">/swl-skill-qa-check-accessibility <URL, tela ou componente a auditar></div>
       </div>
     </div>
 
     <h2>Passos</h2>
-<h3>1. Classificação inicial</h3>
-<p>A partir do log/descrição fornecido, classifique a falha em uma das categorias:</p>
-<ul>
-<li><strong>Bug de produto</strong>: comportamento real da aplicação diverge do esperado</li>
-<li><strong>Teste mal escrito</strong>: assert incorreto, dado de teste inválido, expectativa desatualizada</li>
-<li><strong>Ambiente/infraestrutura</strong>: timeout de rede, serviço externo indisponível, dado de ambiente inconsistente</li>
-<li><strong>Flakiness</strong>: falha intermitente sem mudança de código (encaminhar para <code>swl-skill-qa-check-flakiness</code>)</li>
-</ul>
-<h3>2. Rastreamento</h3>
-<p>Para bug de produto ou teste mal escrito, rastreie até a causa raiz usando o stack trace, logs e o código relevante.</p>
-<h3>3. Proposta de ação</h3>
-<ul>
-<li>Bug de produto → gerar relatório com <code>swl-skill-qa-report-bug</code></li>
-<li>Teste mal escrito → sugerir a correção do teste</li>
-<li>Ambiente → sinalizar ao responsável por infraestrutura, não tentar mascarar no teste</li>
-</ul>
+<h3>1. Detecção da ferramenta</h3>
+<p>Leia o CLAUDE.md e os arquivos de configuração do projeto (<code>package.json</code> com <code>axe-core</code>/<code>@axe-core/playwright</code>/<code>pa11y</code>, config de Lighthouse CI) para identificar a ferramenta de auditoria de acessibilidade já em uso. Nunca introduza uma ferramenta nova sem confirmação explícita do usuário.</p>
+<h3>2. Definição do escopo</h3>
+<p>Esclareça com o usuário: qual nível WCAG é o alvo (A, AA ou AAA — não assuma AA por padrão sem confirmar) e quais telas/fluxos serão auditados.</p>
+<h3>3. Execução da auditoria</h3>
+<p>Rode a ferramenta detectada contra a(s) tela(s)/fluxo(s) definidos no passo 2. Registre exatamente quais URLs/componentes foram exercitados — a auditoria só vale para o que foi de fato executado.</p>
+<h3>4. Classificação dos achados</h3>
+<p>Reporte cada violação com: critério WCAG violado (ex: 1.1.1 Conteúdo Não-textual), elemento/seletor afetado, severidade (Crítico: bloqueia uso por leitor de tela ou navegação por teclado / Alto / Médio / Baixo) e sugestão de correção.</p>
+<h3>5. Saída</h3>
+<pre><code>Ferramenta usada: &lt;nome e versão&gt;
+Nível WCAG alvo: &lt;A/AA/AAA&gt;
+Telas/fluxos auditados: &lt;lista&gt;
+
+Violações encontradas:
+
+- [critério WCAG] [seletor/elemento]: descrição — severidade
+
+Veredito: CONFORME &lt;nível&gt; NAS TELAS AUDITADAS / NÃO CONFORME (N violações) / AUDITORIA PARCIAL
+</code></pre>
     
         <div class="guardrail-box">
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
-          <p>Nunca classifique uma falha como "flaky" ou "ambiente" só para evitar investigar mais a fundo — essa é a saída mais fácil e também a mais perigosa quando esconde um bug real.</p>
+          <p>Nunca declare conformidade com um nível WCAG (A/AA/AAA) sem execução real da ferramenta contra as telas/fluxos testados — a mesma lógica de "nunca declarar cobertura maior do que a efetivamente exercitada" da <code>swl-skill-qa-new-mobile-automation</code> se aplica aqui: "conforme WCAG AA" só pode significar "essas telas específicas, testadas nesta data, com esta ferramenta" — nunca uma extrapolação para o resto do sistema.</p>
         </div>
         
     
-    <div class="page-nav"><a href="../skills/swl-skill-qa-exploratory-session.html"><span class="pn-label">◄ anterior</span>Conduzir sessão exploratória</a><a class="pn-next" href="../skills/swl-skill-qa-report-bug.html"><span class="pn-label">próxima ►</span>Reportar bug</a></div>
+    <div class="page-nav"><a href="../skills/swl-skill-qa-new-contract-tests.html"><span class="pn-label">◄ anterior</span>Gerar testes de contrato</a><a class="pn-next" href="../skills/swl-skill-qa-check-data-quality.html"><span class="pn-label">próxima ►</span>Auditar qualidade de dados</a></div>
     <div class="footer-note">Base2 Tecnologia · Processo de Qualidade com IA · mantido pela equipe de engenharia</div>
   </main>
 </div>

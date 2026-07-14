@@ -4,6 +4,7 @@ description: Pipeline completo antes de commitar testes gerados por IA — check
 argument-hint: "<contexto da mudança>"
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

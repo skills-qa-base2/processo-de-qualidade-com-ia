@@ -4,6 +4,7 @@ description: Gera relatório executivo de execução de testes a partir do resul
 argument-hint: <caminho-do-arquivo-de-resultado>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

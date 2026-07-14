@@ -4,6 +4,7 @@ description: Analisa o resultado real de uma execução de teste de performance 
 argument-hint: <caminho-do-arquivo-de-resultado>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

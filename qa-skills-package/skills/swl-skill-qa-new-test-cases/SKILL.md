@@ -4,6 +4,7 @@ description: Gera casos de teste estruturados a partir de uma user story, card o
 argument-hint: <UserStoryOuDescriçãoDoRequisito>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

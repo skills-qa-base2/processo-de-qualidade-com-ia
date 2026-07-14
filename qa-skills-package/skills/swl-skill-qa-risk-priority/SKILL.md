@@ -4,6 +4,7 @@ description: Prioriza cenários de teste por criticidade de negócio e risco té
 argument-hint: <NomeDaFeatureOuMóduloAMapear>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

@@ -4,6 +4,7 @@ description: Gera testes de contrato/schema para APIs (validação contra OpenAP
 argument-hint: <NomeDoServiçoOuEndpoint>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

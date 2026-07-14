@@ -4,6 +4,7 @@ description: Detecta padrões de instabilidade (flakiness) em testes automatizad
 argument-hint: <CaminhoDaSuíteOuArquivoDeTeste>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

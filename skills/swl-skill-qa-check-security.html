@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnosticar falha de teste · Processo de Qualidade com IA</title>
+<title>Verificar segurança (multi-stack) · Processo de Qualidade com IA</title>
 <meta name="description" content="Processo de Qualidade com IA · Skills de QA da Base2 Tecnologia para Claude Code.">
 <style>
 /* ============================================================
@@ -574,13 +574,13 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <li><a href="../skills/swl-skill-qa-check-environment.html" class="">Validar ambiente de teste</a></li>
 <li><a href="../skills/swl-skill-qa-check-coverage.html" class="">Verificar cobertura de cenários</a></li>
 <li><a href="../skills/swl-skill-qa-check-performance-results.html" class="">Verificar resultado de performance</a></li>
-<li><a href="../skills/swl-skill-qa-check-security.html" class="">Verificar segurança (multi-stack)</a></li>
+<li><a href="../skills/swl-skill-qa-check-security.html" class="active">Verificar segurança (multi-stack)</a></li>
 </ul></div>
 <div class="nav-group">
 <div class="nav-group-label">// DIAGNÓSTICO</div>
 <ul>
 <li><a href="../skills/swl-skill-qa-exploratory-session.html" class="">Conduzir sessão exploratória</a></li>
-<li><a href="../skills/swl-skill-qa-diagnose-failure.html" class="active">Diagnosticar falha de teste</a></li>
+<li><a href="../skills/swl-skill-qa-diagnose-failure.html" class="">Diagnosticar falha de teste</a></li>
 <li><a href="../skills/swl-skill-qa-report-bug.html" class="">Reportar bug</a></li>
 </ul></div>
 <div class="nav-group">
@@ -594,48 +594,53 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">185 palavras&nbsp;&nbsp;|&nbsp;&nbsp;1 min</div>
+    <div class="content-meta">370 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
-      <span class="cat-pill">Diagnóstico</span>
+      <span class="cat-pill">Verificação</span>
       <span class="ver">versão 1.0.0</span>
     </div>
-    <h1>Diagnosticar falha de teste</h1>
+    <h1>Verificar segurança (multi-stack)</h1>
     
-    <p>Recebe log, stack trace ou descrição de falha de teste e rastreia até a causa raiz, distinguindo bug de produto, teste mal escrito ou instabilidade de ambiente.</p>
+        <div class="guardrail-box">
+          <div class="g-label">⚑ AINDA NÃO VALIDADA</div>
+          <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
+          Confira o comportamento documentado abaixo com mais atenção até a validação ser concluída.</p>
+        </div>
+        
+    <p>Verificação de segurança stack-agnóstica (Node, Python, Java, mobile — qualquer stack fora de .NET Web API), do ponto de vista de QA funcional/dinâmico, não revisão estática de código. Complementa (não duplica) a `swl-skill-check-security` do pacote `org-skills`, que cobre especificamente APIs .NET.</p>
 
     <div class="usage-block">
       <div>
         <div class="usage-label">COMANDO</div>
-        <div class="usage-cmd">/swl-skill-qa-diagnose-failure <descrição ou log da falha></div>
+        <div class="usage-cmd">/swl-skill-qa-check-security <URL, endpoint ou fluxo a verificar></div>
       </div>
     </div>
 
     <h2>Passos</h2>
-<h3>1. Classificação inicial</h3>
-<p>A partir do log/descrição fornecido, classifique a falha em uma das categorias:</p>
+<h3>1. Levantamento do alvo e do que já existe</h3>
+<p>Identifique o stack do projeto (Node, Python, Java, mobile, etc.) via CLAUDE.md/config. Se o projeto for .NET Web API, esta skill não deve ser usada — use <code>swl-skill-check-security</code> do pacote <code>org-skills</code>, que já cobre esse caso em profundidade. Verifique também se o projeto já tem ferramenta de teste de segurança configurada (ex: OWASP ZAP, Burp Suite, sqlmap, ferramenta de scan de dependências) — nunca introduza uma ferramenta nova sem confirmação explícita do usuário.</p>
+<h3>2. Verificação funcional/dinâmica</h3>
+<p>A partir de um fluxo, tela ou endpoint real informado, verifique como QA funcional (exercitando o sistema em execução, não lendo o código-fonte):</p>
 <ul>
-<li><strong>Bug de produto</strong>: comportamento real da aplicação diverge do esperado</li>
-<li><strong>Teste mal escrito</strong>: assert incorreto, dado de teste inválido, expectativa desatualizada</li>
-<li><strong>Ambiente/infraestrutura</strong>: timeout de rede, serviço externo indisponível, dado de ambiente inconsistente</li>
-<li><strong>Flakiness</strong>: falha intermitente sem mudança de código (encaminhar para <code>swl-skill-qa-check-flakiness</code>)</li>
+<li><strong>Autenticação/autorização</strong>: acessar recurso protegido sem token, com token expirado, ou com token de outro usuário — deve ser rejeitado</li>
+<li><strong>Injeção</strong>: enviar payload de SQL injection/NoSQL injection/XSS em campos de entrada e observar o comportamento real da resposta (não apenas inspecionar o código)</li>
+<li><strong>Exposição de dados sensíveis</strong>: verificar se respostas de erro expõem stack trace, versão de framework ou dados de outros usuários</li>
+<li><strong>CORS/headers</strong>: verificar headers de segurança presentes na resposta real (<code>Content-Type</code>, <code>X-Content-Type-Options</code>, <code>Strict-Transport-Security</code>, <code>Access-Control-Allow-Origin</code>)</li>
+<li><strong>Mobile (quando aplicável)</strong>: certificado pinning, armazenamento local de dados sensíveis (keychain/keystore vs. armazenamento não criptografado), permissões excessivas</li>
 </ul>
-<h3>2. Rastreamento</h3>
-<p>Para bug de produto ou teste mal escrito, rastreie até a causa raiz usando o stack trace, logs e o código relevante.</p>
-<h3>3. Proposta de ação</h3>
-<ul>
-<li>Bug de produto → gerar relatório com <code>swl-skill-qa-report-bug</code></li>
-<li>Teste mal escrito → sugerir a correção do teste</li>
-<li>Ambiente → sinalizar ao responsável por infraestrutura, não tentar mascarar no teste</li>
-</ul>
+<h3>3. Classificação</h3>
+<p>Classifique cada achado como Crítico (dado sensível exposto, autenticação contornável) / Alto / Médio / Baixo, com a evidência real observada (request/response, não suposição).</p>
+<h3>4. Saída</h3>
+<p>Relatório com um achado por linha: endpoint/fluxo testado, payload/ação usada, resposta real observada, severidade. Se nada for encontrado, diga isso claramente — não invente achado para parecer útil.</p>
     
         <div class="guardrail-box">
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
-          <p>Nunca classifique uma falha como "flaky" ou "ambiente" só para evitar investigar mais a fundo — essa é a saída mais fácil e também a mais perigosa quando esconde um bug real.</p>
+          <p>Todo achado reportado precisa ter uma evidência real de execução (request/response observado, não uma suposição de como o sistema "provavelmente" se comporta). Nunca reporte "aprovado em segurança" com base em ausência de teste — se um item da lista do passo 2 não foi de fato exercitado, diga explicitamente que ficou fora do escopo desta execução, em vez de presumir que passaria.</p>
         </div>
         
     
-    <div class="page-nav"><a href="../skills/swl-skill-qa-exploratory-session.html"><span class="pn-label">◄ anterior</span>Conduzir sessão exploratória</a><a class="pn-next" href="../skills/swl-skill-qa-report-bug.html"><span class="pn-label">próxima ►</span>Reportar bug</a></div>
+    <div class="page-nav"><a href="../skills/swl-skill-qa-check-performance-results.html"><span class="pn-label">◄ anterior</span>Verificar resultado de performance</a><a class="pn-next" href="../skills/swl-skill-qa-exploratory-session.html"><span class="pn-label">próxima ►</span>Conduzir sessão exploratória</a></div>
     <div class="footer-note">Base2 Tecnologia · Processo de Qualidade com IA · mantido pela equipe de engenharia</div>
   </main>
 </div>

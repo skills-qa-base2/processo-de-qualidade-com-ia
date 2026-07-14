@@ -4,6 +4,7 @@ description: Audita documentos, relatórios e diagnósticos de QA gerados por IA
 argument-hint: <CaminhoDoDocumentoOuRelatório>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

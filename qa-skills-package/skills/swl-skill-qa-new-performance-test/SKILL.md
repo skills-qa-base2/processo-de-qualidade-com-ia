@@ -4,6 +4,7 @@ description: Gera scripts de teste de performance (carga, stress, spike, soak) d
 argument-hint: <NomeDoFluxoOuEndpointACarregar>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

@@ -10,7 +10,7 @@ Repositório: https://github.com/skills-qa-base2/processo-de-qualidade-com-ia
 ## O que é
 
 Skills são instruções salvas que o Claude executa quando você digita um comando
-`/nome-da-skill` no Claude Code. Essa coleção reúne **22 skills** que padronizam as tarefas
+`/nome-da-skill` no Claude Code. Essa coleção reúne **25 skills** que padronizam as tarefas
 mais repetitivas de QA — planejar estratégia de teste, gerar cenários BDD e casos de teste,
 automatizar, criar massa de dados fictícia, verificar qualidade antes de commitar, diagnosticar
 falhas e fechar a entrega (relatório, PR, documentação).
@@ -28,7 +28,7 @@ pendente (`a confirmar`) em vez de inventar. Esse comportamento foi validado com
 adversariais antes da publicação — histórico completo em
 [`qa-skills-package/MANIFEST.md`](qa-skills-package/MANIFEST.md).
 
-## As 22 skills, por categoria
+## As 25 skills, por categoria
 
 **Planejamento** (2) — antes de gerar qualquer cenário
 - `swl-skill-qa-plan-strategy` — entrevista estruturada para levantar a estratégia de testes
@@ -43,13 +43,16 @@ adversariais antes da publicação — histórico completo em
 - `swl-skill-qa-new-contract-tests` — testes de contrato/schema de API (OpenAPI/Pact)
 - `swl-skill-qa-new-performance-test` — script de carga/stress/spike/soak (k6/JMeter/Gatling/Artillery)
 
-**Verificação** (6) — antes de confiar no resultado
+**Verificação** (9) — antes de confiar no resultado
 - `swl-skill-qa-check-coverage` — gaps de cobertura funcional (critérios x cenários)
 - `swl-skill-qa-check-flakiness` — padrões de instabilidade em testes automatizados
 - `swl-skill-qa-check-data-quality` — audita relatórios/documentos de QA gerados por IA
 - `swl-skill-qa-review-tests` — nomenclatura, asserts e cobertura real dos testes
 - `swl-skill-qa-risk-priority` — prioriza cenários por criticidade de negócio e risco técnico
 - `swl-skill-qa-check-performance-results` — resultado real de carga contra thresholds definidos
+- `swl-skill-qa-check-security` — verificação de segurança stack-agnóstica (Node/Python/Java/mobile), complementar à check-security .NET do org-skills
+- `swl-skill-qa-check-accessibility` — audita acessibilidade (WCAG) via ferramenta já presente no projeto
+- `swl-skill-qa-check-environment` — valida que o ambiente está pronto antes da execução (health check, seed, feature flags)
 
 **Diagnóstico** (3) — quando algo falha
 - `swl-skill-qa-diagnose-failure` — rastreia uma falha até a causa raiz
@@ -97,7 +100,7 @@ Depois de instalada, use no Claude Code digitando o comando da skill (ex:
 ├── index.html                  → site: página inicial
 ├── instalacao.html              → site: como instalar e usar (com botão de download)
 ├── skills/
-│   └── swl-skill-qa-*.html      → site: uma página por skill (22 no total)
+│   └── swl-skill-qa-*.html      → site: uma página por skill (25 no total)
 ├── downloads/
 │   └── qa-skills-package.zip    → gerado a partir de qa-skills-package/ — não editar na mão
 ├── assets/

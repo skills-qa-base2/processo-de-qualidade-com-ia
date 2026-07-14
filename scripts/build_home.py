@@ -23,6 +23,21 @@ def build_home():
     for s in SKILLS:
         groups[s["category"]].append(s)
 
+    validated_skills = [s for s in SKILLS if s["validated"]]
+    pending_skills = [s for s in SKILLS if not s["validated"]]
+    if pending_skills:
+        pending_names = ", ".join(f"<code>/{s['name']}</code>" for s in pending_skills)
+        validation_sentence = (
+            f"{len(validated_skills)} de {len(SKILLS)} skills já foram validadas com teste "
+            f"adversarial antes da publicação. {len(pending_skills)} ainda "
+            f"{'está' if len(pending_skills) == 1 else 'estão'} pendente"
+            f"{'' if len(pending_skills) == 1 else 's'}: {pending_names}."
+        )
+    else:
+        validation_sentence = (
+            f"Todas as {len(SKILLS)} skills já foram validadas com teste adversarial antes da publicação."
+        )
+
     cards_html = []
     for cat in CATEGORY_ORDER:
         items = groups[cat]
@@ -59,8 +74,7 @@ def build_home():
       <p><strong>Diante de dúvida, a skill sinaliza como pendente — nunca inventa.</strong></p>
       <p>Toda skill desta coleção tem um guardrail contra fabricação: diante de informação
       ausente ou ambígua (regra de negócio não confirmada, severidade desconhecida, dado sem
-      fonte rastreável), a skill marca o ponto como pendente em vez de inventar. Esse
-      comportamento foi validado com testes adversariais antes da publicação desta versão.</p>
+      fonte rastreável), a skill marca o ponto como pendente em vez de inventar. {validation_sentence}</p>
     </div>
 
     <p>Comece por <a href="{base}instalacao.html" style="color:var(--green); font-weight:600;">como instalar e usar</a>,

@@ -20,6 +20,9 @@ CATEGORY_MAP = {
     "swl-skill-qa-check-coverage": "Verificação",
     "swl-skill-qa-check-flakiness": "Verificação",
     "swl-skill-qa-check-data-quality": "Verificação",
+    "swl-skill-qa-check-security": "Verificação",
+    "swl-skill-qa-check-accessibility": "Verificação",
+    "swl-skill-qa-check-environment": "Verificação",
     "swl-skill-qa-review-tests": "Verificação",
     "swl-skill-qa-risk-priority": "Verificação",
     "swl-skill-qa-diagnose-failure": "Diagnóstico",
@@ -46,6 +49,9 @@ TITLE_MAP = {
     "swl-skill-qa-check-coverage": "Verificar cobertura de cenários",
     "swl-skill-qa-check-flakiness": "Detectar flakiness",
     "swl-skill-qa-check-data-quality": "Auditar qualidade de dados",
+    "swl-skill-qa-check-security": "Verificar segurança (multi-stack)",
+    "swl-skill-qa-check-accessibility": "Auditar acessibilidade",
+    "swl-skill-qa-check-environment": "Validar ambiente de teste",
     "swl-skill-qa-review-tests": "Revisar testes",
     "swl-skill-qa-risk-priority": "Priorizar por risco",
     "swl-skill-qa-diagnose-failure": "Diagnosticar falha de teste",
@@ -65,6 +71,7 @@ def parse_skill(folder):
     front_raw, body = m.group(1), m.group(2).strip()
     front = yaml.safe_load(front_raw)
     version = front.get("metadata", {}).get("version", "1.0.0")
+    validated = front["metadata"]["validated"]
 
     # Split out Guardrail section
     guardrail = None
@@ -79,6 +86,7 @@ def parse_skill(folder):
         "description": front["description"],
         "argument_hint": front.get("argument-hint", ""),
         "version": version,
+        "validated": validated,
         "category": CATEGORY_MAP.get(folder, "Outros"),
         "title": TITLE_MAP.get(folder, folder),
         "body_md": body,

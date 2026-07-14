@@ -4,6 +4,7 @@ description: Revisa testes gerados ou existentes quanto a nomenclatura, clareza 
 argument-hint: <CaminhoDoArquivoOuFeature>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

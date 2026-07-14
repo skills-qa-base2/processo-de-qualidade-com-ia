@@ -71,6 +71,9 @@ Com o Claude Code aberto em qualquer projeto, digite:
 | `/swl-skill-qa-check-data-quality` | Audita relatórios/documentos de QA gerados por IA contra dados fabricados |
 | `/swl-skill-qa-review-tests` | Revisa testes quanto a nomenclatura, asserts e cobertura real |
 | `/swl-skill-qa-risk-priority` | Prioriza cenários por criticidade de negócio e risco técnico |
+| `/swl-skill-qa-check-security` | Verificação de segurança stack-agnóstica (Node, Python, Java, mobile) — complementa a check-security do org-skills, que é .NET |
+| `/swl-skill-qa-check-accessibility` | Audita acessibilidade (WCAG) via ferramenta já presente no projeto |
+| `/swl-skill-qa-check-environment` | Valida que o ambiente está pronto antes da execução (health check, seed, feature flags) |
 | `/swl-skill-qa-diagnose-failure` | Rastreia uma falha de teste até a causa raiz |
 | `/swl-skill-qa-report-bug` | Gera relatório de bug estruturado |
 | `/swl-skill-qa-exploratory-session` | Conduz e documenta uma sessão de teste exploratório |
@@ -101,6 +104,9 @@ Com o Claude Code aberto em qualquer projeto, digite:
 | `swl-skill-qa-check-data-quality` | Verificação | Dados fabricados em relatórios/documentos gerados por IA |
 | `swl-skill-qa-review-tests` | Verificação | Nomenclatura, asserts e cobertura real de testes |
 | `swl-skill-qa-risk-priority` | Verificação | Priorização de cenários por risco |
+| `swl-skill-qa-check-security` | Verificação | Segurança stack-agnóstica (Node/Python/Java/mobile), complementar à check-security .NET do org-skills |
+| `swl-skill-qa-check-accessibility` | Verificação | Auditoria WCAG via ferramenta já presente no projeto |
+| `swl-skill-qa-check-environment` | Verificação | Ambiente pronto antes da execução (health check, seed, feature flags) |
 | `swl-skill-qa-diagnose-failure` | Diagnóstico | Causa raiz de falha de teste |
 | `swl-skill-qa-report-bug` | Diagnóstico | Relatório de bug estruturado |
 | `swl-skill-qa-exploratory-session` | Diagnóstico | Sessão de teste exploratório documentada |

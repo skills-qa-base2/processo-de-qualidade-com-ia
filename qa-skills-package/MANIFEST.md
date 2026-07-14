@@ -21,6 +21,9 @@ Skills de QA da Base2 Tecnologia para Claude Code. Cobrem frontend/web, API, int
 | `swl-skill-qa-check-data-quality` | 1.0.0 | Verificação | Audita documentos/relatórios de QA gerados por IA em busca de dados fabricados |
 | `swl-skill-qa-review-tests` | 1.0.0 | Verificação | Revisa testes quanto a nomenclatura, clareza de asserts e cobertura real |
 | `swl-skill-qa-risk-priority` | 1.0.0 | Verificação | Prioriza cenários por criticidade de negócio e risco técnico |
+| `swl-skill-qa-check-security` | 1.0.0 | Verificação | Verificação de segurança stack-agnóstica (Node, Python, Java, mobile) — complementa, não duplica, a `swl-skill-check-security` do org-skills (.NET Web API) |
+| `swl-skill-qa-check-accessibility` | 1.0.0 | Verificação | Audita acessibilidade (WCAG) via ferramenta já presente no projeto (axe-core, pa11y, Lighthouse) |
+| `swl-skill-qa-check-environment` | 1.0.0 | Verificação | Valida que um ambiente está pronto para rodar a suíte (health check, seed de dados, feature flags) |
 | `swl-skill-qa-diagnose-failure` | 1.0.0 | Diagnóstico | Rastreia falha de teste até a causa raiz, distinguindo bug de produto, teste mal escrito ou ambiente |
 | `swl-skill-qa-report-bug` | 1.0.0 | Diagnóstico | Gera relatório de bug estruturado pronto para o sistema de gestão do projeto |
 | `swl-skill-qa-exploratory-session` | 1.0.0 | Diagnóstico | Conduz e documenta uma sessão de teste exploratório estruturada |
@@ -46,6 +49,8 @@ Skills de QA da Base2 Tecnologia para Claude Code. Cobrem frontend/web, API, int
 Antes da publicação 1.0.0, as 18 skills originais foram testadas funcionalmente contra cenários reais e adversariais (dado real colado propositalmente, métrica fabricada, regra de negócio ambígua, falha real de execução, gap de cobertura genuíno). Todos os guardrails resistiram — nenhuma skill inventou dado, arredondou resultado ou pulou uma etapa crítica quando pressionada.
 
 As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mesmo tipo de teste adversarial antes de entrar no pacote: `qa-new-mobile-automation` não inflou cobertura de dispositivo/OS além do testado; `qa-new-contract-tests` recusou gerar schema sem especificação real e gerou corretamente quando uma foi fornecida; `qa-new-performance-test` não assumiu tipo de teste nem inventou threshold de SLA; `qa-check-performance-results` reportou métricas reais extraídas de um resultado k6 sintético e recusou dar veredito de aprovação sem threshold definido. Relatório completo da auditoria disponível junto ao time que validou o pacote.
+
+**Nota sobre `qa-check-security`, `qa-check-accessibility` e `qa-check-environment`**: essas 3 skills seguem o mesmo formato e a mesma convenção de guardrail anti-invenção das demais, mas **ainda não passaram pelo teste adversarial** aplicado às skills anteriores (ver `AUDITORIA-COBERTURA.md`, Parte 3). Tratar como pendente de validação antes de considerar o mesmo nível de confiança das outras 22.
 
 ---
 
@@ -96,6 +101,15 @@ As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mes
 
 ### swl-skill-qa-risk-priority
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Classificação sempre rastreável aos critérios individuais; omite histórico de bugs sem dado real.
+
+### swl-skill-qa-check-security
+- **1.0.0** — Versão inicial. Verificação de segurança stack-agnóstica (fora de .NET Web API); guardrail exige evidência real de execução (request/response observado) para qualquer achado, nunca "aprovado" por ausência de teste. Pendente de teste adversarial (ver nota em "Validação desta versão").
+
+### swl-skill-qa-check-accessibility
+- **1.0.0** — Versão inicial. Audita WCAG via ferramenta já presente no projeto; guardrail nunca declara conformidade além das telas efetivamente auditadas. Pendente de teste adversarial.
+
+### swl-skill-qa-check-environment
+- **1.0.0** — Versão inicial. Valida ambiente antes da execução (health check, seed, feature flags); guardrail nunca presume "ambiente pronto" sem checar de fato. Pendente de teste adversarial.
 
 ### swl-skill-qa-diagnose-failure
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Nunca classifica como "flaky"/"ambiente" para evitar investigar mais a fundo.

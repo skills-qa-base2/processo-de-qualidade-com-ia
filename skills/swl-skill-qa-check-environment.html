@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnosticar falha de teste · Processo de Qualidade com IA</title>
+<title>Validar ambiente de teste · Processo de Qualidade com IA</title>
 <meta name="description" content="Processo de Qualidade com IA · Skills de QA da Base2 Tecnologia para Claude Code.">
 <style>
 /* ============================================================
@@ -571,7 +571,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <li><a href="../skills/swl-skill-qa-check-flakiness.html" class="">Detectar flakiness</a></li>
 <li><a href="../skills/swl-skill-qa-risk-priority.html" class="">Priorizar por risco</a></li>
 <li><a href="../skills/swl-skill-qa-review-tests.html" class="">Revisar testes</a></li>
-<li><a href="../skills/swl-skill-qa-check-environment.html" class="">Validar ambiente de teste</a></li>
+<li><a href="../skills/swl-skill-qa-check-environment.html" class="active">Validar ambiente de teste</a></li>
 <li><a href="../skills/swl-skill-qa-check-coverage.html" class="">Verificar cobertura de cenários</a></li>
 <li><a href="../skills/swl-skill-qa-check-performance-results.html" class="">Verificar resultado de performance</a></li>
 <li><a href="../skills/swl-skill-qa-check-security.html" class="">Verificar segurança (multi-stack)</a></li>
@@ -580,7 +580,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <div class="nav-group-label">// DIAGNÓSTICO</div>
 <ul>
 <li><a href="../skills/swl-skill-qa-exploratory-session.html" class="">Conduzir sessão exploratória</a></li>
-<li><a href="../skills/swl-skill-qa-diagnose-failure.html" class="active">Diagnosticar falha de teste</a></li>
+<li><a href="../skills/swl-skill-qa-diagnose-failure.html" class="">Diagnosticar falha de teste</a></li>
 <li><a href="../skills/swl-skill-qa-report-bug.html" class="">Reportar bug</a></li>
 </ul></div>
 <div class="nav-group">
@@ -594,48 +594,54 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">185 palavras&nbsp;&nbsp;|&nbsp;&nbsp;1 min</div>
+    <div class="content-meta">341 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
-      <span class="cat-pill">Diagnóstico</span>
+      <span class="cat-pill">Verificação</span>
       <span class="ver">versão 1.0.0</span>
     </div>
-    <h1>Diagnosticar falha de teste</h1>
+    <h1>Validar ambiente de teste</h1>
     
-    <p>Recebe log, stack trace ou descrição de falha de teste e rastreia até a causa raiz, distinguindo bug de produto, teste mal escrito ou instabilidade de ambiente.</p>
+        <div class="guardrail-box">
+          <div class="g-label">⚑ AINDA NÃO VALIDADA</div>
+          <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
+          Confira o comportamento documentado abaixo com mais atenção até a validação ser concluída.</p>
+        </div>
+        
+    <p>Valida que um ambiente está de fato pronto para rodar a suíte antes da execução — health check dos serviços, seed de dados presente, feature flags no estado esperado — nunca assume que um ambiente está pronto sem checar.</p>
 
     <div class="usage-block">
       <div>
         <div class="usage-label">COMANDO</div>
-        <div class="usage-cmd">/swl-skill-qa-diagnose-failure <descrição ou log da falha></div>
+        <div class="usage-cmd">/swl-skill-qa-check-environment <NomeDoAmbiente></div>
       </div>
     </div>
 
     <h2>Passos</h2>
-<h3>1. Classificação inicial</h3>
-<p>A partir do log/descrição fornecido, classifique a falha em uma das categorias:</p>
-<ul>
-<li><strong>Bug de produto</strong>: comportamento real da aplicação diverge do esperado</li>
-<li><strong>Teste mal escrito</strong>: assert incorreto, dado de teste inválido, expectativa desatualizada</li>
-<li><strong>Ambiente/infraestrutura</strong>: timeout de rede, serviço externo indisponível, dado de ambiente inconsistente</li>
-<li><strong>Flakiness</strong>: falha intermitente sem mudança de código (encaminhar para <code>swl-skill-qa-check-flakiness</code>)</li>
-</ul>
-<h3>2. Rastreamento</h3>
-<p>Para bug de produto ou teste mal escrito, rastreie até a causa raiz usando o stack trace, logs e o código relevante.</p>
-<h3>3. Proposta de ação</h3>
-<ul>
-<li>Bug de produto → gerar relatório com <code>swl-skill-qa-report-bug</code></li>
-<li>Teste mal escrito → sugerir a correção do teste</li>
-<li>Ambiente → sinalizar ao responsável por infraestrutura, não tentar mascarar no teste</li>
-</ul>
+<h3>1. Levantamento do que "pronto" significa neste projeto</h3>
+<p>Leia o CLAUDE.md e <code>.claude/rules/qa/</code> (se existirem, especialmente <code>convencoes-teste.md</code> gerado por <code>swl-skill-qa-generate-rules</code>) para identificar quais serviços, dados de seed e feature flags o ambiente precisa ter. Se não houver essa definição registrada, pergunte ao usuário — nunca assuma um critério de "ambiente pronto" genérico sem confirmação.</p>
+<h3>2. Health check dos serviços</h3>
+<p>Verifique, com uma chamada real (não suposição), que cada serviço/dependência necessário está de fato respondendo: API principal, banco de dados, filas, serviços externos mockados/stubados (ex: WireMock/MockServer, se o projeto usar).</p>
+<h3>3. Verificação de seed de dados</h3>
+<p>Confirme que a massa de dados esperada (gerada via <code>swl-skill-qa-new-test-data</code>, se aplicável) está de fato presente no ambiente — não apenas que o script de seed existe, mas que os dados resultantes estão lá.</p>
+<h3>4. Verificação de feature flags</h3>
+<p>Se o projeto usa feature flags, confirme o estado real de cada flag relevante para a suíte que vai rodar, comparando com o estado esperado informado pelo usuário.</p>
+<h3>5. Saída</h3>
+<pre><code>Ambiente: &lt;nome&gt;
+Serviços verificados: &lt;lista com status real: UP / DOWN / não verificado&gt;
+Seed de dados: &lt;presente / ausente / não verificado&gt;
+Feature flags: &lt;flag: estado real vs. esperado&gt;
+
+Veredito: AMBIENTE PRONTO / AMBIENTE NÃO PRONTO (motivo) / VERIFICAÇÃO PARCIAL (o que não pôde ser checado)
+</code></pre>
     
         <div class="guardrail-box">
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
-          <p>Nunca classifique uma falha como "flaky" ou "ambiente" só para evitar investigar mais a fundo — essa é a saída mais fácil e também a mais perigosa quando esconde um bug real.</p>
+          <p>Nunca assuma que um ambiente está pronto sem checar de fato — um "ambiente pronto" presumido é a mesma classe de erro que os guardrails de "nunca inferir" já usados nas demais skills (nunca inferir schema sem especificação real, nunca inferir threshold sem confirmação), aplicada a ambiente em vez de dado/contrato/performance. Se um item do passo 2, 3 ou 4 não puder ser verificado (ex: sem acesso à infraestrutura), diga isso explicitamente como "não verificado" — nunca reporte como "OK" por omissão.</p>
         </div>
         
     
-    <div class="page-nav"><a href="../skills/swl-skill-qa-exploratory-session.html"><span class="pn-label">◄ anterior</span>Conduzir sessão exploratória</a><a class="pn-next" href="../skills/swl-skill-qa-report-bug.html"><span class="pn-label">próxima ►</span>Reportar bug</a></div>
+    <div class="page-nav"><a href="../skills/swl-skill-qa-review-tests.html"><span class="pn-label">◄ anterior</span>Revisar testes</a><a class="pn-next" href="../skills/swl-skill-qa-check-coverage.html"><span class="pn-label">próxima ►</span>Verificar cobertura de cenários</a></div>
     <div class="footer-note">Base2 Tecnologia · Processo de Qualidade com IA · mantido pela equipe de engenharia</div>
   </main>
 </div>

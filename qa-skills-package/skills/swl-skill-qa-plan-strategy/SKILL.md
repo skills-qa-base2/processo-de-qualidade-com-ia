@@ -4,6 +4,7 @@ description: Entrevista estruturada para levantar a estratégia de testes de um 
 argument-hint: <NomeDoProjetoOuFeature>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

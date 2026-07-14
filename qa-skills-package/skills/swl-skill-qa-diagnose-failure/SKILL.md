@@ -4,6 +4,7 @@ description: Recebe log, stack trace ou descrição de falha de teste e rastreia
 argument-hint: "<descrição ou log da falha>"
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

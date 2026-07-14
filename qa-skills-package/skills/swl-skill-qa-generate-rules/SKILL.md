@@ -4,6 +4,7 @@ description: Gera .claude/rules/qa/ a partir de documentação técnica existent
 argument-hint: <NomeDoProjeto>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

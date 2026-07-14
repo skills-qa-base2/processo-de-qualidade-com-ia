@@ -4,6 +4,7 @@ description: Gera código de automação de teste mobile detectando o framework 
 argument-hint: <NomeDoCenárioOuTelaAAutomatizar>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos

@@ -4,6 +4,7 @@ description: Gera cenários BDD em Gherkin (Dado/Quando/Então) a partir de crit
 argument-hint: <NomeDaFeature>
 metadata:
   version: 1.0.0
+  validated: true
 ---
 
 ## Passos
