@@ -63,8 +63,6 @@ TITLE_MAP = {
     "swl-skill-qa-safe-test-commit": "Pipeline de commit seguro",
 }
 
-LEVEL_LABELS = {"Jr": "Júnior", "Pl": "Pleno", "Sr": "Sênior"}
-
 def parse_examples(folder):
     path = os.path.join(SKILLS_DIR, folder, "EXAMPLES.md")
     if not os.path.exists(path):
@@ -72,17 +70,18 @@ def parse_examples(folder):
     with open(path, encoding="utf-8") as f:
         text = f.read()
 
-    blocks = re.split(r"^## (Jr|Pl|Sr)\s*$", text, flags=re.M)
+    blocks = re.split(r"^## (Cenário direto|Cenário com ambiguidade|Cenário de risco real) — (\S+)\s*$", text, flags=re.M)
     examples = []
-    for i in range(1, len(blocks), 2):
-        level = blocks[i]
-        content = blocks[i + 1]
+    for i in range(1, len(blocks), 3):
+        situation = blocks[i]
+        project_type = blocks[i + 1]
+        content = blocks[i + 2]
         cenario = re.search(r"\*\*Cenário:\*\*\s*(.+?)(?=\n\*\*|\Z)", content, re.S)
         input_ = re.search(r"\*\*Input:\*\*\s*(.+?)(?=\n\*\*|\Z)", content, re.S)
-        saida = re.search(r"\*\*Saída esperada:\*\*\s*(.+?)(?=\n##|\Z)", content, re.S)
+        saida = re.search(r"\*\*Saída esperada:\*\*\s*(.+?)(?=\n\n|\Z)", content, re.S)
         examples.append({
-            "level": level,
-            "level_label": LEVEL_LABELS[level],
+            "situation": situation,
+            "project_type": project_type,
             "scenario": cenario.group(1).strip() if cenario else "",
             "input": input_.group(1).strip() if input_ else "",
             "expected_output": saida.group(1).strip() if saida else "",

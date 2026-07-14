@@ -211,23 +211,23 @@ def build_skill_page(s, idx):
 
     examples_html = ""
     if s.get("examples"):
-        cards = []
-        for ex in s["examples"]:
-            cards.append(f"""
-            <div class="example-card">
-              <div class="example-level">{ex['level']} <span class="example-level-full">— {ex['level_label']}</span></div>
-              <p><strong>Cenário:</strong> {render_inline_md(ex['scenario'])}</p>
-              <p><strong>Input:</strong> {render_inline_md(ex['input'])}</p>
-              <p><strong>Saída esperada:</strong> {render_inline_md(ex['expected_output'])}</p>
-            </div>
+        accordions = []
+        for idx, ex in enumerate(s["examples"], start=1):
+            accordions.append(f"""
+            <details class="examples-accordion examples-accordion--{idx}">
+              <summary>{ex['situation']} <span class="examples-sep">·</span> {ex['project_type']}</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> {render_inline_md(ex['scenario'])}</p>
+                <p><strong>Input:</strong> {render_inline_md(ex['input'])}</p>
+                <p><strong>Saída esperada:</strong> {render_inline_md(ex['expected_output'])}</p>
+              </div>
+            </details>
             """)
         examples_html = f"""
-        <details class="examples-accordion">
-          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
-          <div class="examples-content">
-            {''.join(cards)}
-          </div>
-        </details>
+        <div class="examples-section">
+          <p class="examples-intro">Os três exemplos abaixo mostram a mesma skill em situações de complexidade crescente — não é sobre o seu nível, é sobre o tipo de situação que você está resolvendo agora.</p>
+          {''.join(accordions)}
+        </div>
         """
 
     not_validated_html = ""

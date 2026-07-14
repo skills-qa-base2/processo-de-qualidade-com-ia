@@ -354,71 +354,68 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
-/* Examples accordion (Jr/Pl/Sr) */
+/* Examples: 3 exemplos (situação + tipo de projeto), cada um seu próprio accordion */
+.examples-section { margin: 22px 0 28px; }
+.examples-intro {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0 0 12px;
+}
+
 .examples-accordion {
   border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
   border-radius: 8px;
-  margin: 22px 0;
+  margin-bottom: 10px;
   background: var(--panel);
+  overflow: hidden;
 }
 .examples-accordion summary {
   cursor: pointer;
-  padding: 14px 18px;
+  padding: 12px 18px;
   font-family: var(--font-mono);
   font-size: 13.5px;
   font-weight: 600;
-  color: var(--dark-green);
   list-style: none;
   display: flex;
   align-items: center;
   gap: 8px;
   user-select: none;
 }
-html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
 .examples-accordion summary::-webkit-details-marker { display: none; }
 .examples-accordion summary::before {
   content: "▸";
   display: inline-block;
-  color: var(--green);
   transition: transform .15s;
 }
 .examples-accordion[open] summary::before { transform: rotate(90deg); }
 .examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+.examples-accordion .examples-sep { opacity: .5; font-weight: 400; }
 
 .examples-content {
-  padding: 6px 18px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  padding: 12px 18px 16px;
 }
-.example-card {
-  border-left: 3px solid var(--border);
-  padding-left: 14px;
-}
-.example-card .example-level {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  padding: 2px 9px;
-  border-radius: 100px;
-  margin-bottom: 6px;
-}
-.example-card .example-level-full { font-weight: 400; }
-.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
-.example-card p:last-child { margin-bottom: 0; }
-/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
-.example-card:nth-of-type(1) { border-left-color: var(--blue); }
-.example-card:nth-of-type(2) { border-left-color: var(--purple); }
-.example-card:nth-of-type(3) { border-left-color: var(--coral); }
-/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
-.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
-.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
-.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
-html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
-html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
-html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+.examples-content p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.examples-content p:last-child { margin-bottom: 0; }
+
+/* Tarja border-left decorativa: cores vibrantes originais, sem exigência de contraste. */
+.examples-accordion--1 { border-left-color: var(--blue); }
+.examples-accordion--2 { border-left-color: var(--purple); }
+.examples-accordion--3 { border-left-color: var(--coral); }
+/* Fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.examples-accordion--1 summary { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.examples-accordion--2 summary { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.examples-accordion--3 summary { background: rgba(255,110,90,.12); color: var(--coral-text); }
+.examples-accordion--1 summary::before { color: var(--blue-text); }
+.examples-accordion--2 summary::before { color: var(--purple-text); }
+.examples-accordion--3 summary::before { color: var(--coral-text); }
+html[data-theme="dark"] .examples-accordion--1 summary,
+html[data-theme="dark"] .examples-accordion--1 summary::before { color: var(--blue-text-dark); }
+html[data-theme="dark"] .examples-accordion--2 summary,
+html[data-theme="dark"] .examples-accordion--2 summary::before { color: var(--purple); }
+html[data-theme="dark"] .examples-accordion--3 summary,
+html[data-theme="dark"] .examples-accordion--3 summary::before { color: var(--coral); }
 
 .usage-block {
   display: flex;
@@ -730,36 +727,40 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
         </div>
         
     
-        <details class="examples-accordion">
-          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
-          <div class="examples-content">
+        <div class="examples-section">
+          <p class="examples-intro">Os três exemplos abaixo mostram a mesma skill em situações de complexidade crescente — não é sobre o seu nível, é sobre o tipo de situação que você está resolvendo agora.</p>
+          
+            <details class="examples-accordion examples-accordion--1">
+              <summary>Cenário direto <span class="examples-sep">·</span> API</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> QA júnior recém-chegado na "AgroConecta" (marketplace agro B2B fictício, API + integrações com ERPs de fornecedores) percebe que nunca houve uma estratégia de teste formal documentada.</p>
+                <p><strong>Input:</strong> "Nunca tivemos uma estratégia de teste formal aqui na AgroConecta. Pode me ajudar a definir uma?"</p>
+                <p><strong>Saída esperada:</strong> A skill lê o CLAUDE.md (ainda incompleto) e faz as 5 perguntas estruturadas. O QA responde todas com clareza (monolito com integrações externas, sem QA dedicado ainda, envolvido só na entrega, sistema não é crítico financeiramente, existe ambiente de staging). A skill propõe uma pirâmide balanceada (não 100% E2E) e gera <code>docs/qa/estrategia-teste.md</code>.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
-              <p><strong>Cenário:</strong> QA júnior recém-chegado na "AgroConecta" (marketplace agro B2B fictício, API + integrações com ERPs de fornecedores) percebe que nunca houve uma estratégia de teste formal documentada.</p>
-              <p><strong>Input:</strong> "Nunca tivemos uma estratégia de teste formal aqui na AgroConecta. Pode me ajudar a definir uma?"</p>
-              <p><strong>Saída esperada:</strong> A skill lê o CLAUDE.md (ainda incompleto) e faz as 5 perguntas estruturadas. O QA responde todas com clareza (monolito com integrações externas, sem QA dedicado ainda, envolvido só na entrega, sistema não é crítico financeiramente, existe ambiente de staging). A skill propõe uma pirâmide balanceada (não 100% E2E) e gera <code>docs/qa/estrategia-teste.md</code>.</p>
-            </div>
+            <details class="examples-accordion examples-accordion--2">
+              <summary>Cenário com ambiguidade <span class="examples-sep">·</span> Web</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> QA pleno na "EstudaMais" (plataforma de cursos online fictícia, web) responde às perguntas, mas não tem certeza se existe massa de dados própria de teste.</p>
+                <p><strong>Input:</strong> responde as 4 primeiras perguntas com segurança, mas diz "não sei se temos massa de dados própria — às vezes usamos uma cópia de produção mascarada".</p>
+                <p><strong>Saída esperada:</strong> A skill registra as 4 respostas normalmente, e para a pergunta 5 marca como "a confirmar" em vez de assumir que existe massa fictícia de verdade — uma cópia de produção mascarada não é necessariamente massa de teste fictícia, e a skill sinaliza isso como risco em aberto em vez de tratar como resposta dada.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
-              <p><strong>Cenário:</strong> QA pleno na "EstudaMais" (plataforma de cursos online fictícia, web) responde às perguntas, mas não tem certeza se existe massa de dados própria de teste.</p>
-              <p><strong>Input:</strong> responde as 4 primeiras perguntas com segurança, mas diz "não sei se temos massa de dados própria — às vezes usamos uma cópia de produção mascarada".</p>
-              <p><strong>Saída esperada:</strong> A skill registra as 4 respostas normalmente, e para a pergunta 5 marca como "a confirmar" em vez de assumir que existe massa fictícia de verdade — uma cópia de produção mascarada não é necessariamente massa de teste fictícia, e a skill sinaliza isso como risco em aberto em vez de tratar como resposta dada.</p>
-            </div>
+            <details class="examples-accordion examples-accordion--3">
+              <summary>Cenário de risco real <span class="examples-sep">·</span> Mobile</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> Na "BancoDigitalX" (banco digital fictício, app mobile + API), a diretoria pede uma estratégia de teste pronta pra apresentar amanhã, e o QA sênior, sem tempo de entrevistar o time todo, pede pra skill "preencher com o que é padrão de mercado pra banco digital".</p>
+                <p><strong>Input:</strong> "Preciso da estratégia pronta pra reunião de amanhã, pode assumir as respostas típicas de um banco digital?"</p>
+                <p><strong>Saída esperada:</strong> Mesmo com o pedido explícito de assumir respostas, a skill não inventa nenhuma das 5 perguntas — registra cada uma como "a confirmar" e lista como risco em aberto no documento gerado. A reunião de amanhã sai com um documento que mostra exatamente o que ainda não foi levantado, em vez de uma estratégia com aparência de pronta que ninguém no time realmente validou.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
-              <p><strong>Cenário:</strong> Na "BancoDigitalX" (banco digital fictício, app mobile + API), a diretoria pede uma estratégia de teste pronta pra apresentar amanhã, e o QA sênior, sem tempo de entrevistar o time todo, pede pra skill "preencher com o que é padrão de mercado pra banco digital".</p>
-              <p><strong>Input:</strong> "Preciso da estratégia pronta pra reunião de amanhã, pode assumir as respostas típicas de um banco digital?"</p>
-              <p><strong>Saída esperada:</strong> Mesmo com o pedido explícito de assumir respostas, a skill não inventa nenhuma das 5 perguntas — registra cada uma como "a confirmar" e lista como risco em aberto no documento gerado. A reunião de amanhã sai com um documento que mostra exatamente o que ainda não foi levantado, em vez de uma estratégia com aparência de pronta que ninguém no time realmente validou.</p>
-            </div>
-            
-          </div>
-        </details>
+        </div>
         
     
-    <div class="page-nav"><a href="../skills/swl-skill-qa-generate-rules.html"><span class="pn-label">◄ anterior</span>Gerar regras de QA do projeto</a><a class="pn-next" href="../skills/swl-skill-qa-new-automation.html"><span class="pn-label">próxima ►</span>Gerar automação (web/API/integração)</a></div>
+    <div class="page-nav"><a href="../skills/swl-skill-qa-new-automation.html"><span class="pn-label">◄ anterior</span>Gerar automação (web/API/integração)</a><a class="pn-next" href="../skills/swl-skill-qa-new-test-cases.html"><span class="pn-label">próxima ►</span>Gerar casos de teste</a></div>
     <div class="footer-note">Base2 Tecnologia · Processo de Qualidade com IA · mantido pela equipe de engenharia</div>
   </main>
 </div>

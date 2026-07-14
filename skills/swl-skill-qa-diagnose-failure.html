@@ -354,71 +354,68 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
-/* Examples accordion (Jr/Pl/Sr) */
+/* Examples: 3 exemplos (situação + tipo de projeto), cada um seu próprio accordion */
+.examples-section { margin: 22px 0 28px; }
+.examples-intro {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0 0 12px;
+}
+
 .examples-accordion {
   border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
   border-radius: 8px;
-  margin: 22px 0;
+  margin-bottom: 10px;
   background: var(--panel);
+  overflow: hidden;
 }
 .examples-accordion summary {
   cursor: pointer;
-  padding: 14px 18px;
+  padding: 12px 18px;
   font-family: var(--font-mono);
   font-size: 13.5px;
   font-weight: 600;
-  color: var(--dark-green);
   list-style: none;
   display: flex;
   align-items: center;
   gap: 8px;
   user-select: none;
 }
-html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
 .examples-accordion summary::-webkit-details-marker { display: none; }
 .examples-accordion summary::before {
   content: "▸";
   display: inline-block;
-  color: var(--green);
   transition: transform .15s;
 }
 .examples-accordion[open] summary::before { transform: rotate(90deg); }
 .examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+.examples-accordion .examples-sep { opacity: .5; font-weight: 400; }
 
 .examples-content {
-  padding: 6px 18px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  padding: 12px 18px 16px;
 }
-.example-card {
-  border-left: 3px solid var(--border);
-  padding-left: 14px;
-}
-.example-card .example-level {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  padding: 2px 9px;
-  border-radius: 100px;
-  margin-bottom: 6px;
-}
-.example-card .example-level-full { font-weight: 400; }
-.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
-.example-card p:last-child { margin-bottom: 0; }
-/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
-.example-card:nth-of-type(1) { border-left-color: var(--blue); }
-.example-card:nth-of-type(2) { border-left-color: var(--purple); }
-.example-card:nth-of-type(3) { border-left-color: var(--coral); }
-/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
-.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
-.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
-.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
-html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
-html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
-html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+.examples-content p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.examples-content p:last-child { margin-bottom: 0; }
+
+/* Tarja border-left decorativa: cores vibrantes originais, sem exigência de contraste. */
+.examples-accordion--1 { border-left-color: var(--blue); }
+.examples-accordion--2 { border-left-color: var(--purple); }
+.examples-accordion--3 { border-left-color: var(--coral); }
+/* Fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.examples-accordion--1 summary { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.examples-accordion--2 summary { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.examples-accordion--3 summary { background: rgba(255,110,90,.12); color: var(--coral-text); }
+.examples-accordion--1 summary::before { color: var(--blue-text); }
+.examples-accordion--2 summary::before { color: var(--purple-text); }
+.examples-accordion--3 summary::before { color: var(--coral-text); }
+html[data-theme="dark"] .examples-accordion--1 summary,
+html[data-theme="dark"] .examples-accordion--1 summary::before { color: var(--blue-text-dark); }
+html[data-theme="dark"] .examples-accordion--2 summary,
+html[data-theme="dark"] .examples-accordion--2 summary::before { color: var(--purple); }
+html[data-theme="dark"] .examples-accordion--3 summary,
+html[data-theme="dark"] .examples-accordion--3 summary::before { color: var(--coral); }
 
 .usage-block {
   display: flex;
@@ -719,36 +716,40 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
         </div>
         
     
-        <details class="examples-accordion">
-          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
-          <div class="examples-content">
+        <div class="examples-section">
+          <p class="examples-intro">Os três exemplos abaixo mostram a mesma skill em situações de complexidade crescente — não é sobre o seu nível, é sobre o tipo de situação que você está resolvendo agora.</p>
+          
+            <details class="examples-accordion examples-accordion--1">
+              <summary>Cenário direto <span class="examples-sep">·</span> Web</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> QA júnior na "Lojinha Verde" (e-commerce fictício de plantas, web) vê um teste de checkout falhar no CI com uma mensagem de assert clara.</p>
+                <p><strong>Input:</strong> cola o log — o teste esperava "Pedido confirmado!" e recebeu "Pedido confirmado com sucesso!", porque a aplicação mudou o texto da mensagem.</p>
+                <p><strong>Saída esperada:</strong> A skill classifica como "teste mal escrito" (expectativa desatualizada), aponta a linha exata do assert, e sugere corrigir o texto esperado no teste.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
-              <p><strong>Cenário:</strong> QA júnior na "Lojinha Verde" (e-commerce fictício de plantas) vê um teste de checkout falhar no CI com uma mensagem de assert clara.</p>
-              <p><strong>Input:</strong> cola o log — o teste esperava "Pedido confirmado!" e recebeu "Pedido confirmado com sucesso!", porque a aplicação mudou o texto da mensagem.</p>
-              <p><strong>Saída esperada:</strong> A skill classifica como "teste mal escrito" (expectativa desatualizada), aponta a linha exata do assert, e sugere corrigir o texto esperado no teste.</p>
-            </div>
+            <details class="examples-accordion examples-accordion--2">
+              <summary>Cenário com ambiguidade <span class="examples-sep">·</span> Integração</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> QA pleno na "PagaFácil" (fintech de pagamentos fictícia) tem um teste de integração com o serviço de notificação que falha 1 a cada 5 execuções no CI, sem mudança de código recente.</p>
+                <p><strong>Input:</strong> cola o log de timeout na chamada ao serviço de notificação, mencionando que "já viu isso antes" mas sem dados de histórico completo.</p>
+                <p><strong>Saída esperada:</strong> A skill nota o padrão intermitente, mas como o histórico de execução não foi fornecido de forma completa, marca como "possível flakiness, rastreamento incompleto" e recomenda coletar o histórico real via <code>swl-skill-qa-check-flakiness</code> antes de classificar definitivamente.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
-              <p><strong>Cenário:</strong> QA pleno na "PagaFácil" (fintech de pagamentos fictícia) tem um teste de integração com o serviço de notificação que falha 1 a cada 5 execuções no CI, sem mudança de código recente.</p>
-              <p><strong>Input:</strong> cola o log de timeout na chamada ao serviço de notificação, mencionando que "já viu isso antes" mas sem dados de histórico completo.</p>
-              <p><strong>Saída esperada:</strong> A skill nota o padrão intermitente, mas como o histórico de execução não foi fornecido de forma completa, marca como "possível flakiness, rastreamento incompleto" e recomenda coletar o histórico real via <code>swl-skill-qa-check-flakiness</code> antes de classificar definitivamente.</p>
-            </div>
+            <details class="examples-accordion examples-accordion--3">
+              <summary>Cenário de risco real <span class="examples-sep">·</span> API</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> Na "PagaFácil" (fintech de pagamentos fictícia, API), a equipe de infraestrutura explica que uma falha recorrente no fechamento de fatura em produção é "só instabilidade de rede", pedindo apenas retry no teste pra ele passar.</p>
+                <p><strong>Input:</strong> descreve a pressão para classificar como "ambiente" e colar retry, mas mostra um log onde o valor da fatura calculado já vem errado (arredondamento) antes do timeout aparecer.</p>
+                <p><strong>Saída esperada:</strong> A skill recusa classificar como ambiente/flaky só para o teste passar — aponta que o log mostra um valor de fatura incorreto antes do timeout, indicando bug real de arredondamento, não instabilidade de rede. Recomenda investigar a lógica de cálculo em vez de mascarar com retry: o timeout foi só o sintoma que apareceu primeiro no log, o valor da fatura já tinha saído errado duas linhas antes dele.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
-              <p><strong>Cenário:</strong> Na "PagaFácil", a equipe de infraestrutura explica que uma falha recorrente no fechamento de fatura em produção é "só instabilidade de rede", pedindo apenas retry no teste pra ele passar.</p>
-              <p><strong>Input:</strong> descreve a pressão para classificar como "ambiente" e colar retry, mas mostra um log onde o valor da fatura calculado já vem errado (arredondamento) antes do timeout aparecer.</p>
-              <p><strong>Saída esperada:</strong> A skill recusa classificar como ambiente/flaky só para o teste passar — aponta que o log mostra um valor de fatura incorreto antes do timeout, indicando bug real de arredondamento, não instabilidade de rede. Recomenda investigar a lógica de cálculo em vez de mascarar com retry: o timeout foi só o sintoma que apareceu primeiro no log, o valor da fatura já tinha saído errado duas linhas antes dele.</p>
-            </div>
-            
-          </div>
-        </details>
+        </div>
         
     
-    <div class="page-nav"><a href="../skills/swl-skill-qa-exploratory-session.html"><span class="pn-label">◄ anterior</span>Conduzir sessão exploratória</a><a class="pn-next" href="../skills/swl-skill-qa-report-bug.html"><span class="pn-label">próxima ►</span>Reportar bug</a></div>
+    <div class="page-nav"><a href="../skills/swl-skill-qa-new-automation.html"><span class="pn-label">◄ anterior</span>Gerar automação (web/API/integração)</a><a class="pn-next" href="../skills/swl-skill-qa-new-test-cases.html"><span class="pn-label">próxima ►</span>Gerar casos de teste</a></div>
     <div class="footer-note">Base2 Tecnologia · Processo de Qualidade com IA · mantido pela equipe de engenharia</div>
   </main>
 </div>

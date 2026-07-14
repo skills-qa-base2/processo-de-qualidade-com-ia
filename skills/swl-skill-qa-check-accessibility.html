@@ -354,71 +354,68 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
-/* Examples accordion (Jr/Pl/Sr) */
+/* Examples: 3 exemplos (situação + tipo de projeto), cada um seu próprio accordion */
+.examples-section { margin: 22px 0 28px; }
+.examples-intro {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0 0 12px;
+}
+
 .examples-accordion {
   border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
   border-radius: 8px;
-  margin: 22px 0;
+  margin-bottom: 10px;
   background: var(--panel);
+  overflow: hidden;
 }
 .examples-accordion summary {
   cursor: pointer;
-  padding: 14px 18px;
+  padding: 12px 18px;
   font-family: var(--font-mono);
   font-size: 13.5px;
   font-weight: 600;
-  color: var(--dark-green);
   list-style: none;
   display: flex;
   align-items: center;
   gap: 8px;
   user-select: none;
 }
-html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
 .examples-accordion summary::-webkit-details-marker { display: none; }
 .examples-accordion summary::before {
   content: "▸";
   display: inline-block;
-  color: var(--green);
   transition: transform .15s;
 }
 .examples-accordion[open] summary::before { transform: rotate(90deg); }
 .examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+.examples-accordion .examples-sep { opacity: .5; font-weight: 400; }
 
 .examples-content {
-  padding: 6px 18px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  padding: 12px 18px 16px;
 }
-.example-card {
-  border-left: 3px solid var(--border);
-  padding-left: 14px;
-}
-.example-card .example-level {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  padding: 2px 9px;
-  border-radius: 100px;
-  margin-bottom: 6px;
-}
-.example-card .example-level-full { font-weight: 400; }
-.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
-.example-card p:last-child { margin-bottom: 0; }
-/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
-.example-card:nth-of-type(1) { border-left-color: var(--blue); }
-.example-card:nth-of-type(2) { border-left-color: var(--purple); }
-.example-card:nth-of-type(3) { border-left-color: var(--coral); }
-/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
-.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
-.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
-.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
-html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
-html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
-html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+.examples-content p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.examples-content p:last-child { margin-bottom: 0; }
+
+/* Tarja border-left decorativa: cores vibrantes originais, sem exigência de contraste. */
+.examples-accordion--1 { border-left-color: var(--blue); }
+.examples-accordion--2 { border-left-color: var(--purple); }
+.examples-accordion--3 { border-left-color: var(--coral); }
+/* Fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.examples-accordion--1 summary { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.examples-accordion--2 summary { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.examples-accordion--3 summary { background: rgba(255,110,90,.12); color: var(--coral-text); }
+.examples-accordion--1 summary::before { color: var(--blue-text); }
+.examples-accordion--2 summary::before { color: var(--purple-text); }
+.examples-accordion--3 summary::before { color: var(--coral-text); }
+html[data-theme="dark"] .examples-accordion--1 summary,
+html[data-theme="dark"] .examples-accordion--1 summary::before { color: var(--blue-text-dark); }
+html[data-theme="dark"] .examples-accordion--2 summary,
+html[data-theme="dark"] .examples-accordion--2 summary::before { color: var(--purple); }
+html[data-theme="dark"] .examples-accordion--3 summary,
+html[data-theme="dark"] .examples-accordion--3 summary::before { color: var(--coral); }
 
 .usage-block {
   display: flex;
@@ -728,36 +725,40 @@ Veredito: CONFORME &lt;nível&gt; NAS TELAS AUDITADAS / NÃO CONFORME (N violaç
         </div>
         
     
-        <details class="examples-accordion">
-          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
-          <div class="examples-content">
+        <div class="examples-section">
+          <p class="examples-intro">Os três exemplos abaixo mostram a mesma skill em situações de complexidade crescente — não é sobre o seu nível, é sobre o tipo de situação que você está resolvendo agora.</p>
+          
+            <details class="examples-accordion examples-accordion--1">
+              <summary>Cenário direto <span class="examples-sep">·</span> Web</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> QA júnior na "EstudaMais" (plataforma de cursos online fictícia, web) audita a página de listagem de cursos, com axe-core já configurado.</p>
+                <p><strong>Input:</strong> "Audita a acessibilidade da página de listagem de cursos, nível AA, já usamos axe-core no projeto."</p>
+                <p><strong>Saída esperada:</strong> A skill detecta axe-core, roda contra a página, e reporta violações reais encontradas (ex: contraste insuficiente em um botão) com critério WCAG e severidade.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
-              <p><strong>Cenário:</strong> QA júnior na "EstudaMais" (plataforma de cursos online fictícia, web) audita a página de listagem de cursos, com axe-core já configurado.</p>
-              <p><strong>Input:</strong> "Audita a acessibilidade da página de listagem de cursos, nível AA, já usamos axe-core no projeto."</p>
-              <p><strong>Saída esperada:</strong> A skill detecta axe-core, roda contra a página, e reporta violações reais encontradas (ex: contraste insuficiente em um botão) com critério WCAG e severidade.</p>
-            </div>
+            <details class="examples-accordion examples-accordion--2">
+              <summary>Cenário com ambiguidade <span class="examples-sep">·</span> Mobile</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> QA pleno no app "PetAmigo" (adoção de pets fictícia, mobile) precisa auditar a tela de cadastro de pet, mas o nível WCAG alvo não foi confirmado.</p>
+                <p><strong>Input:</strong> "Audita a acessibilidade da tela de cadastro de pet." (sem dizer o nível)</p>
+                <p><strong>Saída esperada:</strong> A skill pergunta qual nível é o alvo (A, AA ou AAA) em vez de assumir AA por padrão, e só roda a auditoria depois de confirmado.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
-              <p><strong>Cenário:</strong> QA pleno no app "PetAmigo" (adoção de pets fictícia, mobile) precisa auditar a tela de cadastro de pet, mas o nível WCAG alvo não foi confirmado.</p>
-              <p><strong>Input:</strong> "Audita a acessibilidade da tela de cadastro de pet." (sem dizer o nível)</p>
-              <p><strong>Saída esperada:</strong> A skill pergunta qual nível é o alvo (A, AA ou AAA) em vez de assumir AA por padrão, e só roda a auditoria depois de confirmado.</p>
-            </div>
+            <details class="examples-accordion examples-accordion--3">
+              <summary>Cenário de risco real <span class="examples-sep">·</span> Mobile</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> No app "SaúdeJá" (telemedicina fictícia, mobile), o time de produto pede pra "declarar conforme AA" no app inteiro com base só na auditoria feita na tela de login, pra atender um requisito de licitação pública.</p>
+                <p><strong>Input:</strong> "Auditamos só a tela de login e passou. Pode declarar o app inteiro conforme AA pra gente anexar na licitação?"</p>
+                <p><strong>Saída esperada:</strong> A skill relata a conformidade só para a tela de login efetivamente testada, sem estender a conclusão pro "app inteiro" — telas de agendamento, prontuário e pagamento nunca passaram pela ferramenta. Uma declaração assim, anexada numa licitação pública, vira uma promessa que alguém vai cobrar depois: no dia em que um usuário de leitor de tela não conseguir passar da tela de prontuário.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
-              <p><strong>Cenário:</strong> Na "SaúdeJá" (telemedicina fictícia, web), o time de produto pede pra "declarar conforme AA" no site inteiro com base só na auditoria feita na tela de login, pra atender um requisito de licitação pública.</p>
-              <p><strong>Input:</strong> "Auditamos só a tela de login e passou. Pode declarar o site inteiro conforme AA pra gente anexar na licitação?"</p>
-              <p><strong>Saída esperada:</strong> A skill relata a conformidade só para a tela de login efetivamente testada, sem estender a conclusão pro "site inteiro" — telas de agendamento, prontuário e pagamento nunca passaram pela ferramenta. Uma declaração assim, anexada numa licitação pública, vira uma promessa que alguém vai cobrar depois: no dia em que um usuário de leitor de tela não conseguir passar da tela de prontuário.</p>
-            </div>
-            
-          </div>
-        </details>
+        </div>
         
     
-    <div class="page-nav"><a href="../skills/swl-skill-qa-new-contract-tests.html"><span class="pn-label">◄ anterior</span>Gerar testes de contrato</a><a class="pn-next" href="../skills/swl-skill-qa-check-data-quality.html"><span class="pn-label">próxima ►</span>Auditar qualidade de dados</a></div>
+    <div class="page-nav"><a href="../skills/swl-skill-qa-new-automation.html"><span class="pn-label">◄ anterior</span>Gerar automação (web/API/integração)</a><a class="pn-next" href="../skills/swl-skill-qa-new-test-cases.html"><span class="pn-label">próxima ►</span>Gerar casos de teste</a></div>
     <div class="footer-note">Base2 Tecnologia · Processo de Qualidade com IA · mantido pela equipe de engenharia</div>
   </main>
 </div>

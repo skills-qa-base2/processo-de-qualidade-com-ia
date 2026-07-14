@@ -354,71 +354,68 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
-/* Examples accordion (Jr/Pl/Sr) */
+/* Examples: 3 exemplos (situação + tipo de projeto), cada um seu próprio accordion */
+.examples-section { margin: 22px 0 28px; }
+.examples-intro {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0 0 12px;
+}
+
 .examples-accordion {
   border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
   border-radius: 8px;
-  margin: 22px 0;
+  margin-bottom: 10px;
   background: var(--panel);
+  overflow: hidden;
 }
 .examples-accordion summary {
   cursor: pointer;
-  padding: 14px 18px;
+  padding: 12px 18px;
   font-family: var(--font-mono);
   font-size: 13.5px;
   font-weight: 600;
-  color: var(--dark-green);
   list-style: none;
   display: flex;
   align-items: center;
   gap: 8px;
   user-select: none;
 }
-html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
 .examples-accordion summary::-webkit-details-marker { display: none; }
 .examples-accordion summary::before {
   content: "▸";
   display: inline-block;
-  color: var(--green);
   transition: transform .15s;
 }
 .examples-accordion[open] summary::before { transform: rotate(90deg); }
 .examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+.examples-accordion .examples-sep { opacity: .5; font-weight: 400; }
 
 .examples-content {
-  padding: 6px 18px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  padding: 12px 18px 16px;
 }
-.example-card {
-  border-left: 3px solid var(--border);
-  padding-left: 14px;
-}
-.example-card .example-level {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  padding: 2px 9px;
-  border-radius: 100px;
-  margin-bottom: 6px;
-}
-.example-card .example-level-full { font-weight: 400; }
-.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
-.example-card p:last-child { margin-bottom: 0; }
-/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
-.example-card:nth-of-type(1) { border-left-color: var(--blue); }
-.example-card:nth-of-type(2) { border-left-color: var(--purple); }
-.example-card:nth-of-type(3) { border-left-color: var(--coral); }
-/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
-.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
-.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
-.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
-html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
-html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
-html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+.examples-content p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.examples-content p:last-child { margin-bottom: 0; }
+
+/* Tarja border-left decorativa: cores vibrantes originais, sem exigência de contraste. */
+.examples-accordion--1 { border-left-color: var(--blue); }
+.examples-accordion--2 { border-left-color: var(--purple); }
+.examples-accordion--3 { border-left-color: var(--coral); }
+/* Fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.examples-accordion--1 summary { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.examples-accordion--2 summary { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.examples-accordion--3 summary { background: rgba(255,110,90,.12); color: var(--coral-text); }
+.examples-accordion--1 summary::before { color: var(--blue-text); }
+.examples-accordion--2 summary::before { color: var(--purple-text); }
+.examples-accordion--3 summary::before { color: var(--coral-text); }
+html[data-theme="dark"] .examples-accordion--1 summary,
+html[data-theme="dark"] .examples-accordion--1 summary::before { color: var(--blue-text-dark); }
+html[data-theme="dark"] .examples-accordion--2 summary,
+html[data-theme="dark"] .examples-accordion--2 summary::before { color: var(--purple); }
+html[data-theme="dark"] .examples-accordion--3 summary,
+html[data-theme="dark"] .examples-accordion--3 summary::before { color: var(--coral); }
 
 .usage-block {
   display: flex;
@@ -720,36 +717,40 @@ Falhas encontradas:
         </div>
         
     
-        <details class="examples-accordion">
-          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
-          <div class="examples-content">
+        <div class="examples-section">
+          <p class="examples-intro">Os três exemplos abaixo mostram a mesma skill em situações de complexidade crescente — não é sobre o seu nível, é sobre o tipo de situação que você está resolvendo agora.</p>
+          
+            <details class="examples-accordion examples-accordion--1">
+              <summary>Cenário direto <span class="examples-sep">·</span> Web</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> QA júnior na "Lojinha Verde" (e-commerce fictício de plantas, web) gera o relatório de execução da suíte de checkout a partir do JSON real do Playwright.</p>
+                <p><strong>Input:</strong> "Gera o relatório de execução a partir desse JSON do Playwright." (2 testes, ambos passaram)</p>
+                <p><strong>Saída esperada:</strong> A skill gera o relatório com números reais extraídos do arquivo — 2 executados, 2 sucesso, 0 falha, tempo real de execução.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
-              <p><strong>Cenário:</strong> QA júnior na "Lojinha Verde" (e-commerce fictício de plantas) gera o relatório de execução da suíte de checkout a partir do JSON real do Playwright.</p>
-              <p><strong>Input:</strong> "Gera o relatório de execução a partir desse JSON do Playwright." (2 testes, ambos passaram)</p>
-              <p><strong>Saída esperada:</strong> A skill gera o relatório com números reais extraídos do arquivo — 2 executados, 2 sucesso, 0 falha, tempo real de execução.</p>
-            </div>
+            <details class="examples-accordion examples-accordion--2">
+              <summary>Cenário com ambiguidade <span class="examples-sep">·</span> Mobile</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> QA pleno no app "PetAmigo" (adoção de pets fictícia, mobile) gera o relatório de uma execução com uma falha, sem execução anterior disponível pra comparar.</p>
+                <p><strong>Input:</strong> "Gera o relatório dessa execução do app." (1 falha em 20 testes) + "não tenho o resultado da execução anterior aqui."</p>
+                <p><strong>Saída esperada:</strong> A skill reporta os números reais (19 sucesso, 1 falha com a mensagem de erro), sem incluir comparação de tendência ("melhorou" ou "piorou"), já que só há um ponto de dado disponível.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
-              <p><strong>Cenário:</strong> QA pleno na "EstudaMais" (plataforma de cursos fictícia) gera o relatório de uma execução com uma falha, sem execução anterior disponível pra comparar.</p>
-              <p><strong>Input:</strong> "Gera o relatório dessa execução." (1 falha em 20 testes) + "não tenho o resultado da execução anterior aqui."</p>
-              <p><strong>Saída esperada:</strong> A skill reporta os números reais (19 sucesso, 1 falha com a mensagem de erro), sem incluir comparação de tendência ("melhorou" ou "piorou"), já que só há um ponto de dado disponível.</p>
-            </div>
+            <details class="examples-accordion examples-accordion--3">
+              <summary>Cenário de risco real <span class="examples-sep">·</span> Integração</summary>
+              <div class="examples-content">
+                <p><strong>Cenário:</strong> Na "StreamPlay" (streaming de vídeo fictício, integração com CDN de terceiro), antes de uma reunião de status, o gerente de projeto pede pra "consolidar" duas execuções diferentes (segunda e sexta) somando os testes que passaram em qualquer uma das duas, "pra mostrar cobertura maior".</p>
+                <p><strong>Input:</strong> manda os dois arquivos de execução e pede pra somar os que passaram em qualquer um dos dois como "aprovados".</p>
+                <p><strong>Saída esperada:</strong> A skill gera o relatório de cada execução separadamente, com os números reais de cada arquivo, sem somar "passou em pelo menos uma das duas" como métrica de aprovação. Um teste que passou na segunda e falhou na sexta não vira confiável só por ter passado uma vez — ele continua com um resultado real de falha que o relatório consolidado teria escondido.</p>
+              </div>
+            </details>
             
-            <div class="example-card">
-              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
-              <p><strong>Cenário:</strong> Na "StreamPlay" (streaming de vídeo fictício), antes de uma reunião de status, o gerente de projeto pede pra "consolidar" duas execuções diferentes (segunda e sexta) somando os testes que passaram em qualquer uma das duas, "pra mostrar cobertura maior".</p>
-              <p><strong>Input:</strong> manda os dois arquivos de execução e pede pra somar os que passaram em qualquer um dos dois como "aprovados".</p>
-              <p><strong>Saída esperada:</strong> A skill gera o relatório de cada execução separadamente, com os números reais de cada arquivo, sem somar "passou em pelo menos uma das duas" como métrica de aprovação. Um teste que passou na segunda e falhou na sexta não vira confiável só por ter passado uma vez — ele continua com um resultado real de falha que o relatório consolidado teria escondido.</p>
-            </div>
-            
-          </div>
-        </details>
+        </div>
         
     
-    <div class="page-nav"><a href="../skills/swl-skill-qa-describe-test-pr.html"><span class="pn-label">◄ anterior</span>Descrever PR de testes</a><a class="pn-next" href="../skills/swl-skill-qa-safe-test-commit.html"><span class="pn-label">próxima ►</span>Pipeline de commit seguro</a></div>
+    <div class="page-nav"><a href="../skills/swl-skill-qa-new-automation.html"><span class="pn-label">◄ anterior</span>Gerar automação (web/API/integração)</a><a class="pn-next" href="../skills/swl-skill-qa-new-test-cases.html"><span class="pn-label">próxima ►</span>Gerar casos de teste</a></div>
     <div class="footer-note">Base2 Tecnologia · Processo de Qualidade com IA · mantido pela equipe de engenharia</div>
   </main>
 </div>
