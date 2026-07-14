@@ -18,6 +18,16 @@
   --blue: #4d8cff;
   --purple: #9d7fea;
 
+  /* Variantes de texto dos badges Jr/Pl/Sr (.example-level). Calculadas contra o
+     fundo REAL (rgba(cor,.12) sobre --panel), não contra branco/preto puro — a
+     margem é apertada (~4,6:1 contra o mínimo AA de 4,5:1). Qualquer mudança
+     futura em --blue/--purple/--coral ou na opacidade .12 do fundo diluído exige
+     recalcular o contraste, não só ajustar visualmente. */
+  --blue-text: #3b6ac2;
+  --purple-text: #765fb0;
+  --coral-text: #b34d3f;
+  --blue-text-dark: #508fff;
+
   --bg: #f6faf8;
   --panel: #ffffff;
   --border: #dfe8e3;
@@ -344,6 +354,72 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
+/* Examples accordion (Jr/Pl/Sr) */
+.examples-accordion {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 22px 0;
+  background: var(--panel);
+}
+.examples-accordion summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dark-green);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
+.examples-accordion summary::-webkit-details-marker { display: none; }
+.examples-accordion summary::before {
+  content: "▸";
+  display: inline-block;
+  color: var(--green);
+  transition: transform .15s;
+}
+.examples-accordion[open] summary::before { transform: rotate(90deg); }
+.examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+
+.examples-content {
+  padding: 6px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.example-card {
+  border-left: 3px solid var(--border);
+  padding-left: 14px;
+}
+.example-card .example-level {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 2px 9px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+}
+.example-card .example-level-full { font-weight: 400; }
+.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.example-card p:last-child { margin-bottom: 0; }
+/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
+.example-card:nth-of-type(1) { border-left-color: var(--blue); }
+.example-card:nth-of-type(2) { border-left-color: var(--purple); }
+.example-card:nth-of-type(3) { border-left-color: var(--coral); }
+/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
+html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
+html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
+html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+
 .usage-block {
   display: flex;
   align-items: center;
@@ -638,6 +714,35 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
           <p>Não afirme que um teste é flaky sem evidência de execução real (histórico de falhas intermitentes) quando disponível — combine análise estática com o histórico de execução, se houver, antes de classificar como "provavelmente flaky".</p>
         </div>
+        
+    
+        <details class="examples-accordion">
+          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
+          <div class="examples-content">
+            
+            <div class="example-card">
+              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
+              <p><strong>Cenário:</strong> QA júnior na "LogiFrete" (transportadora fictícia) analisa a suíte de integração com o sistema de rastreamento de um parceiro externo, que às vezes falha sem motivo aparente.</p>
+              <p><strong>Input:</strong> "Analisa essa suíte de integração com o rastreamento, ela às vezes falha sem motivo aparente."</p>
+              <p><strong>Saída esperada:</strong> A skill identifica um <code>waitForTimeout(3000)</code> na linha X, sugere trocar por espera condicional ao estado da resposta da API do parceiro.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
+              <p><strong>Cenário:</strong> QA pleno na "SaúdeJá" (telemedicina fictícia) tem testes de agendamento que parecem depender de ordem de execução, mas não há histórico de execução disponível pra confirmar.</p>
+              <p><strong>Input:</strong> "Os testes de agendamento falham quando rodam em paralelo, mas só às vezes. Não tenho o histórico de execução do CI à mão."</p>
+              <p><strong>Saída esperada:</strong> A skill identifica na análise estática uma variável compartilhada entre dois testes (indício claro de dependência de ordem), mas para outro trecho suspeito, sem histórico disponível, classifica como "padrão de risco, não confirmado como causa da falha real" em vez de afirmar que é a causa.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
+              <p><strong>Cenário:</strong> Na "ClickIngressos" (venda de ingressos, alta demanda), dias antes de um lançamento, o tech lead pede pra só marcar a suíte inteira como "flaky, ignorar por enquanto" pra não travar o deploy, já que "sempre foi meio instável mesmo".</p>
+              <p><strong>Input:</strong> "A suíte de compra de ingresso está instável há semanas, só marca tudo como flaky e segue com o deploy, não temos tempo agora."</p>
+              <p><strong>Saída esperada:</strong> A skill analisa arquivo por arquivo em vez de aceitar o rótulo de largada, e encontra que boa parte dos testes usa seletor por classe CSS de estilo, que muda a cada deploy de design. Não é instabilidade aleatória — é um padrão previsível quebrando toda vez que o time de design mexe no CSS, e rotular isso como "flaky" deixaria o mesmo problema voltando no próximo deploy.</p>
+            </div>
+            
+          </div>
+        </details>
         
     
     <div class="page-nav"><a href="../skills/swl-skill-qa-check-data-quality.html"><span class="pn-label">◄ anterior</span>Auditar qualidade de dados</a><a class="pn-next" href="../skills/swl-skill-qa-risk-priority.html"><span class="pn-label">próxima ►</span>Priorizar por risco</a></div>

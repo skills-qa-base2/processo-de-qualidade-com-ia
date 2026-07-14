@@ -18,6 +18,16 @@
   --blue: #4d8cff;
   --purple: #9d7fea;
 
+  /* Variantes de texto dos badges Jr/Pl/Sr (.example-level). Calculadas contra o
+     fundo REAL (rgba(cor,.12) sobre --panel), não contra branco/preto puro — a
+     margem é apertada (~4,6:1 contra o mínimo AA de 4,5:1). Qualquer mudança
+     futura em --blue/--purple/--coral ou na opacidade .12 do fundo diluído exige
+     recalcular o contraste, não só ajustar visualmente. */
+  --blue-text: #3b6ac2;
+  --purple-text: #765fb0;
+  --coral-text: #b34d3f;
+  --blue-text-dark: #508fff;
+
   --bg: #f6faf8;
   --panel: #ffffff;
   --border: #dfe8e3;
@@ -344,6 +354,72 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
+/* Examples accordion (Jr/Pl/Sr) */
+.examples-accordion {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 22px 0;
+  background: var(--panel);
+}
+.examples-accordion summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dark-green);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
+.examples-accordion summary::-webkit-details-marker { display: none; }
+.examples-accordion summary::before {
+  content: "▸";
+  display: inline-block;
+  color: var(--green);
+  transition: transform .15s;
+}
+.examples-accordion[open] summary::before { transform: rotate(90deg); }
+.examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+
+.examples-content {
+  padding: 6px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.example-card {
+  border-left: 3px solid var(--border);
+  padding-left: 14px;
+}
+.example-card .example-level {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 2px 9px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+}
+.example-card .example-level-full { font-weight: 400; }
+.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.example-card p:last-child { margin-bottom: 0; }
+/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
+.example-card:nth-of-type(1) { border-left-color: var(--blue); }
+.example-card:nth-of-type(2) { border-left-color: var(--purple); }
+.example-card:nth-of-type(3) { border-left-color: var(--coral); }
+/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
+html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
+html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
+html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+
 .usage-block {
   display: flex;
   align-items: center;
@@ -638,6 +714,35 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
           <p>Esta skill nunca gera dados para "completar" o que está faltando. Seu único papel é apontar o que não pode ser confirmado, para que o QA busque a fonte real ou remova a afirmação.</p>
         </div>
+        
+    
+        <details class="examples-accordion">
+          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
+          <div class="examples-content">
+            
+            <div class="example-card">
+              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
+              <p><strong>Cenário:</strong> QA júnior na "EstudaMais" (plataforma de cursos fictícia) audita um relatório simples de execução de testes do módulo de matrícula antes de enviar pro time.</p>
+              <p><strong>Input:</strong> "Audita esse relatório de testes do módulo de matrícula antes de eu enviar pro time."</p>
+              <p><strong>Saída esperada:</strong> A skill confere as afirmações do relatório — todas rastreáveis ao arquivo de resultado real anexado — e não sinaliza nada, já que não há número ou citação sem fonte.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
+              <p><strong>Cenário:</strong> QA pleno na "AgroConecta" (marketplace B2B fictício) audita um relatório de diagnóstico de bug com uma citação de cliente sem transcrição anexada.</p>
+              <p><strong>Input:</strong> "Audita esse relatório de bug antes de eu abrir o chamado." (o relatório cita "o cliente disse que trava toda vez" sem anexo)</p>
+              <p><strong>Saída esperada:</strong> A skill sinaliza a citação atribuída ao cliente como sem fonte rastreável (nenhuma transcrição, e-mail ou print anexado) e pergunta qual é a origem, sem remover nem confirmar a afirmação por conta própria.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
+              <p><strong>Cenário:</strong> Na "RH Fácil" (sistema de RH fictício), um analista júnior entrega ao QA sênior um relatório de sessão exploratória com "98% de satisfação dos usuários testados" pra incluir no relatório trimestral de qualidade da diretoria.</p>
+              <p><strong>Input:</strong> "Pode revisar esse relatório antes de eu mandar pra diretoria? Tem um número de satisfação ali."</p>
+              <p><strong>Saída esperada:</strong> A skill sinaliza o "98% de satisfação" como número redondo demais sem fonte associada — não há survey, entrevista registrada nem pesquisa anexada — e pergunta de onde veio, em vez de deixar passar por já estar num relatório formatado. Um número assim, uma vez impresso num relatório de diretoria, costuma virar fato citado depois, mesmo que ninguém mais lembre de onde saiu.</p>
+            </div>
+            
+          </div>
+        </details>
         
     
     <div class="page-nav"><a href="../skills/swl-skill-qa-check-accessibility.html"><span class="pn-label">◄ anterior</span>Auditar acessibilidade</a><a class="pn-next" href="../skills/swl-skill-qa-check-flakiness.html"><span class="pn-label">próxima ►</span>Detectar flakiness</a></div>

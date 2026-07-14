@@ -18,6 +18,16 @@
   --blue: #4d8cff;
   --purple: #9d7fea;
 
+  /* Variantes de texto dos badges Jr/Pl/Sr (.example-level). Calculadas contra o
+     fundo REAL (rgba(cor,.12) sobre --panel), não contra branco/preto puro — a
+     margem é apertada (~4,6:1 contra o mínimo AA de 4,5:1). Qualquer mudança
+     futura em --blue/--purple/--coral ou na opacidade .12 do fundo diluído exige
+     recalcular o contraste, não só ajustar visualmente. */
+  --blue-text: #3b6ac2;
+  --purple-text: #765fb0;
+  --coral-text: #b34d3f;
+  --blue-text-dark: #508fff;
+
   --bg: #f6faf8;
   --panel: #ffffff;
   --border: #dfe8e3;
@@ -344,6 +354,72 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
+/* Examples accordion (Jr/Pl/Sr) */
+.examples-accordion {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 22px 0;
+  background: var(--panel);
+}
+.examples-accordion summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dark-green);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
+.examples-accordion summary::-webkit-details-marker { display: none; }
+.examples-accordion summary::before {
+  content: "▸";
+  display: inline-block;
+  color: var(--green);
+  transition: transform .15s;
+}
+.examples-accordion[open] summary::before { transform: rotate(90deg); }
+.examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+
+.examples-content {
+  padding: 6px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.example-card {
+  border-left: 3px solid var(--border);
+  padding-left: 14px;
+}
+.example-card .example-level {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 2px 9px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+}
+.example-card .example-level-full { font-weight: 400; }
+.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.example-card p:last-child { margin-bottom: 0; }
+/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
+.example-card:nth-of-type(1) { border-left-color: var(--blue); }
+.example-card:nth-of-type(2) { border-left-color: var(--purple); }
+.example-card:nth-of-type(3) { border-left-color: var(--coral); }
+/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
+html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
+html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
+html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+
 .usage-block {
   display: flex;
   align-items: center;
@@ -636,6 +712,35 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
           <p>Nunca infira convenções de um projeto a partir de suposições genéricas quando não há documentação nem confirmação do usuário — é melhor deixar uma seção marcada como "a definir" do que gerar uma regra incorreta que a IA passará a seguir automaticamente depois.</p>
         </div>
+        
+    
+        <details class="examples-accordion">
+          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
+          <div class="examples-content">
+            
+            <div class="example-card">
+              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
+              <p><strong>Cenário:</strong> QA júnior na "Lojinha Verde" (e-commerce fictício de plantas, web) gera as regras de QA pela primeira vez, a partir de uma página de wiki já existente.</p>
+              <p><strong>Input:</strong> "Gera as regras de QA pra Lojinha Verde. Temos uma página de wiki com nossas convenções de teste."</p>
+              <p><strong>Saída esperada:</strong> A skill lê o wiki e gera <code>padroes-teste.md</code>, <code>restricoes-teste.md</code> e <code>convencoes-teste.md</code> com as convenções reais documentadas (Playwright, Page Object Model, nomenclatura em português).</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
+              <p><strong>Cenário:</strong> QA pleno na "AgroConecta" (marketplace B2B, integrações com ERPs de fornecedores) tem só parte do processo documentado.</p>
+              <p><strong>Input:</strong> "Não temos wiki, mas o time sabe de cabeça algumas convenções. Vou te contar o que sei."</p>
+              <p><strong>Saída esperada:</strong> A skill conduz a entrevista curta, documenta o que foi confirmado (ferramentas de automação, estrutura de pastas), e para os pontos sem certeza no time (política de dados de teste ao integrar com ERP de terceiro) deixa marcado como "a definir" em vez de assumir um padrão genérico de mercado.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
+              <p><strong>Cenário:</strong> QA sênior herda o sistema legado da "RotaCerta" (logística/entregas fictícia, integração com sistemas de rastreamento de terceiros) sem nenhuma documentação de QA, e o tech lead pede pra "gerar regras baseadas no que costuma ser padrão em projetos de logística", já que ninguém mais lembra as convenções antigas.</p>
+              <p><strong>Input:</strong> "Ninguém aqui sabe as convenções antigas desse projeto. Pode gerar baseado no que costuma ser padrão pra sistemas de logística?"</p>
+              <p><strong>Saída esperada:</strong> Em vez de recorrer a um "padrão de mercado" genérico, a skill examina a estrutura real de testes já existente no código (pastas, nomenclatura usada nos arquivos) como fonte concreta. Para o que não consegue confirmar nem pela estrutura nem pela entrevista, marca "a definir" explicitamente — uma regra errada aqui não fica só registrada, ela vira instrução que a IA vai seguir automaticamente em toda tarefa futura nesse projeto.</p>
+            </div>
+            
+          </div>
+        </details>
         
     
     <div class="page-nav"><span></span><a class="pn-next" href="../skills/swl-skill-qa-plan-strategy.html"><span class="pn-label">próxima ►</span>Planejar estratégia de testes</a></div>

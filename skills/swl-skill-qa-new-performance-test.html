@@ -18,6 +18,16 @@
   --blue: #4d8cff;
   --purple: #9d7fea;
 
+  /* Variantes de texto dos badges Jr/Pl/Sr (.example-level). Calculadas contra o
+     fundo REAL (rgba(cor,.12) sobre --panel), não contra branco/preto puro — a
+     margem é apertada (~4,6:1 contra o mínimo AA de 4,5:1). Qualquer mudança
+     futura em --blue/--purple/--coral ou na opacidade .12 do fundo diluído exige
+     recalcular o contraste, não só ajustar visualmente. */
+  --blue-text: #3b6ac2;
+  --purple-text: #765fb0;
+  --coral-text: #b34d3f;
+  --blue-text-dark: #508fff;
+
   --bg: #f6faf8;
   --panel: #ffffff;
   --border: #dfe8e3;
@@ -344,6 +354,72 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
+/* Examples accordion (Jr/Pl/Sr) */
+.examples-accordion {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 22px 0;
+  background: var(--panel);
+}
+.examples-accordion summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dark-green);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
+.examples-accordion summary::-webkit-details-marker { display: none; }
+.examples-accordion summary::before {
+  content: "▸";
+  display: inline-block;
+  color: var(--green);
+  transition: transform .15s;
+}
+.examples-accordion[open] summary::before { transform: rotate(90deg); }
+.examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+
+.examples-content {
+  padding: 6px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.example-card {
+  border-left: 3px solid var(--border);
+  padding-left: 14px;
+}
+.example-card .example-level {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 2px 9px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+}
+.example-card .example-level-full { font-weight: 400; }
+.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.example-card p:last-child { margin-bottom: 0; }
+/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
+.example-card:nth-of-type(1) { border-left-color: var(--blue); }
+.example-card:nth-of-type(2) { border-left-color: var(--purple); }
+.example-card:nth-of-type(3) { border-left-color: var(--coral); }
+/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
+html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
+html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
+html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+
 .usage-block {
   display: flex;
   align-items: center;
@@ -642,6 +718,35 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
           <p>Nunca defina o tipo de teste (load/stress/spike/soak) ou os thresholds de aceite por conta própria — são decisões de negócio/SRE que devem ser confirmadas, não assumidas. Um teste de carga com threshold errado aprova em produção um sistema que não aguenta o tráfego real.</p>
         </div>
+        
+    
+        <details class="examples-accordion">
+          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
+          <div class="examples-content">
+            
+            <div class="example-card">
+              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
+              <p><strong>Cenário:</strong> QA júnior na "ClickIngressos" (venda de ingressos online fictícia) quer um smoke test simples do endpoint de listagem de eventos, com k6 já configurado.</p>
+              <p><strong>Input:</strong> "Preciso de um teste de performance smoke pro endpoint GET /eventos, já usamos k6."</p>
+              <p><strong>Saída esperada:</strong> A skill detecta k6, confirma que é smoke test (poucos usuários virtuais, só validar que o script roda), gera o script parametrizado e salva em <code>tests/performance/</code>.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
+              <p><strong>Cenário:</strong> QA pleno na "StreamPlay" (streaming de vídeo fictício) quer testar a API de início de reprodução, mas só definiu o tipo de teste (load), sem os thresholds.</p>
+              <p><strong>Input:</strong> "Quero um teste de carga (load) pro endpoint de iniciar reprodução, mas ainda não sei os números de threshold."</p>
+              <p><strong>Saída esperada:</strong> A skill gera o script como load test conforme pedido, mas para os thresholds (p95, taxa de erro, RPS) marca "a confirmar com o responsável pelo SLA" em vez de preencher com números de exemplo.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
+              <p><strong>Cenário:</strong> Na "BancoDigitalX" (banco digital fictício), o time de infra pede um teste de stress pro endpoint de autenticação antes de um evento de marketing com pico esperado de acessos, mas ninguém do time de negócio respondeu quais números de SLA valem, e o prazo é hoje.</p>
+              <p><strong>Input:</strong> "Precisamos rodar um teste de stress hoje mesmo pro pico do evento, mas ninguém me respondeu ainda o SLA. Pode estimar um número razoável pra gente não atrasar?"</p>
+              <p><strong>Saída esperada:</strong> Mesmo com o prazo apertado e o pedido direto de estimar, a skill gera o script de stress funcional, mas deixa os thresholds marcados como pendentes — um teste "aprovado" contra um número inventado pela própria skill não prova nada sobre o sistema aguentar o pico real do evento, só prova que ele aguenta o número que foi chutado.</p>
+            </div>
+            
+          </div>
+        </details>
         
     
     <div class="page-nav"><a href="../skills/swl-skill-qa-new-test-data.html"><span class="pn-label">◄ anterior</span>Gerar massa de dados de teste</a><a class="pn-next" href="../skills/swl-skill-qa-new-contract-tests.html"><span class="pn-label">próxima ►</span>Gerar testes de contrato</a></div>

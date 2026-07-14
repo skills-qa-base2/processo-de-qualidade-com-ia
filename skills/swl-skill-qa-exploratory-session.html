@@ -18,6 +18,16 @@
   --blue: #4d8cff;
   --purple: #9d7fea;
 
+  /* Variantes de texto dos badges Jr/Pl/Sr (.example-level). Calculadas contra o
+     fundo REAL (rgba(cor,.12) sobre --panel), não contra branco/preto puro — a
+     margem é apertada (~4,6:1 contra o mínimo AA de 4,5:1). Qualquer mudança
+     futura em --blue/--purple/--coral ou na opacidade .12 do fundo diluído exige
+     recalcular o contraste, não só ajustar visualmente. */
+  --blue-text: #3b6ac2;
+  --purple-text: #765fb0;
+  --coral-text: #b34d3f;
+  --blue-text-dark: #508fff;
+
   --bg: #f6faf8;
   --panel: #ffffff;
   --border: #dfe8e3;
@@ -344,6 +354,72 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
+/* Examples accordion (Jr/Pl/Sr) */
+.examples-accordion {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 22px 0;
+  background: var(--panel);
+}
+.examples-accordion summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dark-green);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
+.examples-accordion summary::-webkit-details-marker { display: none; }
+.examples-accordion summary::before {
+  content: "▸";
+  display: inline-block;
+  color: var(--green);
+  transition: transform .15s;
+}
+.examples-accordion[open] summary::before { transform: rotate(90deg); }
+.examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+
+.examples-content {
+  padding: 6px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.example-card {
+  border-left: 3px solid var(--border);
+  padding-left: 14px;
+}
+.example-card .example-level {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 2px 9px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+}
+.example-card .example-level-full { font-weight: 400; }
+.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.example-card p:last-child { margin-bottom: 0; }
+/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
+.example-card:nth-of-type(1) { border-left-color: var(--blue); }
+.example-card:nth-of-type(2) { border-left-color: var(--purple); }
+.example-card:nth-of-type(3) { border-left-color: var(--coral); }
+/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
+html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
+html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
+html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+
 .usage-block {
   display: flex;
   align-items: center;
@@ -649,6 +725,35 @@ Cobertura percebida: &lt;o que ainda não foi explorado por falta de tempo&gt;
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
           <p>Teste exploratório documenta o que foi de fato observado durante a sessão — nunca preencha "áreas cobertas" com funcionalidades que não foram realmente exercitadas na sessão registrada.</p>
         </div>
+        
+    
+        <details class="examples-accordion">
+          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
+          <div class="examples-content">
+            
+            <div class="example-card">
+              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
+              <p><strong>Cenário:</strong> QA júnior no app "PetAmigo" (adoção de pets fictícia) faz sua primeira sessão exploratória na tela de busca de pets.</p>
+              <p><strong>Input:</strong> "Quero fazer uma sessão exploratória na busca de pets, tenho 1 hora."</p>
+              <p><strong>Saída esperada:</strong> A skill define o charter (missão: busca por filtros combinados; escopo: só a tela de busca; tempo-caixa: 60 min), conduz e documenta os achados reais da sessão.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
+              <p><strong>Cenário:</strong> QA pleno na "AgroConecta" (marketplace B2B fictício) conduz sessão exploratória no checkout, mas é interrompido antes de testar uma parte do fluxo planejado.</p>
+              <p><strong>Input:</strong> relata que testou boa parte do fluxo de negociação de preço, mas foi interrompido antes de testar o fluxo de aprovação em duas etapas.</p>
+              <p><strong>Saída esperada:</strong> A skill documenta as áreas realmente cobertas (negociação de preço) e registra explicitamente, em "cobertura percebida", que o fluxo de aprovação em duas etapas não foi exercitado por falta de tempo — sem incluir esse fluxo em "áreas cobertas" mesmo fazendo parte do charter original.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
+              <p><strong>Cenário:</strong> Na "RH Fácil" (sistema de RH fictício), o QA sênior conduz uma sessão de 45 minutos na tela de folha de pagamento, e o gerente pede pro relatório dizer que "o módulo de folha inteiro foi testado" pra justificar a liberação do release.</p>
+              <p><strong>Input:</strong> "Coloca no relatório que testamos o módulo de folha inteiro, deu pra ver bastante coisa nessa sessão."</p>
+              <p><strong>Saída esperada:</strong> O relatório lista como "áreas cobertas" exatamente as três telas exercitadas (cálculo de horas extras, desconto de INSS, geração de holerite) — não o módulo inteiro, que também inclui rescisão e 13º salário, nenhum dos dois tocados nesses 45 minutos. Um release liberado com base num relatório que diz "módulo inteiro testado" deixa ninguém sabendo que rescisão ficou sem nenhum teste, até um problema aparecer lá.</p>
+            </div>
+            
+          </div>
+        </details>
         
     
     <div class="page-nav"><a href="../skills/swl-skill-qa-check-security.html"><span class="pn-label">◄ anterior</span>Verificar segurança (multi-stack)</a><a class="pn-next" href="../skills/swl-skill-qa-diagnose-failure.html"><span class="pn-label">próxima ►</span>Diagnosticar falha de teste</a></div>

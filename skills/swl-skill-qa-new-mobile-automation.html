@@ -18,6 +18,16 @@
   --blue: #4d8cff;
   --purple: #9d7fea;
 
+  /* Variantes de texto dos badges Jr/Pl/Sr (.example-level). Calculadas contra o
+     fundo REAL (rgba(cor,.12) sobre --panel), não contra branco/preto puro — a
+     margem é apertada (~4,6:1 contra o mínimo AA de 4,5:1). Qualquer mudança
+     futura em --blue/--purple/--coral ou na opacidade .12 do fundo diluído exige
+     recalcular o contraste, não só ajustar visualmente. */
+  --blue-text: #3b6ac2;
+  --purple-text: #765fb0;
+  --coral-text: #b34d3f;
+  --blue-text-dark: #508fff;
+
   --bg: #f6faf8;
   --panel: #ffffff;
   --border: #dfe8e3;
@@ -344,6 +354,72 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
+/* Examples accordion (Jr/Pl/Sr) */
+.examples-accordion {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 22px 0;
+  background: var(--panel);
+}
+.examples-accordion summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dark-green);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+html[data-theme="dark"] .examples-accordion summary { color: var(--lime); }
+.examples-accordion summary::-webkit-details-marker { display: none; }
+.examples-accordion summary::before {
+  content: "▸";
+  display: inline-block;
+  color: var(--green);
+  transition: transform .15s;
+}
+.examples-accordion[open] summary::before { transform: rotate(90deg); }
+.examples-accordion[open] summary { border-bottom: 1px solid var(--border); }
+
+.examples-content {
+  padding: 6px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.example-card {
+  border-left: 3px solid var(--border);
+  padding-left: 14px;
+}
+.example-card .example-level {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 2px 9px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+}
+.example-card .example-level-full { font-weight: 400; }
+.example-card p { font-size: 14px; margin: 0 0 6px; line-height: 1.6; }
+.example-card p:last-child { margin-bottom: 0; }
+/* Tarja border-left decorativa: usa as cores vibrantes originais, sem exigência de contraste. */
+.example-card:nth-of-type(1) { border-left-color: var(--blue); }
+.example-card:nth-of-type(2) { border-left-color: var(--purple); }
+.example-card:nth-of-type(3) { border-left-color: var(--coral); }
+/* Pílula de nível: fundo diluído da cor original + variante de texto com contraste calculado (ver :root). */
+.example-card:nth-of-type(1) .example-level { background: rgba(77,140,255,.12); color: var(--blue-text); }
+.example-card:nth-of-type(2) .example-level { background: rgba(157,127,234,.12); color: var(--purple-text); }
+.example-card:nth-of-type(3) .example-level { background: rgba(255,110,90,.12); color: var(--coral-text); }
+html[data-theme="dark"] .example-card:nth-of-type(1) .example-level { color: var(--blue-text-dark); }
+html[data-theme="dark"] .example-card:nth-of-type(2) .example-level { color: var(--purple); }
+html[data-theme="dark"] .example-card:nth-of-type(3) .example-level { color: var(--coral); }
+
 .usage-block {
   display: flex;
   align-items: center;
@@ -642,6 +718,35 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
           <p>Nunca afirme que um cenário foi validado em um dispositivo ou versão de OS sem execução real registrada — fragmentação de dispositivo é a causa mais comum de falso-positivo em QA mobile. Todo teste gerado deve ser marcado com o comentário <code>// generated-by-ai: pending-review</code> (ou equivalente na linguagem) <strong>somente após</strong> revisão humana.</p>
         </div>
+        
+    
+        <details class="examples-accordion">
+          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
+          <div class="examples-content">
+            
+            <div class="example-card">
+              <div class="example-level">Jr <span class="example-level-full">— Júnior</span></div>
+              <p><strong>Cenário:</strong> QA júnior no app "PetAmigo" (adoção de pets fictícia) precisa automatizar a tela de favoritar um pet, com Detox já configurado.</p>
+              <p><strong>Input:</strong> "Gera a automação mobile do cenário de favoritar um pet, já temos Detox configurado e o ScreenObject de Listagem pronto."</p>
+              <p><strong>Saída esperada:</strong> A skill detecta Detox via <code>.detoxrc</code>, reutiliza o Screen Object existente, usa seletores por <code>testID</code>, declara "testado no emulador Android 14 (Pixel 7)" e marca <code>generated-by-ai: pending-review</code>.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Pl <span class="example-level-full">— Pleno</span></div>
+              <p><strong>Cenário:</strong> QA pleno na "BancoDigitalX" (banco digital fictício) precisa automatizar a aprovação de transferência via biometria, mas não está claro se o projeto já trata o diálogo nativo de biometria em algum outro teste.</p>
+              <p><strong>Input:</strong> "Automatiza a aprovação de transferência via biometria no Appium. Não sei se já lidamos com o diálogo do sistema de biometria em algum outro teste."</p>
+              <p><strong>Saída esperada:</strong> A skill gera o teste cobrindo o fluxo, mas ao chegar no diálogo nativo de biometria do SO, marca que não encontrou tratamento existente pra esse tipo de diálogo no projeto e pergunta se deve ser mockado (comum em CI, já que biometria real não funciona em emulador) antes de assumir uma abordagem.</p>
+            </div>
+            
+            <div class="example-card">
+              <div class="example-level">Sr <span class="example-level-full">— Sênior</span></div>
+              <p><strong>Cenário:</strong> Na "RotaCerta" (app do entregador fictício), o QA sênior testou só no emulador Android mais recente, mas o gerente de operações pede pra "confirmar que funciona em todos os celulares dos entregadores" pra aprovar o rollout geral.</p>
+              <p><strong>Input:</strong> "Preciso saber se a atualização do app funciona nos celulares dos entregadores em geral, pra liberar pra todo mundo essa semana."</p>
+              <p><strong>Saída esperada:</strong> A skill documenta exatamente o que rodou (emulador Android 14, Pixel 7) e não estende essa cobertura pra "os celulares dos entregadores em geral" — a frota real inclui Android 9 a 14 em fabricantes variados, nenhum deles exercitado nesta execução. O rollout geral, aprovado só com base nesse teste, estaria liberando pra um universo de dispositivos nunca tocado.</p>
+            </div>
+            
+          </div>
+        </details>
         
     
     <div class="page-nav"><a href="../skills/swl-skill-qa-new-automation.html"><span class="pn-label">◄ anterior</span>Gerar automação (web/API/integração)</a><a class="pn-next" href="../skills/swl-skill-qa-new-test-cases.html"><span class="pn-label">próxima ►</span>Gerar casos de teste</a></div>

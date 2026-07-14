@@ -63,6 +63,32 @@ TITLE_MAP = {
     "swl-skill-qa-safe-test-commit": "Pipeline de commit seguro",
 }
 
+LEVEL_LABELS = {"Jr": "Júnior", "Pl": "Pleno", "Sr": "Sênior"}
+
+def parse_examples(folder):
+    path = os.path.join(SKILLS_DIR, folder, "EXAMPLES.md")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        text = f.read()
+
+    blocks = re.split(r"^## (Jr|Pl|Sr)\s*$", text, flags=re.M)
+    examples = []
+    for i in range(1, len(blocks), 2):
+        level = blocks[i]
+        content = blocks[i + 1]
+        cenario = re.search(r"\*\*Cenário:\*\*\s*(.+?)(?=\n\*\*|\Z)", content, re.S)
+        input_ = re.search(r"\*\*Input:\*\*\s*(.+?)(?=\n\*\*|\Z)", content, re.S)
+        saida = re.search(r"\*\*Saída esperada:\*\*\s*(.+?)(?=\n##|\Z)", content, re.S)
+        examples.append({
+            "level": level,
+            "level_label": LEVEL_LABELS[level],
+            "scenario": cenario.group(1).strip() if cenario else "",
+            "input": input_.group(1).strip() if input_ else "",
+            "expected_output": saida.group(1).strip() if saida else "",
+        })
+    return examples
+
 def parse_skill(folder):
     path = os.path.join(SKILLS_DIR, folder, "SKILL.md")
     with open(path, encoding="utf-8") as f:
@@ -91,6 +117,7 @@ def parse_skill(folder):
         "title": TITLE_MAP.get(folder, folder),
         "body_md": body,
         "guardrail_md": guardrail,
+        "examples": parse_examples(folder),
     }
 
 def main():
@@ -100,6 +127,10 @@ def main():
     with open(os.path.join(SCRIPT_DIR, "skills_data.json"), "w", encoding="utf-8") as f:
         json.dump(skills, f, ensure_ascii=False, indent=2)
     print(f"Parsed {len(skills)} skills")
+
+    missing_examples = [s["folder"] for s in skills if s["examples"] is None]
+    if missing_examples:
+        print(f"AVISO: {len(missing_examples)} skills sem EXAMPLES.md (ficam sem seção de exemplos no site): {', '.join(missing_examples)}")
 
 if __name__ == "__main__":
     main()

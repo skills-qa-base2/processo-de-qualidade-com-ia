@@ -37,6 +37,11 @@ def word_count_and_time(text):
 def render_md(text):
     return md.markdown(text, extensions=["tables", "fenced_code", "sane_lists"])
 
+def render_inline_md(text):
+    """Render markdown (bold, code) without the wrapping <p>, for text already inside another <p>."""
+    html = render_md(text).strip()
+    return re.sub(r"^<p>(.*)</p>$", r"\1", html, flags=re.S)
+
 def preprocess_steps_md(text):
     """Fix common formatting quirks in the SKILL.md bodies:
     - insert a blank line before bullet/numbered lists glued to the previous paragraph
@@ -204,6 +209,27 @@ def build_skill_page(s, idx):
         </div>
         """
 
+    examples_html = ""
+    if s.get("examples"):
+        cards = []
+        for ex in s["examples"]:
+            cards.append(f"""
+            <div class="example-card">
+              <div class="example-level">{ex['level']} <span class="example-level-full">— {ex['level_label']}</span></div>
+              <p><strong>Cenário:</strong> {render_inline_md(ex['scenario'])}</p>
+              <p><strong>Input:</strong> {render_inline_md(ex['input'])}</p>
+              <p><strong>Saída esperada:</strong> {render_inline_md(ex['expected_output'])}</p>
+            </div>
+            """)
+        examples_html = f"""
+        <details class="examples-accordion">
+          <summary>Ver 3 exemplos (Júnior / Pleno / Sênior)</summary>
+          <div class="examples-content">
+            {''.join(cards)}
+          </div>
+        </details>
+        """
+
     not_validated_html = ""
     if not s["validated"]:
         not_validated_html = """
@@ -232,6 +258,7 @@ def build_skill_page(s, idx):
 
     {body_md_html}
     {guardrail_html}
+    {examples_html}
     """
 
     html = page_shell(
