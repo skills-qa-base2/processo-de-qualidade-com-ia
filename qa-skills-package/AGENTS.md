@@ -13,6 +13,9 @@ Este repositório mantém uma coleção de skills de QA da Base2 para o Claude C
 ## Estrutura esperada
 - Cada skill fica em `skills/<nome-da-skill>/SKILL.md`.
 - O arquivo principal da skill deve conter metadados no topo (`name`, `description`, `argument-hint`, `metadata.version`) e instruções claras para o agente.
+- Cada skill também deve ter um `EXAMPLES.md` na mesma pasta, com 3 exemplos no formato
+  `Cenário`/`Input`/`Prompt de exemplo`/`Saída esperada`, mesmo padrão já usado nas
+  skills existentes.
 - O conteúdo deve ser conciso, acionável e alinhado com os padrões já usados nas skills existentes.
 
 ## Convenções importantes

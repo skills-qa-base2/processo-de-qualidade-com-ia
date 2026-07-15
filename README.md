@@ -146,7 +146,9 @@ python3 build_instalacao.py    # regenera instalacao.html
 **Adicionando uma skill nova:** crie a pasta
 `qa-skills-package/skills/swl-skill-qa-<nome>/SKILL.md` seguindo o formato das demais
 (frontmatter `name`/`description`/`argument-hint`/`metadata.version`, seção `## Passos` e
-seção `## Guardrail`), registre-a em `CATEGORY_MAP` e `TITLE_MAP` no topo de
+seção `## Guardrail`), crie também o `EXAMPLES.md` da mesma pasta com 3 exemplos no
+formato `Cenário`/`Input`/`Prompt de exemplo`/`Saída esperada` (mesmo padrão das 25
+skills existentes), registre-a em `CATEGORY_MAP` e `TITLE_MAP` no topo de
 `scripts/build_data.py`, e rode os cinco scripts acima.
 
 **Renomeando o site:** a constante `SITE_NAME` no topo de `scripts/build_skill_pages.py`.

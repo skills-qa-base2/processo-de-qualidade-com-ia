@@ -288,7 +288,8 @@ def build_skill_page(s, idx):
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(html)
 
-for i, s in enumerate(SKILLS):
-    build_skill_page(s, i)
+if __name__ == "__main__":
+    for i, s in enumerate(SKILLS):
+        build_skill_page(s, i)
 
-print(f"Built {len(SKILLS)} skill pages")
+    print(f"Built {len(SKILLS)} skill pages")

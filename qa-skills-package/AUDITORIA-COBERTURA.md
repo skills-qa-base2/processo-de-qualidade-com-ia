@@ -36,22 +36,30 @@ Não houve 5ª proposta — "manutenção da suíte" já estava coberta, não fo
 
 ## Parte 2 — Consolidação: as 4 skills de automação deveriam virar 1?
 
+> **Nota de atualização (2026-07-14):** os números de contagem de palavras abaixo foram
+> reconferidos e atualizados nesta data. As contagens originais desta Parte 2 foram
+> medidas antes da rodada de corte de verbosidade documentada em `EFICIENCIA-TOKENS.md`
+> (que reduziu 4 destas skills sem mudar comportamento); os valores abaixo refletem o
+> `SKILL.md` real de hoje, não a versão pré-corte. A coluna "% genuinamente exclusivo"
+> e a estimativa de custo da versão fundida (abaixo) não foram recalculadas nesta
+> atualização — só as contagens brutas.
+
 ### Números reais (contagem `wc`, arquivo completo incluindo frontmatter = exatamente o custo por chamada)
 
 | Skill | Palavras/chamada | Frontmatter | % genuinamente exclusivo |
 |---|---|---|---|
-| `qa-new-automation` | 288 | 46 | ≈70% |
-| `qa-new-mobile-automation` | 315 | 44 | ≈73% |
-| `qa-new-contract-tests` | 277 | 40 | ≈96% |
-| `qa-new-performance-test` | 292 | 46 | ≈95% |
-| **Total hoje** | **1172** | — | — |
+| `qa-new-automation` | 290 | 46 | ≈70% |
+| `qa-new-mobile-automation` | 298 | 44 | ≈73% |
+| `qa-new-contract-tests` | 264 | 40 | ≈96% |
+| `qa-new-performance-test` | 278 | 46 | ≈95% |
+| **Total hoje** | **1130** | — | — |
 
 Duplicação real concentrada quase toda entre **automation ↔ mobile** (~85 palavras idênticas/quase-idênticas, confirmado via grep): seção `Origem do cenário`, seção `Registro no pipeline`, bullet de dados via `qa-new-test-data`, núcleo do guardrail `generated-by-ai`. `contract-tests` e `performance-test` não têm nenhuma dessas seções — são as mais distintas das 4.
 
 ### Custo por chamada, hoje vs. fundida
-- Hoje: 277 a 315 palavras, dependendo de qual é chamada.
-- Fundida (eliminando toda duplicação real + adicionando uma etapa nova de "identifique o domínio" que hoje é implícita no nome da skill): ≈900-950 palavras.
-- **Resultado: ~2,9x a 3,3x mais caro por chamada, para sempre, em troca de uma redução de armazenamento total de ~20%.**
+- Hoje: 264 a 298 palavras, dependendo de qual é chamada.
+- Fundida (eliminando toda duplicação real + adicionando uma etapa nova de "identifique o domínio" que hoje é implícita no nome da skill): ≈900-950 palavras (estimativa original, não recalculada nesta atualização).
+- **Resultado: ~3,0x (900÷298) a 3,6x (950÷264) mais caro por chamada, para sempre, em troca de uma redução de armazenamento total de ~20%** (múltiplo recalculado cruzando os extremos da contagem atual — 264 a 298 palavras — com a mesma estimativa de fundida de 900-950, não revisada nesta atualização; o múltiplo real ficou levemente maior que o original ~2,9x-3,3x, já que as 4 skills individuais ficaram mais enxutas e a estimativa de fundida não).
 
 ### Guardrail se perderia?
 Sim — risco real de diluição (parágrafo genérico aplicado com menos precisão) e de perda por edição futura (alguém "simplifica" o parágrafo combinado e apaga sem querer a cláusula de outro domínio).

@@ -9,21 +9,21 @@ Skills de QA da Base2 Tecnologia para Claude Code. Cobrem frontend/web, API, int
 | `swl-skill-qa-plan-strategy` | 1.0.0 | Planejamento | Entrevista estruturada para levantar a estratégia de testes de um projeto ou feature antes de gerar qualquer cenário |
 | `swl-skill-qa-generate-rules` | 1.0.0 | Planejamento | Gera `.claude/rules/qa/` a partir de documentação técnica existente ou entrevista com o time |
 | `swl-skill-qa-new-bdd-scenarios` | 1.0.0 | Geração | Gera cenários BDD em Gherkin a partir de critérios de aceite |
-| `swl-skill-qa-new-test-cases` | 1.0.0 | Geração | Gera casos de teste estruturados a partir de user story, cobrindo happy path, edge cases e negativos |
+| `swl-skill-qa-new-test-cases` | 1.0.1 | Geração | Gera casos de teste estruturados a partir de user story, cobrindo happy path, edge cases e negativos |
 | `swl-skill-qa-new-test-data` | 1.0.0 | Geração | Gera massa de dados de teste fictícia via factories/fixtures |
 | `swl-skill-qa-new-automation` | 1.1.0 | Geração | Gera código de automação web/API/integração detectando o framework do projeto (Playwright, Cypress, Selenium, Robot Framework, RestAssured, Postman/Newman, Testcontainers, WireMock/MockServer, Cucumber, SpecFlow) |
-| `swl-skill-qa-new-mobile-automation` | 1.0.0 | Geração | Gera código de automação mobile detectando o framework do projeto (Appium, Espresso, XCUITest, Detox, Maestro) |
-| `swl-skill-qa-new-contract-tests` | 1.0.0 | Geração | Gera testes de contrato/schema de API (OpenAPI/JSON Schema, Pact/Spring Cloud Contract) a partir de especificação real |
-| `swl-skill-qa-new-performance-test` | 1.0.0 | Geração | Gera scripts de teste de performance (smoke/load/stress/spike/soak) detectando a ferramenta do projeto (k6, JMeter, Gatling, Artillery) |
+| `swl-skill-qa-new-mobile-automation` | 1.0.1 | Geração | Gera código de automação mobile detectando o framework do projeto (Appium, Espresso, XCUITest, Detox, Maestro) |
+| `swl-skill-qa-new-contract-tests` | 1.0.1 | Geração | Gera testes de contrato/schema de API (OpenAPI/JSON Schema, Pact/Spring Cloud Contract) a partir de especificação real |
+| `swl-skill-qa-new-performance-test` | 1.0.1 | Geração | Gera scripts de teste de performance (smoke/load/stress/spike/soak) detectando a ferramenta do projeto (k6, JMeter, Gatling, Artillery) |
 | `swl-skill-qa-check-performance-results` | 1.0.0 | Verificação | Analisa resultado real de execução de teste de performance contra thresholds definidos |
 | `swl-skill-qa-check-coverage` | 1.0.0 | Verificação | Analisa gaps de cobertura de cenários frente a requisitos e critérios de aceite |
 | `swl-skill-qa-check-flakiness` | 1.0.0 | Verificação | Detecta padrões de instabilidade em testes automatizados |
 | `swl-skill-qa-check-data-quality` | 1.0.0 | Verificação | Audita documentos/relatórios de QA gerados por IA em busca de dados fabricados |
 | `swl-skill-qa-review-tests` | 1.0.0 | Verificação | Revisa testes quanto a nomenclatura, clareza de asserts e cobertura real |
 | `swl-skill-qa-risk-priority` | 1.0.0 | Verificação | Prioriza cenários por criticidade de negócio e risco técnico |
-| `swl-skill-qa-check-security` | 1.0.0 | Verificação | Verificação de segurança stack-agnóstica (Node, Python, Java, mobile) — complementa, não duplica, a `swl-skill-check-security` do org-skills (.NET Web API) |
-| `swl-skill-qa-check-accessibility` | 1.0.0 | Verificação | Audita acessibilidade (WCAG) via ferramenta já presente no projeto (axe-core, pa11y, Lighthouse) |
-| `swl-skill-qa-check-environment` | 1.0.0 | Verificação | Valida que um ambiente está pronto para rodar a suíte (health check, seed de dados, feature flags) |
+| `swl-skill-qa-check-security` | 1.0.1 | Verificação | Verificação de segurança stack-agnóstica (Node, Python, Java, mobile) — complementa, não duplica, a `swl-skill-check-security` do org-skills (.NET Web API) |
+| `swl-skill-qa-check-accessibility` | 1.0.1 | Verificação | Audita acessibilidade (WCAG) via ferramenta já presente no projeto (axe-core, pa11y, Lighthouse) |
+| `swl-skill-qa-check-environment` | 1.0.1 | Verificação | Valida que um ambiente está pronto para rodar a suíte (health check, seed de dados, feature flags) |
 | `swl-skill-qa-diagnose-failure` | 1.0.0 | Diagnóstico | Rastreia falha de teste até a causa raiz, distinguindo bug de produto, teste mal escrito ou ambiente |
 | `swl-skill-qa-report-bug` | 1.0.0 | Diagnóstico | Gera relatório de bug estruturado pronto para o sistema de gestão do projeto |
 | `swl-skill-qa-exploratory-session` | 1.0.0 | Diagnóstico | Conduz e documenta uma sessão de teste exploratório estruturada |
@@ -66,6 +66,7 @@ As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mes
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Gera `.feature` com happy path, edge case e negativo por critério; um `Quando` por ação de negócio.
 
 ### swl-skill-qa-new-test-cases
+- **1.0.1** — Reduz verbosidade (217 → 206 palavras, -5,1%) sem mudança de comportamento, conforme `EFICIENCIA-TOKENS.md`.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Marca `[REGRA A CONFIRMAR COM PO]` quando a regra de negócio não está explícita.
 
 ### swl-skill-qa-new-test-data
@@ -76,12 +77,15 @@ As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mes
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Detecta framework via CLAUDE.md/config; marca `generated-by-ai: pending-review` até revisão humana.
 
 ### swl-skill-qa-new-mobile-automation
+- **1.0.1** — Reduz verbosidade (317 → 298 palavras, -6,0%) sem mudança de comportamento, conforme `EFICIENCIA-TOKENS.md`.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Detecta Appium/Espresso/XCUITest/Detox/Maestro; nunca declara cobertura de dispositivo/OS além do efetivamente testado.
 
 ### swl-skill-qa-new-contract-tests
+- **1.0.1** — Reduz verbosidade (279 → 264 palavras, -5,4%) sem mudança de comportamento, conforme `EFICIENCIA-TOKENS.md`.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Nunca gera schema/contrato a partir de suposição — exige especificação real (OpenAPI, JSON Schema ou contrato Pact publicado).
 
 ### swl-skill-qa-new-performance-test
+- **1.0.1** — Reduz verbosidade (294 → 278 palavras, -5,4%) sem mudança de comportamento, conforme `EFICIENCIA-TOKENS.md`.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Nunca assume tipo de teste (smoke/load/stress/spike/soak) nem threshold de SLA sem confirmação.
 
 ### swl-skill-qa-check-performance-results
@@ -103,12 +107,15 @@ As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mes
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Classificação sempre rastreável aos critérios individuais; omite histórico de bugs sem dado real.
 
 ### swl-skill-qa-check-security
+- **1.0.1** — Reduz verbosidade (389 → 359 palavras, -7,7%) sem mudança de comportamento, conforme `EFICIENCIA-TOKENS.md`.
 - **1.0.0** — Versão inicial. Verificação de segurança stack-agnóstica (fora de .NET Web API); guardrail exige evidência real de execução (request/response observado) para qualquer achado, nunca "aprovado" por ausência de teste. Pendente de teste adversarial (ver nota em "Validação desta versão").
 
 ### swl-skill-qa-check-accessibility
+- **1.0.1** — Reduz verbosidade (300 → 288 palavras, -4,0%) sem mudança de comportamento, conforme `EFICIENCIA-TOKENS.md`.
 - **1.0.0** — Versão inicial. Audita WCAG via ferramenta já presente no projeto; guardrail nunca declara conformidade além das telas efetivamente auditadas. Pendente de teste adversarial.
 
 ### swl-skill-qa-check-environment
+- **1.0.1** — Reduz verbosidade (355 → 344 palavras, -3,1%) sem mudança de comportamento, conforme `EFICIENCIA-TOKENS.md`.
 - **1.0.0** — Versão inicial. Valida ambiente antes da execução (health check, seed, feature flags); guardrail nunca presume "ambiente pronto" sem checar de fato. Pendente de teste adversarial.
 
 ### swl-skill-qa-diagnose-failure
