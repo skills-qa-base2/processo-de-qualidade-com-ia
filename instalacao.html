@@ -702,7 +702,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">551 palavras&nbsp;&nbsp;|&nbsp;&nbsp;3 min</div>
+    <div class="content-meta">1708 palavras&nbsp;&nbsp;|&nbsp;&nbsp;8 min</div>
     
 <div class="eyebrow"><span class="cat-pill">Fundamentos</span></div>
 <h1>Como instalar e usar</h1>
@@ -777,6 +777,124 @@ Documente no <code>CLAUDE.md</code> do seu projeto:</p>
 <li>Política de dados de teste</li>
 </ul>
 <p>Quanto mais completo o <code>CLAUDE.md</code>, mais preciso o resultado das skills.</p>
+<h2>Fluxos comuns</h2>
+<p>Isto é um <strong>guia de referência</strong>, não uma skill nem uma automação nova — a ideia é
+colar a versão em markdown (mais abaixo) no <code>CLAUDE.md</code> do seu projeto, para que o
+Claude Code (ou você mesmo) saiba em que ordem faz sentido chamar as skills quando o
+pedido é amplo ("testa esse fluxo do zero", "isso tá pronto pra lançar?"), em vez de
+escolher uma skill de cada vez sem critério. Onde a ordem é uma dependência real
+(uma skill lê o que a outra gerou), isso está indicado; onde é só uma sugestão de
+bom senso, também.</p>
+<h3>Fluxo 1 — Funcionalidade nova, testar do zero</h3>
+<p><strong>Dispara com:</strong> "preciso testar o fluxo de checkout do zero", "essa feature ainda não tem nenhum teste".</p>
+<ol>
+<li><code>/swl-skill-qa-plan-strategy</code> — se o projeto ainda não tem uma estratégia de teste registrada. <em>Ordem sugerida:</em> evita partir direto pra 100% E2E por padrão.</li>
+<li><code>/swl-skill-qa-new-bdd-scenarios</code> (ou <code>/swl-skill-qa-new-test-cases</code>, conforme o projeto usa Gherkin ou casos estruturados) — a partir da user story/critérios de aceite.</li>
+<li><code>/swl-skill-qa-risk-priority</code> — prioriza os cenários gerados no passo 2. <em>Ordem sugerida:</em> a skill lista "cenários já mapeados via new-test-cases/new-bdd-scenarios" como fonte preferencial.</li>
+<li><code>/swl-skill-qa-new-test-data</code> — gera a massa fictícia para a entidade/domínio da feature.</li>
+<li><code>/swl-skill-qa-new-automation</code> (ou <code>/swl-skill-qa-new-mobile-automation</code> para mobile, <code>/swl-skill-qa-new-performance-test</code> para carga, <code>/swl-skill-qa-new-contract-tests</code> para contrato de API) — <em>dependência real:</em> o passo "Origem do cenário" dessas skills lê o cenário do passo 2, e consome a massa do passo 4.</li>
+<li><code>/swl-skill-qa-safe-test-commit</code> — antes de commitar, roda em sequência check-coverage, check-data-quality, check-flakiness e review-tests (pipeline interno da própria skill).</li>
+</ol>
+<h3>Fluxo 2 — Verificar se está pronto para lançar (release readiness)</h3>
+<p><strong>Dispara com:</strong> "dá pra lançar essa versão?", "preciso de um go/no-go pra release".</p>
+<ol>
+<li><code>/swl-skill-qa-check-environment</code> — <em>dependência real:</em> confirma health check, seed de dados e feature flags antes de qualquer execução; lê <code>convencoes-teste.md</code> se ele existir (gerado por <code>swl-skill-qa-generate-rules</code>).</li>
+<li><code>/swl-skill-qa-check-coverage</code> — confirma que os critérios de aceite da release estão de fato cobertos por cenários, antes de aceitar os números da execução.</li>
+<li>Execute a suíte (fora do escopo das skills) e gere os arquivos de resultado reais.</li>
+<li><code>/swl-skill-qa-generate-test-report</code> — <em>dependência real:</em> lê o arquivo de resultado real gerado no passo 3.</li>
+<li><code>/swl-skill-qa-check-performance-results</code> — se houver teste de carga no ciclo; <em>dependência real:</em> compara com os thresholds definidos em <code>swl-skill-qa-new-performance-test</code>, quando existirem.</li>
+<li><code>/swl-skill-qa-check-security</code> e <code>/swl-skill-qa-check-accessibility</code> — verificações funcionais/dinâmicas adicionais contra o ambiente já confirmado no passo 1. <em>Ordem entre elas é livre.</em></li>
+<li><code>/swl-skill-qa-check-data-quality</code> — audita o relatório final gerado nos passos anteriores antes de circular para stakeholders, garantindo que nenhum número foi inventado.</li>
+</ol>
+<h3>Fluxo 3 — Um teste ou suíte está falhando / vermelho no CI</h3>
+<p><strong>Dispara com:</strong> "esse teste quebrou no CI e eu não sei por quê", "a suíte ficou vermelha".</p>
+<ol>
+<li><code>/swl-skill-qa-check-environment</code> — <em>ordem sugerida, não obrigatória:</em> descarta primeiro se o CI está vermelho por ambiente não estar pronto, antes de investigar o teste em si.</li>
+<li><code>/swl-skill-qa-diagnose-failure</code> — classifica a causa raiz: bug de produto / teste mal escrito / ambiente / flakiness.</li>
+<li>Conforme a classificação do passo 2 — <em>dependência real, a própria skill encaminha:</em>
+   - Bug de produto → <code>/swl-skill-qa-report-bug</code>
+   - Flakiness → <code>/swl-skill-qa-check-flakiness</code>
+   - Teste mal escrito → corrigir o teste diretamente (sem skill dedicada)
+   - Ambiente → sinalizar ao responsável por infraestrutura</li>
+<li><code>/swl-skill-qa-safe-test-commit</code> — antes de subir a correção do teste ou do bug.</li>
+</ol>
+<h3>Fluxo 4 — Assumir ou auditar um conjunto de testes já existente</h3>
+<p><strong>Dispara com:</strong> "herdei essa suíte e não sei o estado dela", "projeto legado sem processo de QA definido".</p>
+<ol>
+<li><code>/swl-skill-qa-generate-rules</code> — quando o projeto não tem <code>.claude/rules/qa/</code> definido ainda; é o caso de uso explícito da skill para "projetos legados sem processo de teste definido".</li>
+<li><code>/swl-skill-qa-plan-strategy</code> — <em>dependência real:</em> seu primeiro passo lê <code>.claude/rules/qa/</code> (se existirem) e o <code>CLAUDE.md</code> para levantar o contexto atual.</li>
+<li><code>/swl-skill-qa-check-flakiness</code> — varre a suíte existente em busca de instabilidade.</li>
+<li><code>/swl-skill-qa-check-coverage</code> — cruza os critérios de aceite atuais com os cenários já existentes; aponta gaps e possíveis testes órfãos.</li>
+<li><code>/swl-skill-qa-review-tests</code> — revisa nomenclatura, qualidade de assert e redundância dos testes existentes.</li>
+<li><code>/swl-skill-qa-risk-priority</code> — com o cenário completo levantado, prioriza o que vale manter/automatizar vs. testar manualmente daqui pra frente.</li>
+</ol>
+<h3>Fluxo 5 — Fechar a entrega depois de uma rodada de testes</h3>
+<p><strong>Dispara com:</strong> "terminei de rodar os testes desse ciclo, preciso fechar a entrega", "preciso descrever o PR de testes".</p>
+<ol>
+<li><code>/swl-skill-qa-check-coverage</code> — <em>dependência real:</em> seu resultado é referenciado diretamente no template do passo 5.</li>
+<li><code>/swl-skill-qa-generate-test-report</code> — relatório executivo a partir do resultado real de execução do ciclo.</li>
+<li><code>/swl-skill-qa-check-data-quality</code> — audita o relatório recém-gerado antes de circular.</li>
+<li><code>/swl-skill-qa-update-test-docs</code> — atualiza README de automação, glossário de cenários e mapa de cobertura com base no que mudou na branch.</li>
+<li><code>/swl-skill-qa-describe-test-pr</code> — <em>dependência real:</em> o template gerado já embute "resultado do swl-skill-qa-check-coverage mais recente" (passo 1).</li>
+<li><code>/swl-skill-qa-safe-test-commit</code> — se ainda houver testes dessa rodada não commitados, roda o pipeline de segurança antes do push final.</li>
+</ol>
+<h3>Fluxo 6 — Sessão de teste exploratório e o que fazer com os achados</h3>
+<p><strong>Dispara com:</strong> "quero explorar essa área e documentar o que encontrar", "vamos rodar uma sessão exploratória no módulo X".</p>
+<ol>
+<li><code>/swl-skill-qa-exploratory-session</code> — define charter, conduz a sessão e documenta o que foi de fato observado.</li>
+<li>Para cada bug encontrado — <em>dependência real, a própria skill encaminha:</em> <code>/swl-skill-qa-report-bug</code>.</li>
+<li>Dúvidas de regra de negócio levantadas na sessão vão para PO/dev — fora do escopo das skills.</li>
+<li><code>/swl-skill-qa-risk-priority</code> — <em>ordem sugerida:</em> usa as áreas cobertas/não cobertas da sessão para ajudar a decidir o que virar automação vs. teste manual contínuo.</li>
+<li>Se algum cenário encontrado virar automação, segue a mesma cadeia do Fluxo 1 a partir do passo 2 (<code>/swl-skill-qa-new-bdd-scenarios</code> ou <code>/swl-skill-qa-new-test-cases</code> → <code>/swl-skill-qa-new-test-data</code> → <code>/swl-skill-qa-new-automation</code> → <code>/swl-skill-qa-safe-test-commit</code>).</li>
+</ol>
+<p><strong>Pronto pra colar no <code>CLAUDE.md</code> do projeto:</strong></p>
+<pre><code class="language-markdown">## Fluxos comuns de QA (ordem sugerida de skills)
+
+### Funcionalidade nova, testar do zero
+1. /swl-skill-qa-plan-strategy (se não houver estratégia definida)
+2. /swl-skill-qa-new-bdd-scenarios ou /swl-skill-qa-new-test-cases
+3. /swl-skill-qa-risk-priority
+4. /swl-skill-qa-new-test-data
+5. /swl-skill-qa-new-automation (ou new-mobile-automation / new-performance-test / new-contract-tests)
+6. /swl-skill-qa-safe-test-commit
+
+### Verificar release readiness
+1. /swl-skill-qa-check-environment
+2. /swl-skill-qa-check-coverage
+3. (executar a suíte e gerar os arquivos de resultado reais)
+4. /swl-skill-qa-generate-test-report
+5. /swl-skill-qa-check-performance-results (se houver teste de carga)
+6. /swl-skill-qa-check-security e /swl-skill-qa-check-accessibility
+7. /swl-skill-qa-check-data-quality
+
+### Teste ou suíte falhando no CI
+1. /swl-skill-qa-check-environment (descarta causa de ambiente)
+2. /swl-skill-qa-diagnose-failure
+3. conforme a classificação: /swl-skill-qa-report-bug (bug de produto) ou /swl-skill-qa-check-flakiness (flakiness)
+4. /swl-skill-qa-safe-test-commit
+
+### Assumir/auditar suíte já existente
+1. /swl-skill-qa-generate-rules (projeto legado sem .claude/rules/qa)
+2. /swl-skill-qa-plan-strategy
+3. /swl-skill-qa-check-flakiness
+4. /swl-skill-qa-check-coverage
+5. /swl-skill-qa-review-tests
+6. /swl-skill-qa-risk-priority
+
+### Fechar entrega após rodada de testes
+1. /swl-skill-qa-check-coverage
+2. /swl-skill-qa-generate-test-report
+3. /swl-skill-qa-check-data-quality
+4. /swl-skill-qa-update-test-docs
+5. /swl-skill-qa-describe-test-pr
+6. /swl-skill-qa-safe-test-commit (se houver testes não commitados)
+
+### Sessão exploratória e o que fazer com os achados
+1. /swl-skill-qa-exploratory-session
+2. /swl-skill-qa-report-bug (para cada bug encontrado)
+3. /swl-skill-qa-risk-priority
+4. se virar automação: /swl-skill-qa-new-bdd-scenarios ou /swl-skill-qa-new-test-cases -&gt; /swl-skill-qa-new-test-data -&gt; /swl-skill-qa-new-automation -&gt; /swl-skill-qa-safe-test-commit
+</code></pre>
 <h2>Preciso de uma URL para testar?</h2>
 <p>As skills geram ou verificam código de teste — elas não sobem a aplicação. Alguém
 (você, o Docker Compose do projeto, o pipeline de CI) precisa ter a aplicação
