@@ -4,7 +4,7 @@ description: Gera a descrição de um Pull Request de testes, identificando auto
 argument-hint: (sem argumento — analisa a branch atual)
 metadata:
   version: 1.1.0
-  validated: false
+  validated: true
 ---
 
 ## Passos

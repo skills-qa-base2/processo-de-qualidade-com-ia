@@ -4,7 +4,7 @@ description: Verificação de segurança stack-agnóstica (Node, Python, Java, m
 argument-hint: <URL, endpoint ou fluxo a verificar>
 metadata:
   version: 1.0.1
-  validated: false
+  validated: true
 ---
 
 ## Passos

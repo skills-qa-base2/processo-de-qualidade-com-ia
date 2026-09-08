@@ -4,7 +4,7 @@ description: Seleciona o subconjunto de regressão a executar numa release, cruz
 argument-hint: <tag/branch de release ou intervalo de commits>
 metadata:
   version: 1.0.0
-  validated: false
+  validated: true
 ---
 
 ## Passos

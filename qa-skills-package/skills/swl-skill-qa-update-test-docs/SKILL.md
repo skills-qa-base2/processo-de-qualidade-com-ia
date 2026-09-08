@@ -4,7 +4,7 @@ description: Atualiza a documentação de testes do projeto (README de automaç�
 argument-hint: (sem argumento — analisa a branch atual)
 metadata:
   version: 1.1.0
-  validated: false
+  validated: true
 ---
 
 ## Passos

@@ -4,7 +4,7 @@ description: Analisa o histórico real de execuções do CI para identificar tes
 argument-hint: [caminho ou nome do teste — vazio analisa a suíte inteira]
 metadata:
   version: 1.0.0
-  validated: false
+  validated: true
 ---
 
 ## Passos

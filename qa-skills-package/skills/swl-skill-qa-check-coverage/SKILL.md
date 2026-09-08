@@ -4,7 +4,7 @@ description: Analisa gaps de cobertura de cenários frente aos requisitos e crit
 argument-hint: <NomeDaFeatureOuMódulo>
 metadata:
   version: 1.1.0
-  validated: false
+  validated: true
 ---
 
 ## Passos

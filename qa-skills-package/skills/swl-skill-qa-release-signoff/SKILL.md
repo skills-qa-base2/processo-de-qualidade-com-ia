@@ -4,7 +4,7 @@ description: Consolida as evidências reais de uma release (execução de testes
 argument-hint: <versão ou tag da release>
 metadata:
   version: 1.0.0
-  validated: false
+  validated: true
 ---
 
 ## Passos
