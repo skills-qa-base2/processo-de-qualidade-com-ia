@@ -1,0 +1,8 @@
+{
+  "name": "qa-base2",
+  "description": "30 skills de QA da Base2: planejamento, geração de cenários e automação, verificação, diagnóstico e entrega. Todas com guardrail anti-invenção e validadas por teste adversarial.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Base2 Tecnologia"
+  }
+}
