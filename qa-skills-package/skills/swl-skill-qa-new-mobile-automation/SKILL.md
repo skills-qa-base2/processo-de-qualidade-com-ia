@@ -3,8 +3,8 @@ name: swl-skill-qa-new-mobile-automation
 description: Gera código de automação de teste mobile detectando o framework do projeto (Appium, Espresso, XCUITest, Detox, Maestro) a partir do CLAUDE.md e rules — cobre concerns específicas de mobile (matriz de dispositivo/OS, permissões, conectividade).
 argument-hint: <NomeDoCenárioOuTelaAAutomatizar>
 metadata:
-  version: 1.0.1
-  validated: true
+  version: 1.1.0
+  validated: false
 ---
 
 ## Passos
@@ -30,4 +30,4 @@ Declare explicitamente em qual dispositivo/emulador e versão de OS o teste foi 
 Adicione o teste à suíte/CI conforme convenção do projeto (tag, grupo, pasta).
 
 ## Guardrail
-Nunca afirme que um cenário foi validado em um dispositivo ou versão de OS sem execução real registrada — fragmentação de dispositivo é a causa mais comum de falso-positivo em QA mobile. Todo teste gerado deve ser marcado com o comentário `// generated-by-ai: pending-review` (ou equivalente na linguagem) **somente após** revisão humana.
+Nunca afirme que um cenário foi validado em um dispositivo ou versão de OS sem execução real registrada — fragmentação de dispositivo é a causa mais comum de falso-positivo em QA mobile. Todo teste gerado nasce com o comentário `// generated-by-ai: pending-review` (ou equivalente na linguagem). Só `swl-skill-qa-review-tests` troca esse marcador por `reviewed`, e só depois de uma pessoa validar as observações — nunca gere um teste já marcado como `reviewed`.

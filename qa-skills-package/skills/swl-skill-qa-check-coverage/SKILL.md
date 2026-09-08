@@ -3,14 +3,14 @@ name: swl-skill-qa-check-coverage
 description: Analisa gaps de cobertura de cenários frente aos requisitos e critérios de aceite — cobertura funcional, não cobertura de código.
 argument-hint: <NomeDaFeatureOuMódulo>
 metadata:
-  version: 1.0.0
-  validated: true
+  version: 1.1.0
+  validated: false
 ---
 
 ## Passos
 
 ## 1. Levantamento das duas fontes
-Reúna: (a) os critérios de aceite / requisitos da feature, e (b) os casos de teste ou cenários BDD já existentes para ela.
+Reúna: (a) os critérios de aceite / requisitos da feature, e (b) os casos de teste ou cenários BDD já existentes para ela. Procure em `docs/qa/`, arquivos `.feature`, na pasta de testes e na ferramenta de gestão indicada no CLAUDE.md. Se uma das duas fontes não for localizada, pergunte onde ela está — nunca deduza os critérios de aceite a partir dos testes existentes, porque isso torna a auditoria circular e sempre conclui "tudo coberto".
 
 ## 2. Cruzamento
 Para cada critério de aceite, verifique se existe ao menos um cenário de happy path, um edge case relevante e um cenário negativo cobrindo-o.
