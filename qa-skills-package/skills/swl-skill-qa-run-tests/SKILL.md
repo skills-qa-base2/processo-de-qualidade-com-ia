@@ -4,7 +4,7 @@ description: Executa a suíte de testes do projeto detectando o runner automatic
 argument-hint: [caminho, tag ou filtro — vazio executa a suíte configurada]
 metadata:
   version: 1.0.0
-  validated: false
+  validated: true
 ---
 
 ## Passos

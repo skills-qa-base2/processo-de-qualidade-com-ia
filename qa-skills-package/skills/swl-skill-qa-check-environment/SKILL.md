@@ -4,7 +4,7 @@ description: Valida que um ambiente está de fato pronto para rodar a suíte ant
 argument-hint: <NomeDoAmbiente>
 metadata:
   version: 1.0.1
-  validated: false
+  validated: true
 ---
 
 ## Passos

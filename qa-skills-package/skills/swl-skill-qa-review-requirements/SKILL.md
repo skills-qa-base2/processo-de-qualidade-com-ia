@@ -4,7 +4,7 @@ description: Revisa uma user story ou requisito sob a ótica de QA antes do dese
 argument-hint: <UserStoryOuCaminhoDoCard>
 metadata:
   version: 1.0.0
-  validated: false
+  validated: true
 ---
 
 ## Passos

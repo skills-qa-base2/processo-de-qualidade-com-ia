@@ -4,7 +4,7 @@ description: Gera código de automação de teste detectando o framework do proj
 argument-hint: <NomeDoCenárioOuArquivoFeature>
 metadata:
   version: 1.2.0
-  validated: false
+  validated: true
 ---
 
 ## Passos

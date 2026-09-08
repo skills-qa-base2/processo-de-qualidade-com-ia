@@ -4,7 +4,7 @@ description: Audita acessibilidade (WCAG) de telas/fluxos usando a ferramenta jÃ
 argument-hint: <URL, tela ou componente a auditar>
 metadata:
   version: 1.0.1
-  validated: false
+  validated: true
 ---
 
 ## Passos
