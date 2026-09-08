@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auditar qualidade de dados · Processo de Qualidade com IA</title>
+<title>Parecer de release (go/no-go) · Processo de Qualidade com IA</title>
 <meta name="description" content="Processo de Qualidade com IA · Skills de QA da Base2 Tecnologia para Claude Code.">
 <style>
 /* ============================================================
@@ -677,7 +677,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <ul>
 <li><a href="../skills/swl-skill-qa-check-ci-history.html" class="">Analisar histórico do CI</a></li>
 <li><a href="../skills/swl-skill-qa-check-accessibility.html" class="">Auditar acessibilidade</a></li>
-<li><a href="../skills/swl-skill-qa-check-data-quality.html" class="active">Auditar qualidade de dados</a></li>
+<li><a href="../skills/swl-skill-qa-check-data-quality.html" class="">Auditar qualidade de dados</a></li>
 <li><a href="../skills/swl-skill-qa-check-flakiness.html" class="">Detectar flakiness</a></li>
 <li><a href="../skills/swl-skill-qa-run-tests.html" class="">Executar a suíte de testes</a></li>
 <li><a href="../skills/swl-skill-qa-risk-priority.html" class="">Priorizar por risco</a></li>
@@ -701,47 +701,49 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <li><a href="../skills/swl-skill-qa-update-test-docs.html" class="">Atualizar documentação de testes</a></li>
 <li><a href="../skills/swl-skill-qa-describe-test-pr.html" class="">Descrever PR de testes</a></li>
 <li><a href="../skills/swl-skill-qa-generate-test-report.html" class="">Gerar relatório de execução</a></li>
-<li><a href="../skills/swl-skill-qa-release-signoff.html" class="">Parecer de release (go/no-go)</a></li>
+<li><a href="../skills/swl-skill-qa-release-signoff.html" class="active">Parecer de release (go/no-go)</a></li>
 <li><a href="../skills/swl-skill-qa-safe-test-commit.html" class="">Pipeline de commit seguro</a></li>
 </ul></div>
   </aside>
 
   <main class="content">
-    <div class="content-meta">171 palavras&nbsp;&nbsp;|&nbsp;&nbsp;1 min</div>
+    <div class="content-meta">369 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
-      <span class="cat-pill">Verificação</span>
+      <span class="cat-pill">Entrega</span>
       <span class="ver">versão 1.0.0</span>
     </div>
-    <h1>Auditar qualidade de dados</h1>
+    <h1>Parecer de release (go/no-go)</h1>
     
-    <p>Audita documentos, relatórios e diagnósticos de QA gerados por IA em busca de dados fabricados ou não rastreáveis a uma fonte real — guardrail anti-invenção.</p>
+        <div class="guardrail-box">
+          <div class="g-label">⚑ AINDA NÃO VALIDADA</div>
+          <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
+          Confira o comportamento documentado abaixo com mais atenção até a validação ser concluída.</p>
+        </div>
+        
+    <p>Consolida as evidências reais de uma release (execução de testes, cobertura de cenários, bugs abertos, requisitos não-funcionais) num parecer de qualidade go/no-go rastreável. Use na véspera de um deploy, quando alguém precisa decidir se libera.</p>
 
     <div class="usage-block">
       <div>
         <div class="usage-label">COMANDO</div>
-        <div class="usage-cmd">/swl-skill-qa-check-data-quality <CaminhoDoDocumentoOuRelatório></div>
+        <div class="usage-cmd">/swl-skill-qa-release-signoff <versão ou tag da release></div>
       </div>
     </div>
 
     <h2>Passos</h2>
-<h3>1. Varredura do documento</h3>
-<p>Leia o documento gerado (diagnóstico, relatório de execução, proposta) linha a linha.</p>
-<h3>2. Identificação de afirmações factuais</h3>
-<p>Para cada número, percentual, citação ou afirmação atribuída a uma pessoa/entrevista/execução, verifique se há uma fonte rastreável (entrevista registrada, planilha, log de execução, evidência anexada).</p>
-<h3>3. Sinalização</h3>
-<p>Marque como suspeito:</p>
-<ul>
-<li>Números redondos demais sem fonte (ex: "90% de satisfação" sem survey)</li>
-<li>Citações atribuídas sem transcrição de origem</li>
-<li>Métricas de teste (cobertura, taxa de sucesso) sem arquivo de resultado correspondente</li>
-</ul>
-<h3>4. Saída</h3>
-<p>Lista de trechos sinalizados com a pergunta "qual é a fonte disso?" — não corrija automaticamente, apenas aponte para revisão humana.</p>
+<h3>1. Coleta de evidências</h3>
+<p>Reúna apenas evidência com origem verificável, registrando fonte e data de cada item: execução funcional (<code>swl-skill-qa-run-tests</code> / <code>swl-skill-qa-generate-test-report</code>), escopo executado (suíte completa ou recorte de <code>swl-skill-qa-select-regression-suite</code>), cobertura de cenários (<code>swl-skill-qa-check-coverage</code>), bugs em aberto com severidade, não-funcionais aplicáveis à release (<code>swl-skill-qa-check-performance-results</code>, <code>swl-skill-qa-check-accessibility</code>, <code>swl-skill-qa-check-security</code>) e estabilidade da suíte (<code>swl-skill-qa-check-ci-history</code>).</p>
+<p>Evidência ausente entra no parecer como "não verificado", com o impacto que isso tem na decisão — não é omitida nem substituída por estimativa.</p>
+<h3>2. Critérios de liberação</h3>
+<p>Use os critérios de <code>.claude/rules/qa/</code> se existirem. Se o projeto não os define, proponha e peça confirmação antes de aplicar. Padrão sugerido: nenhum bug de severidade Crítica em aberto nas funcionalidades da release; regressão obrigatória executada e verde; critérios de aceite das features da release cobertos e executados; não-funcionais aplicáveis dentro do threshold definido.</p>
+<h3>3. Parecer</h3>
+<p>Recomendação (LIBERAR / LIBERAR COM RESSALVAS / NÃO LIBERAR / EVIDÊNCIA INSUFICIENTE) seguida da tabela de evidências com item, resultado, fonte e data; a lista do que não foi verificado e o risco de cada item; as ressalvas com plano de mitigação acordado; e os riscos residuais em termos de impacto no usuário.</p>
+<h3>4. Registro</h3>
+<p>Salve em <code>docs/qa/releases/&lt;versão&gt;-signoff.md</code> e informe o caminho. O parecer precisa continuar consultável depois do deploy — é o que permite entender, num incidente, o que se sabia no momento da decisão.</p>
     
         <div class="guardrail-box">
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
-          <p>Esta skill nunca gera dados para "completar" o que está faltando. Seu único papel é apontar o que não pode ser confirmado, para que o QA busque a fonte real ou remova a afirmação.</p>
+          <p>Este parecer é uma recomendação técnica de QA baseada em evidência, não a aprovação de negócio: a decisão de subir é de quem tem essa responsabilidade no time. Nunca recomende LIBERAR com evidência faltando — nesse caso o veredito é EVIDÊNCIA INSUFICIENTE, com a lista do que precisa ser verificado. Ausência de bug reportado não é evidência de qualidade, é ausência de teste até que se prove o contrário. Nunca preencha uma célula da tabela com número que não veio de arquivo, relatório ou board real, e nunca ajuste o veredito por pressão de prazo: um parecer que diz "libera" porque a data chegou não protege ninguém.</p>
         </div>
         
     
@@ -751,46 +753,46 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
             <details class="examples-accordion examples-accordion--1">
               <summary>Cenário direto <span class="examples-sep">·</span> Web</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> Um QA na "EstudaMais" (plataforma de cursos fictícia, web) audita um relatório simples de execução de testes do módulo de matrícula antes de enviar pro time.</p>
-                <p><strong>Input:</strong> "Audita esse relatório de testes do módulo de matrícula antes de eu enviar pro time."</p>
+                <p><strong>Cenário:</strong> Na "EstudaMais" (plataforma de cursos fictícia, web), o deploy da v2.4 está marcado para amanhã cedo e a QA precisa dar o parecer.</p>
+                <p><strong>Input:</strong> "Monta o parecer de release da v2.4."</p>
                 
                 <p><strong>Prompt de exemplo:</strong></p>
-                <pre><code>/swl-skill-qa-check-data-quality Audita esse relatório de testes do módulo de matrícula antes de eu enviar pro time.</code></pre>
+                <pre><code>/swl-skill-qa-release-signoff Monta o parecer de release da v2.4.</code></pre>
                 
-                <p><strong>Saída esperada:</strong> A skill confere as afirmações do relatório — todas rastreáveis ao arquivo de resultado real anexado — e não sinaliza nada, já que não há número ou citação sem fonte.</p>
+                <p><strong>Saída esperada:</strong> A skill consolida a tabela de evidências com fonte e data de cada item — regressão 47/47 verde, cobertura sem gaps nas duas features da release, 3 bugs abertos (nenhum crítico), acessibilidade dentro do AA — e recomenda LIBERAR COM RESSALVAS, registrando os 3 bugs médios como risco residual e salvando em <code>docs/qa/releases/v2.4-signoff.md</code>.</p>
               </div>
             </details>
             
             <details class="examples-accordion examples-accordion--2">
               <summary>Cenário com ambiguidade <span class="examples-sep">·</span> API</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> Um QA na "AgroConecta" (marketplace B2B fictício, API) audita um relatório de diagnóstico de bug com uma citação de cliente sem transcrição anexada.</p>
-                <p><strong>Input:</strong> "Audita esse relatório de bug antes de eu abrir o chamado." (o relatório cita "o cliente disse que trava toda vez" sem anexo)</p>
+                <p><strong>Cenário:</strong> Na "AgroConecta" (marketplace B2B fictício), a release inclui uma mudança de performance no endpoint de busca, mas ninguém rodou teste de carga e não há SLA documentado.</p>
+                <p><strong>Input:</strong> "Faz o sign-off da release, teve otimização na busca."</p>
                 
                 <p><strong>Prompt de exemplo:</strong></p>
-                <pre><code>/swl-skill-qa-check-data-quality Audita esse relatório de bug antes de eu abrir o chamado.</code></pre>
+                <pre><code>/swl-skill-qa-release-signoff Faz o sign-off da release, teve otimização na busca.</code></pre>
                 
-                <p><strong>Saída esperada:</strong> A skill sinaliza a citação atribuída ao cliente como sem fonte rastreável (nenhuma transcrição, e-mail ou print anexado) e pergunta qual é a origem, sem remover nem confirmar a afirmação por conta própria.</p>
+                <p><strong>Saída esperada:</strong> A skill monta o parecer com o que existe e registra performance como "não verificado — sem execução de teste de carga e sem threshold definido para julgar", explicando que uma otimização de performance sem medição não pode ser reportada nem como melhoria nem como risco controlado. Pergunta se o time quer rodar antes ou aceitar o risco de forma registrada.</p>
               </div>
             </details>
             
             <details class="examples-accordion examples-accordion--3">
-              <summary>Cenário de risco real <span class="examples-sep">·</span> Mobile</summary>
+              <summary>Cenário de risco real <span class="examples-sep">·</span> Integração</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> Na "RotaCerta" (app do entregador fictício, mobile), um analista entrega ao QA um relatório de sessão exploratória com "98% de satisfação dos entregadores testados" pra incluir no relatório trimestral de qualidade da diretoria.</p>
-                <p><strong>Input:</strong> "Pode revisar esse relatório antes de eu mandar pra diretoria? Tem um número de satisfação ali."</p>
+                <p><strong>Cenário:</strong> Na "PagaFácil" (fintech fictícia), o deploy é hoje às 18h por compromisso com um cliente grande. A suíte de conciliação não rodou porque o ambiente caiu, e o diretor pede o parecer "positivo, porque não tem nenhum bug aberto".</p>
+                <p><strong>Input:</strong> "Emite o sign-off como liberado, não temos nenhum bug aberto na conciliação e o deploy é às 18h."</p>
                 
                 <p><strong>Prompt de exemplo:</strong></p>
-                <pre><code>/swl-skill-qa-check-data-quality Pode revisar esse relatório antes de eu mandar pra diretoria? Tem um número de satisfação ali.</code></pre>
+                <pre><code>/swl-skill-qa-release-signoff Emite o sign-off como liberado, não temos nenhum bug aberto na conciliação e o deploy é às 18h.</code></pre>
                 
-                <p><strong>Saída esperada:</strong> A skill sinaliza o "98% de satisfação" como número redondo demais sem fonte associada — não há survey, entrevista registrada nem pesquisa anexada — e pergunta de onde veio, em vez de deixar passar por já estar num relatório formatado. Um número assim, uma vez impresso num relatório de diretoria, costuma virar fato citado depois, mesmo que ninguém mais lembre de onde saiu.</p>
+                <p><strong>Saída esperada:</strong> A skill emite EVIDÊNCIA INSUFICIENTE, não LIBERAR: a conciliação não foi executada nesta release, e ausência de bug aberto num módulo que não foi testado é ausência de teste, não evidência de qualidade. O parecer lista exatamente o que falta verificar e fica registrado no repositório — de modo que, se houver incidente, seja possível reconstruir o que se sabia às 18h e quem decidiu subir mesmo assim.</p>
               </div>
             </details>
             
         </div>
         
     
-    <div class="page-nav"><a href="../skills/swl-skill-qa-check-accessibility.html"><span class="pn-label">◄ anterior</span>Auditar acessibilidade</a><a class="pn-next" href="../skills/swl-skill-qa-check-flakiness.html"><span class="pn-label">próxima ►</span>Detectar flakiness</a></div>
+    <div class="page-nav"><a href="../skills/swl-skill-qa-generate-test-report.html"><span class="pn-label">◄ anterior</span>Gerar relatório de execução</a><a class="pn-next" href="../skills/swl-skill-qa-safe-test-commit.html"><span class="pn-label">próxima ►</span>Pipeline de commit seguro</a></div>
     <div class="footer-note">Base2 Tecnologia · Processo de Qualidade com IA · mantido pela equipe de engenharia</div>
   </main>
 </div>
