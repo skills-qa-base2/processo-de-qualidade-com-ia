@@ -3,8 +3,8 @@ name: swl-skill-qa-new-automation
 description: Gera código de automação de teste detectando o framework do projeto (Playwright, Cypress, Selenium, Robot Framework, RestAssured, Postman/Newman, Testcontainers, WireMock/MockServer, Cucumber, SpecFlow) a partir do CLAUDE.md e rules. Para mobile use swl-skill-qa-new-mobile-automation; para performance/carga use swl-skill-qa-new-performance-test.
 argument-hint: <NomeDoCenárioOuArquivoFeature>
 metadata:
-  version: 1.1.0
-  validated: true
+  version: 1.2.0
+  validated: false
 ---
 
 ## Passos
@@ -28,4 +28,4 @@ Gere o teste seguindo os padrões já existentes no projeto:
 Adicione o teste à suíte/CI conforme convenção do projeto (tag, grupo, pasta).
 
 ## Guardrail
-Todo teste gerado deve ser marcado com o comentário `// generated-by-ai: reviewed` (ou equivalente na linguagem) **somente após** revisão humana. Testes sem esse comentário não devem ser aceitos em PR — não adicione o comentário antes da revisão real acontecer.
+Todo teste gerado nasce com o comentário `// generated-by-ai: pending-review` (ou equivalente na linguagem). Só `swl-skill-qa-review-tests` troca esse marcador por `reviewed`, e só depois de uma pessoa validar as observações — nunca gere um teste já marcado como `reviewed`. Teste ainda em `pending-review` não deve ser aceito em PR como revisado.

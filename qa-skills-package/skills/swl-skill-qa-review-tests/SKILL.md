@@ -3,8 +3,8 @@ name: swl-skill-qa-review-tests
 description: Revisa testes gerados ou existentes quanto a nomenclatura, clareza de asserts e cobertura real de cenários — evita testes triviais ou redundantes.
 argument-hint: <CaminhoDoArquivoOuFeature>
 metadata:
-  version: 1.0.0
-  validated: true
+  version: 1.1.0
+  validated: false
 ---
 
 ## Passos
@@ -21,5 +21,8 @@ Sinalize testes que cobrem apenas variações triviais dos mesmos dados (ex: tro
 ## 4. Saída
 Lista de observações por teste: nomenclatura, qualidade de assert, redundância — com recomendação objetiva (manter, ajustar, remover por redundância).
 
+## 5. Promoção do marcador
+Esta é a única skill do pacote que troca `generated-by-ai: pending-review` por `reviewed`. Só faça a troca com as três condições satisfeitas: as observações dos passos 1 a 3 foram apresentadas; uma pessoa confirmou explicitamente nesta conversa que revisou e aceita o teste; o teste foi executado com sucesso, ou o usuário informou o resultado real da execução. Faltando qualquer uma, mantenha `pending-review` e diga o que falta.
+
 ## Guardrail
-Esta skill não gera nem corrige o teste automaticamente — aponta os problemas para o QA decidir. Testes gerados por IA revisados aqui só recebem o marcador `generated-by-ai: reviewed` depois que um humano de fato validar as observações.
+Esta skill não gera nem corrige o conteúdo do teste — aponta os problemas para o QA decidir; a única edição que ela faz é a do marcador. Nunca promova o marcador na mesma passada em que o teste foi gerado, e nunca trate pressa ou um "pode seguir" genérico como confirmação de revisão.
