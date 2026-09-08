@@ -383,6 +383,38 @@ html[data-theme="dark"] .content code { color: var(--lime); background: rgba(158
 html[data-theme="dark"] .guardrail-box .g-label { color: var(--lime); }
 .guardrail-box p, .guardrail-box li { margin-bottom: 0; font-size: 14.5px; }
 
+/* Aviso "validacao pendente" — mesma estrutura da .guardrail-box, cor diferente.
+   O guardrail (lima) e uma propriedade permanente e positiva da skill; a validacao
+   pendente e um estado temporario que pede atencao. Usa o mesmo ambar do selo
+   .sc-pending da home, para que "pendente" tenha uma linguagem visual so.
+   Contrastes contra o fundo real rgba(--amber,.10) sobre --panel — #fdf6ec no
+   claro, #262c1e no escuro:
+     corpo do texto  15,20:1 (claro)  12,63:1 (escuro)
+     label ambar      5,19:1 (claro)   6,66:1 (escuro)  — AA, minimo 4,5:1
+     borda vs painel  5,57:1 (claro)   7,90:1 (escuro)  — minimo 3:1 nao-textual
+   Mudanca de tom em --amber ou na opacidade .10 exige recalcular os seis numeros. */
+.pending-box {
+  border: 1px solid var(--amber-text);
+  border-left: 4px solid var(--amber-text);
+  background: rgba(232, 163, 61, .10);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 22px 0;
+}
+.pending-box .g-label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .06em;
+  color: var(--amber-text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pending-box p, .pending-box li { margin-bottom: 0; font-size: 14.5px; }
+html[data-theme="dark"] .pending-box { border-color: var(--amber-text-dark); }
+html[data-theme="dark"] .pending-box .g-label { color: var(--amber-text-dark); }
+
 /* Examples: 3 exemplos (situação + tipo de projeto), cada um seu próprio accordion */
 .examples-section { margin: 22px 0 28px; }
 .examples-intro {
@@ -746,10 +778,11 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
     </div>
     <h1>Parecer de release (go/no-go)</h1>
     
-        <div class="guardrail-box">
-          <div class="g-label">⚑ AINDA NÃO VALIDADA</div>
+        <div class="pending-box">
+          <div class="g-label">⧗ VALIDAÇÃO PENDENTE</div>
           <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
-          Confira o comportamento documentado abaixo com mais atenção até a validação ser concluída.</p>
+          O guardrail abaixo descreve o comportamento esperado, mas ele ainda não foi
+          exercitado sob pressão — confira com mais atenção até a validação ser concluída.</p>
         </div>
         
     <p>Consolida as evidências reais de uma release (execução de testes, cobertura de cenários, bugs abertos, requisitos não-funcionais) num parecer de qualidade go/no-go rastreável. Use na véspera de um deploy, quando alguém precisa decidir se libera.</p>
