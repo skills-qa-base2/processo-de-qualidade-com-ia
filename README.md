@@ -78,6 +78,32 @@ do site (`skills/swl-skill-qa-<nome>.html`) ou no `SKILL.md` correspondente em
 
 ## Como instalar
 
+### Opção 1 — Plugin (recomendada)
+
+Este repositório também é um **marketplace de plugin do Claude Code**. Instalando por
+aqui, as 30 skills chegam de uma vez e passam a atualizar sozinhas quando o repositório
+muda — sem copiar pasta e sem cada pessoa ficar numa versão diferente.
+
+No Claude Code:
+
+```
+/plugin marketplace add skills-qa-base2/processo-de-qualidade-com-ia
+/plugin install qa-base2@qa-base2
+```
+
+Os comandos continuam iguais (`/swl-skill-qa-plan-strategy`) — skill instalada por plugin
+não ganha prefixo.
+
+Para experimentar antes de instalar, sem alterar nada na sua configuração:
+
+```bash
+claude --plugin-dir ./qa-skills-package
+```
+
+O plugin vale só para aquela sessão.
+
+### Opção 2 — Cópia manual
+
 **Baixe** o pacote (`downloads/qa-skills-package.zip`, ou clone este repositório) e copie
 as skills que quiser para dentro do seu projeto ou do seu usuário:
 

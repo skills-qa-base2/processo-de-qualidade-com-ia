@@ -1,0 +1,14 @@
+{
+  "name": "qa-base2",
+  "description": "Skills de QA da Base2 Tecnologia para Claude Code — cobrem o ciclo do refinamento ao parecer de release, com guardrail anti-invenção em todas",
+  "owner": {
+    "name": "Base2 Tecnologia"
+  },
+  "plugins": [
+    {
+      "name": "qa-base2",
+      "source": "./qa-skills-package",
+      "description": "30 skills de QA: planejamento, geração de cenários e automação, verificação, diagnóstico e entrega"
+    }
+  ]
+}
