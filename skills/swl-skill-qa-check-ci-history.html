@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auditar qualidade de dados · Processo de Qualidade com IA</title>
+<title>Analisar histórico do CI · Processo de Qualidade com IA</title>
 <meta name="description" content="Processo de Qualidade com IA · Skills de QA da Base2 Tecnologia para Claude Code.">
 <style>
 /* ============================================================
@@ -675,9 +675,9 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <div class="nav-group">
 <div class="nav-group-label">// VERIFICAÇÃO</div>
 <ul>
-<li><a href="../skills/swl-skill-qa-check-ci-history.html" class="">Analisar histórico do CI</a></li>
+<li><a href="../skills/swl-skill-qa-check-ci-history.html" class="active">Analisar histórico do CI</a></li>
 <li><a href="../skills/swl-skill-qa-check-accessibility.html" class="">Auditar acessibilidade</a></li>
-<li><a href="../skills/swl-skill-qa-check-data-quality.html" class="active">Auditar qualidade de dados</a></li>
+<li><a href="../skills/swl-skill-qa-check-data-quality.html" class="">Auditar qualidade de dados</a></li>
 <li><a href="../skills/swl-skill-qa-check-flakiness.html" class="">Detectar flakiness</a></li>
 <li><a href="../skills/swl-skill-qa-run-tests.html" class="">Executar a suíte de testes</a></li>
 <li><a href="../skills/swl-skill-qa-risk-priority.html" class="">Priorizar por risco</a></li>
@@ -707,41 +707,51 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">171 palavras&nbsp;&nbsp;|&nbsp;&nbsp;1 min</div>
+    <div class="content-meta">386 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
       <span class="cat-pill">Verificação</span>
       <span class="ver">versão 1.0.0</span>
     </div>
-    <h1>Auditar qualidade de dados</h1>
+    <h1>Analisar histórico do CI</h1>
     
-    <p>Audita documentos, relatórios e diagnósticos de QA gerados por IA em busca de dados fabricados ou não rastreáveis a uma fonte real — guardrail anti-invenção.</p>
+        <div class="guardrail-box">
+          <div class="g-label">⚑ AINDA NÃO VALIDADA</div>
+          <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
+          Confira o comportamento documentado abaixo com mais atenção até a validação ser concluída.</p>
+        </div>
+        
+    <p>Analisa o histórico real de execuções do CI para identificar testes flaky por evidência, testes cronicamente quebrados e tendência de duração da suíte. Use quando precisar provar, e não supor, que um teste é instável.</p>
 
     <div class="usage-block">
       <div>
         <div class="usage-label">COMANDO</div>
-        <div class="usage-cmd">/swl-skill-qa-check-data-quality <CaminhoDoDocumentoOuRelatório></div>
+        <div class="usage-cmd">/swl-skill-qa-check-ci-history ['caminho ou nome do teste — vazio analisa a suíte inteira']</div>
       </div>
     </div>
 
     <h2>Passos</h2>
-<h3>1. Varredura do documento</h3>
-<p>Leia o documento gerado (diagnóstico, relatório de execução, proposta) linha a linha.</p>
-<h3>2. Identificação de afirmações factuais</h3>
-<p>Para cada número, percentual, citação ou afirmação atribuída a uma pessoa/entrevista/execução, verifique se há uma fonte rastreável (entrevista registrada, planilha, log de execução, evidência anexada).</p>
-<h3>3. Sinalização</h3>
-<p>Marque como suspeito:</p>
+<h3>1. Fonte do histórico</h3>
+<p>Busque nesta ordem e diga qual foi usada: API do CI (<code>gh run list</code>/<code>gh api</code>, Azure DevOps, GitLab CI, Jenkins), arquivos de resultado acumulados em <code>test-results/</code> ou artefatos de build, ou o relatório de retry do próprio runner. Se nenhuma fonte estiver acessível, pare e diga isso — sem histórico não há análise, e leitura estática do código é papel de <code>swl-skill-qa-check-flakiness</code>.</p>
+<h3>2. Janela</h3>
+<p>Combine a janela com o usuário (ex: últimos 30 dias ou últimas 50 execuções) e registre-a no relatório. Janela pequena demais transforma coincidência em padrão.</p>
+<h3>3. Classificação por evidência</h3>
+<p>Cruze resultado com revisão de código:</p>
 <ul>
-<li>Números redondos demais sem fonte (ex: "90% de satisfação" sem survey)</li>
-<li>Citações atribuídas sem transcrição de origem</li>
-<li>Métricas de teste (cobertura, taxa de sucesso) sem arquivo de resultado correspondente</li>
+<li><strong>Flaky confirmado</strong>: passou e falhou na mesma revisão (mesmo commit), ou passou em retry sem mudança de código</li>
+<li><strong>Quebrado</strong>: falha em todas as execuções desde uma revisão identificável — é bug ou teste desatualizado, não flakiness</li>
+<li><strong>Degradando</strong>: taxa de falha crescente ao longo da janela</li>
+<li><strong>Estável</strong>: sem falhas na janela</li>
 </ul>
-<h3>4. Saída</h3>
-<p>Lista de trechos sinalizados com a pergunta "qual é a fonte disso?" — não corrija automaticamente, apenas aponte para revisão humana.</p>
+<p>Separar "flaky" de "quebrado" é a distinção mais importante do relatório: quebrado exige correção, flaky exige investigação de causa. Tratar quebrado como flaky é como um time começa a ignorar o CI.</p>
+<h3>4. Duração</h3>
+<p>Reporte os testes mais lentos e a tendência de duração total da suíte na janela — crescimento contínuo é o que faz o time parar de rodar a suíte.</p>
+<h3>5. Saída</h3>
+<p>Fonte, janela e número de execuções analisadas; taxa de sucesso da suíte; e as quatro listas com a evidência de cada classificação. Encaminhe os flaky confirmados para <code>swl-skill-qa-check-flakiness</code>, que identifica a causa no código, e os quebrados para <code>swl-skill-qa-diagnose-failure</code>.</p>
     
         <div class="guardrail-box">
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>
-          <p>Esta skill nunca gera dados para "completar" o que está faltando. Seu único papel é apontar o que não pode ser confirmado, para que o QA busque a fonte real ou remova a afirmação.</p>
+          <p>Toda classificação precisa vir de execução registrada. Nunca estime uma taxa de falha, nunca extrapole tendência a partir de duas execuções, e nunca chame de flaky um teste que apenas falhou algumas vezes em revisões diferentes — isso pode ser regressão real do produto, e é exatamente o caso em que o rótulo "flaky" faz o time ignorar um bug verdadeiro. Se a janela tiver poucas execuções para sustentar a conclusão, diga que a amostra é insuficiente em vez de concluir mesmo assim.</p>
         </div>
         
     
@@ -751,46 +761,46 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
             <details class="examples-accordion examples-accordion--1">
               <summary>Cenário direto <span class="examples-sep">·</span> Web</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> Um QA na "EstudaMais" (plataforma de cursos fictícia, web) audita um relatório simples de execução de testes do módulo de matrícula antes de enviar pro time.</p>
-                <p><strong>Input:</strong> "Audita esse relatório de testes do módulo de matrícula antes de eu enviar pro time."</p>
+                <p><strong>Cenário:</strong> Na "EstudaMais" (plataforma de cursos fictícia, web), a suíte E2E do CI vive vermelha e o time quer saber quais testes são realmente instáveis.</p>
+                <p><strong>Input:</strong> "Analisa o histórico do CI dos últimos 30 dias e me diz quais testes E2E são flaky."</p>
                 
                 <p><strong>Prompt de exemplo:</strong></p>
-                <pre><code>/swl-skill-qa-check-data-quality Audita esse relatório de testes do módulo de matrícula antes de eu enviar pro time.</code></pre>
+                <pre><code>/swl-skill-qa-check-ci-history Analisa o histórico do CI dos últimos 30 dias e me diz quais testes E2E são flaky.</code></pre>
                 
-                <p><strong>Saída esperada:</strong> A skill confere as afirmações do relatório — todas rastreáveis ao arquivo de resultado real anexado — e não sinaliza nada, já que não há número ou citação sem fonte.</p>
+                <p><strong>Saída esperada:</strong> A skill lê as execuções via <code>gh run list</code>, e separa: 2 flaky confirmados (passaram e falharam no mesmo commit), 1 quebrado desde um commit específico de duas semanas atrás, e o resto estável — deixando claro que o quebrado não é flakiness e precisa de correção, não de retry.</p>
               </div>
             </details>
             
             <details class="examples-accordion examples-accordion--2">
               <summary>Cenário com ambiguidade <span class="examples-sep">·</span> API</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> Um QA na "AgroConecta" (marketplace B2B fictício, API) audita um relatório de diagnóstico de bug com uma citação de cliente sem transcrição anexada.</p>
-                <p><strong>Input:</strong> "Audita esse relatório de bug antes de eu abrir o chamado." (o relatório cita "o cliente disse que trava toda vez" sem anexo)</p>
+                <p><strong>Cenário:</strong> Na "AgroConecta" (marketplace B2B fictício), o CI foi migrado de Jenkins para GitHub Actions há oito dias e só há histórico curto na ferramenta nova.</p>
+                <p><strong>Input:</strong> "Vê o histórico do CI e me diz se o teste de negociação de preço é flaky."</p>
                 
                 <p><strong>Prompt de exemplo:</strong></p>
-                <pre><code>/swl-skill-qa-check-data-quality Audita esse relatório de bug antes de eu abrir o chamado.</code></pre>
+                <pre><code>/swl-skill-qa-check-ci-history Vê o histórico do CI e me diz se o teste de negociação de preço é flaky.</code></pre>
                 
-                <p><strong>Saída esperada:</strong> A skill sinaliza a citação atribuída ao cliente como sem fonte rastreável (nenhuma transcrição, e-mail ou print anexado) e pergunta qual é a origem, sem remover nem confirmar a afirmação por conta própria.</p>
+                <p><strong>Saída esperada:</strong> A skill informa que só encontrou 6 execuções na janela disponível desde a migração, apresenta o que viu, e diz que a amostra é insuficiente para classificar como flaky — sugerindo buscar os artefatos do Jenkins antigo ou aguardar mais execuções, em vez de concluir a partir de duas falhas.</p>
               </div>
             </details>
             
             <details class="examples-accordion examples-accordion--3">
-              <summary>Cenário de risco real <span class="examples-sep">·</span> Mobile</summary>
+              <summary>Cenário de risco real <span class="examples-sep">·</span> Integração</summary>
               <div class="examples-content">
-                <p><strong>Cenário:</strong> Na "RotaCerta" (app do entregador fictício, mobile), um analista entrega ao QA um relatório de sessão exploratória com "98% de satisfação dos entregadores testados" pra incluir no relatório trimestral de qualidade da diretoria.</p>
-                <p><strong>Input:</strong> "Pode revisar esse relatório antes de eu mandar pra diretoria? Tem um número de satisfação ali."</p>
+                <p><strong>Cenário:</strong> Na "PagaFácil" (fintech fictícia), o teste de conciliação de estorno falhou em 4 das últimas 20 execuções, sempre em commits diferentes. O tech lead quer marcá-lo como flaky e ligar retry automático para destravar o pipeline antes do fechamento do mês.</p>
+                <p><strong>Input:</strong> "Confirma que o teste de conciliação de estorno é flaky pra eu ligar retry nele, tá travando o pipeline."</p>
                 
                 <p><strong>Prompt de exemplo:</strong></p>
-                <pre><code>/swl-skill-qa-check-data-quality Pode revisar esse relatório antes de eu mandar pra diretoria? Tem um número de satisfação ali.</code></pre>
+                <pre><code>/swl-skill-qa-check-ci-history Confirma que o teste de conciliação de estorno é flaky pra eu ligar retry nele, tá travando o pipeline.</code></pre>
                 
-                <p><strong>Saída esperada:</strong> A skill sinaliza o "98% de satisfação" como número redondo demais sem fonte associada — não há survey, entrevista registrada nem pesquisa anexada — e pergunta de onde veio, em vez de deixar passar por já estar num relatório formatado. Um número assim, uma vez impresso num relatório de diretoria, costuma virar fato citado depois, mesmo que ninguém mais lembre de onde saiu.</p>
+                <p><strong>Saída esperada:</strong> A skill não confirma. As 4 falhas são em revisões diferentes e nenhuma revisão apresenta passa e falha simultâneos — o padrão é compatível com regressão real intermitente, não com flakiness. Encaminha para <code>swl-skill-qa-diagnose-failure</code>. Ligar retry num teste de conciliação financeira que está falhando de verdade é o mecanismo exato pelo qual o pipeline passa a esconder o bug que ele existia para pegar.</p>
               </div>
             </details>
             
         </div>
         
     
-    <div class="page-nav"><a href="../skills/swl-skill-qa-check-accessibility.html"><span class="pn-label">◄ anterior</span>Auditar acessibilidade</a><a class="pn-next" href="../skills/swl-skill-qa-check-flakiness.html"><span class="pn-label">próxima ►</span>Detectar flakiness</a></div>
+    <div class="page-nav"><a href="../skills/swl-skill-qa-new-contract-tests.html"><span class="pn-label">◄ anterior</span>Gerar testes de contrato</a><a class="pn-next" href="../skills/swl-skill-qa-check-accessibility.html"><span class="pn-label">próxima ►</span>Auditar acessibilidade</a></div>
     <div class="footer-note">Base2 Tecnologia · Processo de Qualidade com IA · mantido pela equipe de engenharia</div>
   </main>
 </div>

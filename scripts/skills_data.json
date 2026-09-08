@@ -82,6 +82,47 @@
     ]
   },
   {
+    "folder": "swl-skill-qa-review-requirements",
+    "name": "swl-skill-qa-review-requirements",
+    "description": "Revisa uma user story ou requisito sob a ótica de QA antes do desenvolvimento — testabilidade, ambiguidade, critérios de aceite verificáveis e lacunas de regra. Use no refinamento, para levar perguntas ao PO em vez de descobrir o gap na hora de testar.",
+    "argument_hint": "<UserStoryOuCaminhoDoCard>",
+    "version": "1.0.0",
+    "validated": false,
+    "category": "Planejamento",
+    "title": "Revisar requisitos da story",
+    "body_md": "## Passos\n\n## 1. Leitura da story\nLeia a descrição, os critérios de aceite, as regras de negócio e os anexos referenciados. Anexo referenciado e inacessível é lacuna a registrar, não conteúdo a supor.\n\n## 2. Verificabilidade de cada critério\nPara cada critério de aceite pergunte: é possível escrever um teste que dê inequivocamente passa ou falha? Sinalize os que não passam nesse teste — termo subjetivo sem número (\"rápido\", \"amigável\", \"de forma adequada\"), critério sem gatilho claro (\"o sistema deve validar\" — validar o quê, quando, e o que acontece se falhar), critério que descreve implementação em vez de comportamento observável, e critério que só descreve o caminho feliz.\n\n## 3. Lacunas clássicas\nListe as que a story não responde: permissão (quem pode e quem não pode), estado (recurso inexistente, inativo ou já processado), limites (tamanho, faixa, obrigatoriedade de cada campo), concorrência (dois usuários sobre o mesmo recurso), falha de dependência externa, retroatividade sobre registros criados antes desta regra, requisitos não-funcionais associados, e observabilidade (o comportamento é verificável por quem testa).\n\n## 4. Testabilidade técnica\nAponte o que precisa ser combinado com o dev ainda no refinamento: falta de `data-testid` nos elementos novos, ausência de endpoint ou seed para preparar o estado, dependência externa sem ambiente de sandbox, ação sem retorno observável.\n\n## 5. Saída\nVeredito de prontidão (pronta para dev / pronta com ressalvas / não pronta), critérios não verificáveis com reescrita sugerida, perguntas objetivas para o PO, riscos de testabilidade para o dev, e os cenários que já dá para antecipar — insumo para `swl-skill-qa-new-test-cases`.",
+    "guardrail_md": "Nunca responda por conta própria as perguntas destinadas ao PO, nem transforme uma suposição razoável em critério de aceite. O valor desta skill é produzir a lista de perguntas certas antes de o código existir — uma lacuna preenchida por adivinhação vira um teste que valida o comportamento errado com toda a confiança, e o erro só aparece em produção. Reescrita de critério é sugestão apresentada ao time; não edite a story na ferramenta de gestão sem pedido explícito.",
+    "examples": [
+      {
+        "situation": "Cenário direto",
+        "project_type": "Web",
+        "scenario": "Num refinamento da \"EstudaMais\" (plataforma de cursos fictícia, web), a QA revisa a story de emissão de certificado antes de o dev pegar o card.",
+        "input": "\"Revisa essa story: 'Como aluno, quero emitir meu certificado ao concluir o curso'. Critérios: o certificado deve ser gerado rapidamente e ficar disponível para download.\"",
+        "prompt_example": "/swl-skill-qa-review-requirements Revisa essa story: \"Como aluno, quero emitir meu certificado ao concluir o curso\". Critérios: o certificado deve ser gerado rapidamente e ficar disponível para download.",
+        "prompt_note": null,
+        "expected_output": "A skill marca \"rapidamente\" como não verificável e sugere reescrita com número, e levanta as lacunas: o que conta como concluir o curso, o que acontece se o aluno concluiu antes desta regra existir, quem mais pode baixar o certificado, e o que o aluno vê se a geração falhar. Veredito: não pronta, com quatro perguntas para o PO."
+      },
+      {
+        "situation": "Cenário com ambiguidade",
+        "project_type": "API",
+        "scenario": "Na \"AgroConecta\" (marketplace B2B fictício), a story de cancelamento de pedido referencia um documento de regras de negócio no Confluence que a QA não consegue abrir.",
+        "input": "\"Revisa a story de cancelamento de pedido, as regras estão no doc de política comercial linkado no card.\"",
+        "prompt_example": "/swl-skill-qa-review-requirements Revisa a story de cancelamento de pedido, as regras estão no doc de política comercial linkado no card.",
+        "prompt_note": null,
+        "expected_output": "A skill revisa o que está na story e registra explicitamente que o documento de política comercial não pôde ser lido — sem inferir as regras de cancelamento a partir do nome do documento. O veredito de prontidão fica condicionado à leitura dessa fonte, listada como pendência bloqueante."
+      },
+      {
+        "situation": "Cenário de risco real",
+        "project_type": "Integração",
+        "scenario": "Na \"PagaFácil\" (fintech fictícia), a story de estorno parcial vai para a sprint hoje. O PO, sem tempo, pede pra QA \"completar os critérios que faltam do jeito que fizer sentido, você conhece o produto melhor que eu\".",
+        "input": "\"Revisa a story de estorno parcial e já completa os critérios que estiverem faltando, confio no seu julgamento.\"",
+        "prompt_example": "/swl-skill-qa-review-requirements Revisa a story de estorno parcial e já completa os critérios que estiverem faltando, confio no seu julgamento.",
+        "prompt_note": null,
+        "expected_output": "A skill lista as lacunas como perguntas — se o estorno parcial pode exceder o valor já estornado, o que acontece com um estorno sobre transação em disputa, qual o prazo limite — em vez de preencher com o comportamento mais provável. Num fluxo de dinheiro, um critério inventado que parece razoável vira teste verde sobre a regra errada, e o teste passa a defender o erro."
+      }
+    ]
+  },
+  {
     "folder": "swl-skill-qa-new-automation",
     "name": "swl-skill-qa-new-automation",
     "description": "Gera código de automação de teste detectando o framework do projeto (Playwright, Cypress, Selenium, Robot Framework, RestAssured, Postman/Newman, Testcontainers, WireMock/MockServer, Cucumber, SpecFlow) a partir do CLAUDE.md e rules. Para mobile use swl-skill-qa-new-mobile-automation; para performance/carga use swl-skill-qa-new-performance-test.",
@@ -369,6 +410,49 @@
     ]
   },
   {
+    "folder": "swl-skill-qa-check-ci-history",
+    "name": "swl-skill-qa-check-ci-history",
+    "description": "Analisa o histórico real de execuções do CI para identificar testes flaky por evidência, testes cronicamente quebrados e tendência de duração da suíte. Use quando precisar provar, e não supor, que um teste é instável.",
+    "argument_hint": [
+      "caminho ou nome do teste — vazio analisa a suíte inteira"
+    ],
+    "version": "1.0.0",
+    "validated": false,
+    "category": "Verificação",
+    "title": "Analisar histórico do CI",
+    "body_md": "## Passos\n\n## 1. Fonte do histórico\nBusque nesta ordem e diga qual foi usada: API do CI (`gh run list`/`gh api`, Azure DevOps, GitLab CI, Jenkins), arquivos de resultado acumulados em `test-results/` ou artefatos de build, ou o relatório de retry do próprio runner. Se nenhuma fonte estiver acessível, pare e diga isso — sem histórico não há análise, e leitura estática do código é papel de `swl-skill-qa-check-flakiness`.\n\n## 2. Janela\nCombine a janela com o usuário (ex: últimos 30 dias ou últimas 50 execuções) e registre-a no relatório. Janela pequena demais transforma coincidência em padrão.\n\n## 3. Classificação por evidência\nCruze resultado com revisão de código:\n- **Flaky confirmado**: passou e falhou na mesma revisão (mesmo commit), ou passou em retry sem mudança de código\n- **Quebrado**: falha em todas as execuções desde uma revisão identificável — é bug ou teste desatualizado, não flakiness\n- **Degradando**: taxa de falha crescente ao longo da janela\n- **Estável**: sem falhas na janela\n\nSeparar \"flaky\" de \"quebrado\" é a distinção mais importante do relatório: quebrado exige correção, flaky exige investigação de causa. Tratar quebrado como flaky é como um time começa a ignorar o CI.\n\n## 4. Duração\nReporte os testes mais lentos e a tendência de duração total da suíte na janela — crescimento contínuo é o que faz o time parar de rodar a suíte.\n\n## 5. Saída\nFonte, janela e número de execuções analisadas; taxa de sucesso da suíte; e as quatro listas com a evidência de cada classificação. Encaminhe os flaky confirmados para `swl-skill-qa-check-flakiness`, que identifica a causa no código, e os quebrados para `swl-skill-qa-diagnose-failure`.",
+    "guardrail_md": "Toda classificação precisa vir de execução registrada. Nunca estime uma taxa de falha, nunca extrapole tendência a partir de duas execuções, e nunca chame de flaky um teste que apenas falhou algumas vezes em revisões diferentes — isso pode ser regressão real do produto, e é exatamente o caso em que o rótulo \"flaky\" faz o time ignorar um bug verdadeiro. Se a janela tiver poucas execuções para sustentar a conclusão, diga que a amostra é insuficiente em vez de concluir mesmo assim.",
+    "examples": [
+      {
+        "situation": "Cenário direto",
+        "project_type": "Web",
+        "scenario": "Na \"EstudaMais\" (plataforma de cursos fictícia, web), a suíte E2E do CI vive vermelha e o time quer saber quais testes são realmente instáveis.",
+        "input": "\"Analisa o histórico do CI dos últimos 30 dias e me diz quais testes E2E são flaky.\"",
+        "prompt_example": "/swl-skill-qa-check-ci-history Analisa o histórico do CI dos últimos 30 dias e me diz quais testes E2E são flaky.",
+        "prompt_note": null,
+        "expected_output": "A skill lê as execuções via `gh run list`, e separa: 2 flaky confirmados (passaram e falharam no mesmo commit), 1 quebrado desde um commit específico de duas semanas atrás, e o resto estável — deixando claro que o quebrado não é flakiness e precisa de correção, não de retry."
+      },
+      {
+        "situation": "Cenário com ambiguidade",
+        "project_type": "API",
+        "scenario": "Na \"AgroConecta\" (marketplace B2B fictício), o CI foi migrado de Jenkins para GitHub Actions há oito dias e só há histórico curto na ferramenta nova.",
+        "input": "\"Vê o histórico do CI e me diz se o teste de negociação de preço é flaky.\"",
+        "prompt_example": "/swl-skill-qa-check-ci-history Vê o histórico do CI e me diz se o teste de negociação de preço é flaky.",
+        "prompt_note": null,
+        "expected_output": "A skill informa que só encontrou 6 execuções na janela disponível desde a migração, apresenta o que viu, e diz que a amostra é insuficiente para classificar como flaky — sugerindo buscar os artefatos do Jenkins antigo ou aguardar mais execuções, em vez de concluir a partir de duas falhas."
+      },
+      {
+        "situation": "Cenário de risco real",
+        "project_type": "Integração",
+        "scenario": "Na \"PagaFácil\" (fintech fictícia), o teste de conciliação de estorno falhou em 4 das últimas 20 execuções, sempre em commits diferentes. O tech lead quer marcá-lo como flaky e ligar retry automático para destravar o pipeline antes do fechamento do mês.",
+        "input": "\"Confirma que o teste de conciliação de estorno é flaky pra eu ligar retry nele, tá travando o pipeline.\"",
+        "prompt_example": "/swl-skill-qa-check-ci-history Confirma que o teste de conciliação de estorno é flaky pra eu ligar retry nele, tá travando o pipeline.",
+        "prompt_note": null,
+        "expected_output": "A skill não confirma. As 4 falhas são em revisões diferentes e nenhuma revisão apresenta passa e falha simultâneos — o padrão é compatível com regressão real intermitente, não com flakiness. Encaminha para `swl-skill-qa-diagnose-failure`. Ligar retry num teste de conciliação financeira que está falhando de verdade é o mecanismo exato pelo qual o pipeline passa a esconder o bug que ele existia para pegar."
+      }
+    ]
+  },
+  {
     "folder": "swl-skill-qa-check-accessibility",
     "name": "swl-skill-qa-check-accessibility",
     "description": "Audita acessibilidade (WCAG) de telas/fluxos usando a ferramenta já presente no projeto (axe-core, pa11y, Lighthouse ou equivalente) — nunca declara conformidade com um nível WCAG sem execução real da ferramenta.",
@@ -492,6 +576,50 @@
     ]
   },
   {
+    "folder": "swl-skill-qa-run-tests",
+    "name": "swl-skill-qa-run-tests",
+    "description": "Executa a suíte de testes do projeto detectando o runner automaticamente, captura o arquivo de resultado e reporta o que passou e o que falhou. Use sempre que precisar do resultado real de execução — antes de commitar testes, ao investigar falha, ou como insumo de relatório.",
+    "argument_hint": [
+      "caminho",
+      "tag ou filtro — vazio executa a suíte configurada"
+    ],
+    "version": "1.0.0",
+    "validated": false,
+    "category": "Verificação",
+    "title": "Executar a suíte de testes",
+    "body_md": "## Passos\n\n## 1. Detecção do runner\nSe `.claude/rules/qa/convencoes-teste.md` registra o comando de execução do projeto, use exatamente esse comando. Senão detecte pelos arquivos: `package.json` (script `test`/`test:e2e`, Playwright, Cypress, Jest, Vitest), `.csproj`/`.sln` (`dotnet test`), `pom.xml`/`build.gradle` (`mvn test`/`gradle test`), `pytest.ini`/`pyproject.toml` (`pytest`), robotframework (`robot`). Se mais de um runner for plausível, pergunte qual — não escolha por conta própria.\n\n## 2. Pré-condições e alvo\nConfirme o que a suíte precisa (serviços no ar, variáveis de ambiente, seed de dados, aplicação servida) e contra qual ambiente vai rodar. Se algo faltar, diga o que falta e pare: suíte que quebra por ambiente não produz resultado de teste. Para a checagem completa use `swl-skill-qa-check-environment`. Nunca execute contra produção sem autorização explícita.\n\n## 3. Execução com resultado persistido\nRode sempre com a flag de relatório de máquina, para o resultado ficar em arquivo e não só no terminal: Playwright `--reporter=json`, Jest/Vitest `--outputFile`, dotnet `--logger trx`, Maven/Gradle (Surefire/JUnit XML), pytest `--junitxml`, Robot `--xunit`. Salve em `test-results/` ou no caminho de convenção do projeto e informe o caminho gerado.\n\n## 4. Relato\nReporte: comando exato executado, ambiente, escopo, passou/falhou/pulado/retried, duração, caminho do arquivo de resultado e a primeira linha do erro de cada falha. Se o usuário passou filtro, diga explicitamente que a execução foi parcial — nunca apresente execução parcial como se fosse a suíte inteira. Encaminhe as falhas para `swl-skill-qa-diagnose-failure` e o arquivo para `swl-skill-qa-generate-test-report`.",
+    "guardrail_md": "Nunca reporte resultado que não veio de uma execução real nesta sessão. Se o comando não rodou, travou, estourou timeout ou o ambiente não subiu, diga exatamente isso em vez de preencher o resumo com números plausíveis. Nunca altere teste, assert ou configuração para fazer a suíte passar: se falhou, o resultado é \"falhou\", e corrigir é uma decisão separada tomada depois do diagnóstico. Teste pulado não é teste que passou, e retry que passou na segunda tentativa é sinal de flakiness que deve aparecer no relato, não ser absorvido no total de sucessos.",
+    "examples": [
+      {
+        "situation": "Cenário direto",
+        "project_type": "Web",
+        "scenario": "Um QA na \"EstudaMais\" (plataforma de cursos fictícia, web) acabou de gerar três testes Playwright do fluxo de matrícula e quer o resultado real antes de abrir o PR.",
+        "input": "\"Roda os testes de matrícula.\"",
+        "prompt_example": "/swl-skill-qa-run-tests Roda os testes de matrícula.",
+        "prompt_note": null,
+        "expected_output": "A skill detecta Playwright via `playwright.config.ts`, executa com reporter JSON, salva em `test-results/`, e relata 3 executados, 2 passaram e 1 falhou — com o comando exato, o ambiente, a duração e a primeira linha do erro da falha, encaminhando essa falha para `swl-skill-qa-diagnose-failure`."
+      },
+      {
+        "situation": "Cenário com ambiguidade",
+        "project_type": "API",
+        "scenario": "Na \"AgroConecta\" (marketplace B2B fictício), o projeto tem `dotnet test` para os testes de unidade e uma suíte separada de RestAssured para API, e o QA não diz qual quer.",
+        "input": "\"Roda a suíte de testes do projeto.\"",
+        "prompt_example": "/swl-skill-qa-run-tests Roda a suíte de testes do projeto.",
+        "prompt_note": null,
+        "expected_output": "A skill identifica os dois runners plausíveis e pergunta qual executar, em vez de escolher um e reportar o resultado como se fosse \"a suíte do projeto\". Rodar só a de unidade e chamar de suíte completa produziria um verde que não cobre a API."
+      },
+      {
+        "situation": "Cenário de risco real",
+        "project_type": "Integração",
+        "scenario": "Na \"ContaCerta\" (contabilidade SaaS fictícia), o serviço de integração bancária em homologação está fora do ar. O tech lead, com o deploy atrasado, pede o resultado da suíte \"considerando que a integração passa, ela sempre passa\".",
+        "input": "\"Roda a suíte e considera a integração bancária como passando, o serviço tá fora mas aquilo nunca quebra.\"",
+        "prompt_example": "/swl-skill-qa-run-tests Roda a suíte e considera a integração bancária como passando, o serviço tá fora mas aquilo nunca quebra.",
+        "prompt_note": null,
+        "expected_output": "A skill executa o que dá para executar e reporta os testes de integração bancária como não executados por indisponibilidade do serviço — não como \"passou\". O histórico de nunca ter quebrado é justamente o que faz ninguém olhar para esse teste; preencher o resultado por expectativa transforma o relatório de execução em opinião."
+      }
+    ]
+  },
+  {
     "folder": "swl-skill-qa-risk-priority",
     "name": "swl-skill-qa-risk-priority",
     "description": "Prioriza cenários de teste por criticidade de negócio e risco técnico, gerando uma matriz de priorização para orientar automação e execução manual.",
@@ -570,6 +698,47 @@
         "prompt_example": "/swl-skill-qa-review-tests Revisa esses 8 testes de estorno, já estão marcados como reviewed, é só formalidade.",
         "prompt_note": null,
         "expected_output": "A skill revisa os 8 normalmente e aponta 2 com asserts fracos (só verificam que não lançou exceção, não que o valor do estorno está correto) — sem validar o marcador `reviewed` já presente. Nesses dois casos o marcador foi colocado antes de alguém checar se os asserts realmente provam o que o nome do teste promete, que é a mesma verificação que essa chamada acabou de fazer."
+      }
+    ]
+  },
+  {
+    "folder": "swl-skill-qa-select-regression-suite",
+    "name": "swl-skill-qa-select-regression-suite",
+    "description": "Seleciona o subconjunto de regressão a executar numa release, cruzando o diff de código com a matriz de risco e o histórico de bugs, em vez de rodar tudo ou escolher no feeling. Use quando não há tempo ou ambiente para a suíte completa.",
+    "argument_hint": "<tag/branch de release ou intervalo de commits>",
+    "version": "1.0.0",
+    "validated": false,
+    "category": "Verificação",
+    "title": "Selecionar suíte de regressão",
+    "body_md": "## Passos\n\n## 1. Escopo da release\nDetermine o intervalo a analisar (`git diff <tag-anterior>...<tag-atual>`). Se o intervalo não for informado nem dedutível das tags, pergunte — comparar contra a base errada produz uma seleção sem valor.\n\n## 2. Mapeamento de impacto\nPara cada área alterada, identifique os módulos e fluxos afetados, incluindo o impacto indireto e dizendo como o inferiu: código compartilhado (helper, middleware, componente de UI base) afeta todo consumidor; contrato de API afeta os consumidores conhecidos; schema ou migration afeta todo fluxo que lê ou grava a tabela; configuração, dependência ou build afeta a aplicação inteira. Impacto não rastreável pelo código (ex: mudança em serviço externo) entra como área de risco a confirmar com o time.\n\n## 3. Cruzamento com risco\nCruze as áreas impactadas com a matriz de `swl-skill-qa-risk-priority` e com o histórico de `swl-skill-qa-check-ci-history`, se existirem. Se nenhuma das duas fontes existir, diga isso e trate a seleção como preliminar, baseada só no diff.\n\n## 4. Montagem da seleção\nClassifique em três faixas, justificando cada uma pelo impacto que a motivou:\n- **Obrigatórios**: fluxos críticos diretamente impactados, mais os fluxos críticos de negócio que nunca saem da regressão (login, pagamento, permissão), mesmo sem alteração aparente\n- **Recomendados**: impacto indireto ou histórico de regressão na área\n- **Fora desta regressão**: áreas sem relação com o diff — liste explicitamente, para que a decisão de não rodar fique registrada\n\n## 5. Saída\nRelease, arquivos alterados, módulos impactados, fontes de risco usadas, as três faixas com justificativa, e a seção \"riscos aceitos ao não rodar a suíte completa\" em termos de negócio. Para executar, use `swl-skill-qa-run-tests` com o filtro correspondente, registrando que a execução foi parcial e por seleção de risco.",
+    "guardrail_md": "Esta skill recomenda um recorte; a decisão de não executar parte da suíte é do time e precisa ser tomada com a seção de riscos aceitos à vista. Nunca apresente a seleção como equivalente à regressão completa. Nunca marque uma área como dispensável só porque nenhum arquivo dela mudou: dependência compartilhada, configuração e migration quebram exatamente as áreas que ninguém tocou. Na dúvida sobre impacto indireto, inclua o cenário e explique a dúvida.",
+    "examples": [
+      {
+        "situation": "Cenário direto",
+        "project_type": "Web",
+        "scenario": "Na \"EstudaMais\" (plataforma de cursos fictícia, web), a release da sexta tem 40 arquivos alterados e a suíte completa leva 3 horas — só há uma janela de 1 hora no ambiente de homologação.",
+        "input": "\"Monta a regressão da release v2.4 comparando com a v2.3.\"",
+        "prompt_example": "/swl-skill-qa-select-regression-suite Monta a regressão da release v2.4 comparando com a v2.3.",
+        "prompt_note": null,
+        "expected_output": "A skill mapeia os módulos impactados (matrícula e certificado), monta 12 cenários obrigatórios, 8 recomendados, lista as áreas fora do recorte, e fecha com os riscos aceitos — incluindo que o módulo de pagamento entra como obrigatório mesmo sem alteração, por ser fluxo crítico de negócio."
+      },
+      {
+        "situation": "Cenário com ambiguidade",
+        "project_type": "API",
+        "scenario": "Na \"AgroConecta\" (marketplace B2B fictício), a release inclui o bump de uma biblioteca de serialização usada em todos os endpoints, e o projeto nunca montou matriz de risco.",
+        "input": "\"Seleciona a regressão dessa release, tem um upgrade de dependência no meio.\"",
+        "prompt_example": "/swl-skill-qa-select-regression-suite Seleciona a regressão dessa release, tem um upgrade de dependência no meio.",
+        "prompt_note": null,
+        "expected_output": "A skill avisa que não há matriz de `swl-skill-qa-risk-priority` nem histórico de CI acessível, e trata a seleção como preliminar, baseada só no diff. Como o bump é de biblioteca compartilhada por todos os endpoints, não classifica nenhuma área da API como dispensável — explica que o critério \"nenhum arquivo dessa área mudou\" não vale quando a mudança é numa dependência transversal."
+      },
+      {
+        "situation": "Cenário de risco real",
+        "project_type": "Integração",
+        "scenario": "Na \"ContaCerta\" (contabilidade SaaS fictícia), a release sai em 2 horas. O gerente pede pra deixar a integração bancária de fora da regressão porque \"não foi mexida nessa release e os testes dela são os mais lentos\".",
+        "input": "\"Monta a regressão sem a integração bancária, ninguém mexeu nela e são os testes mais demorados.\"",
+        "prompt_example": "/swl-skill-qa-select-regression-suite Monta a regressão sem a integração bancária, ninguém mexeu nela e são os testes mais demorados.",
+        "prompt_note": null,
+        "expected_output": "A skill verifica o diff e mostra que a release inclui uma migration na tabela de lançamentos, que a integração bancária lê e grava — então ela está indiretamente impactada e permanece nos obrigatórios, com a evidência do impacto. Se o time ainda assim decidir cortar, a seção de riscos aceitos registra o que fica descoberto, em termos de negócio, e de quem foi a decisão."
       }
     ]
   },
@@ -980,6 +1149,47 @@
         "prompt_example": "/swl-skill-qa-generate-test-report [dois arquivos de execução anexados — segunda e sexta] Consolida os dois: quero que conte como aprovado qualquer teste que passou em pelo menos uma das duas execuções.",
         "prompt_note": null,
         "expected_output": "A skill gera o relatório de cada execução separadamente, com os números reais de cada arquivo, sem somar \"passou em pelo menos uma das duas\" como métrica de aprovação. Um teste que passou na segunda e falhou na sexta não vira confiável só por ter passado uma vez — ele continua com um resultado real de falha que o relatório consolidado teria escondido."
+      }
+    ]
+  },
+  {
+    "folder": "swl-skill-qa-release-signoff",
+    "name": "swl-skill-qa-release-signoff",
+    "description": "Consolida as evidências reais de uma release (execução de testes, cobertura de cenários, bugs abertos, requisitos não-funcionais) num parecer de qualidade go/no-go rastreável. Use na véspera de um deploy, quando alguém precisa decidir se libera.",
+    "argument_hint": "<versão ou tag da release>",
+    "version": "1.0.0",
+    "validated": false,
+    "category": "Entrega",
+    "title": "Parecer de release (go/no-go)",
+    "body_md": "## Passos\n\n## 1. Coleta de evidências\nReúna apenas evidência com origem verificável, registrando fonte e data de cada item: execução funcional (`swl-skill-qa-run-tests` / `swl-skill-qa-generate-test-report`), escopo executado (suíte completa ou recorte de `swl-skill-qa-select-regression-suite`), cobertura de cenários (`swl-skill-qa-check-coverage`), bugs em aberto com severidade, não-funcionais aplicáveis à release (`swl-skill-qa-check-performance-results`, `swl-skill-qa-check-accessibility`, `swl-skill-qa-check-security`) e estabilidade da suíte (`swl-skill-qa-check-ci-history`).\n\nEvidência ausente entra no parecer como \"não verificado\", com o impacto que isso tem na decisão — não é omitida nem substituída por estimativa.\n\n## 2. Critérios de liberação\nUse os critérios de `.claude/rules/qa/` se existirem. Se o projeto não os define, proponha e peça confirmação antes de aplicar. Padrão sugerido: nenhum bug de severidade Crítica em aberto nas funcionalidades da release; regressão obrigatória executada e verde; critérios de aceite das features da release cobertos e executados; não-funcionais aplicáveis dentro do threshold definido.\n\n## 3. Parecer\nRecomendação (LIBERAR / LIBERAR COM RESSALVAS / NÃO LIBERAR / EVIDÊNCIA INSUFICIENTE) seguida da tabela de evidências com item, resultado, fonte e data; a lista do que não foi verificado e o risco de cada item; as ressalvas com plano de mitigação acordado; e os riscos residuais em termos de impacto no usuário.\n\n## 4. Registro\nSalve em `docs/qa/releases/<versão>-signoff.md` e informe o caminho. O parecer precisa continuar consultável depois do deploy — é o que permite entender, num incidente, o que se sabia no momento da decisão.",
+    "guardrail_md": "Este parecer é uma recomendação técnica de QA baseada em evidência, não a aprovação de negócio: a decisão de subir é de quem tem essa responsabilidade no time. Nunca recomende LIBERAR com evidência faltando — nesse caso o veredito é EVIDÊNCIA INSUFICIENTE, com a lista do que precisa ser verificado. Ausência de bug reportado não é evidência de qualidade, é ausência de teste até que se prove o contrário. Nunca preencha uma célula da tabela com número que não veio de arquivo, relatório ou board real, e nunca ajuste o veredito por pressão de prazo: um parecer que diz \"libera\" porque a data chegou não protege ninguém.",
+    "examples": [
+      {
+        "situation": "Cenário direto",
+        "project_type": "Web",
+        "scenario": "Na \"EstudaMais\" (plataforma de cursos fictícia, web), o deploy da v2.4 está marcado para amanhã cedo e a QA precisa dar o parecer.",
+        "input": "\"Monta o parecer de release da v2.4.\"",
+        "prompt_example": "/swl-skill-qa-release-signoff Monta o parecer de release da v2.4.",
+        "prompt_note": null,
+        "expected_output": "A skill consolida a tabela de evidências com fonte e data de cada item — regressão 47/47 verde, cobertura sem gaps nas duas features da release, 3 bugs abertos (nenhum crítico), acessibilidade dentro do AA — e recomenda LIBERAR COM RESSALVAS, registrando os 3 bugs médios como risco residual e salvando em `docs/qa/releases/v2.4-signoff.md`."
+      },
+      {
+        "situation": "Cenário com ambiguidade",
+        "project_type": "API",
+        "scenario": "Na \"AgroConecta\" (marketplace B2B fictício), a release inclui uma mudança de performance no endpoint de busca, mas ninguém rodou teste de carga e não há SLA documentado.",
+        "input": "\"Faz o sign-off da release, teve otimização na busca.\"",
+        "prompt_example": "/swl-skill-qa-release-signoff Faz o sign-off da release, teve otimização na busca.",
+        "prompt_note": null,
+        "expected_output": "A skill monta o parecer com o que existe e registra performance como \"não verificado — sem execução de teste de carga e sem threshold definido para julgar\", explicando que uma otimização de performance sem medição não pode ser reportada nem como melhoria nem como risco controlado. Pergunta se o time quer rodar antes ou aceitar o risco de forma registrada."
+      },
+      {
+        "situation": "Cenário de risco real",
+        "project_type": "Integração",
+        "scenario": "Na \"PagaFácil\" (fintech fictícia), o deploy é hoje às 18h por compromisso com um cliente grande. A suíte de conciliação não rodou porque o ambiente caiu, e o diretor pede o parecer \"positivo, porque não tem nenhum bug aberto\".",
+        "input": "\"Emite o sign-off como liberado, não temos nenhum bug aberto na conciliação e o deploy é às 18h.\"",
+        "prompt_example": "/swl-skill-qa-release-signoff Emite o sign-off como liberado, não temos nenhum bug aberto na conciliação e o deploy é às 18h.",
+        "prompt_note": null,
+        "expected_output": "A skill emite EVIDÊNCIA INSUFICIENTE, não LIBERAR: a conciliação não foi executada nesta release, e ausência de bug aberto num módulo que não foi testado é ausência de teste, não evidência de qualidade. O parecer lista exatamente o que falta verificar e fica registrado no repositório — de modo que, se houver incidente, seja possível reconstruir o que se sabia às 18h e quem decidiu subir mesmo assim."
       }
     ]
   },
