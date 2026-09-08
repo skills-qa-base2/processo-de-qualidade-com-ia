@@ -247,10 +247,11 @@ def build_skill_page(s, idx):
     not_validated_html = ""
     if not s["validated"]:
         not_validated_html = """
-        <div class="guardrail-box">
-          <div class="g-label">⚑ AINDA NÃO VALIDADA</div>
+        <div class="pending-box">
+          <div class="g-label">⧗ VALIDAÇÃO PENDENTE</div>
           <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
-          Confira o comportamento documentado abaixo com mais atenção até a validação ser concluída.</p>
+          O guardrail abaixo descreve o comportamento esperado, mas ele ainda não foi
+          exercitado sob pressão — confira com mais atenção até a validação ser concluída.</p>
         </div>
         """
 
