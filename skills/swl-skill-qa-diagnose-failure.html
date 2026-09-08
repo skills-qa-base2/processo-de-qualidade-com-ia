@@ -40,6 +40,21 @@
      do tema escuro, exige recalcular, não só ajustar visualmente. */
   --green-strong: #007c49;
 
+  /* Selo "validação pendente" nos cards da home (.sc-pending). O fundo é
+     rgba(--amber,.12) compositado sobre --panel, o que dá #fcf4e8 no tema claro e
+     #2a2f1e no escuro; os tons de texto abaixo foram calculados contra esses
+     fundos reais, não contra branco/preto puro:
+       --amber-text       sobre #fcf4e8 → 5,10:1   (AA texto, mínimo 4,5:1)
+       --amber-text-dark  sobre #2a2f1e → 6,39:1   (AA texto)
+     O fundo diluído sozinho fica em 1,09:1 / 1,24:1 contra --panel, abaixo do
+     mínimo de 3:1 para contraste não-textual — por isso o selo leva borda 1px na
+     própria cor do texto, que resolve o limite em 5,57:1 (claro) e 7,90:1
+     (escuro). Qualquer mudança de tom em --amber, na opacidade .12 ou nos fundos
+     --panel exige recalcular os quatro números, não só ajustar visualmente. */
+  --amber: #e8a33d;
+  --amber-text: #8f5e05;
+  --amber-text-dark: #e8a33d;
+
   --bg: #f6faf8;
   --panel: #ffffff;
   --border: #dfe8e3;
@@ -544,6 +559,22 @@ html[data-theme="dark"] .skill-card .sc-title { color: var(--lime); }
 .skill-card .sc-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
 .skill-card .sc-go { font-size: 12.5px; color: var(--dark-green); font-weight: 600; margin-top: 4px; }
 html[data-theme="dark"] .skill-card .sc-go { color: var(--lime); }
+.sc-pending {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: var(--amber-text);
+  background: rgba(232, 163, 61, .12);
+  border: 1px solid var(--amber-text);
+}
+html[data-theme="dark"] .sc-pending {
+  color: var(--amber-text-dark);
+  border-color: var(--amber-text-dark);
+}
 
 /* Table */
 .content table {

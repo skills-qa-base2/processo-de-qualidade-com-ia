@@ -26,12 +26,14 @@ def build_home():
     validated_skills = [s for s in SKILLS if s["validated"]]
     pending_skills = [s for s in SKILLS if not s["validated"]]
     if pending_skills:
-        pending_names = ", ".join(f"<code>/{s['name']}</code>" for s in pending_skills)
         validation_sentence = (
             f"{len(validated_skills)} de {len(SKILLS)} skills já foram validadas com teste "
-            f"adversarial antes da publicação. {len(pending_skills)} ainda "
-            f"{'está' if len(pending_skills) == 1 else 'estão'} pendente"
-            f"{'' if len(pending_skills) == 1 else 's'}: {pending_names}."
+            f"adversarial antes da publicação. "
+            f"{'A outra segue' if len(pending_skills) == 1 else f'As outras {len(pending_skills)} seguem'} "
+            f"a mesma convenção de guardrail, mas ainda "
+            f"{'não passou' if len(pending_skills) == 1 else 'não passaram'} pelo teste — "
+            f"{'está marcada' if len(pending_skills) == 1 else 'cada uma está marcada'} abaixo "
+            f"com <span class=\"sc-pending\">validação pendente</span>."
         )
     else:
         validation_sentence = (
@@ -47,6 +49,7 @@ def build_home():
             <a class="skill-card" href="{skill_url(s['folder'], base)}">
               <div class="sc-title">{s['title']}</div>
               <div class="sc-cmd">/{s['name']}</div>
+              {'<div class="sc-pending">⚑ validação pendente</div>' if not s['validated'] else ''}
               <div class="sc-desc">{s['description']}</div>
               <div class="sc-go">Ver skill ✦</div>
             </a>
@@ -65,9 +68,10 @@ def build_home():
     integração, contrato, mobile e performance, funcionando em qualquer projeto,
     independente de stack ou framework de automação.</p>
     <p>Skills são instruções salvas que o Claude executa quando você digita um comando
-    <code>/nome-da-skill</code> no Claude Code. Elas padronizam tarefas repetitivas de QA
-    como planejar estratégia de teste, gerar cenários BDD/casos de teste, automatizar,
-    criar massa de dados fictícia e verificar qualidade antes de commitar.</p>
+    <code>/nome-da-skill</code> no Claude Code. Elas padronizam o ciclo de QA de ponta a
+    ponta: revisar a story no refinamento, planejar a estratégia, gerar cenários BDD e
+    casos de teste, criar massa de dados fictícia, automatizar, executar a suíte,
+    diagnosticar falhas e fechar com o parecer de release.</p>
 
     <div class="callout">
       <div class="callout-label">// PRINCÍPIO-GUIA</div>
