@@ -10,7 +10,7 @@ Repositório: https://github.com/skills-qa-base2/processo-de-qualidade-com-ia
 ## O que é
 
 Skills são instruções salvas que o Claude executa quando você digita um comando
-`/nome-da-skill` no Claude Code. Essa coleção reúne **25 skills** que padronizam as tarefas
+`/nome-da-skill` no Claude Code. Essa coleção reúne **30 skills** que padronizam as tarefas
 mais repetitivas de QA — planejar estratégia de teste, gerar cenários BDD e casos de teste,
 automatizar, criar massa de dados fictícia, verificar qualidade antes de commitar, diagnosticar
 falhas e fechar a entrega (relatório, PR, documentação).
@@ -28,10 +28,11 @@ pendente (`a confirmar`) em vez de inventar. Esse comportamento foi validado com
 adversariais antes da publicação — histórico completo em
 [`qa-skills-package/MANIFEST.md`](qa-skills-package/MANIFEST.md).
 
-## As 25 skills, por categoria
+## As 30 skills, por categoria
 
-**Planejamento** (2) — antes de gerar qualquer cenário
+**Planejamento** (3) — antes de gerar qualquer cenário
 - `swl-skill-qa-plan-strategy` — entrevista estruturada para levantar a estratégia de testes
+- `swl-skill-qa-review-requirements` — revisa a story no refinamento (testabilidade, critérios verificáveis, lacunas)
 - `swl-skill-qa-generate-rules` — gera `.claude/rules/qa/` a partir de documentação ou entrevista
 
 **Geração** (7) — cenários, dados e automação
@@ -43,7 +44,7 @@ adversariais antes da publicação — histórico completo em
 - `swl-skill-qa-new-contract-tests` — testes de contrato/schema de API (OpenAPI/Pact)
 - `swl-skill-qa-new-performance-test` — script de carga/stress/spike/soak (k6/JMeter/Gatling/Artillery)
 
-**Verificação** (9) — antes de confiar no resultado
+**Verificação** (12) — antes de confiar no resultado
 - `swl-skill-qa-check-coverage` — gaps de cobertura funcional (critérios x cenários)
 - `swl-skill-qa-check-flakiness` — padrões de instabilidade em testes automatizados
 - `swl-skill-qa-check-data-quality` — audita relatórios/documentos de QA gerados por IA
@@ -53,17 +54,21 @@ adversariais antes da publicação — histórico completo em
 - `swl-skill-qa-check-security` — verificação de segurança stack-agnóstica (Node/Python/Java/mobile), complementar à check-security .NET do org-skills
 - `swl-skill-qa-check-accessibility` — audita acessibilidade (WCAG) via ferramenta já presente no projeto
 - `swl-skill-qa-check-environment` — valida que o ambiente está pronto antes da execução (health check, seed, feature flags)
+- `swl-skill-qa-run-tests` — executa a suíte detectando o runner e captura o arquivo de resultado
+- `swl-skill-qa-check-ci-history` — flakiness por evidência do histórico do CI, não por leitura do código
+- `swl-skill-qa-select-regression-suite` — recorte de regressão por diff e risco quando não dá pra rodar tudo
 
 **Diagnóstico** (3) — quando algo falha
 - `swl-skill-qa-diagnose-failure` — rastreia uma falha até a causa raiz
 - `swl-skill-qa-report-bug` — relatório de bug estruturado
 - `swl-skill-qa-exploratory-session` — conduz e documenta uma sessão de teste exploratório
 
-**Entrega** (4) — fechando o ciclo
+**Entrega** (5) — fechando o ciclo
 - `swl-skill-qa-generate-test-report` — relatório executivo a partir de execução real
 - `swl-skill-qa-describe-test-pr` — descrição de PR de testes
 - `swl-skill-qa-update-test-docs` — atualiza README/glossário/mapa de cobertura
-- `swl-skill-qa-safe-test-commit` — pipeline completo (coverage, data-quality, flakiness, review) antes de commitar
+- `swl-skill-qa-safe-test-commit` — pipeline completo (execução, coverage, data-quality, flakiness, review) antes de commitar
+- `swl-skill-qa-release-signoff` — parecer go/no-go de release a partir das evidências reais
 
 A descrição completa, o comando exato e os passos de cada skill estão na página dela dentro
 do site (`skills/swl-skill-qa-<nome>.html`) ou no `SKILL.md` correspondente em
@@ -147,7 +152,7 @@ python3 build_instalacao.py    # regenera instalacao.html
 `qa-skills-package/skills/swl-skill-qa-<nome>/SKILL.md` seguindo o formato das demais
 (frontmatter `name`/`description`/`argument-hint`/`metadata.version`, seção `## Passos` e
 seção `## Guardrail`), crie também o `EXAMPLES.md` da mesma pasta com 3 exemplos no
-formato `Cenário`/`Input`/`Prompt de exemplo`/`Saída esperada` (mesmo padrão das 25
+formato `Cenário`/`Input`/`Prompt de exemplo`/`Saída esperada` (mesmo padrão das demais
 skills existentes), registre-a em `CATEGORY_MAP` e `TITLE_MAP` no topo de
 `scripts/build_data.py`, e rode os cinco scripts acima.
 

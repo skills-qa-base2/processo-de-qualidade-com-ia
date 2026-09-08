@@ -9,6 +9,7 @@ CATEGORY_ORDER = ["Planejamento", "Geração", "Verificação", "Diagnóstico", 
 CATEGORY_MAP = {
     "swl-skill-qa-plan-strategy": "Planejamento",
     "swl-skill-qa-generate-rules": "Planejamento",
+    "swl-skill-qa-review-requirements": "Planejamento",
     "swl-skill-qa-new-bdd-scenarios": "Geração",
     "swl-skill-qa-new-test-cases": "Geração",
     "swl-skill-qa-new-test-data": "Geração",
@@ -25,6 +26,9 @@ CATEGORY_MAP = {
     "swl-skill-qa-check-environment": "Verificação",
     "swl-skill-qa-review-tests": "Verificação",
     "swl-skill-qa-risk-priority": "Verificação",
+    "swl-skill-qa-run-tests": "Verificação",
+    "swl-skill-qa-check-ci-history": "Verificação",
+    "swl-skill-qa-select-regression-suite": "Verificação",
     "swl-skill-qa-diagnose-failure": "Diagnóstico",
     "swl-skill-qa-report-bug": "Diagnóstico",
     "swl-skill-qa-exploratory-session": "Diagnóstico",
@@ -32,12 +36,14 @@ CATEGORY_MAP = {
     "swl-skill-qa-describe-test-pr": "Entrega",
     "swl-skill-qa-update-test-docs": "Entrega",
     "swl-skill-qa-safe-test-commit": "Entrega",
+    "swl-skill-qa-release-signoff": "Entrega",
 }
 
 # Nice short display titles (Portuguese, human readable) for nav/cards
 TITLE_MAP = {
     "swl-skill-qa-plan-strategy": "Planejar estratégia de testes",
     "swl-skill-qa-generate-rules": "Gerar regras de QA do projeto",
+    "swl-skill-qa-review-requirements": "Revisar requisitos da story",
     "swl-skill-qa-new-bdd-scenarios": "Gerar cenários BDD",
     "swl-skill-qa-new-test-cases": "Gerar casos de teste",
     "swl-skill-qa-new-test-data": "Gerar massa de dados de teste",
@@ -54,6 +60,9 @@ TITLE_MAP = {
     "swl-skill-qa-check-environment": "Validar ambiente de teste",
     "swl-skill-qa-review-tests": "Revisar testes",
     "swl-skill-qa-risk-priority": "Priorizar por risco",
+    "swl-skill-qa-run-tests": "Executar a suíte de testes",
+    "swl-skill-qa-check-ci-history": "Analisar histórico do CI",
+    "swl-skill-qa-select-regression-suite": "Selecionar suíte de regressão",
     "swl-skill-qa-diagnose-failure": "Diagnosticar falha de teste",
     "swl-skill-qa-report-bug": "Reportar bug",
     "swl-skill-qa-exploratory-session": "Conduzir sessão exploratória",
@@ -61,6 +70,7 @@ TITLE_MAP = {
     "swl-skill-qa-describe-test-pr": "Descrever PR de testes",
     "swl-skill-qa-update-test-docs": "Atualizar documentação de testes",
     "swl-skill-qa-safe-test-commit": "Pipeline de commit seguro",
+    "swl-skill-qa-release-signoff": "Parecer de release (go/no-go)",
 }
 
 def parse_examples(folder):

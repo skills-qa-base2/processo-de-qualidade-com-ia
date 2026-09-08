@@ -81,7 +81,12 @@ Com o Claude Code aberto em qualquer projeto, digite:
 | `/swl-skill-qa-generate-test-report` | Gera relatório executivo a partir de execução real (JSON/XML) |
 | `/swl-skill-qa-describe-test-pr` | Gera descrição de PR de testes |
 | `/swl-skill-qa-update-test-docs` | Atualiza README/glossário/mapa de cobertura de testes |
-| `/swl-skill-qa-safe-test-commit` | Pipeline completo (coverage, data-quality, flakiness, review) antes de commit |
+| `/swl-skill-qa-safe-test-commit` | Pipeline completo (execução, coverage, data-quality, flakiness, review) antes de commit |
+| `/swl-skill-qa-review-requirements` | Revisa a story no refinamento: testabilidade, critérios verificáveis e lacunas |
+| `/swl-skill-qa-run-tests` | Executa a suíte detectando o runner e captura o arquivo de resultado |
+| `/swl-skill-qa-check-ci-history` | Identifica flakiness por evidência do histórico do CI |
+| `/swl-skill-qa-select-regression-suite` | Seleciona o recorte de regressão por diff e risco |
+| `/swl-skill-qa-release-signoff` | Parecer go/no-go de release a partir das evidências reais |
 
 ---
 
@@ -114,6 +119,11 @@ Com o Claude Code aberto em qualquer projeto, digite:
 | `swl-skill-qa-describe-test-pr` | Entrega | Descrição de PR de testes |
 | `swl-skill-qa-update-test-docs` | Entrega | Atualização de documentação de testes |
 | `swl-skill-qa-safe-test-commit` | Entrega | Pipeline de qualidade antes de commit |
+| `swl-skill-qa-review-requirements` | Planejamento | Revisão de story no refinamento (testabilidade e lacunas) |
+| `swl-skill-qa-run-tests` | Verificação | Execução da suíte e captura do arquivo de resultado |
+| `swl-skill-qa-check-ci-history` | Verificação | Flakiness por evidência do histórico do CI |
+| `swl-skill-qa-select-regression-suite` | Verificação | Recorte de regressão por diff e risco |
+| `swl-skill-qa-release-signoff` | Entrega | Parecer go/no-go de release |
 
 ---
 
