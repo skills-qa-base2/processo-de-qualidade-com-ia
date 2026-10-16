@@ -50,6 +50,10 @@ Skills de QA da Base2 Tecnologia para Claude Code. Cobrem frontend/web, API, int
 | **MINOR** (x.Y.0) | Nova seção, novo passo ou novo critério adicionado |
 | **PATCH** (x.y.Z) | Correção de typo, texto ou exemplo sem mudança de comportamento |
 
+A mesma convenção vale para a versão do **plugin** (`.claude-plugin/plugin.json`), que é
+o sinal de atualização para quem instalou pelo marketplace. A regra de quando bumpar está
+em `AGENTS.md`, seção "Versionamento do plugin".
+
 ---
 
 ## Validação desta versão
