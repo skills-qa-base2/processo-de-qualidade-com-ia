@@ -770,21 +770,14 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">308 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
+    <div class="content-meta">330 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
       <span class="cat-pill">Verificação</span>
-      <span class="ver">versão 1.2.0</span>
+      <span class="ver">versão 1.3.0</span>
     </div>
     <h1>Revisar testes</h1>
     
-        <div class="pending-box">
-          <div class="g-label">⧗ VALIDAÇÃO PENDENTE</div>
-          <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
-          O guardrail abaixo descreve o comportamento esperado, mas ele ainda não foi
-          exercitado sob pressão — confira com mais atenção até a validação ser concluída.</p>
-        </div>
-        
     <p>Revisa testes gerados ou existentes quanto a nomenclatura, clareza de asserts e cobertura real de cenários — evita testes triviais ou redundantes.</p>
 
     <div class="usage-block">
@@ -805,7 +798,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <h3>4. Saída</h3>
 <p>Lista de observações por teste: nomenclatura, qualidade de assert, redundância — com recomendação objetiva (manter, ajustar, remover por redundância).</p>
 <h3>5. Promoção do marcador</h3>
-<p>Esta é a única skill do pacote que troca <code>generated-by-ai: pending-review</code> por <code>reviewed</code>. Só faça a troca com as três condições satisfeitas: as observações dos passos 1 a 3 foram apresentadas; uma pessoa confirmou explicitamente nesta conversa que revisou e aceita o teste; o teste foi executado com sucesso, ou o usuário informou o resultado real da execução. Faltando qualquer uma, mantenha <code>pending-review</code> e diga o que falta.</p>
+<p>Esta é a única skill do pacote que troca <code>generated-by-ai: pending-review</code> por <code>reviewed</code>. Só faça a troca com as três condições satisfeitas: as observações dos passos 1 a 3 foram apresentadas; uma pessoa confirmou explicitamente nesta conversa que revisou e aceita o teste <strong>depois</strong> de ver essas observações — confirmação dada antes delas existirem não vale, porque aceitou o que ainda não tinha sido apontado; o teste foi executado com sucesso, ou o usuário informou o resultado real da execução. Faltando qualquer uma, mantenha <code>pending-review</code> e diga o que falta.</p>
     
         <div class="guardrail-box">
           <div class="g-label">⚑ GUARDRAIL ANTI-INVENÇÃO</div>

@@ -4,7 +4,7 @@ description: Gera massa de dados de teste fictícia (nunca dados reais de client
 argument-hint: <NomeDaEntidadeOuDomínio>
 metadata:
   version: 1.1.0
-  validated: false
+  validated: true
 ---
 
 ## Passos
