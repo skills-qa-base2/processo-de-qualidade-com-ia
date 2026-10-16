@@ -1,7 +1,11 @@
-# Roteiro de validação — técnicas de especificação (RASCUNHO, não executado)
+# Roteiro de validação — técnicas de especificação
+
+> **Executado em 16/10/2026.** Resultado e evidência por cenário em `VALIDACAO-ADVERSARIAL.md`.
+> O roteiro fica aqui para ser reexecutado por uma pessoa do time — é o que daria validação
+> de fato independente, que a execução de 16/10 não dá.
 
 Cobre as 6 skills que entraram em `validated: false` ao incorporarem técnicas de
-especificação. **Nenhum destes cenários foi executado.** Devem rodar em sessão separada,
+especificação. Rodaram em sessão separada em 16/10/2026,
 pelo método e com as ressalvas de `VALIDACAO-ADVERSARIAL.md` — em especial a de que o
 mesmo modelo conduzir e avaliar não é validação independente.
 

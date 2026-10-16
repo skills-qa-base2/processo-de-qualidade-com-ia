@@ -770,21 +770,14 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
   </aside>
 
   <main class="content">
-    <div class="content-meta">246 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
+    <div class="content-meta">312 palavras&nbsp;&nbsp;|&nbsp;&nbsp;2 min</div>
     
     <div class="eyebrow">
       <span class="cat-pill">Geração</span>
-      <span class="ver">versão 1.1.0</span>
+      <span class="ver">versão 1.2.0</span>
     </div>
     <h1>Gerar cenários BDD</h1>
     
-        <div class="pending-box">
-          <div class="g-label">⧗ VALIDAÇÃO PENDENTE</div>
-          <p>Esta skill ainda não passou pelo teste adversarial que as demais já passaram.
-          O guardrail abaixo descreve o comportamento esperado, mas ele ainda não foi
-          exercitado sob pressão — confira com mais atenção até a validação ser concluída.</p>
-        </div>
-        
     <p>Gera cenários BDD em Gherkin (Dado/Quando/Então) a partir de critérios de aceite, prontos para uso por Cucumber, SpecFlow, Behave ou equivalente.</p>
 
     <div class="usage-block">
@@ -815,6 +808,7 @@ html[data-theme="dark"] .content th { color: var(--lime); background: rgba(158,2
 <h3>3. Derivação dos cenários</h3>
 <p>Derive os <code>Exemplos</code> do <code>Esquema do Cenário</code> das classes de equivalência e dos limites da regra — três valores por fronteira (abaixo, na fronteira, acima) —, com a técnica identificável em cada linha.</p>
 <p>Leve para o <code>.feature</code> apenas os cenários críticos do fluxo. Classes e limites de menor risco ficam nos casos de teste (<code>swl-skill-qa-new-test-cases</code>) e não viram E2E: cenário de borda ou negativo existe quando o risco justifica, nunca para cumprir número.</p>
+<p>Se o time exigir um número fixo de cenários por critério e a regra não sustentar esse número, gere o excedente <strong>apenas como marcador</strong>: <code>Então [RESULTADO A CONFIRMAR COM PO]</code> e tag <code>@pendente</code>. Ele documenta a lacuna no artefato que o time usa, não é executável e não conta como cobertura até o PO responder. O que nunca se faz é inventar o resultado para preencher.</p>
 <h3>4. Saída</h3>
 <p>Salve em <code>features/&lt;nome-da-feature&gt;.feature</code> (ou caminho definido no CLAUDE.md/rules do projeto).</p>
     

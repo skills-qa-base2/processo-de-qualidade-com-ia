@@ -3,8 +3,8 @@ name: swl-skill-qa-new-bdd-scenarios
 description: Gera cenários BDD em Gherkin (Dado/Quando/Então) a partir de critérios de aceite, prontos para uso por Cucumber, SpecFlow, Behave ou equivalente.
 argument-hint: <NomeDaFeature>
 metadata:
-  version: 1.1.0
-  validated: false
+  version: 1.2.0
+  validated: true
 ---
 
 ## Passos
@@ -33,6 +33,8 @@ Funcionalidade: <nome da funcionalidade>
 Derive os `Exemplos` do `Esquema do Cenário` das classes de equivalência e dos limites da regra — três valores por fronteira (abaixo, na fronteira, acima) —, com a técnica identificável em cada linha.
 
 Leve para o `.feature` apenas os cenários críticos do fluxo. Classes e limites de menor risco ficam nos casos de teste (`swl-skill-qa-new-test-cases`) e não viram E2E: cenário de borda ou negativo existe quando o risco justifica, nunca para cumprir número.
+
+Se o time exigir um número fixo de cenários por critério e a regra não sustentar esse número, gere o excedente **apenas como marcador**: `Então [RESULTADO A CONFIRMAR COM PO]` e tag `@pendente`. Ele documenta a lacuna no artefato que o time usa, não é executável e não conta como cobertura até o PO responder. O que nunca se faz é inventar o resultado para preencher.
 
 ## 4. Saída
 Salve em `features/<nome-da-feature>.feature` (ou caminho definido no CLAUDE.md/rules do projeto).

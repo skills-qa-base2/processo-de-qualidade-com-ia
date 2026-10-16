@@ -9,7 +9,7 @@ Skills de QA da Base2 Tecnologia para Claude Code. Cobrem frontend/web, API, int
 | `swl-skill-qa-plan-strategy` | 1.0.0 | Planejamento | Entrevista estruturada para levantar a estratégia de testes de um projeto ou feature antes de gerar qualquer cenário |
 | `swl-skill-qa-generate-rules` | 1.0.0 | Planejamento | Gera `.claude/rules/qa/` a partir de documentação técnica existente ou entrevista com o time |
 | `swl-skill-qa-review-requirements` | 1.1.0 | Planejamento | Revisa user story no refinamento: testabilidade, critérios de aceite verificáveis e lacunas de regra |
-| `swl-skill-qa-new-bdd-scenarios` | 1.1.0 | Geração | Gera cenários BDD em Gherkin a partir de critérios de aceite |
+| `swl-skill-qa-new-bdd-scenarios` | 1.2.0 | Geração | Gera cenários BDD em Gherkin a partir de critérios de aceite |
 | `swl-skill-qa-new-test-cases` | 1.1.0 | Geração | Gera casos de teste a partir de user story aplicando técnicas de especificação e registrando a técnica que originou cada caso |
 | `swl-skill-qa-new-test-data` | 1.1.0 | Geração | Gera massa de dados de teste fictícia via factories/fixtures |
 | `swl-skill-qa-new-automation` | 1.2.0 | Geração | Gera código de automação web/API/integração detectando o framework do projeto (Playwright, Cypress, Selenium, Robot Framework, RestAssured, Postman/Newman, Testcontainers, WireMock/MockServer, Cucumber, SpecFlow) |
@@ -58,6 +58,8 @@ Antes da publicação 1.0.0, as 18 skills originais foram testadas funcionalment
 
 As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mesmo tipo de teste adversarial antes de entrar no pacote: `qa-new-mobile-automation` não inflou cobertura de dispositivo/OS além do testado; `qa-new-contract-tests` recusou gerar schema sem especificação real e gerou corretamente quando uma foi fornecida; `qa-new-performance-test` não assumiu tipo de teste nem inventou threshold de SLA; `qa-check-performance-results` reportou métricas reais extraídas de um resultado k6 sintético e recusou dar veredito de aprovação sem threshold definido. Relatório completo da auditoria disponível junto ao time que validou o pacote.
 
+**Rodada de validação de 16/10/2026**: as 6 skills que receberam técnicas de especificação (PR #7) passaram por teste adversarial e voltaram a `validated: true`. **As 30 skills do pacote estão validadas.** Diferença de método em relação à rodada anterior: cada cenário rodou em sessão limpa e separada, sem o roteiro e sem saber que era teste — mas o avaliador continua sendo quem escreveu o roteiro, então **ainda não é validação independente**. Detalhes, evidência por skill e o achado que levou `qa-new-bdd-scenarios` a 1.2.0 estão em `VALIDACAO-ADVERSARIAL.md`.
+
 **Rodada de validação de 08/09/2026**: as 15 skills que estavam com `validated: false` — as 7 alteradas no PR #1, as 5 adicionadas no PR #2 e as 3 pendentes desde a entrada (`qa-check-security`, `qa-check-accessibility`, `qa-check-environment`) — passaram por teste adversarial e estão todas com `validated: true`. As 30 skills do pacote estão validadas. Método, alvos usados, resultado por skill e **a limitação do método** (o mesmo modelo executou e avaliou; não é validação independente) estão em `VALIDACAO-ADVERSARIAL.md`.
 
 **Nota histórica**: `qa-check-security`, `qa-check-accessibility` e `qa-check-environment` entraram no pacote sem teste adversarial (ver `AUDITORIA-COBERTURA.md`, Parte 3) e permaneceram pendentes até essa rodada. As 7 skills alteradas nos PRs #1/#2 foram remarcadas como pendentes na época por terem tido frases do `## Guardrail` reescritas, conforme a regra de `EFICIENCIA-TOKENS.md`.
@@ -73,6 +75,7 @@ As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mes
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Gera `padroes-teste.md`, `restricoes-teste.md` e `convencoes-teste.md`; nunca infere convenção sem fonte.
 
 ### swl-skill-qa-new-bdd-scenarios
+- **1.2.0** — Nomeia a saída para quando o time exige um número fixo de cenários que a regra não sustenta: o excedente vira marcador com `[RESULTADO A CONFIRMAR COM PO]` e tag `@pendente`, não conta como cobertura e nunca tem o resultado inventado. Surgiu da rodada adversarial de 16/10/2026, em que a skill improvisou exatamente essa saída sem ela estar no texto — o comportamento era bom, a imprevisibilidade não.
 - **1.1.0** — Os `Exemplos` do `Esquema do Cenário` passam a ser derivados das classes de equivalência e dos limites da regra. **A cota de "no mínimo 1 happy path, 1 edge case e 1 negativo por critério" foi removida de propósito, não por esquecimento**: ela incentivava deduzir borda e negativo para cumprir número, e técnica de especificação multiplica casos por natureza. O `.feature` passa a levar só os cenários críticos; classes e limites de menor risco ficam nos casos de teste e não viram E2E.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Gera `.feature` com happy path, edge case e negativo por critério; um `Quando` por ação de negócio.
 
