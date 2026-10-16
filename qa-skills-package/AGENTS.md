@@ -26,6 +26,27 @@ Este repositório mantém uma coleção de skills de QA da Base2 para o Claude C
 - Referências a outras skills desta coleção devem usar o nome completo com prefixo (ex: `swl-skill-qa-check-coverage`), nunca a forma curta — o nome no frontmatter deve ser idêntico ao nome da pasta.
 - Toda skill que envolve geração de conteúdo (dados, respostas, relatórios) deve ter uma seção `## Guardrail` explícita contra fabricação/invenção quando a informação de origem não estiver disponível.
 
+## Versionamento do plugin
+
+O pacote é distribuído como plugin (`qa-base2`), e
+`qa-skills-package/.claude-plugin/plugin.json` carrega a versão que os clientes usam
+como **sinal de atualização**.
+
+- **Toda mudança em `skills/` bumpa o `plugin.json`.** Sem isso, quem já está na versão
+  corrente não recebe a mudança, e a falha é silenciosa — nada avisa que a skill
+  instalada está velha.
+- O incremento segue a mesma convenção do `MANIFEST.md`: **MINOR** para nova seção,
+  passo ou critério em qualquer skill; **PATCH** para correção de texto sem mudança de
+  comportamento; **MAJOR** para remoção de skill ou quebra de contrato.
+- A versão do plugin é independente da versão de cada skill: várias skills podem mudar
+  num mesmo PR e o plugin sobe uma vez só.
+- Mudança que não toca `skills/` (site, scripts, documentação de governança) não exige
+  bump.
+
+Isso já falhou uma vez: o PR #8 alterou `swl-skill-qa-review-tests` e
+`swl-skill-qa-new-bdd-scenarios` sem bumpar o plugin, e as duas foram parar dentro de um
+pacote ainda rotulado 1.1.0. Quem estivesse em 1.1.0 nunca receberia as mudanças.
+
 ## Quando editar arquivos
 - Se a mudança afetar o uso da skill, atualize também a documentação pública e o manifest.
 - Se a mudança for apenas de formato ou clareza da instrução, mantenha o restante do repositório consistente com o estilo atual.
