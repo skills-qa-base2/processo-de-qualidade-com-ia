@@ -37,7 +37,7 @@ adversariais antes da publicação — histórico completo em
 
 **Geração** (7) — cenários, dados e automação
 - `swl-skill-qa-new-bdd-scenarios` — cenários BDD (Gherkin) a partir de critérios de aceite
-- `swl-skill-qa-new-test-cases` — casos de teste estruturados a partir de user story
+- `swl-skill-qa-new-test-cases` — casos de teste a partir de user story, com a técnica de especificação registrada em cada caso
 - `swl-skill-qa-new-test-data` — massa de dados fictícia via factories/fixtures
 - `swl-skill-qa-new-automation` — automação web/API/integração, detectando o framework do projeto
 - `swl-skill-qa-new-mobile-automation` — automação mobile (Appium/Espresso/XCUITest/Detox/Maestro)
@@ -93,6 +93,11 @@ No Claude Code:
 
 Os comandos continuam iguais (`/swl-skill-qa-plan-strategy`) — skill instalada por plugin
 não ganha prefixo.
+
+> **Se você já copiou as skills para `~/.claude/skills`, remova-as antes de instalar o
+> plugin.** A cópia manual prevalece sobre a do plugin: você continuaria usando a versão
+> antiga, sem nenhum aviso, e a do plugin só ficaria acessível sob o nome com prefixo
+> (`qa-base2:swl-skill-qa-<nome>`).
 
 Para experimentar antes de instalar, sem alterar nada na sua configuração:
 

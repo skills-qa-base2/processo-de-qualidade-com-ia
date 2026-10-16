@@ -59,7 +59,7 @@ Com o Claude Code aberto em qualquer projeto, digite:
 |---|---|
 | `/swl-skill-qa-plan-strategy` | Entrevista estruturada para definir a estratégia de testes antes de gerar qualquer cenário |
 | `/swl-skill-qa-new-bdd-scenarios` | Gera cenários BDD (Gherkin) a partir de critérios de aceite |
-| `/swl-skill-qa-new-test-cases` | Gera casos de teste estruturados a partir de uma user story |
+| `/swl-skill-qa-new-test-cases` | Gera casos de teste a partir de uma user story, registrando a técnica que originou cada caso |
 | `/swl-skill-qa-new-test-data` | Gera massa de dados de teste fictícia via factories/fixtures |
 | `/swl-skill-qa-new-automation` | Gera código de automação web/API/integração detectando o framework do projeto |
 | `/swl-skill-qa-new-mobile-automation` | Gera código de automação mobile (Appium/Espresso/XCUITest/Detox/Maestro) |
@@ -97,7 +97,7 @@ Com o Claude Code aberto em qualquer projeto, digite:
 | `swl-skill-qa-plan-strategy` | Planejamento | Entrevista estruturada para levantar a estratégia de testes |
 | `swl-skill-qa-generate-rules` | Planejamento | Gera project rules de QA a partir de documentação ou entrevista |
 | `swl-skill-qa-new-bdd-scenarios` | Geração | Cenários BDD em Gherkin a partir de critérios de aceite |
-| `swl-skill-qa-new-test-cases` | Geração | Casos de teste estruturados a partir de user story |
+| `swl-skill-qa-new-test-cases` | Geração | Casos de teste a partir de user story, com técnica de especificação registrada |
 | `swl-skill-qa-new-test-data` | Geração | Massa de dados fictícia via factories/fixtures |
 | `swl-skill-qa-new-automation` | Geração | Código de automação web/API/integração detectando o framework do projeto |
 | `swl-skill-qa-new-mobile-automation` | Geração | Código de automação mobile (Appium/Espresso/XCUITest/Detox/Maestro) |
