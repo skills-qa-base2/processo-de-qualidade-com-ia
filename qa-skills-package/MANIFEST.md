@@ -8,19 +8,19 @@ Skills de QA da Base2 Tecnologia para Claude Code. Cobrem frontend/web, API, int
 |---|---|---|---|
 | `swl-skill-qa-plan-strategy` | 1.0.0 | Planejamento | Entrevista estruturada para levantar a estratégia de testes de um projeto ou feature antes de gerar qualquer cenário |
 | `swl-skill-qa-generate-rules` | 1.0.0 | Planejamento | Gera `.claude/rules/qa/` a partir de documentação técnica existente ou entrevista com o time |
-| `swl-skill-qa-review-requirements` | 1.0.0 | Planejamento | Revisa user story no refinamento: testabilidade, critérios de aceite verificáveis e lacunas de regra |
-| `swl-skill-qa-new-bdd-scenarios` | 1.0.0 | Geração | Gera cenários BDD em Gherkin a partir de critérios de aceite |
-| `swl-skill-qa-new-test-cases` | 1.0.1 | Geração | Gera casos de teste estruturados a partir de user story, cobrindo happy path, edge cases e negativos |
-| `swl-skill-qa-new-test-data` | 1.0.0 | Geração | Gera massa de dados de teste fictícia via factories/fixtures |
+| `swl-skill-qa-review-requirements` | 1.1.0 | Planejamento | Revisa user story no refinamento: testabilidade, critérios de aceite verificáveis e lacunas de regra |
+| `swl-skill-qa-new-bdd-scenarios` | 1.1.0 | Geração | Gera cenários BDD em Gherkin a partir de critérios de aceite |
+| `swl-skill-qa-new-test-cases` | 1.1.0 | Geração | Gera casos de teste a partir de user story aplicando técnicas de especificação e registrando a técnica que originou cada caso |
+| `swl-skill-qa-new-test-data` | 1.1.0 | Geração | Gera massa de dados de teste fictícia via factories/fixtures |
 | `swl-skill-qa-new-automation` | 1.2.0 | Geração | Gera código de automação web/API/integração detectando o framework do projeto (Playwright, Cypress, Selenium, Robot Framework, RestAssured, Postman/Newman, Testcontainers, WireMock/MockServer, Cucumber, SpecFlow) |
 | `swl-skill-qa-new-mobile-automation` | 1.1.0 | Geração | Gera código de automação mobile detectando o framework do projeto (Appium, Espresso, XCUITest, Detox, Maestro) |
 | `swl-skill-qa-new-contract-tests` | 1.0.1 | Geração | Gera testes de contrato/schema de API (OpenAPI/JSON Schema, Pact/Spring Cloud Contract) a partir de especificação real |
 | `swl-skill-qa-new-performance-test` | 1.0.1 | Geração | Gera scripts de teste de performance (smoke/load/stress/spike/soak) detectando a ferramenta do projeto (k6, JMeter, Gatling, Artillery) |
 | `swl-skill-qa-check-performance-results` | 1.0.0 | Verificação | Analisa resultado real de execução de teste de performance contra thresholds definidos |
-| `swl-skill-qa-check-coverage` | 1.1.0 | Verificação | Analisa gaps de cobertura de cenários frente a requisitos e critérios de aceite |
+| `swl-skill-qa-check-coverage` | 1.2.0 | Verificação | Analisa gaps de cobertura de cenários frente a requisitos e critérios de aceite |
 | `swl-skill-qa-check-flakiness` | 1.0.0 | Verificação | Detecta padrões de instabilidade em testes automatizados |
 | `swl-skill-qa-check-data-quality` | 1.0.0 | Verificação | Audita documentos/relatórios de QA gerados por IA em busca de dados fabricados |
-| `swl-skill-qa-review-tests` | 1.1.0 | Verificação | Revisa testes quanto a nomenclatura, clareza de asserts e cobertura real; única skill que promove o marcador `generated-by-ai` para `reviewed` |
+| `swl-skill-qa-review-tests` | 1.2.0 | Verificação | Revisa testes quanto a nomenclatura, clareza de asserts e cobertura real; única skill que promove o marcador `generated-by-ai` para `reviewed` |
 | `swl-skill-qa-risk-priority` | 1.0.0 | Verificação | Prioriza cenários por criticidade de negócio e risco técnico |
 | `swl-skill-qa-check-security` | 1.0.1 | Verificação | Verificação de segurança stack-agnóstica (Node, Python, Java, mobile) — complementa, não duplica, a `swl-skill-check-security` do org-skills (.NET Web API) |
 | `swl-skill-qa-check-accessibility` | 1.0.1 | Verificação | Audita acessibilidade (WCAG) via ferramenta já presente no projeto (axe-core, pa11y, Lighthouse) |
@@ -73,13 +73,16 @@ As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mes
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Gera `padroes-teste.md`, `restricoes-teste.md` e `convencoes-teste.md`; nunca infere convenção sem fonte.
 
 ### swl-skill-qa-new-bdd-scenarios
+- **1.1.0** — Os `Exemplos` do `Esquema do Cenário` passam a ser derivados das classes de equivalência e dos limites da regra. **A cota de "no mínimo 1 happy path, 1 edge case e 1 negativo por critério" foi removida de propósito, não por esquecimento**: ela incentivava deduzir borda e negativo para cumprir número, e técnica de especificação multiplica casos por natureza. O `.feature` passa a levar só os cenários críticos; classes e limites de menor risco ficam nos casos de teste e não viram E2E.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Gera `.feature` com happy path, edge case e negativo por critério; um `Quando` por ação de negócio.
 
 ### swl-skill-qa-new-test-cases
+- **1.1.0** — Passa a selecionar a técnica de especificação por regra (partição de equivalência, valor limite, tabela de decisão, transição de estados) e a registrar em cada caso, na linha `Técnica:`, qual delas o originou. Convenção de valor limite do pacote: **três valores por fronteira** (abaixo, na fronteira, acima). Regra sem característica de técnica gera caso direto — a skill não força técnica para parecer rigorosa.
 - **1.0.1** — Reduz verbosidade (217 → 206 palavras, -5,1%) sem mudança de comportamento, conforme `EFICIENCIA-TOKENS.md`.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Marca `[REGRA A CONFIRMAR COM PO]` quando a regra de negócio não está explícita.
 
 ### swl-skill-qa-new-test-data
+- **1.1.0** — Conjuntos de borda passam a ser derivados dos limites reais da regra (três valores por fronteira) em vez de bordas genéricas; string vazia e campo ausente continuam, por não virem de técnica. Guardrail novo impede inventar o limite para poder gerar a borda.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Nunca usa dado real como base, mesmo se colado pelo usuário como exemplo.
 
 ### swl-skill-qa-new-automation
@@ -104,6 +107,7 @@ As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mes
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Lê apenas resultado real de execução de performance; nunca aprova sem threshold definido para comparar.
 
 ### swl-skill-qa-check-coverage
+- **1.2.0** — Passa a reportar um terceiro tipo de gap: regra com técnica esperada e não aplicada (limite sem casos de fronteira, condições combinadas sem tabela, estado sem transições). Distingue no relatório gap da suíte de gap do requisito — se a regra não traz o limite, cobrar casos de fronteira seria cobrar o impossível.
 - **1.1.0** — Passa a dizer onde procurar as duas fontes e a perguntar quando uma delas não é localizada, em vez de seguir com uma só. Impede o modo de falha em que os critérios de aceite são deduzidos dos próprios testes existentes, o que torna a auditoria circular e sempre conclui "tudo coberto".
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Não substitui execução real; não reporta "% de cobertura" como métrica de execução.
 
@@ -114,10 +118,12 @@ As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mes
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Guardrail anti-invenção: nunca completa dado faltante, apenas sinaliza.
 
 ### swl-skill-qa-review-tests
+- **1.2.0** — A revisão de realismo passa a reconhecer redundância de classe de equivalência (vários casos na mesma faixa válida contam como um) e o gap inverso: regra com limite explícito cujos casos não tocam nenhuma fronteira, pela convenção de três valores do pacote.
 - **1.1.0** — Passa a ser a única skill do pacote autorizada a promover `generated-by-ai: pending-review` para `reviewed`, com três condições explícitas (observações apresentadas, confirmação humana explícita, teste executado com sucesso). Antes, nenhuma skill era dona dessa transição: as geradoras diziam que ela devia acontecer e esta dizia que não editava o teste.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Não corrige teste automaticamente; marcador `reviewed` só após validação humana real.
 
 ### swl-skill-qa-review-requirements
+- **1.1.0** — Passa a sinalizar à parte as regras que pedem técnica de especificação mas não trazem o insumo dela: limite citado sem número, condições combinadas sem o resultado de cada uma, estados sem as transições. Sem o insumo o caso não pode ser derivado, então vira pergunta ao PO.
 - **1.0.0** — Versão inicial. Cobre a lacuna de QA no refinamento: testa a verificabilidade de cada critério de aceite, levanta as lacunas clássicas (permissão, estado, limites, concorrência, falha de dependência, retroatividade, não-funcionais, observabilidade) e nunca responde por conta própria uma pergunta destinada ao PO.
 
 ### swl-skill-qa-run-tests

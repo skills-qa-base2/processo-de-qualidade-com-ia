@@ -3,8 +3,8 @@ name: swl-skill-qa-review-tests
 description: Revisa testes gerados ou existentes quanto a nomenclatura, clareza de asserts e cobertura real de cenários — evita testes triviais ou redundantes.
 argument-hint: <CaminhoDoArquivoOuFeature>
 metadata:
-  version: 1.1.0
-  validated: true
+  version: 1.2.0
+  validated: false
 ---
 
 ## Passos
@@ -16,7 +16,9 @@ Verifique se o nome do teste descreve o comportamento esperado, não a implement
 Verifique se os asserts validam o comportamento relevante (não apenas "não lançou exceção") e se cada teste tem um propósito único e claro.
 
 ## 3. Revisão de realismo de cenário
-Sinalize testes que cobrem apenas variações triviais dos mesmos dados (ex: trocar só um caractere) sem agregar cobertura real de regra de negócio.
+Sinalize testes que não agregam cobertura real de regra de negócio: variações triviais dos mesmos dados (ex: trocar só um caractere) e casos que caem na mesma classe de equivalência sem exercitar fronteira ou condição diferente — três valores no meio da mesma faixa válida são um caso, não três.
+
+Sinalize também o inverso: regra com limite explícito cujos casos não tocam nenhuma fronteira — a convenção do pacote é três valores por fronteira (abaixo, na fronteira, acima).
 
 ## 4. Saída
 Lista de observações por teste: nomenclatura, qualidade de assert, redundância — com recomendação objetiva (manter, ajustar, remover por redundância).

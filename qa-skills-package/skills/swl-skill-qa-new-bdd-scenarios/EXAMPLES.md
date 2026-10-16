@@ -5,7 +5,7 @@
 ```
 /swl-skill-qa-new-bdd-scenarios Critério: usuário busca por nome de produto e vê os resultados correspondentes.
 ```
-**Saída esperada:** A skill gera `Funcionalidade: Busca de produtos` com cenário happy path, um negativo (busca sem resultado) e um edge case (busca com caractere especial).
+**Saída esperada:** A skill deriva as classes do critério — termo com resultado, termo sem resultado, termo vazio — e leva para o `.feature` só o que é crítico no fluxo: o happy path e a busca sem resultado. Caractere especial fica como caso de teste em `swl-skill-qa-new-test-cases` e não vira E2E, porque o risco não justifica manter esse cenário na suíte de aceitação.
 
 ## Cenário com ambiguidade — Mobile
 **Cenário:** Um QA no app mobile da "TarefaCerta" (gestão de tarefas fictícia) recebe um critério de assinatura de plano com regra de desconto pouco clara.

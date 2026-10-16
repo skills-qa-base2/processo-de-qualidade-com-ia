@@ -3,8 +3,8 @@ name: swl-skill-qa-new-test-data
 description: Gera massa de dados de teste fictícia (nunca dados reais de cliente) via factories/fixtures, respeitando as regras de negócio do domínio.
 argument-hint: <NomeDaEntidadeOuDomínio>
 metadata:
-  version: 1.0.0
-  validated: true
+  version: 1.1.0
+  validated: false
 ---
 
 ## Passos
@@ -15,7 +15,7 @@ Leia o CLAUDE.md e o modelo/entidade envolvida. Identifique campos obrigatórios
 ## 2. Geração dos conjuntos de dados
 Gere, usando a biblioteca de fixtures já usada no projeto (Faker, Bogus, factory_boy ou equivalente):
 - Conjunto **válido** completo (happy path)
-- Conjuntos de **borda** (valor mínimo, máximo, string vazia, campo opcional ausente)
+- Conjuntos de **borda** derivados dos limites reais da regra — três valores por fronteira (abaixo, na fronteira, acima) —, mais string vazia e campo opcional ausente, que não vêm de técnica
 - Conjuntos **inválidos** (formato incorreto, tipo errado, campo obrigatório ausente)
 
 ## 3. Saída
@@ -23,3 +23,5 @@ Salve como factory/fixture reutilizável em `test/factories/` (ou caminho de con
 
 ## Guardrail
 Dados fictícios apenas. Nunca use CPF, e-mail, telefone ou qualquer dado real de cliente, mesmo mascarado parcialmente, como base para massa de teste. Se o usuário colar dados reais para servir de exemplo, gere uma versão totalmente fictícia equivalente e avise que os dados reais não foram usados.
+
+Nunca invente o limite para poder gerar a borda: se a regra não diz qual é o máximo, gere o conjunto válido e marque `[LIMITE A CONFIRMAR COM PO]` em vez de escolher um número plausível.

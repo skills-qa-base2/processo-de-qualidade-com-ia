@@ -3,8 +3,8 @@ name: swl-skill-qa-check-coverage
 description: Analisa gaps de cobertura de cenários frente aos requisitos e critérios de aceite — cobertura funcional, não cobertura de código.
 argument-hint: <NomeDaFeatureOuMódulo>
 metadata:
-  version: 1.1.0
-  validated: true
+  version: 1.2.0
+  validated: false
 ---
 
 ## Passos
@@ -20,9 +20,12 @@ Liste, sem arredondar para "está tudo coberto":
 - Critérios sem nenhum cenário
 - Critérios só com happy path (faltando negativo/edge)
 - Cenários existentes que não correspondem a nenhum critério atual (possível teste órfão)
+- Regras com técnica esperada e não aplicada: limite numérico sem casos de fronteira, combinação de condições sem tabela de decisão, estado sem as transições
 
 ## 4. Saída
 Relatório objetivo com uma linha por gap encontrado, sem inflar números. Se a cobertura estiver completa, diga isso claramente — não invente gaps para parecer útil.
 
 ## Guardrail
 Esta skill audita cenários **e não substitui execução real**: cobertura completa de cenários não significa que os testes foram executados com sucesso. Nunca reporte "cobertura de X%" como métrica de execução — isso é papel do `swl-skill-qa-generate-test-report`.
+
+Técnica ausente e regra incompleta são gaps diferentes: se a regra não traz o limite, o gap é do requisito, não da suíte — reporte assim, em vez de cobrar casos de fronteira que ninguém poderia ter escrito.
