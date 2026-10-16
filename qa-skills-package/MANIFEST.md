@@ -20,7 +20,7 @@ Skills de QA da Base2 Tecnologia para Claude Code. Cobrem frontend/web, API, int
 | `swl-skill-qa-check-coverage` | 1.2.0 | Verificação | Analisa gaps de cobertura de cenários frente a requisitos e critérios de aceite |
 | `swl-skill-qa-check-flakiness` | 1.0.0 | Verificação | Detecta padrões de instabilidade em testes automatizados |
 | `swl-skill-qa-check-data-quality` | 1.0.0 | Verificação | Audita documentos/relatórios de QA gerados por IA em busca de dados fabricados |
-| `swl-skill-qa-review-tests` | 1.2.0 | Verificação | Revisa testes quanto a nomenclatura, clareza de asserts e cobertura real; única skill que promove o marcador `generated-by-ai` para `reviewed` |
+| `swl-skill-qa-review-tests` | 1.3.0 | Verificação | Revisa testes quanto a nomenclatura, clareza de asserts e cobertura real; única skill que promove o marcador `generated-by-ai` para `reviewed` |
 | `swl-skill-qa-risk-priority` | 1.0.0 | Verificação | Prioriza cenários por criticidade de negócio e risco técnico |
 | `swl-skill-qa-check-security` | 1.0.1 | Verificação | Verificação de segurança stack-agnóstica (Node, Python, Java, mobile) — complementa, não duplica, a `swl-skill-check-security` do org-skills (.NET Web API) |
 | `swl-skill-qa-check-accessibility` | 1.0.1 | Verificação | Audita acessibilidade (WCAG) via ferramenta já presente no projeto (axe-core, pa11y, Lighthouse) |
@@ -118,6 +118,7 @@ As 4 skills adicionadas depois (mobile, contrato, performance) passaram pelo mes
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Guardrail anti-invenção: nunca completa dado faltante, apenas sinaliza.
 
 ### swl-skill-qa-review-tests
+- **1.3.0** — Fecha lacuna encontrada na rodada adversarial de 08/09/2026 (registrada em `VALIDACAO-ADVERSARIAL.md`): o guardrail exigia confirmação humana explícita, mas não exigia que ela viesse **depois** das observações. Uma confirmação dada antes aceita o que ainda não foi apontado; a execução anterior tratou isso como inválido por leitura de intenção, e outra poderia aceitar.
 - **1.2.0** — A revisão de realismo passa a reconhecer redundância de classe de equivalência (vários casos na mesma faixa válida contam como um) e o gap inverso: regra com limite explícito cujos casos não tocam nenhuma fronteira, pela convenção de três valores do pacote.
 - **1.1.0** — Passa a ser a única skill do pacote autorizada a promover `generated-by-ai: pending-review` para `reviewed`, com três condições explícitas (observações apresentadas, confirmação humana explícita, teste executado com sucesso). Antes, nenhuma skill era dona dessa transição: as geradoras diziam que ela devia acontecer e esta dizia que não editava o teste.
 - **1.0.0** — Versão inicial conforme ao padrão Base2. Não corrige teste automaticamente; marcador `reviewed` só após validação humana real.

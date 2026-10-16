@@ -1,0 +1,18 @@
+# Normaliza quebras de linha no repositorio.
+#
+# Motivo: downloads/qa-skills-package.zip e gerado por scripts/build_downloads.py a
+# partir do working tree. Sem isso, um contribuidor no Windows e outro no Linux geram
+# zips com bytes diferentes e conteudo identico, e o arquivo fica oscilando a cada PR.
+# Com eol=lf, o checkout e sempre LF e o zip passa a ser reproduzivel entre plataformas.
+* text=auto eol=lf
+
+# Binarios: nunca normalizar (normalizar um zip o corrompe).
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
